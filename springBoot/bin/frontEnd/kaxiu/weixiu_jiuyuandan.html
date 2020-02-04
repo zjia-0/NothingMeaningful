@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>站外救援单</title>
+		<link rel="stylesheet" href="css/bootstrap.min.css" />
+		<style>
+			#top1{ background-color: rgb(249,249,249);}
+			#top1 h3{display: inline-block;margin: 10px 1000px 10px 30px; vertical-align: middle;}
+			#top1 input{display: inline-block;width: 230px; }
+			#search{width: 90px;color: white;background-color: #5CB85C; margin-right: 10px;}
+			#close{color: white;background-color: #999999;}
+			#btns a{ text-decoration: none; color: black; font-size: 16px;}
+			#btns span{color: orange;  margin-top: 5px; margin-left: 10px;}
+			#info hr{height: 2px;width: 98%;}
+			#info table{ margin-left: 30px; width: 1000px;}
+			#info table tr{font-size: 16px; font-weight: 600; color: #31B0D5; line-height: 40px;}
+			#info table tr input{width: 150px;}
+			#no{margin-top: 10px; margin-left: 15px;}
+			#menu{ width: 98%; margin: auto; color: #999999; background-color: rgb(249,249,249);  margin-top: 10px;}
+			/*覆盖bootstrap原页签效果*/
+			.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {color: #31B0D5;cursor: default;background-color: rgba(0,0,0,0); border:none; border-top: solid 3px #31B0D5;} 
+			.nav-tabs>li>a {margin-right: 2px;line-height: 1.42857143;border: 1px solid transparent;border-radius: 0;}
+			/*覆盖完毕*/
+			#tabs{width: 98%; margin: auto;}
+			#tabs thead td{color: white; background-color: #31B0D5;}
+		</style>
+	</head>
+	<body>
+		<div class="container-fluid">
+			<div id="top1" class="row">
+				<h3>站外救援单</h3>
+				<button id="search" class="btn btn-default"><span class="glyphicon glyphicon-ok"></span>&nbsp;保存</button>
+				<button id="close" class="btn btn-default">取消</button>
+			</div>
+			<div id="btns" class="row">
+				<div id="no" class="col-md-2">单号：<strong>1231231231</strong></div>
+				<div class="col-md-3 col-md-push-7">
+					<span class="glyphicon glyphicon-certificate"></span><a href="javascript:void(0)">维修接车</a>
+					<span class="glyphicon glyphicon-plus"></span><a href="javascript:void(0)">救援开单</a>
+					<span class="glyphicon glyphicon-plus-sign"></span><a href="javascript:void(0)">关注公众号</a>
+				</div>				
+			</div>
+			<div id="info" class="row">
+				<hr color="#31B0D5"/>
+				<form class="form-inline">
+				<table>
+					<tr>
+						<td>车牌号码&nbsp;<input type="text" class="form-control"  ></td>
+						<td>车辆型号&nbsp;<input type="text" class="form-control"  ></td>
+						<td>车辆品牌&nbsp;<input type="text" class="form-control"  ></td>
+						<td>发动机品牌&nbsp;<input type="text" class="form-control"  ></td>
+					</tr>
+					<tr>
+						<td>车主名称&nbsp;<input type="text" class="form-control"  ></td>
+						<td>驾驶员&nbsp;<input style="margin-left: 15px;" type="text" class="form-control"  ></td>
+						<td>手机&nbsp;<input style="margin-left: 32px;" type="text" class="form-control"  ></td>
+						<td>服务顾问&nbsp;<input style="margin-left: 15px;" type="text" class="form-control"  ></td>			
+					</tr>
+					<tr>
+						<td>业务类别&nbsp;<input type="text" class="form-control"  ></td>
+						<td>施工班次&nbsp;<input type="text" class="form-control"  ></td>
+						<td>当前里程&nbsp;<input type="text" class="form-control"  ></td>
+						<td>派工时间&nbsp;<input style="margin-left: 15px;" type="text" class="form-control"  ></td>				
+					</tr>
+					<tr>
+						<td>结算方式&nbsp;<input type="text" class="form-control"  ></td>
+						<td>赔款公司&nbsp;<input type="text" class="form-control"  ></td>
+						<td>派工班组&nbsp;<input type="text" class="form-control"  ></td>					
+					</tr>
+					<tr>
+						<td>出发时间&nbsp;<input type="text" class="form-control"  ></td>
+						<td>出发地址&nbsp;<input type="text" class="form-control"  ></td>
+						<td>驾驶车辆&nbsp;<input type="text" class="form-control"  ></td>
+						<td>行驶里程&nbsp;<input style="margin-left: 15px;" type="text" class="form-control"  ></td>				
+					</tr>
+					<tr>
+						<td>施工时间&nbsp;<input type="text" class="form-control"  ></td>
+						<td>救援地址&nbsp;<input type="text" class="form-control"  ></td>
+						<td>完工时间&nbsp;<input type="text" class="form-control"  ></td>					
+					</tr>
+					<tr>
+						<td>预估金额&nbsp;<input type="text" class="form-control"  ></td>
+						<td colspan="3">维修备注&nbsp;<input style="width: 666px;" type="text" class="form-control"  ></td>					
+					</tr>
+				</table>
+				</form>
+			</div>
+			<div class="row">
+				<ul class="nav nav-tabs" id="menu">
+					<li class="active"><a href="#index" data-toggle="tab">作业中车辆</a></li>
+					<li class=""><a href="#" data-toggle="tab">维修历史</a></li>
+					<li class=""><a href="#" data-toggle="tab">维修项目</a></li>
+					<li class=""><a href="#" data-toggle="tab">领料情况</a></li>
+					<li class=""><a href="#" data-toggle="tab">历史回访</a></li>
+				</ul>
+			</div>
+			<div id="tabs" class="row">
+				<table border="1px" class="table">
+					<thead>
+						<tr>
+							<td>单据状态</td>
+							<td>业务类型</td>
+							<td>客户名称</td>
+							<td>车牌号</td>
+							<td>手机</td>
+							<td>会员卡</td>
+							<td>维修单</td>
+							<td>单据类型</td>
+							<td>开单时间</td>
+							<td>预计完工</td>
+							<td>完工时间</td>
+							<td>结算时间</td>
+							<td>预估金额</td>
+							<td>服务顾问</td>
+							<td>接车人</td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>123</td>
+							<td>123</td>
+							<td>123</td>
+							<td>123</td>
+							<td>123</td>
+							<td>123</td>
+							<td>123</td>
+							<td>123</td>
+							<td>123</td>
+							<td>123</td>
+							<td>123</td>
+							<td>123</td>
+							<td>123</td>
+							<td>123</td>
+							<td>123</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<script type="text/javascript" src="js/jquery-1.12.4.js"></script>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+		<script>
+			
+		</script>
+	</body>
+</html>

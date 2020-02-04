@@ -1,0 +1,512 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.accp.mapper.CustomerMapper" >
+  <resultMap id="BaseResultMap" type="com.accp.domain.Customer" >
+    <id column="cno" property="cno" jdbcType="VARCHAR" />
+    <result column="ctno" property="ctno" jdbcType="VARCHAR" />
+    <result column="cname" property="cname" jdbcType="VARCHAR" />
+    <result column="cpeople" property="cpeople" jdbcType="VARCHAR" />
+    <result column="cphone" property="cphone" jdbcType="VARCHAR" />
+    <result column="caddress" property="caddress" jdbcType="VARCHAR" />
+    <result column="cbirthday" property="cbirthday" jdbcType="TIMESTAMP" />
+    <result column="cperiod" property="cperiod" jdbcType="INTEGER" />
+    <result column="climit" property="climit" jdbcType="REAL" />
+    <result column="personnelid" property="personnelid" jdbcType="INTEGER" />
+    <result column="cadviserphone" property="cadviserphone" jdbcType="VARCHAR" />
+    <result column="cprovince" property="cprovince" jdbcType="VARCHAR" />
+    <result column="cremark" property="cremark" jdbcType="VARCHAR" />
+    <result column="ctaxes" property="ctaxes" jdbcType="VARCHAR" />
+    <result column="cregistphone" property="cregistphone" jdbcType="VARCHAR" />
+    <result column="cbank" property="cbank" jdbcType="VARCHAR" />
+    <result column="cbanknumber" property="cbanknumber" jdbcType="VARCHAR" />
+    <result column="cdlicense" property="cdlicense" jdbcType="VARCHAR" />
+    <result column="cregistaddress" property="cregistaddress" jdbcType="VARCHAR" />
+    <result column="remark1" property="remark1" jdbcType="VARCHAR" />
+    <result column="remark2" property="remark2" jdbcType="VARCHAR" />
+    <result column="remark3" property="remark3" jdbcType="VARCHAR" />
+    <result column="remark4" property="remark4" jdbcType="VARCHAR" />
+    <result column="remark5" property="remark5" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    cno, ctno, cname, cpeople, cphone, caddress, cbirthday, cperiod, climit, personnelid, 
+    cadviserphone, cprovince, cremark, ctaxes, cregistphone, cbank, cbanknumber, cdlicense, 
+    cregistaddress, remark1, remark2, remark3, remark4, remark5
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.accp.domain.CustomerExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from customer
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from customer
+    where cno = #{cno,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from customer
+    where cno = #{cno,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.accp.domain.CustomerExample" >
+    delete from customer
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.accp.domain.Customer" >
+    insert into customer (cno, ctno, cname, 
+      cpeople, cphone, caddress, 
+      cbirthday, cperiod, climit, 
+      personnelid, cadviserphone, cprovince, 
+      cremark, ctaxes, cregistphone, 
+      cbank, cbanknumber, cdlicense, 
+      cregistaddress, remark1, remark2, 
+      remark3, remark4, remark5
+      )
+    values (#{cno,jdbcType=VARCHAR}, #{ctno,jdbcType=VARCHAR}, #{cname,jdbcType=VARCHAR}, 
+      #{cpeople,jdbcType=VARCHAR}, #{cphone,jdbcType=VARCHAR}, #{caddress,jdbcType=VARCHAR}, 
+      #{cbirthday,jdbcType=TIMESTAMP}, #{cperiod,jdbcType=INTEGER}, #{climit,jdbcType=REAL}, 
+      #{personnelid,jdbcType=INTEGER}, #{cadviserphone,jdbcType=VARCHAR}, #{cprovince,jdbcType=VARCHAR}, 
+      #{cremark,jdbcType=VARCHAR}, #{ctaxes,jdbcType=VARCHAR}, #{cregistphone,jdbcType=VARCHAR}, 
+      #{cbank,jdbcType=VARCHAR}, #{cbanknumber,jdbcType=VARCHAR}, #{cdlicense,jdbcType=VARCHAR}, 
+      #{cregistaddress,jdbcType=VARCHAR}, #{remark1,jdbcType=VARCHAR}, #{remark2,jdbcType=VARCHAR}, 
+      #{remark3,jdbcType=VARCHAR}, #{remark4,jdbcType=VARCHAR}, #{remark5,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.accp.domain.Customer" >
+    insert into customer
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="cno != null" >
+        cno,
+      </if>
+      <if test="ctno != null" >
+        ctno,
+      </if>
+      <if test="cname != null" >
+        cname,
+      </if>
+      <if test="cpeople != null" >
+        cpeople,
+      </if>
+      <if test="cphone != null" >
+        cphone,
+      </if>
+      <if test="caddress != null" >
+        caddress,
+      </if>
+      <if test="cbirthday != null" >
+        cbirthday,
+      </if>
+      <if test="cperiod != null" >
+        cperiod,
+      </if>
+      <if test="climit != null" >
+        climit,
+      </if>
+      <if test="personnelid != null" >
+        personnelid,
+      </if>
+      <if test="cadviserphone != null" >
+        cadviserphone,
+      </if>
+      <if test="cprovince != null" >
+        cprovince,
+      </if>
+      <if test="cremark != null" >
+        cremark,
+      </if>
+      <if test="ctaxes != null" >
+        ctaxes,
+      </if>
+      <if test="cregistphone != null" >
+        cregistphone,
+      </if>
+      <if test="cbank != null" >
+        cbank,
+      </if>
+      <if test="cbanknumber != null" >
+        cbanknumber,
+      </if>
+      <if test="cdlicense != null" >
+        cdlicense,
+      </if>
+      <if test="cregistaddress != null" >
+        cregistaddress,
+      </if>
+      <if test="remark1 != null" >
+        remark1,
+      </if>
+      <if test="remark2 != null" >
+        remark2,
+      </if>
+      <if test="remark3 != null" >
+        remark3,
+      </if>
+      <if test="remark4 != null" >
+        remark4,
+      </if>
+      <if test="remark5 != null" >
+        remark5,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="cno != null" >
+        #{cno,jdbcType=VARCHAR},
+      </if>
+      <if test="ctno != null" >
+        #{ctno,jdbcType=VARCHAR},
+      </if>
+      <if test="cname != null" >
+        #{cname,jdbcType=VARCHAR},
+      </if>
+      <if test="cpeople != null" >
+        #{cpeople,jdbcType=VARCHAR},
+      </if>
+      <if test="cphone != null" >
+        #{cphone,jdbcType=VARCHAR},
+      </if>
+      <if test="caddress != null" >
+        #{caddress,jdbcType=VARCHAR},
+      </if>
+      <if test="cbirthday != null" >
+        #{cbirthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cperiod != null" >
+        #{cperiod,jdbcType=INTEGER},
+      </if>
+      <if test="climit != null" >
+        #{climit,jdbcType=REAL},
+      </if>
+      <if test="personnelid != null" >
+        #{personnelid,jdbcType=INTEGER},
+      </if>
+      <if test="cadviserphone != null" >
+        #{cadviserphone,jdbcType=VARCHAR},
+      </if>
+      <if test="cprovince != null" >
+        #{cprovince,jdbcType=VARCHAR},
+      </if>
+      <if test="cremark != null" >
+        #{cremark,jdbcType=VARCHAR},
+      </if>
+      <if test="ctaxes != null" >
+        #{ctaxes,jdbcType=VARCHAR},
+      </if>
+      <if test="cregistphone != null" >
+        #{cregistphone,jdbcType=VARCHAR},
+      </if>
+      <if test="cbank != null" >
+        #{cbank,jdbcType=VARCHAR},
+      </if>
+      <if test="cbanknumber != null" >
+        #{cbanknumber,jdbcType=VARCHAR},
+      </if>
+      <if test="cdlicense != null" >
+        #{cdlicense,jdbcType=VARCHAR},
+      </if>
+      <if test="cregistaddress != null" >
+        #{cregistaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="remark1 != null" >
+        #{remark1,jdbcType=VARCHAR},
+      </if>
+      <if test="remark2 != null" >
+        #{remark2,jdbcType=VARCHAR},
+      </if>
+      <if test="remark3 != null" >
+        #{remark3,jdbcType=VARCHAR},
+      </if>
+      <if test="remark4 != null" >
+        #{remark4,jdbcType=VARCHAR},
+      </if>
+      <if test="remark5 != null" >
+        #{remark5,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.accp.domain.CustomerExample" resultType="java.lang.Integer" >
+    select count(*) from customer
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update customer
+    <set >
+      <if test="record.cno != null" >
+        cno = #{record.cno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ctno != null" >
+        ctno = #{record.ctno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cname != null" >
+        cname = #{record.cname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cpeople != null" >
+        cpeople = #{record.cpeople,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cphone != null" >
+        cphone = #{record.cphone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.caddress != null" >
+        caddress = #{record.caddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cbirthday != null" >
+        cbirthday = #{record.cbirthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.cperiod != null" >
+        cperiod = #{record.cperiod,jdbcType=INTEGER},
+      </if>
+      <if test="record.climit != null" >
+        climit = #{record.climit,jdbcType=REAL},
+      </if>
+      <if test="record.personnelid != null" >
+        personnelid = #{record.personnelid,jdbcType=INTEGER},
+      </if>
+      <if test="record.cadviserphone != null" >
+        cadviserphone = #{record.cadviserphone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cprovince != null" >
+        cprovince = #{record.cprovince,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cremark != null" >
+        cremark = #{record.cremark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ctaxes != null" >
+        ctaxes = #{record.ctaxes,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cregistphone != null" >
+        cregistphone = #{record.cregistphone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cbank != null" >
+        cbank = #{record.cbank,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cbanknumber != null" >
+        cbanknumber = #{record.cbanknumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cdlicense != null" >
+        cdlicense = #{record.cdlicense,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cregistaddress != null" >
+        cregistaddress = #{record.cregistaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark1 != null" >
+        remark1 = #{record.remark1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark2 != null" >
+        remark2 = #{record.remark2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark3 != null" >
+        remark3 = #{record.remark3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark4 != null" >
+        remark4 = #{record.remark4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark5 != null" >
+        remark5 = #{record.remark5,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update customer
+    set cno = #{record.cno,jdbcType=VARCHAR},
+      ctno = #{record.ctno,jdbcType=VARCHAR},
+      cname = #{record.cname,jdbcType=VARCHAR},
+      cpeople = #{record.cpeople,jdbcType=VARCHAR},
+      cphone = #{record.cphone,jdbcType=VARCHAR},
+      caddress = #{record.caddress,jdbcType=VARCHAR},
+      cbirthday = #{record.cbirthday,jdbcType=TIMESTAMP},
+      cperiod = #{record.cperiod,jdbcType=INTEGER},
+      climit = #{record.climit,jdbcType=REAL},
+      personnelid = #{record.personnelid,jdbcType=INTEGER},
+      cadviserphone = #{record.cadviserphone,jdbcType=VARCHAR},
+      cprovince = #{record.cprovince,jdbcType=VARCHAR},
+      cremark = #{record.cremark,jdbcType=VARCHAR},
+      ctaxes = #{record.ctaxes,jdbcType=VARCHAR},
+      cregistphone = #{record.cregistphone,jdbcType=VARCHAR},
+      cbank = #{record.cbank,jdbcType=VARCHAR},
+      cbanknumber = #{record.cbanknumber,jdbcType=VARCHAR},
+      cdlicense = #{record.cdlicense,jdbcType=VARCHAR},
+      cregistaddress = #{record.cregistaddress,jdbcType=VARCHAR},
+      remark1 = #{record.remark1,jdbcType=VARCHAR},
+      remark2 = #{record.remark2,jdbcType=VARCHAR},
+      remark3 = #{record.remark3,jdbcType=VARCHAR},
+      remark4 = #{record.remark4,jdbcType=VARCHAR},
+      remark5 = #{record.remark5,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.accp.domain.Customer" >
+    update customer
+    <set >
+      <if test="ctno != null" >
+        ctno = #{ctno,jdbcType=VARCHAR},
+      </if>
+      <if test="cname != null" >
+        cname = #{cname,jdbcType=VARCHAR},
+      </if>
+      <if test="cpeople != null" >
+        cpeople = #{cpeople,jdbcType=VARCHAR},
+      </if>
+      <if test="cphone != null" >
+        cphone = #{cphone,jdbcType=VARCHAR},
+      </if>
+      <if test="caddress != null" >
+        caddress = #{caddress,jdbcType=VARCHAR},
+      </if>
+      <if test="cbirthday != null" >
+        cbirthday = #{cbirthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cperiod != null" >
+        cperiod = #{cperiod,jdbcType=INTEGER},
+      </if>
+      <if test="climit != null" >
+        climit = #{climit,jdbcType=REAL},
+      </if>
+      <if test="personnelid != null" >
+        personnelid = #{personnelid,jdbcType=INTEGER},
+      </if>
+      <if test="cadviserphone != null" >
+        cadviserphone = #{cadviserphone,jdbcType=VARCHAR},
+      </if>
+      <if test="cprovince != null" >
+        cprovince = #{cprovince,jdbcType=VARCHAR},
+      </if>
+      <if test="cremark != null" >
+        cremark = #{cremark,jdbcType=VARCHAR},
+      </if>
+      <if test="ctaxes != null" >
+        ctaxes = #{ctaxes,jdbcType=VARCHAR},
+      </if>
+      <if test="cregistphone != null" >
+        cregistphone = #{cregistphone,jdbcType=VARCHAR},
+      </if>
+      <if test="cbank != null" >
+        cbank = #{cbank,jdbcType=VARCHAR},
+      </if>
+      <if test="cbanknumber != null" >
+        cbanknumber = #{cbanknumber,jdbcType=VARCHAR},
+      </if>
+      <if test="cdlicense != null" >
+        cdlicense = #{cdlicense,jdbcType=VARCHAR},
+      </if>
+      <if test="cregistaddress != null" >
+        cregistaddress = #{cregistaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="remark1 != null" >
+        remark1 = #{remark1,jdbcType=VARCHAR},
+      </if>
+      <if test="remark2 != null" >
+        remark2 = #{remark2,jdbcType=VARCHAR},
+      </if>
+      <if test="remark3 != null" >
+        remark3 = #{remark3,jdbcType=VARCHAR},
+      </if>
+      <if test="remark4 != null" >
+        remark4 = #{remark4,jdbcType=VARCHAR},
+      </if>
+      <if test="remark5 != null" >
+        remark5 = #{remark5,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where cno = #{cno,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.accp.domain.Customer" >
+    update customer
+    set ctno = #{ctno,jdbcType=VARCHAR},
+      cname = #{cname,jdbcType=VARCHAR},
+      cpeople = #{cpeople,jdbcType=VARCHAR},
+      cphone = #{cphone,jdbcType=VARCHAR},
+      caddress = #{caddress,jdbcType=VARCHAR},
+      cbirthday = #{cbirthday,jdbcType=TIMESTAMP},
+      cperiod = #{cperiod,jdbcType=INTEGER},
+      climit = #{climit,jdbcType=REAL},
+      personnelid = #{personnelid,jdbcType=INTEGER},
+      cadviserphone = #{cadviserphone,jdbcType=VARCHAR},
+      cprovince = #{cprovince,jdbcType=VARCHAR},
+      cremark = #{cremark,jdbcType=VARCHAR},
+      ctaxes = #{ctaxes,jdbcType=VARCHAR},
+      cregistphone = #{cregistphone,jdbcType=VARCHAR},
+      cbank = #{cbank,jdbcType=VARCHAR},
+      cbanknumber = #{cbanknumber,jdbcType=VARCHAR},
+      cdlicense = #{cdlicense,jdbcType=VARCHAR},
+      cregistaddress = #{cregistaddress,jdbcType=VARCHAR},
+      remark1 = #{remark1,jdbcType=VARCHAR},
+      remark2 = #{remark2,jdbcType=VARCHAR},
+      remark3 = #{remark3,jdbcType=VARCHAR},
+      remark4 = #{remark4,jdbcType=VARCHAR},
+      remark5 = #{remark5,jdbcType=VARCHAR}
+    where cno = #{cno,jdbcType=VARCHAR}
+  </update>
+</mapper>

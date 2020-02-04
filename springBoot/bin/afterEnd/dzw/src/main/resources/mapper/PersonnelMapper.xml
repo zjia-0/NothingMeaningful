@@ -1,0 +1,684 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.accp.mapper.PersonnelMapper" >
+  <resultMap id="BaseResultMap" type="com.accp.domain.Personnel" >
+    <id column="personnelid" property="personnelid" jdbcType="VARCHAR" />
+    <result column="personnelname" property="personnelname" jdbcType="VARCHAR" />
+    <result column="enterid" property="enterid" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="salt" property="salt" jdbcType="VARCHAR" />
+    <result column="storeid" property="storeid" jdbcType="INTEGER" />
+    <result column="sex" property="sex" jdbcType="VARCHAR" />
+    <result column="post" property="post" jdbcType="VARCHAR" />
+    <result column="physicalstate" property="physicalstate" jdbcType="VARCHAR" />
+    <result column="height" property="height" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="card" property="card" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="degree" property="degree" jdbcType="VARCHAR" />
+    <result column="birthplace" property="birthplace" jdbcType="VARCHAR" />
+    <result column="nation" property="nation" jdbcType="VARCHAR" />
+    <result column="schooltag" property="schooltag" jdbcType="VARCHAR" />
+    <result column="martial" property="martial" jdbcType="VARCHAR" />
+    <result column="compile" property="compile" jdbcType="VARCHAR" />
+    <result column="bankcode" property="bankcode" jdbcType="VARCHAR" />
+    <result column="emergencyname" property="emergencyname" jdbcType="VARCHAR" />
+    <result column="emergencyphone" property="emergencyphone" jdbcType="VARCHAR" />
+    <result column="hiredate" property="hiredate" jdbcType="VARCHAR" />
+    <result column="applicable" property="applicable" jdbcType="VARCHAR" />
+    <result column="borndate" property="borndate" jdbcType="VARCHAR" />
+    <result column="startdate" property="startdate" jdbcType="VARCHAR" />
+    <result column="enddate" property="enddate" jdbcType="VARCHAR" />
+    <result column="referrer" property="referrer" jdbcType="VARCHAR" />
+    <result column="picture" property="picture" jdbcType="VARCHAR" />
+    <result column="remark1" property="remark1" jdbcType="VARCHAR" />
+    <result column="remark2" property="remark2" jdbcType="VARCHAR" />
+    <result column="remark3" property="remark3" jdbcType="VARCHAR" />
+    <result column="remark4" property="remark4" jdbcType="VARCHAR" />
+    <result column="remark5" property="remark5" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    personnelid, personnelname, enterid, password, salt, storeid, sex, post, physicalstate, 
+    height, phone, card, address, email, degree, birthplace, nation, schooltag, martial, 
+    compile, bankcode, emergencyname, emergencyphone, hiredate, applicable, borndate, 
+    startdate, enddate, referrer, picture, remark1, remark2, remark3, remark4, remark5
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.accp.domain.PersonnelExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from personnel
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from personnel
+    where personnelid = #{personnelid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from personnel
+    where personnelid = #{personnelid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.accp.domain.PersonnelExample" >
+    delete from personnel
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.accp.domain.Personnel" >
+    insert into personnel (personnelid, personnelname, enterid, 
+      password, salt, storeid, 
+      sex, post, physicalstate, 
+      height, phone, card, 
+      address, email, degree, 
+      birthplace, nation, schooltag, 
+      martial, compile, bankcode, 
+      emergencyname, emergencyphone, hiredate, 
+      applicable, borndate, startdate, 
+      enddate, referrer, picture, 
+      remark1, remark2, remark3, 
+      remark4, remark5)
+    values (#{personnelid,jdbcType=VARCHAR}, #{personnelname,jdbcType=VARCHAR}, #{enterid,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{salt,jdbcType=VARCHAR}, #{storeid,jdbcType=INTEGER}, 
+      #{sex,jdbcType=VARCHAR}, #{post,jdbcType=VARCHAR}, #{physicalstate,jdbcType=VARCHAR}, 
+      #{height,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{card,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{degree,jdbcType=VARCHAR}, 
+      #{birthplace,jdbcType=VARCHAR}, #{nation,jdbcType=VARCHAR}, #{schooltag,jdbcType=VARCHAR}, 
+      #{martial,jdbcType=VARCHAR}, #{compile,jdbcType=VARCHAR}, #{bankcode,jdbcType=VARCHAR}, 
+      #{emergencyname,jdbcType=VARCHAR}, #{emergencyphone,jdbcType=VARCHAR}, #{hiredate,jdbcType=VARCHAR}, 
+      #{applicable,jdbcType=VARCHAR}, #{borndate,jdbcType=VARCHAR}, #{startdate,jdbcType=VARCHAR}, 
+      #{enddate,jdbcType=VARCHAR}, #{referrer,jdbcType=VARCHAR}, #{picture,jdbcType=VARCHAR}, 
+      #{remark1,jdbcType=VARCHAR}, #{remark2,jdbcType=VARCHAR}, #{remark3,jdbcType=VARCHAR}, 
+      #{remark4,jdbcType=VARCHAR}, #{remark5,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.accp.domain.Personnel" >
+    insert into personnel
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="personnelid != null" >
+        personnelid,
+      </if>
+      <if test="personnelname != null" >
+        personnelname,
+      </if>
+      <if test="enterid != null" >
+        enterid,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="salt != null" >
+        salt,
+      </if>
+      <if test="storeid != null" >
+        storeid,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="post != null" >
+        post,
+      </if>
+      <if test="physicalstate != null" >
+        physicalstate,
+      </if>
+      <if test="height != null" >
+        height,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="card != null" >
+        card,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="degree != null" >
+        degree,
+      </if>
+      <if test="birthplace != null" >
+        birthplace,
+      </if>
+      <if test="nation != null" >
+        nation,
+      </if>
+      <if test="schooltag != null" >
+        schooltag,
+      </if>
+      <if test="martial != null" >
+        martial,
+      </if>
+      <if test="compile != null" >
+        compile,
+      </if>
+      <if test="bankcode != null" >
+        bankcode,
+      </if>
+      <if test="emergencyname != null" >
+        emergencyname,
+      </if>
+      <if test="emergencyphone != null" >
+        emergencyphone,
+      </if>
+      <if test="hiredate != null" >
+        hiredate,
+      </if>
+      <if test="applicable != null" >
+        applicable,
+      </if>
+      <if test="borndate != null" >
+        borndate,
+      </if>
+      <if test="startdate != null" >
+        startdate,
+      </if>
+      <if test="enddate != null" >
+        enddate,
+      </if>
+      <if test="referrer != null" >
+        referrer,
+      </if>
+      <if test="picture != null" >
+        picture,
+      </if>
+      <if test="remark1 != null" >
+        remark1,
+      </if>
+      <if test="remark2 != null" >
+        remark2,
+      </if>
+      <if test="remark3 != null" >
+        remark3,
+      </if>
+      <if test="remark4 != null" >
+        remark4,
+      </if>
+      <if test="remark5 != null" >
+        remark5,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="personnelid != null" >
+        #{personnelid,jdbcType=VARCHAR},
+      </if>
+      <if test="personnelname != null" >
+        #{personnelname,jdbcType=VARCHAR},
+      </if>
+      <if test="enterid != null" >
+        #{enterid,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="salt != null" >
+        #{salt,jdbcType=VARCHAR},
+      </if>
+      <if test="storeid != null" >
+        #{storeid,jdbcType=INTEGER},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="post != null" >
+        #{post,jdbcType=VARCHAR},
+      </if>
+      <if test="physicalstate != null" >
+        #{physicalstate,jdbcType=VARCHAR},
+      </if>
+      <if test="height != null" >
+        #{height,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="card != null" >
+        #{card,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="degree != null" >
+        #{degree,jdbcType=VARCHAR},
+      </if>
+      <if test="birthplace != null" >
+        #{birthplace,jdbcType=VARCHAR},
+      </if>
+      <if test="nation != null" >
+        #{nation,jdbcType=VARCHAR},
+      </if>
+      <if test="schooltag != null" >
+        #{schooltag,jdbcType=VARCHAR},
+      </if>
+      <if test="martial != null" >
+        #{martial,jdbcType=VARCHAR},
+      </if>
+      <if test="compile != null" >
+        #{compile,jdbcType=VARCHAR},
+      </if>
+      <if test="bankcode != null" >
+        #{bankcode,jdbcType=VARCHAR},
+      </if>
+      <if test="emergencyname != null" >
+        #{emergencyname,jdbcType=VARCHAR},
+      </if>
+      <if test="emergencyphone != null" >
+        #{emergencyphone,jdbcType=VARCHAR},
+      </if>
+      <if test="hiredate != null" >
+        #{hiredate,jdbcType=VARCHAR},
+      </if>
+      <if test="applicable != null" >
+        #{applicable,jdbcType=VARCHAR},
+      </if>
+      <if test="borndate != null" >
+        #{borndate,jdbcType=VARCHAR},
+      </if>
+      <if test="startdate != null" >
+        #{startdate,jdbcType=VARCHAR},
+      </if>
+      <if test="enddate != null" >
+        #{enddate,jdbcType=VARCHAR},
+      </if>
+      <if test="referrer != null" >
+        #{referrer,jdbcType=VARCHAR},
+      </if>
+      <if test="picture != null" >
+        #{picture,jdbcType=VARCHAR},
+      </if>
+      <if test="remark1 != null" >
+        #{remark1,jdbcType=VARCHAR},
+      </if>
+      <if test="remark2 != null" >
+        #{remark2,jdbcType=VARCHAR},
+      </if>
+      <if test="remark3 != null" >
+        #{remark3,jdbcType=VARCHAR},
+      </if>
+      <if test="remark4 != null" >
+        #{remark4,jdbcType=VARCHAR},
+      </if>
+      <if test="remark5 != null" >
+        #{remark5,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.accp.domain.PersonnelExample" resultType="java.lang.Integer" >
+    select count(*) from personnel
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update personnel
+    <set >
+      <if test="record.personnelid != null" >
+        personnelid = #{record.personnelid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.personnelname != null" >
+        personnelname = #{record.personnelname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.enterid != null" >
+        enterid = #{record.enterid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.password != null" >
+        password = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.salt != null" >
+        salt = #{record.salt,jdbcType=VARCHAR},
+      </if>
+      <if test="record.storeid != null" >
+        storeid = #{record.storeid,jdbcType=INTEGER},
+      </if>
+      <if test="record.sex != null" >
+        sex = #{record.sex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.post != null" >
+        post = #{record.post,jdbcType=VARCHAR},
+      </if>
+      <if test="record.physicalstate != null" >
+        physicalstate = #{record.physicalstate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.height != null" >
+        height = #{record.height,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phone != null" >
+        phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.card != null" >
+        card = #{record.card,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null" >
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null" >
+        email = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.degree != null" >
+        degree = #{record.degree,jdbcType=VARCHAR},
+      </if>
+      <if test="record.birthplace != null" >
+        birthplace = #{record.birthplace,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nation != null" >
+        nation = #{record.nation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.schooltag != null" >
+        schooltag = #{record.schooltag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.martial != null" >
+        martial = #{record.martial,jdbcType=VARCHAR},
+      </if>
+      <if test="record.compile != null" >
+        compile = #{record.compile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bankcode != null" >
+        bankcode = #{record.bankcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.emergencyname != null" >
+        emergencyname = #{record.emergencyname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.emergencyphone != null" >
+        emergencyphone = #{record.emergencyphone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hiredate != null" >
+        hiredate = #{record.hiredate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.applicable != null" >
+        applicable = #{record.applicable,jdbcType=VARCHAR},
+      </if>
+      <if test="record.borndate != null" >
+        borndate = #{record.borndate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.startdate != null" >
+        startdate = #{record.startdate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.enddate != null" >
+        enddate = #{record.enddate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.referrer != null" >
+        referrer = #{record.referrer,jdbcType=VARCHAR},
+      </if>
+      <if test="record.picture != null" >
+        picture = #{record.picture,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark1 != null" >
+        remark1 = #{record.remark1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark2 != null" >
+        remark2 = #{record.remark2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark3 != null" >
+        remark3 = #{record.remark3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark4 != null" >
+        remark4 = #{record.remark4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark5 != null" >
+        remark5 = #{record.remark5,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update personnel
+    set personnelid = #{record.personnelid,jdbcType=VARCHAR},
+      personnelname = #{record.personnelname,jdbcType=VARCHAR},
+      enterid = #{record.enterid,jdbcType=VARCHAR},
+      password = #{record.password,jdbcType=VARCHAR},
+      salt = #{record.salt,jdbcType=VARCHAR},
+      storeid = #{record.storeid,jdbcType=INTEGER},
+      sex = #{record.sex,jdbcType=VARCHAR},
+      post = #{record.post,jdbcType=VARCHAR},
+      physicalstate = #{record.physicalstate,jdbcType=VARCHAR},
+      height = #{record.height,jdbcType=VARCHAR},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      card = #{record.card,jdbcType=VARCHAR},
+      address = #{record.address,jdbcType=VARCHAR},
+      email = #{record.email,jdbcType=VARCHAR},
+      degree = #{record.degree,jdbcType=VARCHAR},
+      birthplace = #{record.birthplace,jdbcType=VARCHAR},
+      nation = #{record.nation,jdbcType=VARCHAR},
+      schooltag = #{record.schooltag,jdbcType=VARCHAR},
+      martial = #{record.martial,jdbcType=VARCHAR},
+      compile = #{record.compile,jdbcType=VARCHAR},
+      bankcode = #{record.bankcode,jdbcType=VARCHAR},
+      emergencyname = #{record.emergencyname,jdbcType=VARCHAR},
+      emergencyphone = #{record.emergencyphone,jdbcType=VARCHAR},
+      hiredate = #{record.hiredate,jdbcType=VARCHAR},
+      applicable = #{record.applicable,jdbcType=VARCHAR},
+      borndate = #{record.borndate,jdbcType=VARCHAR},
+      startdate = #{record.startdate,jdbcType=VARCHAR},
+      enddate = #{record.enddate,jdbcType=VARCHAR},
+      referrer = #{record.referrer,jdbcType=VARCHAR},
+      picture = #{record.picture,jdbcType=VARCHAR},
+      remark1 = #{record.remark1,jdbcType=VARCHAR},
+      remark2 = #{record.remark2,jdbcType=VARCHAR},
+      remark3 = #{record.remark3,jdbcType=VARCHAR},
+      remark4 = #{record.remark4,jdbcType=VARCHAR},
+      remark5 = #{record.remark5,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.accp.domain.Personnel" >
+    update personnel
+    <set >
+      <if test="personnelname != null" >
+        personnelname = #{personnelname,jdbcType=VARCHAR},
+      </if>
+      <if test="enterid != null" >
+        enterid = #{enterid,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="salt != null" >
+        salt = #{salt,jdbcType=VARCHAR},
+      </if>
+      <if test="storeid != null" >
+        storeid = #{storeid,jdbcType=INTEGER},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="post != null" >
+        post = #{post,jdbcType=VARCHAR},
+      </if>
+      <if test="physicalstate != null" >
+        physicalstate = #{physicalstate,jdbcType=VARCHAR},
+      </if>
+      <if test="height != null" >
+        height = #{height,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="card != null" >
+        card = #{card,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="degree != null" >
+        degree = #{degree,jdbcType=VARCHAR},
+      </if>
+      <if test="birthplace != null" >
+        birthplace = #{birthplace,jdbcType=VARCHAR},
+      </if>
+      <if test="nation != null" >
+        nation = #{nation,jdbcType=VARCHAR},
+      </if>
+      <if test="schooltag != null" >
+        schooltag = #{schooltag,jdbcType=VARCHAR},
+      </if>
+      <if test="martial != null" >
+        martial = #{martial,jdbcType=VARCHAR},
+      </if>
+      <if test="compile != null" >
+        compile = #{compile,jdbcType=VARCHAR},
+      </if>
+      <if test="bankcode != null" >
+        bankcode = #{bankcode,jdbcType=VARCHAR},
+      </if>
+      <if test="emergencyname != null" >
+        emergencyname = #{emergencyname,jdbcType=VARCHAR},
+      </if>
+      <if test="emergencyphone != null" >
+        emergencyphone = #{emergencyphone,jdbcType=VARCHAR},
+      </if>
+      <if test="hiredate != null" >
+        hiredate = #{hiredate,jdbcType=VARCHAR},
+      </if>
+      <if test="applicable != null" >
+        applicable = #{applicable,jdbcType=VARCHAR},
+      </if>
+      <if test="borndate != null" >
+        borndate = #{borndate,jdbcType=VARCHAR},
+      </if>
+      <if test="startdate != null" >
+        startdate = #{startdate,jdbcType=VARCHAR},
+      </if>
+      <if test="enddate != null" >
+        enddate = #{enddate,jdbcType=VARCHAR},
+      </if>
+      <if test="referrer != null" >
+        referrer = #{referrer,jdbcType=VARCHAR},
+      </if>
+      <if test="picture != null" >
+        picture = #{picture,jdbcType=VARCHAR},
+      </if>
+      <if test="remark1 != null" >
+        remark1 = #{remark1,jdbcType=VARCHAR},
+      </if>
+      <if test="remark2 != null" >
+        remark2 = #{remark2,jdbcType=VARCHAR},
+      </if>
+      <if test="remark3 != null" >
+        remark3 = #{remark3,jdbcType=VARCHAR},
+      </if>
+      <if test="remark4 != null" >
+        remark4 = #{remark4,jdbcType=VARCHAR},
+      </if>
+      <if test="remark5 != null" >
+        remark5 = #{remark5,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where personnelid = #{personnelid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.accp.domain.Personnel" >
+    update personnel
+    set personnelname = #{personnelname,jdbcType=VARCHAR},
+      enterid = #{enterid,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      salt = #{salt,jdbcType=VARCHAR},
+      storeid = #{storeid,jdbcType=INTEGER},
+      sex = #{sex,jdbcType=VARCHAR},
+      post = #{post,jdbcType=VARCHAR},
+      physicalstate = #{physicalstate,jdbcType=VARCHAR},
+      height = #{height,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      card = #{card,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      degree = #{degree,jdbcType=VARCHAR},
+      birthplace = #{birthplace,jdbcType=VARCHAR},
+      nation = #{nation,jdbcType=VARCHAR},
+      schooltag = #{schooltag,jdbcType=VARCHAR},
+      martial = #{martial,jdbcType=VARCHAR},
+      compile = #{compile,jdbcType=VARCHAR},
+      bankcode = #{bankcode,jdbcType=VARCHAR},
+      emergencyname = #{emergencyname,jdbcType=VARCHAR},
+      emergencyphone = #{emergencyphone,jdbcType=VARCHAR},
+      hiredate = #{hiredate,jdbcType=VARCHAR},
+      applicable = #{applicable,jdbcType=VARCHAR},
+      borndate = #{borndate,jdbcType=VARCHAR},
+      startdate = #{startdate,jdbcType=VARCHAR},
+      enddate = #{enddate,jdbcType=VARCHAR},
+      referrer = #{referrer,jdbcType=VARCHAR},
+      picture = #{picture,jdbcType=VARCHAR},
+      remark1 = #{remark1,jdbcType=VARCHAR},
+      remark2 = #{remark2,jdbcType=VARCHAR},
+      remark3 = #{remark3,jdbcType=VARCHAR},
+      remark4 = #{remark4,jdbcType=VARCHAR},
+      remark5 = #{remark5,jdbcType=VARCHAR}
+    where personnelid = #{personnelid,jdbcType=VARCHAR}
+  </update>
+</mapper>

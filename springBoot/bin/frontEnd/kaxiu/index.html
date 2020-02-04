@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>卡修后台管理系统</title>
+		<link rel="stylesheet" href="css/bootstrap.min.css" />
+		<link rel="stylesheet" href="css/kaxiu.css" />
+	</head>
+	<body>
+		<div id="ctx" class="container-fluid">
+			<div id="head" class="row">
+				<ul class="col-md-1 text-left">
+					<li>重庆成高</li>
+				</ul>
+				<ul id="menus" class="col-md-3 text-center col-md-push-1">
+					<li v-for='item,index in perms' v-if="item.catalog==0 && item.parentid==0">
+						<a style="color: white; text-decoration: none;" href="javascript:void(0)" @click="levels(index)">{{item.name}}</a>
+					</li>
+				</ul>
+				<ul class="col-md-1 col-md-push-7 text-right">
+					<li></li>
+					<li></li>
+					<li>退出</li>
+				</ul>
+			</div>
+			<div id="section" class="row">
+				<div id="left" class="">
+						<ptree :list="perm.childrens"></ptree>			
+				</div>
+				<div id="right" class="">
+					<div id="top1" class=""></div>
+					<iframe class="ifr" src=""></iframe>
+				</div>
+			</div>
+		</div>		
+		<script type="text/javascript" src="js/jquery-1.12.4.js"></script>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/my.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/login.js" type="text/javascript" charset="utf-8"></script>
+		<script>
+			var permsTree = Vue.component("ptree",{
+				props: ["list"],
+				template: `
+					<ul>
+						<li v-for='item in list' v-if="item.catalog==0">
+							<a v-if="item.path" @click="openHTML('html/'+item.path)">{{item.name}}</a>
+							<span v-else>{{item.name}}</span>
+							<ptree :list = "item.childrens"></ptree>
+						</li>
+					</ul>
+				`,
+				methods:{
+					openHTML(src){
+						$("iframe").attr("src",src);
+					}
+				}
+			});
+			var vm = new Vue({
+				el: "#ctx",
+				data() {
+					return {
+						perms: [],
+						perm: {}
+					}
+				},methods:{
+					levels(index){
+						vm.perm=vm.perms[index]	
+					}					
+				},
+				created: function() {
+					var that = this;
+					alert("进入方法")
+					$.ajax({
+						url: data.ip + "perms/find",
+						type: "get",
+						xhrFields: {
+							withCredentials: true
+						},
+						dataType: "json",
+						success: function(response) {
+							alert(response)
+							that.perms = response;
+							that.perm=that.perms[0]
+						},
+						error: function(error) {
+							alert("报错了");
+							console.log(error);
+						}
+					});
+				}
+			});
+		</script>
+	</body>
+</html>
