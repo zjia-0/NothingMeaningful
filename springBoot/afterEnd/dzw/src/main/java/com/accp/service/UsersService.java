@@ -17,8 +17,14 @@ public class UsersService {
 	@Autowired
 	UsersMapper usersMapper;
 
-	public List<Users> find() {
-		return usersMapper.selectByExample();
+	public Users findByUsers(Users users) {
+		UsersExample ex = new UsersExample();
+		ex.createCriteria().andUsernameEqualTo(users.getUsername()).andPasswordEqualTo(users.getPassword());
+		List<Users> list = usersMapper.selectByExample(ex);
+		if (list != null && list.size() > 0) {
+			return list.get(0);
+		}
+		return null;
 	}
 
 }
