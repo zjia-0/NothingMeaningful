@@ -8,6 +8,8 @@ import org.apache.ibatis.annotations.Param;
 public interface PermissionsMapper {
 	List<Permissions> findByUid(Integer uid);
 	
+	List<Permissions> queryPerms();
+	
     int countByExample(PermissionsExample example);
 
     int deleteByExample(PermissionsExample example);

@@ -5,7 +5,9 @@ import java.util.List;
 
 public class Permissions {
     private Integer id;
-
+    
+    private Integer pid;
+    
     private String name;
 
     private String ename;
@@ -13,12 +15,21 @@ public class Permissions {
     private Integer catalog;
 
     private Integer parentid;
-
+    
     private String path;
     
     private List<Permissions> childrens=new ArrayList<Permissions>();
 
-    public List<Permissions> getChildrens() {
+    
+    public Integer getPid() {
+		return pid;
+	}
+
+	public void setPid(Integer pid) {
+		this.pid = pid;
+	}
+
+	public List<Permissions> getChildrens() {
 		return childrens;
 	}
 
