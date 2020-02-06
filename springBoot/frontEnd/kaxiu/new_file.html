@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		欢迎
+		<script src="js/jquery-1.12.4.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/my.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			 function ss(){
+				$.ajax({
+							url: data.ip + "query",
+							type: "get",
+							xhrFields: {
+								withCredentials: true
+							},
+							dataType: "json",
+							success: function(result) {
+								alert("来了老弟")
+								console.log(result)
+							}
+				});
+			}
+			ss()
+		</script>
+	</body>
+</html>
