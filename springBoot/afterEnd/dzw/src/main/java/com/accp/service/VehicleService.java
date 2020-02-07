@@ -19,7 +19,7 @@ public class VehicleService {
 	
 	//查询所有车资料
 	public List<Carinfo> queryCarinfo(){
-		return carinfoMapper.selectByExample(null);
+		return carinfoMapper.queryCarinfo();
 	}
 	//新增车辆信息
 	public int insertCarinfo(Carinfo carinfo) {

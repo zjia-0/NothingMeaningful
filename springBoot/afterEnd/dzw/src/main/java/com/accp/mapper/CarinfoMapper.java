@@ -15,6 +15,8 @@ public interface CarinfoMapper {
     int insert(Carinfo record);
 
     int insertSelective(Carinfo record);
+    
+    List<Carinfo> queryCarinfo();
 
     List<Carinfo> selectByExample(CarinfoExample example);
 

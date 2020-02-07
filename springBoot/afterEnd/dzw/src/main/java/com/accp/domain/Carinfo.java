@@ -2,6 +2,10 @@ package com.accp.domain;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class Carinfo {
     private String cdlicense;
 
@@ -13,10 +17,12 @@ public class Carinfo {
 
     private String cddriverphone;
 
+    @DateTimeFormat(pattern = "yy-MM-dd")
     private Date cddriverbirth;
 
     private Integer clid;
-
+    
+    @DateTimeFormat(pattern = "yy-MM-dd")
     private Date cdlicenseend;
 
     private String cdframe;
@@ -28,11 +34,14 @@ public class Carinfo {
     private Float cdmileage;
 
     private String cdload;
-
+    
+    @JsonFormat(pattern="yyyy-MM-dd")
     private Date cdbuydate;
 
+    @JsonFormat(pattern="yyyy-MM-dd")
     private Date cdgolicense;
 
+    @JsonFormat(pattern="yyyy-MM-dd")
     private Date cdcarcheckdate;
 
     private Integer fuelid;
@@ -41,19 +50,32 @@ public class Carinfo {
 
     private Integer cdcompulsoryinsuranceid;
 
+    @JsonFormat(pattern="yyyy-MM-dd")
     private Date cdcompulsoryinsurancedate;
 
     private Integer cdcommerceinsuranceid;
 
+    @JsonFormat(pattern="yyyy-MM-dd")
     private Date cdcommerceinsurancedate;
 
     private Integer cdisinsure;
 
     private Float cdnextmileage;
-
+    
+    @JsonFormat(pattern="yyyy-MM-dd")
     private Date cdnextkeep;
 
     private String cno;
+    
+    private String brandname;
+    
+    private String cname;
+    
+    private String carname;
+    
+    private String motorname;
+    
+    private String fuelname;
 
     private String remark1;
 
@@ -265,7 +287,94 @@ public class Carinfo {
         this.cdnextkeep = cdnextkeep;
     }
 
-    public String getCno() {
+    public Carinfo(String cdlicense, String cdno, String cbiid, String cddricer, String cddriverphone,
+			Date cddriverbirth, Integer clid, Date cdlicenseend, String cdframe, String cdengine, Float cdyearprice,
+			Float cdmileage, String cdload, Date cdbuydate, Date cdgolicense, Date cdcarcheckdate, Integer fuelid,
+			String cdsystem, Integer cdcompulsoryinsuranceid, Date cdcompulsoryinsurancedate,
+			Integer cdcommerceinsuranceid, Date cdcommerceinsurancedate, Integer cdisinsure, Float cdnextmileage,
+			Date cdnextkeep, String cno, String brandname, String cname, String carname, String motorname,
+			String fuelname, String remark1, String remark2, String remark3, String remark4, String remark5) {
+		super();
+		this.cdlicense = cdlicense;
+		this.cdno = cdno;
+		this.cbiid = cbiid;
+		this.cddricer = cddricer;
+		this.cddriverphone = cddriverphone;
+		this.cddriverbirth = cddriverbirth;
+		this.clid = clid;
+		this.cdlicenseend = cdlicenseend;
+		this.cdframe = cdframe;
+		this.cdengine = cdengine;
+		this.cdyearprice = cdyearprice;
+		this.cdmileage = cdmileage;
+		this.cdload = cdload;
+		this.cdbuydate = cdbuydate;
+		this.cdgolicense = cdgolicense;
+		this.cdcarcheckdate = cdcarcheckdate;
+		this.fuelid = fuelid;
+		this.cdsystem = cdsystem;
+		this.cdcompulsoryinsuranceid = cdcompulsoryinsuranceid;
+		this.cdcompulsoryinsurancedate = cdcompulsoryinsurancedate;
+		this.cdcommerceinsuranceid = cdcommerceinsuranceid;
+		this.cdcommerceinsurancedate = cdcommerceinsurancedate;
+		this.cdisinsure = cdisinsure;
+		this.cdnextmileage = cdnextmileage;
+		this.cdnextkeep = cdnextkeep;
+		this.cno = cno;
+		this.brandname = brandname;
+		this.cname = cname;
+		this.carname = carname;
+		this.motorname = motorname;
+		this.fuelname = fuelname;
+		this.remark1 = remark1;
+		this.remark2 = remark2;
+		this.remark3 = remark3;
+		this.remark4 = remark4;
+		this.remark5 = remark5;
+	}
+    public Carinfo() { }
+
+	public String getBrandname() {
+		return brandname;
+	}
+
+	public void setBrandname(String brandname) {
+		this.brandname = brandname;
+	}
+
+	public String getCname() {
+		return cname;
+	}
+
+	public void setCname(String cname) {
+		this.cname = cname;
+	}
+
+	public String getCarname() {
+		return carname;
+	}
+
+	public void setCarname(String carname) {
+		this.carname = carname;
+	}
+
+	public String getMotorname() {
+		return motorname;
+	}
+
+	public void setMotorname(String motorname) {
+		this.motorname = motorname;
+	}
+
+	public String getFuelname() {
+		return fuelname;
+	}
+
+	public void setFuelname(String fuelname) {
+		this.fuelname = fuelname;
+	}
+
+	public String getCno() {
         return cno;
     }
 
