@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>角色权限控制</title>
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
+		<link rel="stylesheet" href="css/bootstrapStyle/bootstrapStyle.css" type="text/css">
+		<style type="text/css">
+			li{
+				list-style: none;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container-fluid">
+			<div class="row" style="background-color: #DFF0D8;">
+				<div class="col-xs-4">
+					<h2>角色权限控制</h2>
+				</div>
+				<div class="col-xs-4 col-xs-offset-4">
+					<div style="float: right;margin-top: 20px;">
+						<button class="btn btn-success"><span class="glyphicon glyphicon-ok"></span>&nbsp;&nbsp;保存</button>
+						<button class="btn btn-default">关闭</button>
+					</div>
+				</div>
+			</div>
+			<div class="row" style="background-color: #F5F5F5;">
+				<div class="col-xs-6">
+					<div class="btn-group" role="group" aria-label="..."style="height: 50px;margin-top: 20px;">
+					  <span style="width: 100px;" type="button" class="btn btn-default">角色名称：</span>
+					  <div class="btn-group" role="group">
+					    <button style="width: 200px;" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					      	请选择
+					      <span class="caret"></span>
+					    </button>
+					    <ul style="width: 200px;" class="dropdown-menu">
+					      	<li><a href="#">总经理</a></li>
+						    <li><a href="#">站长</a></li>
+						    <li><a href="#">技术顾问</a></li>
+						    <li><a href="#">技术经理</a></li>
+					    </ul>
+					  </div>
+					</div>
+				</div>
+				<div class="col-xs-6">
+					<div style="margin-top: 20px;float: right;">
+						<button class="btn btn-success"><span class="glyphicon glyphicon-book"></span>&nbsp;全部选择</button>
+						<button class="btn btn-success"><span class="glyphicon glyphicon-check"></span>&nbsp;全部取消</button>
+						<button class="btn btn-success" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;角色定义</button>
+					</div>
+				</div>
+			</div>
+			<div class="row" id="ctx">
+				<h2>模块权限</h2>
+				<ptree :list="perm.childrens"></ptree>	
+			</div>
+		
+		
+			<!-- 角色定义模态框 -->
+			<div class="modal fade" data-backdrop="static" data-keyboard="false"  id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			  <div class="modal-dialog" role="document"> 
+			    <div class="modal-content">
+			      <div class="modal-header" style="background-color: #DFF0D8;">
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" class="btn btn-default">关闭</span></button>
+			        <h3 class="modal-title" id="myModalLabel">角色定义</h3>
+			      </div>
+			      <div class="modal-body">
+			        <div class="row text-right" style="margin-bottom: 10px;">
+			        	<button class="btn btn-success"><span class="glyphicon glyphicon-book"></span>&nbsp;增加</button>
+						<button class="btn btn-success"><span class="glyphicon glyphicon-check"></span>&nbsp;删除</button>
+						<button class="btn btn-success" style="margin-right: 15px;"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;保存</button>
+			        </div>
+			        <div class="row" style="padding-bottom: 10px;">
+			        	<!--
+                        	作者：1795022470@qq.com
+                        	时间：2019-12-31
+                        	描述：模态框中新增修改角色
+                        -->
+			        	<div class="row" style="margin-left: 4px;">
+						  <div class="col-lg-5">
+						    <div class="input-group">
+						      <span class="input-group-addon">
+						        角色代码
+						      </span>
+						      <input type="text" class="form-control" aria-label="...">
+						    </div><!-- /input-group -->
+						  </div><!-- /.col-lg-6 -->
+						  <div class="col-lg-5">
+						    <div class="input-group">
+						      <span class="input-group-addon">
+						       角色名称
+						      </span>
+						      <input type="text" class="form-control" aria-label="...">
+						    </div><!-- /input-group -->
+						  </div><!-- /.col-lg-6 -->
+						</div><!-- /.row -->
+			        </div>
+			        <div class="row ">
+			        	<div class="col-xs-8">
+			        		<table border="" cellspacing="" cellpadding="" class="table table-bordered">
+					        	<tr>
+					        		<th>Header</th>
+					        		<th>Header</th>
+					        	</tr>
+								<tr>
+					        		<td>Data</td>
+					        		<td>Data</td>
+					        	</tr>
+					        </table>
+			        	</div>
+			        	
+			        </div>
+			        
+			      </div>
+			      <div class="modal-footer" style="background-color: white;">
+			      <p style="text-align: left;margin-top: 10px;">合计：15条记录</p>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+			
+		</div>
+		
+		<script src="js/canvas-nest.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/jquery-1.12.4.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" src="js/jquery.ztree.core.js"></script>
+		<script src="js/jquery.ztree.excheck.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/my.js" type="text/javascript" charset="utf-8"></script>
+		<!--
+        	作者：1795022470@qq.com
+        	时间：2020-01-01
+        	描述：树状菜单栏
+        -->
+		<script type="text/javascript">
+			var permsTree = Vue.component("ptree",{
+				props: ["list"],
+				template: `
+					<ul>
+						<li v-for='item in list'>
+							<span v-if="item.path" @click="openHTML('html/'+item.path)"><input type="checkbox"/>{{item.name}}</span>
+							<span v-else><input type="checkbox"/>{{item.name}}</span>
+							<ptree :list = "item.childrens"></ptree>
+						</li>
+					</ul>
+				`,
+				methods:{
+					openHTML(src){
+						$("iframe").attr("src",src);
+					}
+				}
+			});
+			var vm = new Vue({
+				el: "#ctx",
+				data() {
+					return {
+						perms: [],
+						perm: {}
+					}
+				},methods:{
+					levels(index){
+						vm.perm=vm.perms[index]	
+					}					
+				},
+				created: function() {
+					var that = this;
+					$.ajax({
+						url: data.ip + "per/perms",
+						type: "get",
+						xhrFields: {
+							withCredentials: true
+						},
+						dataType: "json",
+						success: function(response) {
+							that.perms = response;
+							that.perm=that.perms[0]
+						}
+					});
+				}
+			});
+		</script>
+	</body>
+</html>

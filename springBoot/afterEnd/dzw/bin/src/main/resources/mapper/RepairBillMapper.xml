@@ -1,0 +1,733 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.accp.mapper.RepairBillMapper" >
+  <resultMap id="BaseResultMap" type="com.accp.domain.RepairBill" >
+    <id column="rid" property="rid" jdbcType="INTEGER" />
+    <result column="number" property="number" jdbcType="VARCHAR" />
+    <result column="item_type" property="itemType" jdbcType="INTEGER" />
+    <result column="business_type" property="businessType" jdbcType="INTEGER" />
+    <result column="working_shift" property="workingShift" jdbcType="VARCHAR" />
+    <result column="owner_name" property="ownerName" jdbcType="VARCHAR" />
+    <result column="plate_number" property="plateNumber" jdbcType="VARCHAR" />
+    <result column="car_type" property="carType" jdbcType="VARCHAR" />
+    <result column="vin" property="vin" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="predict_time" property="predictTime" jdbcType="TIMESTAMP" />
+    <result column="finish_time" property="finishTime" jdbcType="TIMESTAMP" />
+    <result column="delays_reason" property="delaysReason" jdbcType="VARCHAR" />
+    <result column="rework_number" property="reworkNumber" jdbcType="INTEGER" />
+    <result column="rework_reason" property="reworkReason" jdbcType="VARCHAR" />
+    <result column="person_liable" property="personLiable" jdbcType="VARCHAR" />
+    <result column="penalty_amount" property="penaltyAmount" jdbcType="REAL" />
+    <result column="engine_number" property="engineNumber" jdbcType="VARCHAR" />
+    <result column="engine_brand" property="engineBrand" jdbcType="VARCHAR" />
+    <result column="service_consultant" property="serviceConsultant" jdbcType="VARCHAR" />
+    <result column="driver" property="driver" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="entrance_mileage" property="entranceMileage" jdbcType="REAL" />
+    <result column="entrance_oil" property="entranceOil" jdbcType="VARCHAR" />
+    <result column="last_mileage" property="lastMileage" jdbcType="REAL" />
+    <result column="entrance_time" property="entranceTime" jdbcType="TIMESTAMP" />
+    <result column="userid" property="userid" jdbcType="INTEGER" />
+    <result column="clearing_form" property="clearingForm" jdbcType="VARCHAR" />
+    <result column="corporation" property="corporation" jdbcType="VARCHAR" />
+    <result column="last_time" property="lastTime" jdbcType="TIMESTAMP" />
+    <result column="estimated_amount" property="estimatedAmount" jdbcType="REAL" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="repairs_statement" property="repairsStatement" jdbcType="VARCHAR" />
+    <result column="remark1" property="remark1" jdbcType="VARCHAR" />
+    <result column="remark2" property="remark2" jdbcType="VARCHAR" />
+    <result column="remark3" property="remark3" jdbcType="VARCHAR" />
+    <result column="remark4" property="remark4" jdbcType="VARCHAR" />
+    <result column="remark5" property="remark5" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    rid, number, item_type, business_type, working_shift, owner_name, plate_number, car_type, 
+    vin, create_time, predict_time, finish_time, delays_reason, rework_number, rework_reason, 
+    person_liable, penalty_amount, engine_number, engine_brand, service_consultant, driver, 
+    phone, entrance_mileage, entrance_oil, last_mileage, entrance_time, userid, clearing_form, 
+    corporation, last_time, estimated_amount, remark, repairs_statement, remark1, remark2, 
+    remark3, remark4, remark5
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.accp.domain.RepairBillExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from repair_bill
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from repair_bill
+    where rid = #{rid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from repair_bill
+    where rid = #{rid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.accp.domain.RepairBillExample" >
+    delete from repair_bill
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.accp.domain.RepairBill" >
+    insert into repair_bill (rid, number, item_type, 
+      business_type, working_shift, owner_name, 
+      plate_number, car_type, vin, 
+      create_time, predict_time, finish_time, 
+      delays_reason, rework_number, rework_reason, 
+      person_liable, penalty_amount, engine_number, 
+      engine_brand, service_consultant, driver, 
+      phone, entrance_mileage, entrance_oil, 
+      last_mileage, entrance_time, userid, 
+      clearing_form, corporation, last_time, 
+      estimated_amount, remark, repairs_statement, 
+      remark1, remark2, remark3, 
+      remark4, remark5)
+    values (#{rid,jdbcType=INTEGER}, #{number,jdbcType=VARCHAR}, #{itemType,jdbcType=INTEGER}, 
+      #{businessType,jdbcType=INTEGER}, #{workingShift,jdbcType=VARCHAR}, #{ownerName,jdbcType=VARCHAR}, 
+      #{plateNumber,jdbcType=VARCHAR}, #{carType,jdbcType=VARCHAR}, #{vin,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{predictTime,jdbcType=TIMESTAMP}, #{finishTime,jdbcType=TIMESTAMP}, 
+      #{delaysReason,jdbcType=VARCHAR}, #{reworkNumber,jdbcType=INTEGER}, #{reworkReason,jdbcType=VARCHAR}, 
+      #{personLiable,jdbcType=VARCHAR}, #{penaltyAmount,jdbcType=REAL}, #{engineNumber,jdbcType=VARCHAR}, 
+      #{engineBrand,jdbcType=VARCHAR}, #{serviceConsultant,jdbcType=VARCHAR}, #{driver,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{entranceMileage,jdbcType=REAL}, #{entranceOil,jdbcType=VARCHAR}, 
+      #{lastMileage,jdbcType=REAL}, #{entranceTime,jdbcType=TIMESTAMP}, #{userid,jdbcType=INTEGER}, 
+      #{clearingForm,jdbcType=VARCHAR}, #{corporation,jdbcType=VARCHAR}, #{lastTime,jdbcType=TIMESTAMP}, 
+      #{estimatedAmount,jdbcType=REAL}, #{remark,jdbcType=VARCHAR}, #{repairsStatement,jdbcType=VARCHAR}, 
+      #{remark1,jdbcType=VARCHAR}, #{remark2,jdbcType=VARCHAR}, #{remark3,jdbcType=VARCHAR}, 
+      #{remark4,jdbcType=VARCHAR}, #{remark5,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.accp.domain.RepairBill" >
+    insert into repair_bill
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="rid != null" >
+        rid,
+      </if>
+      <if test="number != null" >
+        number,
+      </if>
+      <if test="itemType != null" >
+        item_type,
+      </if>
+      <if test="businessType != null" >
+        business_type,
+      </if>
+      <if test="workingShift != null" >
+        working_shift,
+      </if>
+      <if test="ownerName != null" >
+        owner_name,
+      </if>
+      <if test="plateNumber != null" >
+        plate_number,
+      </if>
+      <if test="carType != null" >
+        car_type,
+      </if>
+      <if test="vin != null" >
+        vin,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="predictTime != null" >
+        predict_time,
+      </if>
+      <if test="finishTime != null" >
+        finish_time,
+      </if>
+      <if test="delaysReason != null" >
+        delays_reason,
+      </if>
+      <if test="reworkNumber != null" >
+        rework_number,
+      </if>
+      <if test="reworkReason != null" >
+        rework_reason,
+      </if>
+      <if test="personLiable != null" >
+        person_liable,
+      </if>
+      <if test="penaltyAmount != null" >
+        penalty_amount,
+      </if>
+      <if test="engineNumber != null" >
+        engine_number,
+      </if>
+      <if test="engineBrand != null" >
+        engine_brand,
+      </if>
+      <if test="serviceConsultant != null" >
+        service_consultant,
+      </if>
+      <if test="driver != null" >
+        driver,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="entranceMileage != null" >
+        entrance_mileage,
+      </if>
+      <if test="entranceOil != null" >
+        entrance_oil,
+      </if>
+      <if test="lastMileage != null" >
+        last_mileage,
+      </if>
+      <if test="entranceTime != null" >
+        entrance_time,
+      </if>
+      <if test="userid != null" >
+        userid,
+      </if>
+      <if test="clearingForm != null" >
+        clearing_form,
+      </if>
+      <if test="corporation != null" >
+        corporation,
+      </if>
+      <if test="lastTime != null" >
+        last_time,
+      </if>
+      <if test="estimatedAmount != null" >
+        estimated_amount,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="repairsStatement != null" >
+        repairs_statement,
+      </if>
+      <if test="remark1 != null" >
+        remark1,
+      </if>
+      <if test="remark2 != null" >
+        remark2,
+      </if>
+      <if test="remark3 != null" >
+        remark3,
+      </if>
+      <if test="remark4 != null" >
+        remark4,
+      </if>
+      <if test="remark5 != null" >
+        remark5,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="rid != null" >
+        #{rid,jdbcType=INTEGER},
+      </if>
+      <if test="number != null" >
+        #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="itemType != null" >
+        #{itemType,jdbcType=INTEGER},
+      </if>
+      <if test="businessType != null" >
+        #{businessType,jdbcType=INTEGER},
+      </if>
+      <if test="workingShift != null" >
+        #{workingShift,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerName != null" >
+        #{ownerName,jdbcType=VARCHAR},
+      </if>
+      <if test="plateNumber != null" >
+        #{plateNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="carType != null" >
+        #{carType,jdbcType=VARCHAR},
+      </if>
+      <if test="vin != null" >
+        #{vin,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="predictTime != null" >
+        #{predictTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="finishTime != null" >
+        #{finishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="delaysReason != null" >
+        #{delaysReason,jdbcType=VARCHAR},
+      </if>
+      <if test="reworkNumber != null" >
+        #{reworkNumber,jdbcType=INTEGER},
+      </if>
+      <if test="reworkReason != null" >
+        #{reworkReason,jdbcType=VARCHAR},
+      </if>
+      <if test="personLiable != null" >
+        #{personLiable,jdbcType=VARCHAR},
+      </if>
+      <if test="penaltyAmount != null" >
+        #{penaltyAmount,jdbcType=REAL},
+      </if>
+      <if test="engineNumber != null" >
+        #{engineNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="engineBrand != null" >
+        #{engineBrand,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceConsultant != null" >
+        #{serviceConsultant,jdbcType=VARCHAR},
+      </if>
+      <if test="driver != null" >
+        #{driver,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="entranceMileage != null" >
+        #{entranceMileage,jdbcType=REAL},
+      </if>
+      <if test="entranceOil != null" >
+        #{entranceOil,jdbcType=VARCHAR},
+      </if>
+      <if test="lastMileage != null" >
+        #{lastMileage,jdbcType=REAL},
+      </if>
+      <if test="entranceTime != null" >
+        #{entranceTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="clearingForm != null" >
+        #{clearingForm,jdbcType=VARCHAR},
+      </if>
+      <if test="corporation != null" >
+        #{corporation,jdbcType=VARCHAR},
+      </if>
+      <if test="lastTime != null" >
+        #{lastTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="estimatedAmount != null" >
+        #{estimatedAmount,jdbcType=REAL},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="repairsStatement != null" >
+        #{repairsStatement,jdbcType=VARCHAR},
+      </if>
+      <if test="remark1 != null" >
+        #{remark1,jdbcType=VARCHAR},
+      </if>
+      <if test="remark2 != null" >
+        #{remark2,jdbcType=VARCHAR},
+      </if>
+      <if test="remark3 != null" >
+        #{remark3,jdbcType=VARCHAR},
+      </if>
+      <if test="remark4 != null" >
+        #{remark4,jdbcType=VARCHAR},
+      </if>
+      <if test="remark5 != null" >
+        #{remark5,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.accp.domain.RepairBillExample" resultType="java.lang.Integer" >
+    select count(*) from repair_bill
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update repair_bill
+    <set >
+      <if test="record.rid != null" >
+        rid = #{record.rid,jdbcType=INTEGER},
+      </if>
+      <if test="record.number != null" >
+        number = #{record.number,jdbcType=VARCHAR},
+      </if>
+      <if test="record.itemType != null" >
+        item_type = #{record.itemType,jdbcType=INTEGER},
+      </if>
+      <if test="record.businessType != null" >
+        business_type = #{record.businessType,jdbcType=INTEGER},
+      </if>
+      <if test="record.workingShift != null" >
+        working_shift = #{record.workingShift,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ownerName != null" >
+        owner_name = #{record.ownerName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.plateNumber != null" >
+        plate_number = #{record.plateNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.carType != null" >
+        car_type = #{record.carType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vin != null" >
+        vin = #{record.vin,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.predictTime != null" >
+        predict_time = #{record.predictTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.finishTime != null" >
+        finish_time = #{record.finishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.delaysReason != null" >
+        delays_reason = #{record.delaysReason,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reworkNumber != null" >
+        rework_number = #{record.reworkNumber,jdbcType=INTEGER},
+      </if>
+      <if test="record.reworkReason != null" >
+        rework_reason = #{record.reworkReason,jdbcType=VARCHAR},
+      </if>
+      <if test="record.personLiable != null" >
+        person_liable = #{record.personLiable,jdbcType=VARCHAR},
+      </if>
+      <if test="record.penaltyAmount != null" >
+        penalty_amount = #{record.penaltyAmount,jdbcType=REAL},
+      </if>
+      <if test="record.engineNumber != null" >
+        engine_number = #{record.engineNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.engineBrand != null" >
+        engine_brand = #{record.engineBrand,jdbcType=VARCHAR},
+      </if>
+      <if test="record.serviceConsultant != null" >
+        service_consultant = #{record.serviceConsultant,jdbcType=VARCHAR},
+      </if>
+      <if test="record.driver != null" >
+        driver = #{record.driver,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phone != null" >
+        phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.entranceMileage != null" >
+        entrance_mileage = #{record.entranceMileage,jdbcType=REAL},
+      </if>
+      <if test="record.entranceOil != null" >
+        entrance_oil = #{record.entranceOil,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastMileage != null" >
+        last_mileage = #{record.lastMileage,jdbcType=REAL},
+      </if>
+      <if test="record.entranceTime != null" >
+        entrance_time = #{record.entranceTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.userid != null" >
+        userid = #{record.userid,jdbcType=INTEGER},
+      </if>
+      <if test="record.clearingForm != null" >
+        clearing_form = #{record.clearingForm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.corporation != null" >
+        corporation = #{record.corporation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastTime != null" >
+        last_time = #{record.lastTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.estimatedAmount != null" >
+        estimated_amount = #{record.estimatedAmount,jdbcType=REAL},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.repairsStatement != null" >
+        repairs_statement = #{record.repairsStatement,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark1 != null" >
+        remark1 = #{record.remark1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark2 != null" >
+        remark2 = #{record.remark2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark3 != null" >
+        remark3 = #{record.remark3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark4 != null" >
+        remark4 = #{record.remark4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark5 != null" >
+        remark5 = #{record.remark5,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update repair_bill
+    set rid = #{record.rid,jdbcType=INTEGER},
+      number = #{record.number,jdbcType=VARCHAR},
+      item_type = #{record.itemType,jdbcType=INTEGER},
+      business_type = #{record.businessType,jdbcType=INTEGER},
+      working_shift = #{record.workingShift,jdbcType=VARCHAR},
+      owner_name = #{record.ownerName,jdbcType=VARCHAR},
+      plate_number = #{record.plateNumber,jdbcType=VARCHAR},
+      car_type = #{record.carType,jdbcType=VARCHAR},
+      vin = #{record.vin,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      predict_time = #{record.predictTime,jdbcType=TIMESTAMP},
+      finish_time = #{record.finishTime,jdbcType=TIMESTAMP},
+      delays_reason = #{record.delaysReason,jdbcType=VARCHAR},
+      rework_number = #{record.reworkNumber,jdbcType=INTEGER},
+      rework_reason = #{record.reworkReason,jdbcType=VARCHAR},
+      person_liable = #{record.personLiable,jdbcType=VARCHAR},
+      penalty_amount = #{record.penaltyAmount,jdbcType=REAL},
+      engine_number = #{record.engineNumber,jdbcType=VARCHAR},
+      engine_brand = #{record.engineBrand,jdbcType=VARCHAR},
+      service_consultant = #{record.serviceConsultant,jdbcType=VARCHAR},
+      driver = #{record.driver,jdbcType=VARCHAR},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      entrance_mileage = #{record.entranceMileage,jdbcType=REAL},
+      entrance_oil = #{record.entranceOil,jdbcType=VARCHAR},
+      last_mileage = #{record.lastMileage,jdbcType=REAL},
+      entrance_time = #{record.entranceTime,jdbcType=TIMESTAMP},
+      userid = #{record.userid,jdbcType=INTEGER},
+      clearing_form = #{record.clearingForm,jdbcType=VARCHAR},
+      corporation = #{record.corporation,jdbcType=VARCHAR},
+      last_time = #{record.lastTime,jdbcType=TIMESTAMP},
+      estimated_amount = #{record.estimatedAmount,jdbcType=REAL},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      repairs_statement = #{record.repairsStatement,jdbcType=VARCHAR},
+      remark1 = #{record.remark1,jdbcType=VARCHAR},
+      remark2 = #{record.remark2,jdbcType=VARCHAR},
+      remark3 = #{record.remark3,jdbcType=VARCHAR},
+      remark4 = #{record.remark4,jdbcType=VARCHAR},
+      remark5 = #{record.remark5,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.accp.domain.RepairBill" >
+    update repair_bill
+    <set >
+      <if test="number != null" >
+        number = #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="itemType != null" >
+        item_type = #{itemType,jdbcType=INTEGER},
+      </if>
+      <if test="businessType != null" >
+        business_type = #{businessType,jdbcType=INTEGER},
+      </if>
+      <if test="workingShift != null" >
+        working_shift = #{workingShift,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerName != null" >
+        owner_name = #{ownerName,jdbcType=VARCHAR},
+      </if>
+      <if test="plateNumber != null" >
+        plate_number = #{plateNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="carType != null" >
+        car_type = #{carType,jdbcType=VARCHAR},
+      </if>
+      <if test="vin != null" >
+        vin = #{vin,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="predictTime != null" >
+        predict_time = #{predictTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="finishTime != null" >
+        finish_time = #{finishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="delaysReason != null" >
+        delays_reason = #{delaysReason,jdbcType=VARCHAR},
+      </if>
+      <if test="reworkNumber != null" >
+        rework_number = #{reworkNumber,jdbcType=INTEGER},
+      </if>
+      <if test="reworkReason != null" >
+        rework_reason = #{reworkReason,jdbcType=VARCHAR},
+      </if>
+      <if test="personLiable != null" >
+        person_liable = #{personLiable,jdbcType=VARCHAR},
+      </if>
+      <if test="penaltyAmount != null" >
+        penalty_amount = #{penaltyAmount,jdbcType=REAL},
+      </if>
+      <if test="engineNumber != null" >
+        engine_number = #{engineNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="engineBrand != null" >
+        engine_brand = #{engineBrand,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceConsultant != null" >
+        service_consultant = #{serviceConsultant,jdbcType=VARCHAR},
+      </if>
+      <if test="driver != null" >
+        driver = #{driver,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="entranceMileage != null" >
+        entrance_mileage = #{entranceMileage,jdbcType=REAL},
+      </if>
+      <if test="entranceOil != null" >
+        entrance_oil = #{entranceOil,jdbcType=VARCHAR},
+      </if>
+      <if test="lastMileage != null" >
+        last_mileage = #{lastMileage,jdbcType=REAL},
+      </if>
+      <if test="entranceTime != null" >
+        entrance_time = #{entranceTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userid != null" >
+        userid = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="clearingForm != null" >
+        clearing_form = #{clearingForm,jdbcType=VARCHAR},
+      </if>
+      <if test="corporation != null" >
+        corporation = #{corporation,jdbcType=VARCHAR},
+      </if>
+      <if test="lastTime != null" >
+        last_time = #{lastTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="estimatedAmount != null" >
+        estimated_amount = #{estimatedAmount,jdbcType=REAL},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="repairsStatement != null" >
+        repairs_statement = #{repairsStatement,jdbcType=VARCHAR},
+      </if>
+      <if test="remark1 != null" >
+        remark1 = #{remark1,jdbcType=VARCHAR},
+      </if>
+      <if test="remark2 != null" >
+        remark2 = #{remark2,jdbcType=VARCHAR},
+      </if>
+      <if test="remark3 != null" >
+        remark3 = #{remark3,jdbcType=VARCHAR},
+      </if>
+      <if test="remark4 != null" >
+        remark4 = #{remark4,jdbcType=VARCHAR},
+      </if>
+      <if test="remark5 != null" >
+        remark5 = #{remark5,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where rid = #{rid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.accp.domain.RepairBill" >
+    update repair_bill
+    set number = #{number,jdbcType=VARCHAR},
+      item_type = #{itemType,jdbcType=INTEGER},
+      business_type = #{businessType,jdbcType=INTEGER},
+      working_shift = #{workingShift,jdbcType=VARCHAR},
+      owner_name = #{ownerName,jdbcType=VARCHAR},
+      plate_number = #{plateNumber,jdbcType=VARCHAR},
+      car_type = #{carType,jdbcType=VARCHAR},
+      vin = #{vin,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      predict_time = #{predictTime,jdbcType=TIMESTAMP},
+      finish_time = #{finishTime,jdbcType=TIMESTAMP},
+      delays_reason = #{delaysReason,jdbcType=VARCHAR},
+      rework_number = #{reworkNumber,jdbcType=INTEGER},
+      rework_reason = #{reworkReason,jdbcType=VARCHAR},
+      person_liable = #{personLiable,jdbcType=VARCHAR},
+      penalty_amount = #{penaltyAmount,jdbcType=REAL},
+      engine_number = #{engineNumber,jdbcType=VARCHAR},
+      engine_brand = #{engineBrand,jdbcType=VARCHAR},
+      service_consultant = #{serviceConsultant,jdbcType=VARCHAR},
+      driver = #{driver,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      entrance_mileage = #{entranceMileage,jdbcType=REAL},
+      entrance_oil = #{entranceOil,jdbcType=VARCHAR},
+      last_mileage = #{lastMileage,jdbcType=REAL},
+      entrance_time = #{entranceTime,jdbcType=TIMESTAMP},
+      userid = #{userid,jdbcType=INTEGER},
+      clearing_form = #{clearingForm,jdbcType=VARCHAR},
+      corporation = #{corporation,jdbcType=VARCHAR},
+      last_time = #{lastTime,jdbcType=TIMESTAMP},
+      estimated_amount = #{estimatedAmount,jdbcType=REAL},
+      remark = #{remark,jdbcType=VARCHAR},
+      repairs_statement = #{repairsStatement,jdbcType=VARCHAR},
+      remark1 = #{remark1,jdbcType=VARCHAR},
+      remark2 = #{remark2,jdbcType=VARCHAR},
+      remark3 = #{remark3,jdbcType=VARCHAR},
+      remark4 = #{remark4,jdbcType=VARCHAR},
+      remark5 = #{remark5,jdbcType=VARCHAR}
+    where rid = #{rid,jdbcType=INTEGER}
+  </update>
+</mapper>

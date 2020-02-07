@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" href="css/bootstrap.min.css" />
+		<style>
+			*{
+				margin: 0px;
+				padding: 0px;
+			}
+			.bq span{
+				margin:0px 5px;
+			}
+		</style>
+	</head>
+	<body>
+	<div id="ctx">
+		<div class="container-fluid">
+			<div style="background: #f7ffff; height: 50px;  padding-left: 10px; line-height:50px;">
+				<span style="font-size: 25px;" class="col-sm-11 col-lg-11 col-md-11">发动机品牌</span>
+				<span class="col-lg-1 col-md-1 col-sm-1"><button type="button"class="btn btn-default">关闭</button></span>
+			</div>
+			<div style="background: #f7f7f7; height: 300px; padding-top: 10px;">
+					<div style="float: right;" class="bq">
+						<span v-on:click="ins()"><span class="glyphicon glyphicon-align-left" style="color: #fcac28;" aria-hidden="true"></span>增加</span>
+						<span v-on:click="del()"><span class="glyphicon glyphicon-remove-circle" style="color: #fcac28;" aria-hidden="true"></span>删除</span>
+						<span v-on:click="baochuen()"><span class="glyphicon glyphicon-floppy-disk" style="color: #fcac28;" aria-hidden="true"></span>保存</span>
+						<span><span class="glyphicon glyphicon-share" style="color: #fcac28;" aria-hidden="true"></span>导出</span>
+					</div>		
+					<div style="height: 35px;"></div>
+					<div style="margin-left: 20px;">
+						<span style="color: #5dcbdb;">分类代码</span>
+						<span><input type="text" style="height: 25px;" class="id"></span>
+						<span style="color: #5dcbdb;">分类名称</span>
+						<span><input type="text" style="height: 25px;" class="name"></span>
+					</div>
+					
+					<div class="col-sm-4 col-lg-4 col-md-4" style="margin-top: 10px;">
+						<table  border="1px" class="table" style="border: 1px solid #d0cbc5;">
+							<tr  style="background: #39cede;color: white;">
+								<th>发动机品牌编号</th>
+								<th>发动机品牌名称</th>
+							</tr>
+							<tr style="background: white;" v-for="i in en">
+								<td><input type="text" v-model="i.motorid" style="border: none; text-align: center;"  v-on:click="shu(i.motorid,i.motorname)"/></td>
+								<td><input type="text" v-model="i.motorname" style="border: none; text-align: center;"  v-on:click="shu(i.motorid,i.motorname)"/></td>
+							</tr>
+						</table>
+					</div>		
+			</div>		
+		</div>			
+	</div>		
+		<script type="text/javascript" src="js/jquery-1.12.4.js" ></script>
+		<script type="text/javascript" src="js/bootstrap.min.js" ></script>
+		<script type="text/javascript" src="js/vue.js" ></script>
+		<script type="text/javascript" src="js/my.js" ></script>
+		<script>
+		var vm=new Vue({
+		 el: "#ctx",
+				data() {
+					return {
+						en:{}
+					};
+				},
+				methods: {
+				    shu:function(id,name,index){
+				    	$(".id").val(id);
+				    	$(".name").val(name);
+				    },
+				    del:function(){
+				    	var zhis=$(".id").val()
+				    	var that = this;
+				    	$.ajax({
+							url: data.ip + "enginedelete",
+							data:{"motorid":zhis},
+							type: "post",
+							dataType: "json",
+							success: function(res) {
+								if (res>0) {
+									alert("删除成功")
+								} else{
+									alert("删除失败")
+								}
+							}
+						});
+				    },ins:function(){
+				    	var motorid=$(".id").val()
+				    	var motorname=$(".name").val()
+				    	$.ajax({
+							url: data.ip + "engineinsert",
+							data:{"motorid":motorid,"motorname":motorname},
+							type: "post",
+							dataType: "json",
+							success: function(res) {
+								if (res>0) {
+									alert("新增成功")
+								} else{
+									alert("新增失败")
+								}
+							}
+						});
+				    },baochuen:function(){
+				    	var motorid=$(".id").val()
+				    	var motorname=$(".name").val()
+				    	$.ajax({
+							url: data.ip + "engineupdate",
+							data:{"motorid":motorid,"motorname":motorname},
+							type: "post",
+							dataType: "json",
+							success: function(res) {
+								if (res>0) {
+									alert("修改成功")
+								} else{
+									alert("修改失败")
+								}
+							}
+						});
+				    }
+				},created:function(){
+						var that = this;
+						$.ajax({
+							url: data.ip + "engine",	
+							type: "post",
+							dataType: "json",
+							success: function(res) {
+								that.en=res;
+							}
+						});
+				}
+	  })
+		
+
+			
+		</script>
+	</body>
+</html>

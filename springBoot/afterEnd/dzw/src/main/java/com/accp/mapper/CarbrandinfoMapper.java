@@ -17,6 +17,8 @@ public interface CarbrandinfoMapper {
     int insertSelective(Carbrandinfo record);
 
     List<Carbrandinfo> selectByExample(CarbrandinfoExample example);
+    
+    List<Carbrandinfo> select(String con);
 
     Carbrandinfo selectByPrimaryKey(String cid);
 

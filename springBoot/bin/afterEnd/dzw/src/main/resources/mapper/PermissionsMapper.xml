@@ -11,7 +11,15 @@
 			jdbcType="INTEGER" />
 		<result column="path" property="path" jdbcType="VARCHAR" />
 	</resultMap>
-	
+	<resultMap id="BaseResultMaptwo"
+		type="com.accp.domain.Permissions">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="ename" property="ename" jdbcType="VARCHAR" />
+		<result column="catalog" property="catalog" jdbcType="INTEGER" />
+		<result column="pid" property="pid" jdbcType="INTEGER" />
+		<result column="path" property="path" jdbcType="VARCHAR" />
+	</resultMap>
 	<resultMap type="com.accp.domain.Permissions" id="BaseResultMapExtends" extends="BaseResultMap">
 		<collection property="childrens" column="id"></collection>
 	</resultMap>
@@ -20,7 +28,9 @@
 		SELECT p.* FROM permissions p INNER JOIN roles_perms rp ON p.id = rp.pid INNER JOIN users_roles ur ON rp.rid = ur.rid WHERE ur.uid = #{uid}
 	</select>
 
-
+	<select id="queryPerms" resultMap="BaseResultMaptwo">
+		SELECT `id`,`parentId` AS pid,`name`,`ename`,`catalog`,`path` FROM `permissions`
+	</select>
 	<sql id="Example_Where_Clause">
 		<where>
 			<foreach collection="oredCriteria" item="criteria"

@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.accp.mapper.CarbrandinfoMapper" >
+  <resultMap id="BaseResultMap" type="com.accp.domain.Carbrandinfo" >
+    <id column="cid" property="cid" jdbcType="VARCHAR" />
+    <result column="cno" property="cno" jdbcType="VARCHAR" />
+    <result column="cname" property="cname" jdbcType="VARCHAR" />
+    <result column="cprice" property="cprice" jdbcType="REAL" />
+    <result column="cyear" property="cyear" jdbcType="REAL" />
+    <result column="cdischarge" property="cdischarge" jdbcType="VARCHAR" />
+    <result column="cdomestic" property="cdomestic" jdbcType="VARCHAR" />
+    <result column="cfuel" property="cfuel" jdbcType="VARCHAR" />
+    <result column="cfour" property="cfour" jdbcType="VARCHAR" />
+    <result column="picture" property="picture" jdbcType="VARCHAR" />
+    <result column="remark1" property="remark1" jdbcType="VARCHAR" />
+    <result column="remark2" property="remark2" jdbcType="VARCHAR" />
+    <result column="remark3" property="remark3" jdbcType="VARCHAR" />
+    <result column="remark4" property="remark4" jdbcType="VARCHAR" />
+    <result column="remark5" property="remark5" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    cid, cno, cname, cprice, cyear, cdischarge, cdomestic, cfuel, cfour, picture, remark1, 
+    remark2, remark3, remark4, remark5
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.accp.domain.CarbrandinfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from carbrandinfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from carbrandinfo
+    where cid = #{cid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from carbrandinfo
+    where cid = #{cid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.accp.domain.CarbrandinfoExample" >
+    delete from carbrandinfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.accp.domain.Carbrandinfo" >
+    insert into carbrandinfo (cid, cno, cname, 
+      cprice, cyear, cdischarge, 
+      cdomestic, cfuel, cfour, 
+      picture, remark1, remark2, 
+      remark3, remark4, remark5
+      )
+    values (#{cid,jdbcType=VARCHAR}, #{cno,jdbcType=VARCHAR}, #{cname,jdbcType=VARCHAR}, 
+      #{cprice,jdbcType=REAL}, #{cyear,jdbcType=REAL}, #{cdischarge,jdbcType=VARCHAR}, 
+      #{cdomestic,jdbcType=VARCHAR}, #{cfuel,jdbcType=VARCHAR}, #{cfour,jdbcType=VARCHAR}, 
+      #{picture,jdbcType=VARCHAR}, #{remark1,jdbcType=VARCHAR}, #{remark2,jdbcType=VARCHAR}, 
+      #{remark3,jdbcType=VARCHAR}, #{remark4,jdbcType=VARCHAR}, #{remark5,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.accp.domain.Carbrandinfo" >
+    insert into carbrandinfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="cid != null" >
+        cid,
+      </if>
+      <if test="cno != null" >
+        cno,
+      </if>
+      <if test="cname != null" >
+        cname,
+      </if>
+      <if test="cprice != null" >
+        cprice,
+      </if>
+      <if test="cyear != null" >
+        cyear,
+      </if>
+      <if test="cdischarge != null" >
+        cdischarge,
+      </if>
+      <if test="cdomestic != null" >
+        cdomestic,
+      </if>
+      <if test="cfuel != null" >
+        cfuel,
+      </if>
+      <if test="cfour != null" >
+        cfour,
+      </if>
+      <if test="picture != null" >
+        picture,
+      </if>
+      <if test="remark1 != null" >
+        remark1,
+      </if>
+      <if test="remark2 != null" >
+        remark2,
+      </if>
+      <if test="remark3 != null" >
+        remark3,
+      </if>
+      <if test="remark4 != null" >
+        remark4,
+      </if>
+      <if test="remark5 != null" >
+        remark5,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="cid != null" >
+        #{cid,jdbcType=VARCHAR},
+      </if>
+      <if test="cno != null" >
+        #{cno,jdbcType=VARCHAR},
+      </if>
+      <if test="cname != null" >
+        #{cname,jdbcType=VARCHAR},
+      </if>
+      <if test="cprice != null" >
+        #{cprice,jdbcType=REAL},
+      </if>
+      <if test="cyear != null" >
+        #{cyear,jdbcType=REAL},
+      </if>
+      <if test="cdischarge != null" >
+        #{cdischarge,jdbcType=VARCHAR},
+      </if>
+      <if test="cdomestic != null" >
+        #{cdomestic,jdbcType=VARCHAR},
+      </if>
+      <if test="cfuel != null" >
+        #{cfuel,jdbcType=VARCHAR},
+      </if>
+      <if test="cfour != null" >
+        #{cfour,jdbcType=VARCHAR},
+      </if>
+      <if test="picture != null" >
+        #{picture,jdbcType=VARCHAR},
+      </if>
+      <if test="remark1 != null" >
+        #{remark1,jdbcType=VARCHAR},
+      </if>
+      <if test="remark2 != null" >
+        #{remark2,jdbcType=VARCHAR},
+      </if>
+      <if test="remark3 != null" >
+        #{remark3,jdbcType=VARCHAR},
+      </if>
+      <if test="remark4 != null" >
+        #{remark4,jdbcType=VARCHAR},
+      </if>
+      <if test="remark5 != null" >
+        #{remark5,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.accp.domain.CarbrandinfoExample" resultType="java.lang.Integer" >
+    select count(*) from carbrandinfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update carbrandinfo
+    <set >
+      <if test="record.cid != null" >
+        cid = #{record.cid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cno != null" >
+        cno = #{record.cno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cname != null" >
+        cname = #{record.cname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cprice != null" >
+        cprice = #{record.cprice,jdbcType=REAL},
+      </if>
+      <if test="record.cyear != null" >
+        cyear = #{record.cyear,jdbcType=REAL},
+      </if>
+      <if test="record.cdischarge != null" >
+        cdischarge = #{record.cdischarge,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cdomestic != null" >
+        cdomestic = #{record.cdomestic,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cfuel != null" >
+        cfuel = #{record.cfuel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cfour != null" >
+        cfour = #{record.cfour,jdbcType=VARCHAR},
+      </if>
+      <if test="record.picture != null" >
+        picture = #{record.picture,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark1 != null" >
+        remark1 = #{record.remark1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark2 != null" >
+        remark2 = #{record.remark2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark3 != null" >
+        remark3 = #{record.remark3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark4 != null" >
+        remark4 = #{record.remark4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark5 != null" >
+        remark5 = #{record.remark5,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update carbrandinfo
+    set cid = #{record.cid,jdbcType=VARCHAR},
+      cno = #{record.cno,jdbcType=VARCHAR},
+      cname = #{record.cname,jdbcType=VARCHAR},
+      cprice = #{record.cprice,jdbcType=REAL},
+      cyear = #{record.cyear,jdbcType=REAL},
+      cdischarge = #{record.cdischarge,jdbcType=VARCHAR},
+      cdomestic = #{record.cdomestic,jdbcType=VARCHAR},
+      cfuel = #{record.cfuel,jdbcType=VARCHAR},
+      cfour = #{record.cfour,jdbcType=VARCHAR},
+      picture = #{record.picture,jdbcType=VARCHAR},
+      remark1 = #{record.remark1,jdbcType=VARCHAR},
+      remark2 = #{record.remark2,jdbcType=VARCHAR},
+      remark3 = #{record.remark3,jdbcType=VARCHAR},
+      remark4 = #{record.remark4,jdbcType=VARCHAR},
+      remark5 = #{record.remark5,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.accp.domain.Carbrandinfo" >
+    update carbrandinfo
+    <set >
+      <if test="cno != null" >
+        cno = #{cno,jdbcType=VARCHAR},
+      </if>
+      <if test="cname != null" >
+        cname = #{cname,jdbcType=VARCHAR},
+      </if>
+      <if test="cprice != null" >
+        cprice = #{cprice,jdbcType=REAL},
+      </if>
+      <if test="cyear != null" >
+        cyear = #{cyear,jdbcType=REAL},
+      </if>
+      <if test="cdischarge != null" >
+        cdischarge = #{cdischarge,jdbcType=VARCHAR},
+      </if>
+      <if test="cdomestic != null" >
+        cdomestic = #{cdomestic,jdbcType=VARCHAR},
+      </if>
+      <if test="cfuel != null" >
+        cfuel = #{cfuel,jdbcType=VARCHAR},
+      </if>
+      <if test="cfour != null" >
+        cfour = #{cfour,jdbcType=VARCHAR},
+      </if>
+      <if test="picture != null" >
+        picture = #{picture,jdbcType=VARCHAR},
+      </if>
+      <if test="remark1 != null" >
+        remark1 = #{remark1,jdbcType=VARCHAR},
+      </if>
+      <if test="remark2 != null" >
+        remark2 = #{remark2,jdbcType=VARCHAR},
+      </if>
+      <if test="remark3 != null" >
+        remark3 = #{remark3,jdbcType=VARCHAR},
+      </if>
+      <if test="remark4 != null" >
+        remark4 = #{remark4,jdbcType=VARCHAR},
+      </if>
+      <if test="remark5 != null" >
+        remark5 = #{remark5,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where cid = #{cid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.accp.domain.Carbrandinfo" >
+    update carbrandinfo
+    set cno = #{cno,jdbcType=VARCHAR},
+      cname = #{cname,jdbcType=VARCHAR},
+      cprice = #{cprice,jdbcType=REAL},
+      cyear = #{cyear,jdbcType=REAL},
+      cdischarge = #{cdischarge,jdbcType=VARCHAR},
+      cdomestic = #{cdomestic,jdbcType=VARCHAR},
+      cfuel = #{cfuel,jdbcType=VARCHAR},
+      cfour = #{cfour,jdbcType=VARCHAR},
+      picture = #{picture,jdbcType=VARCHAR},
+      remark1 = #{remark1,jdbcType=VARCHAR},
+      remark2 = #{remark2,jdbcType=VARCHAR},
+      remark3 = #{remark3,jdbcType=VARCHAR},
+      remark4 = #{remark4,jdbcType=VARCHAR},
+      remark5 = #{remark5,jdbcType=VARCHAR}
+    where cid = #{cid,jdbcType=VARCHAR}
+  </update>
+</mapper>

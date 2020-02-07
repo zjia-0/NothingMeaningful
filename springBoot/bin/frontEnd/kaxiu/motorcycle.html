@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" href="css/bootstrap.min.css" />
+		<style>
+			*{
+				margin: 0px;
+				padding: 0px;
+			}
+			.bq span{
+				margin-left:5px;
+				
+			}
+			#wbk tr{
+				height:40px;
+			}
+			#dier tr{
+				height:40px;
+			}
+			
+			#dier td{
+				padding-left: 10px;
+			}
+			.dy span{
+				padding-left: 10px;
+			}
+		</style>
+	</head>
+	<body>
+<div id="cxt">
+	<div id="ctx">
+		<div id="zo"  class="container-fluid">
+			<div style="background: #f7ffff; height: 50px;  padding-left: 10px; line-height:50px;">
+				<span style="font-size: 25px;" class="col-sm-11 col-lg-11 col-md-11">品牌车型</span>
+				<span class="col-lg-1 col-md-1 col-sm-1"><button type="button"class="btn btn-default">关闭</button></span>
+			</div>
+			<div style="background: #f7f7f7; height: 1200px;  padding-left: 10px; line-height:50px;">
+				<div>
+					<div class="col-sm-3 col-lg-3 col-md-3 bq">
+						<div>
+							<span>
+								<span class="glyphicon glyphicon-align-left" style="color: #fcac28;" aria-hidden="true"></span>
+								<span data-toggle="modal" data-target="#myModal">增加品牌</span>
+							</span>	
+							<span>
+								<span class="glyphicon glyphicon-pencil" style="color: #fcac28;" aria-hidden="true"></span>
+								<span data-toggle="modal" data-target="#myModals"  v-on:click="updates()">修改</span>						
+							</span>
+							<span  v-on:click="del()"><span class="glyphicon glyphicon-remove-circle" style="color: #fcac28;" aria-hidden="true" ></span>删除</span>
+						</div>
+						<div>
+							<span><input type="text" style="height: 35px;" placeholder="匹配  品牌编号/品牌名称/首字母"/></span>
+							<span><button type="button" class="btn btn-warning">搜索</button></span>
+							<span><input type="text" style="width: 30px; height: 35px; background: #f7f7f7; color: #f7f7f7; border: none;" class="zhi"/></span>
+						</div>
+						<div>
+							<table border="1px" class="table" style="border: 1px solid #d0cbc5;">
+								<tr style="background: #39cede;color: white;">
+									<th>编码</th>
+									<th>品牌名称</th>
+									<th>首字母</th>
+								</tr>
+								<tr style="background: white;"  v-for="i in car">
+									<td><input type="text" v-model="i.brandid" style="border: none; text-align: center; width: 100px;" v-on:click="dj(i.brandid,i.brandname,i.initial)"/></td>
+									<td><input type="text" v-model="i.brandname" style="border: none; text-align: center; width:100px;" v-on:click="dj(i.brandid,i.brandname,i.initial)"/></td>
+									<td><input type="text" v-model="i.initial" style="border: none; text-align: center; width: 100px;" v-on:click="dj(i.brandid,i.brandname,i.initial)"/></td>
+								</tr>
+							</table>
+						</div>
+					</div>
+					<div class="col-sm-9 col-lg-9 col-md-9 bq">
+						<div>
+							<span><span class="glyphicon glyphicon-align-left" style="color: #fcac28;" aria-hidden="true"></span>
+								<span data-toggle="modal" data-target="#motorcycle" v-on:click="upd()">增加车型</span>
+							</span>
+							<span>
+								<span class="glyphicon glyphicon-pencil" style="color: #fcac28;" aria-hidden="true"></span>
+								<span data-toggle="modal" data-target="#motorcycle">修改</span>								
+							</span>
+							<span  v-on:click="scs()"><span class="glyphicon glyphicon-remove-circle" style="color: #fcac28;" aria-hidden="true"></span>删除</span>
+							<span>
+								<span class="glyphicon glyphicon-picture" style="color: #fcac28;" aria-hidden="true" ></span>
+								<span data-toggle="modal" data-target="#photograph">照片</span>										
+							</span>
+						</div>
+						<div>
+							<span><input type="text" style="height: 35px;" placeholder="匹配  车型编号/车型名称"/></span>
+							<span><button type="button" class="btn btn-warning">搜索</button></span>
+							<span><input type="text" style="width: 30px; height: 35px; background: #f7f7f7; color: #f7f7f7; border: none;" class="zs"/></span>
+							<span><input type="text" style="width: 30px; height: 35px; background: #f7f7f7; color: #f7f7f7; border: none;" class="zhs"/></span>
+						</div>
+						<div>
+							<table border="1px" class="table" style="border: 1px solid #d0cbc5;">
+								<tr style="background: #39cede;color: white;">
+									<th>App展示</th>
+									<th>车型ID</th>
+									<th>车型名称</th>
+									<th>发动机品牌</th>
+									<th>参考价格</th>
+									<th>车辆年款</th>
+									<th>功率</th>
+									<th>进口国产</th>
+									<th>燃油标号</th>
+									<th>载重</th>	
+								</tr>
+								<tr style="background: white;" v-for="i in sel">
+									<td><input type="checkbox"/></td>
+									<td><input type="text" v-model="i.cid" style="border: none; text-align: center; width: 100px;" v-on:click="sc(i.cid,i.cno)"/></td>									
+									<td><input type="text" v-model="i.cname" style="border: none; text-align: center; width: 100px;" v-on:click="sc(i.cid,i.cno)"/></td>
+									<td><input type="text" v-model="i.remark1" style="border: none; text-align: center; width: 100px;" v-on:click="sc(i.cid,i.cno)"/></td>
+									<td><input type="text" v-model="i.cfour" style="border: none; text-align: center; width: 100px;" v-on:click="sc(i.cid,i.cno)"/></td>
+									<td><input type="text" v-model="i.cprice" style="border: none; text-align: center; width: 100px;" v-on:click="sc(i.cid,i.cno)"/></td>
+									<td><input type="text" v-model="i.cyear" style="border: none; text-align: center; width: 100px;" v-on:click="sc(i.cid,i.cno)"/></td>
+									<td><input type="text" v-model="i.cdischarge" style="border: none; text-align: center; width: 100px;" v-on:click="sc(i.cid,i.cno)"/></td>
+									<td><input type="text" v-model="i.cdomestic" style="border: none; text-align: center; width: 100px;" v-on:click="sc(i.cid,i.cno)"/></td>
+									<td><input type="text" v-model="i.cfuel" style="border: none; text-align: center; width: 100px;" v-on:click="sc(i.cid,i.cno)"/></td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+</div>	
+<!--新增品牌车型-->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document" style="width: 400px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel">品牌定义</h4>
+			</div>
+					<div class="modal-body">
+						<table id="wbk" style="margin-left: 60px;">
+							<tr>
+								<td style="color: red;">*</td>
+								<td>品牌编码</td>
+								<td><input type="text" class="ids"/></td>
+							</tr>
+							<tr>
+								<td style="color: red;">*</td>
+								<td>品牌名称</td>
+								<td><input type="text" class="names"/></td>	
+							</tr>
+							<tr>
+								<td style="color: red;">*</td>
+								<td>首字母</td>
+								<td><input type="text" class="shozhi"/></td>
+							</tr>
+						</table>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-success" v-on:click="baochuen()">保存</button>
+					</div>
+		</div>
+	</div>
+</div>
+<!--修改品牌车型-->
+<div class="modal fade" id="myModals" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document" style="width: 400px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel">品牌定义</h4>
+			</div>
+					<div class="modal-body">
+						<table id="wbk" style="margin-left: 60px;">
+							<tr>
+								<td style="color: red;">*</td>
+								<td>品牌编码</td>
+								<td><input type="text" class="idu" v-model="updas.brandid"/></td>
+							</tr>
+							<tr>
+								<td style="color: red;">*</td>
+								<td>品牌名称</td>
+								<td><input type="text" class="nameu" v-model="updas.brandname"/></td>	
+							</tr>
+							<tr>
+								<td style="color: red;">*</td>
+								<td>首字母</td>
+								<td><input type="text" class="shozhu" v-model="updas.initial"/></td>
+							</tr>
+						</table>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-success" v-on:click="update()">保存</button>
+					</div>
+		</div>
+	</div>
+</div>
+<!--车型新增-->
+<div class="modal fade" id="motorcycle" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel">车型定义</h4>
+			</div>
+					<div class="modal-body">
+						<div class="dy"><span style="color: red;">*</span><span style="">车辆品牌</span><span><input type="text" class="clid" v-model="selr.brandid"/><input type="text" class="clmc" v-model="selr.brandname"/></span></div>
+						<table id="dier">
+							<tr>
+								<td  style="color: red;">*</td>
+								<td>车型ID</td>
+								<td><input type="text" class="cxid"/></td>
+								<td  style="color: red;">*</td>
+								<td>车型名称</td>
+								<td><input type="text" class="cxmc"/></td>
+							</tr>
+							<tr>
+								<td  style="color: red;"></td>
+								<td>进口国产</td>
+								<td>
+									<form class="form-inline">
+									  <div class="form-group">
+									    <div class="input-group">
+									     <select  style="width: 140px; height: 30px;">
+										    <option>1</option>
+										</select>
+									      <div class="input-group-addon"  style="background: white; margin-bottom: 20px;" >
+									      	<span class="glyphicon glyphicon-triangle-bottom"   data-toggle="modal" data-target="#import"></span>
+									      </div>
+									    </div>
+									  </div>
+									</form>
+								</td>
+								<td  style="color: red;"></td>
+								<td>参考价格</td>
+								<td><input type="text"/></td>
+							</tr>
+							<tr>
+								<td  style="color: red;"></td>
+								<td>车辆年款</td>
+								<td><input type="text"/></td>
+								<td  style="color: red;"></td>
+								<td>功率</td>
+								<td><input type="text"/></td>
+							</tr>
+							<tr>
+								<td  style="color: red;"></td>
+								<td>燃油标记</td>
+								<td><input type="text"/></td>
+								<td  style="color: red;"></td>
+								<td>载重</td>
+								<td><input type="text"/></td>
+							</tr>
+						</table>
+					<div class="dy">
+						<span style="color: red;">*</span>
+						<span style="">发动机品牌</span>
+						<span>
+							<select style="width: 340px;">
+								<option>111</option>
+							</select>
+						</span>
+					</div>
+					</div>
+
+					<div class="modal-footer  dy">
+						<button type="button" class="btn btn-success">保存</button>
+					</div>
+		</div>
+	</div>
+</div>	
+
+<div class="modal fade" id="import" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document" style="width: 400px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel">选择内容设置</h4>
+			</div>
+					<div class="modal-body">
+							<div class="col-sm-7 col-lg-7 col-md-7 " style="height:30px;">&nbsp;</div>
+							<div class="col-sm-5 col-lg-5 col-md-5 " style="height:30px; line-height: 30px;">
+								<span style="padding-right: 10px;"><span class="glyphicon glyphicon-edit" style="color: #fcac28;" aria-hidden="true"></span>修改</span>
+								<span><span class="glyphicon glyphicon-floppy-disk" style="color: #fcac28;" aria-hidden="true"></span>保存</span>
+							</div>
+						
+						<table class="table">
+							<tr  style="background: #39cede;color: white;">
+								<th>序号</th>
+								<th>进口国产</th>
+							</tr>
+							<tr  style="background: white;">
+								<td>1</td>
+								<td>国产</td>
+							</tr>
+						</table>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-success">选择</button>
+					</div>
+		</div>
+	</div>
+</div>
+			
+<div class="modal fade" id="photograph" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document" style="width: 400px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h3 class="modal-title" id="myModalLabel">
+					<span class="col-sm-5 col-lg-5 col-md-5">车型照片</span>
+					<span class="col-sm-4 col-lg-4 col-md-4" style="font-size: 15px;">
+						<span class="glyphicon glyphicon-picture" style="color: #fcac28;" aria-hidden="true"></span>
+							指定照片
+					</span>
+					<button type="button" class="btn btn-success"  class="col-sm-3 col-lg-3 col-md-3" style="width: 70px; ">保存</button>
+				</h3>
+			</div>
+					<div class="modal-body">
+							
+					</div>
+		</div>
+	</div>
+</div>
+</div>		
+		<script type="text/javascript" src="js/jquery-1.12.4.js" ></script>
+		<script type="text/javascript" src="js/bootstrap.min.js" ></script>
+		<script type="text/javascript" src="js/vue.js" ></script>
+		<script type="text/javascript" src="js/my.js" ></script>
+		<script>
+			$('#myModal').on('shown.bs.modal', function () {
+				  $('#myInput').focus()
+				})
+			
+			var vm=new Vue({
+		 		el: "#cxt",
+				data() {
+					return {
+						car:{},
+						updas:{},
+						sel:{},
+						selr:{},
+						cxsel:{},
+						gc:{}
+					};
+				},
+				methods:{
+					upd:function(){
+						var cno= $(".zhs").val()
+						var that = this;
+						$.ajax({
+							url: data.ip + "selr",	
+							data:{"cno":cno},
+							type: "post",
+							dataType: "json",
+							success: function(res) {
+								that.selr=res;
+							}
+						});
+						
+						$.ajax({
+							url: data.ip + "gcs",
+							type: "post",
+							dataType: "json",
+							success: function(res) {
+								that.gc=res;
+							}
+						});
+					},
+				   baochuen:function(){
+				   		var brandid=$(".ids").val();
+				   		var brandname=$(".names").val();
+				   		var initial=$(".shozhi").val();
+				   		$.ajax({
+							url: data.ip + "carbrandinsert",	
+							data:{"brandid":brandid,"brandname":brandname,"initial":initial},
+							type: "post",
+							dataType: "json",
+							success: function(res) {
+								if (res>0) {
+									alert("新增成功")
+								} else{
+									alert("新增失败")
+								}
+							}
+						});
+				   },caru:function(){
+				   		var brandid=$(".ids").val();
+				   		var brandname=$(".names").val();
+				   		var initial=$(".shozhi").val();
+				   		$.ajax({
+							url: data.ip + "carbrandinsert",	
+							data:{"brandid":brandid,"brandname":brandname,"initial":initial},
+							type: "post",
+							dataType: "json",
+							success: function(res) {
+								if (res>0) {
+									alert("新增成功")
+								} else{
+									alert("新增失败")
+								}
+							}
+						});
+				   },dj:function(brandid,brandname,initial){
+				   		$(".zhi").val(brandid);
+				   		var con=$(".zhi").val();
+				   		var that = this;
+				   		$.ajax({
+							url: data.ip + "sel",	
+							data:{"con":con},
+							type: "post",
+							dataType: "json",
+							success: function(res) {
+								that.sel=res
+							}
+						});
+				   },updates:function(){
+				   		var brandid=$(".zhi").val();
+				   		var that = this;
+						$.ajax({
+							url: data.ip + "updates",	
+							data:{"brandid":brandid},
+							type: "post",
+							dataType: "json",
+							success: function(res) {
+								that.updas=res;
+							}
+						});
+				   },update:function(){
+				   		var brandid=$(".idu").val();
+				   		var brandname=$(".nameu").val();
+				   		var initial=$(".shozhu").val();
+				   		$.ajax({
+							url: data.ip + "carbrandupdate",	
+							data:{"brandid":brandid,"brandname":brandname,"initial":initial},
+							type: "post",
+							dataType: "json",
+							success: function(res) {
+								if (res>0) {
+									alert("修改成功")
+								} else{
+									alert("修改失败")
+								}
+							}
+						});
+				   },del:function(){
+				   		var brandid=$(".zhi").val();
+				   		$.ajax({
+							url: data.ip + "carbrandel",	
+							data:{"brandid":brandid},
+							type: "post",
+							dataType: "json",
+							success: function(res) {
+								if (res>0) {
+									alert("删除成功")
+								} else{
+									alert("删除失败")
+								}
+							}
+						});
+				   },sc:function(cid,con){
+				   		$(".zs").val(cid)
+				   		$(".zhs").val(con)
+				   },scs:function(){
+				   		var cid=$(".zs").val()
+				   		$.ajax({
+							url: data.ip + "carbrandinfodelet",	
+							data:{"cid":cid},
+							type: "post",
+							dataType: "json",
+							success: function(res) {
+								if (res>0) {
+									alert("删除成功")
+								} else{
+									alert("删除失败")
+								}
+							}
+						});
+				   }
+				},created:function(){
+						var that = this;
+						$.ajax({
+							url: data.ip + "carbrand",	
+							type: "post",
+							dataType: "json",
+							success: function(res) {
+								that.car=res;
+							}
+						});
+				}
+	  })
+		</script>
+	</body>
+
+</html>

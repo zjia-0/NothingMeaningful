@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.accp.mapper.ProjectMapper" >
+  <resultMap id="BaseResultMap" type="com.accp.domain.Project" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="maintainid" property="maintainid" jdbcType="INTEGER" />
+    <result column="pnum" property="pnum" jdbcType="VARCHAR" />
+    <result column="pname" property="pname" jdbcType="VARCHAR" />
+    <result column="incomeid" property="incomeid" jdbcType="INTEGER" />
+    <result column="standardprice" property="standardprice" jdbcType="REAL" />
+    <result column="memberprice" property="memberprice" jdbcType="REAL" />
+    <result column="vipprice" property="vipprice" jdbcType="REAL" />
+    <result column="dealprice" property="dealprice" jdbcType="REAL" />
+    <result column="claimprice" property="claimprice" jdbcType="REAL" />
+    <result column="insuranceprice" property="insuranceprice" jdbcType="REAL" />
+    <result column="remark1" property="remark1" jdbcType="VARCHAR" />
+    <result column="remark2" property="remark2" jdbcType="VARCHAR" />
+    <result column="remark3" property="remark3" jdbcType="VARCHAR" />
+    <result column="remark4" property="remark4" jdbcType="VARCHAR" />
+    <result column="remark5" property="remark5" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, maintainid, pnum, pname, incomeid, standardprice, memberprice, vipprice, dealprice, 
+    claimprice, insuranceprice, remark1, remark2, remark3, remark4, remark5
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.accp.domain.ProjectExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from project
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from project
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from project
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.accp.domain.ProjectExample" >
+    delete from project
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.accp.domain.Project" >
+    insert into project (id, maintainid, pnum, 
+      pname, incomeid, standardprice, 
+      memberprice, vipprice, dealprice, 
+      claimprice, insuranceprice, remark1, 
+      remark2, remark3, remark4, 
+      remark5)
+    values (#{id,jdbcType=INTEGER}, #{maintainid,jdbcType=INTEGER}, #{pnum,jdbcType=VARCHAR}, 
+      #{pname,jdbcType=VARCHAR}, #{incomeid,jdbcType=INTEGER}, #{standardprice,jdbcType=REAL}, 
+      #{memberprice,jdbcType=REAL}, #{vipprice,jdbcType=REAL}, #{dealprice,jdbcType=REAL}, 
+      #{claimprice,jdbcType=REAL}, #{insuranceprice,jdbcType=REAL}, #{remark1,jdbcType=VARCHAR}, 
+      #{remark2,jdbcType=VARCHAR}, #{remark3,jdbcType=VARCHAR}, #{remark4,jdbcType=VARCHAR}, 
+      #{remark5,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.accp.domain.Project" >
+    insert into project
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="maintainid != null" >
+        maintainid,
+      </if>
+      <if test="pnum != null" >
+        pnum,
+      </if>
+      <if test="pname != null" >
+        pname,
+      </if>
+      <if test="incomeid != null" >
+        incomeid,
+      </if>
+      <if test="standardprice != null" >
+        standardprice,
+      </if>
+      <if test="memberprice != null" >
+        memberprice,
+      </if>
+      <if test="vipprice != null" >
+        vipprice,
+      </if>
+      <if test="dealprice != null" >
+        dealprice,
+      </if>
+      <if test="claimprice != null" >
+        claimprice,
+      </if>
+      <if test="insuranceprice != null" >
+        insuranceprice,
+      </if>
+      <if test="remark1 != null" >
+        remark1,
+      </if>
+      <if test="remark2 != null" >
+        remark2,
+      </if>
+      <if test="remark3 != null" >
+        remark3,
+      </if>
+      <if test="remark4 != null" >
+        remark4,
+      </if>
+      <if test="remark5 != null" >
+        remark5,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="maintainid != null" >
+        #{maintainid,jdbcType=INTEGER},
+      </if>
+      <if test="pnum != null" >
+        #{pnum,jdbcType=VARCHAR},
+      </if>
+      <if test="pname != null" >
+        #{pname,jdbcType=VARCHAR},
+      </if>
+      <if test="incomeid != null" >
+        #{incomeid,jdbcType=INTEGER},
+      </if>
+      <if test="standardprice != null" >
+        #{standardprice,jdbcType=REAL},
+      </if>
+      <if test="memberprice != null" >
+        #{memberprice,jdbcType=REAL},
+      </if>
+      <if test="vipprice != null" >
+        #{vipprice,jdbcType=REAL},
+      </if>
+      <if test="dealprice != null" >
+        #{dealprice,jdbcType=REAL},
+      </if>
+      <if test="claimprice != null" >
+        #{claimprice,jdbcType=REAL},
+      </if>
+      <if test="insuranceprice != null" >
+        #{insuranceprice,jdbcType=REAL},
+      </if>
+      <if test="remark1 != null" >
+        #{remark1,jdbcType=VARCHAR},
+      </if>
+      <if test="remark2 != null" >
+        #{remark2,jdbcType=VARCHAR},
+      </if>
+      <if test="remark3 != null" >
+        #{remark3,jdbcType=VARCHAR},
+      </if>
+      <if test="remark4 != null" >
+        #{remark4,jdbcType=VARCHAR},
+      </if>
+      <if test="remark5 != null" >
+        #{remark5,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.accp.domain.ProjectExample" resultType="java.lang.Integer" >
+    select count(*) from project
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update project
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.maintainid != null" >
+        maintainid = #{record.maintainid,jdbcType=INTEGER},
+      </if>
+      <if test="record.pnum != null" >
+        pnum = #{record.pnum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pname != null" >
+        pname = #{record.pname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.incomeid != null" >
+        incomeid = #{record.incomeid,jdbcType=INTEGER},
+      </if>
+      <if test="record.standardprice != null" >
+        standardprice = #{record.standardprice,jdbcType=REAL},
+      </if>
+      <if test="record.memberprice != null" >
+        memberprice = #{record.memberprice,jdbcType=REAL},
+      </if>
+      <if test="record.vipprice != null" >
+        vipprice = #{record.vipprice,jdbcType=REAL},
+      </if>
+      <if test="record.dealprice != null" >
+        dealprice = #{record.dealprice,jdbcType=REAL},
+      </if>
+      <if test="record.claimprice != null" >
+        claimprice = #{record.claimprice,jdbcType=REAL},
+      </if>
+      <if test="record.insuranceprice != null" >
+        insuranceprice = #{record.insuranceprice,jdbcType=REAL},
+      </if>
+      <if test="record.remark1 != null" >
+        remark1 = #{record.remark1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark2 != null" >
+        remark2 = #{record.remark2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark3 != null" >
+        remark3 = #{record.remark3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark4 != null" >
+        remark4 = #{record.remark4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark5 != null" >
+        remark5 = #{record.remark5,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update project
+    set id = #{record.id,jdbcType=INTEGER},
+      maintainid = #{record.maintainid,jdbcType=INTEGER},
+      pnum = #{record.pnum,jdbcType=VARCHAR},
+      pname = #{record.pname,jdbcType=VARCHAR},
+      incomeid = #{record.incomeid,jdbcType=INTEGER},
+      standardprice = #{record.standardprice,jdbcType=REAL},
+      memberprice = #{record.memberprice,jdbcType=REAL},
+      vipprice = #{record.vipprice,jdbcType=REAL},
+      dealprice = #{record.dealprice,jdbcType=REAL},
+      claimprice = #{record.claimprice,jdbcType=REAL},
+      insuranceprice = #{record.insuranceprice,jdbcType=REAL},
+      remark1 = #{record.remark1,jdbcType=VARCHAR},
+      remark2 = #{record.remark2,jdbcType=VARCHAR},
+      remark3 = #{record.remark3,jdbcType=VARCHAR},
+      remark4 = #{record.remark4,jdbcType=VARCHAR},
+      remark5 = #{record.remark5,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.accp.domain.Project" >
+    update project
+    <set >
+      <if test="maintainid != null" >
+        maintainid = #{maintainid,jdbcType=INTEGER},
+      </if>
+      <if test="pnum != null" >
+        pnum = #{pnum,jdbcType=VARCHAR},
+      </if>
+      <if test="pname != null" >
+        pname = #{pname,jdbcType=VARCHAR},
+      </if>
+      <if test="incomeid != null" >
+        incomeid = #{incomeid,jdbcType=INTEGER},
+      </if>
+      <if test="standardprice != null" >
+        standardprice = #{standardprice,jdbcType=REAL},
+      </if>
+      <if test="memberprice != null" >
+        memberprice = #{memberprice,jdbcType=REAL},
+      </if>
+      <if test="vipprice != null" >
+        vipprice = #{vipprice,jdbcType=REAL},
+      </if>
+      <if test="dealprice != null" >
+        dealprice = #{dealprice,jdbcType=REAL},
+      </if>
+      <if test="claimprice != null" >
+        claimprice = #{claimprice,jdbcType=REAL},
+      </if>
+      <if test="insuranceprice != null" >
+        insuranceprice = #{insuranceprice,jdbcType=REAL},
+      </if>
+      <if test="remark1 != null" >
+        remark1 = #{remark1,jdbcType=VARCHAR},
+      </if>
+      <if test="remark2 != null" >
+        remark2 = #{remark2,jdbcType=VARCHAR},
+      </if>
+      <if test="remark3 != null" >
+        remark3 = #{remark3,jdbcType=VARCHAR},
+      </if>
+      <if test="remark4 != null" >
+        remark4 = #{remark4,jdbcType=VARCHAR},
+      </if>
+      <if test="remark5 != null" >
+        remark5 = #{remark5,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.accp.domain.Project" >
+    update project
+    set maintainid = #{maintainid,jdbcType=INTEGER},
+      pnum = #{pnum,jdbcType=VARCHAR},
+      pname = #{pname,jdbcType=VARCHAR},
+      incomeid = #{incomeid,jdbcType=INTEGER},
+      standardprice = #{standardprice,jdbcType=REAL},
+      memberprice = #{memberprice,jdbcType=REAL},
+      vipprice = #{vipprice,jdbcType=REAL},
+      dealprice = #{dealprice,jdbcType=REAL},
+      claimprice = #{claimprice,jdbcType=REAL},
+      insuranceprice = #{insuranceprice,jdbcType=REAL},
+      remark1 = #{remark1,jdbcType=VARCHAR},
+      remark2 = #{remark2,jdbcType=VARCHAR},
+      remark3 = #{remark3,jdbcType=VARCHAR},
+      remark4 = #{remark4,jdbcType=VARCHAR},
+      remark5 = #{remark5,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
