@@ -16,6 +16,14 @@
     <result column="remark5" property="remark5" jdbcType="VARCHAR" />
     <result column="money" property="money" jdbcType="DOUBLE" />
   </resultMap>
+  <select id="findVipByname" resultMap="BaseResultMap">
+  	SELECT v.vno,vl.viplevel,c.cname,c.cphone,v.money,v.currentjifen,v.summoney,v.venddate FROM `customer` AS c JOIN `vip` AS v ON v.cno=c.cno
+	JOIN `viplevel` AS vl ON v.levelid=vl.levelid 
+	<if test="name!=null">
+		WHERE c.cname like #{name} OR c.cphone like #{name} OR v.vno like #{name}
+	</if>
+  </select>
+  
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >

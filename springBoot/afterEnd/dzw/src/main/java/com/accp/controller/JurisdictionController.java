@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.accp.domain.Permissions;
+import com.accp.domain.Roles;
 import com.accp.service.JurisdictionServie;
 
 @RestController
@@ -17,8 +18,12 @@ public class JurisdictionController {
 	@Autowired
 	JurisdictionServie JService;
 	
-	@GetMapping("/perms")
-	public List<Permissions> queryAll(){
-		return JService.queryAll();
+	@GetMapping("/per")
+	public List<Permissions> queryAlls(){
+		return JService.queryAlls();
+	}
+	@GetMapping("/findRoles")
+	public List<Roles> queryRoles(){
+		return JService.queryRoles();
 	}
 }

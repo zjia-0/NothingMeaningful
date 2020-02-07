@@ -6,6 +6,8 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface VipMapper {
+	
+	List<Vip> findVipByname(String name);
     int countByExample(VipExample example);
 
     int deleteByExample(VipExample example);

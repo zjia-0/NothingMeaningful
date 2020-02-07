@@ -6,35 +6,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.accp.domain.Permissions;
+import com.accp.domain.Roles;
 import com.accp.mapper.PermissionsMapper;
+import com.accp.mapper.RolesMapper;
 
 @Service
 public class JurisdictionServie {
 	@Autowired
 	PermissionsMapper pMapper;
-	public List<Permissions> queryAll(){
-		List<Permissions> lists = pMapper.selectByExample(null);
-		System.out.println("aw"+lists.size());
-		Permissions parentPerms = new Permissions();
-		parentPerms.setId(0);
-		each(parentPerms, lists);
-		return parentPerms.getChildrens();
+	@Autowired
+	RolesMapper rMapper;
+	
+	public List<Permissions> queryAlls(){
+		return pMapper.selectByExample(null);
+	}
+	public List<Roles> queryRoles(){
+		return rMapper.selectByExample(null);
 	}
 	
-	public void each(Permissions parentPerms,List<Permissions> perms){
-		for(Permissions p : perms) {
-			if(p.getParentid() == parentPerms.getId()) {
-				Permissions newPerms = new Permissions();
-				newPerms.setId(p.getId());
-				newPerms.setCatalog(p.getCatalog());
-				newPerms.setEname(p.getEname());
-				newPerms.setName(p.getName());
-				newPerms.setParentid(p.getParentid());
-				newPerms.setPath(p.getPath());
-				parentPerms.getChildrens().add(newPerms);
-				each(newPerms,perms);
-			}
-		}
-	}
 	
 }
