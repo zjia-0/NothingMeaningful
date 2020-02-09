@@ -80,6 +80,11 @@
     cid, cno, cname, cprice, cyear, cdischarge, cdomestic, cfuel, cfour, picture, remark1, 
     remark2, remark3, remark4, remark5
   </sql>
+  
+    <select id="select" resultMap="BaseResultMap" parameterType="com.accp.domain.CarbrandinfoExample" >
+    SELECT * FROM `carbrandinfo` WHERE cno=#{cno}
+  </select>
+  
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.accp.domain.CarbrandinfoExample" >
     select
     <if test="distinct" >
