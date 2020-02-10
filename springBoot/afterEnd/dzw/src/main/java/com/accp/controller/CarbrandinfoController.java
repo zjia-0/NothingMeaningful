@@ -24,4 +24,19 @@ public class CarbrandinfoController {
 	public int carbrandinfodelet(String cid) {
 		return carbrandinfoService.carbrandinfodelet(cid);
 	}
+	
+	@PostMapping("/carbrandinfoinsert")
+	public int carbrandinfodelet(Carbrandinfo carbrandinfo) {
+		return carbrandinfoService.carbrandinfoinsert(carbrandinfo);
+	}
+	
+	@PostMapping("/carbrandinfoupdate")
+	public int carbrandinfoupdate(Carbrandinfo carbrandinfo) {
+		return carbrandinfoService.carbrandinfoupdate(carbrandinfo);
+	}
+	
+	@PostMapping("/selrs")
+	public Carbrandinfo selrs(String cid) {
+		return carbrandinfoService.selrs(cid);
+	}
 }

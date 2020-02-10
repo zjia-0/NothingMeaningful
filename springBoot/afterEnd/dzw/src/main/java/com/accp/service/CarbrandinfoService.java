@@ -23,4 +23,16 @@ public class CarbrandinfoService {
 	public int carbrandinfodelet(String cid) {
 		return carbrandinfoMapper.deleteByPrimaryKey(cid);
 	}
+	
+	public int carbrandinfoinsert(Carbrandinfo carbrandinfo) {
+		return carbrandinfoMapper.insert(carbrandinfo);
+	}
+	
+	public int carbrandinfoupdate(Carbrandinfo carbrandinfo) {
+		return carbrandinfoMapper.updateByPrimaryKey(carbrandinfo);
+	}
+	
+	public Carbrandinfo selrs(String cid) {
+		return carbrandinfoMapper.selectByPrimaryKey(cid);
+	}
 }

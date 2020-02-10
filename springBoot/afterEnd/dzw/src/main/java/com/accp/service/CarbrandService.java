@@ -19,6 +19,10 @@ public class CarbrandService {
 		return carbrandMapper.selectByExample(null);
 	}
 	
+	public List<Carbrand> fdjpp(){
+		return carbrandMapper.selectByExample(null);
+	}
+	
 	public int cari(Carbrand carbrand) {
 		System.out.println(carbrand.getBrandname());
 		int xin=carbrandMapper.insert(carbrand);
@@ -39,6 +43,10 @@ public class CarbrandService {
 	
 	public Carbrand selr(int cno) {
 		return carbrandMapper.selectByPrimaryKey(cno);
+	}
+	
+	public List<Carbrand> select(int brandid,String brandname,String initial){
+		return carbrandMapper.select(brandid, brandname, initial);
 	}
 	
 }

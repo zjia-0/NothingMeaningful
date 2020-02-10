@@ -52,8 +52,8 @@
 							<span  v-on:click="del()"><span class="glyphicon glyphicon-remove-circle" style="color: #fcac28;" aria-hidden="true" ></span>删除</span>
 						</div>
 						<div>
-							<span><input type="text" style="height: 35px;" placeholder="匹配  品牌编号/品牌名称/首字母"/></span>
-							<span><button type="button" class="btn btn-warning">搜索</button></span>
+							<span><input type="text" style="height: 35px;" placeholder="匹配  品牌编号/品牌名称/首字母"/ class="ppbh"></span>
+							<span><button type="button" class="btn btn-warning" v-on:click="ss()">搜索</button></span>
 							<span><input type="text" style="width: 30px; height: 35px; background: #f7f7f7; color: #f7f7f7; border: none;" class="zhi"/></span>
 						</div>
 						<div>
@@ -78,7 +78,7 @@
 							</span>
 							<span>
 								<span class="glyphicon glyphicon-pencil" style="color: #fcac28;" aria-hidden="true"></span>
-								<span data-toggle="modal" data-target="#motorcycle">修改</span>								
+								<span data-toggle="modal" data-target="#motorcycles" v-on:click="upds()">修改</span>								
 							</span>
 							<span  v-on:click="scs()"><span class="glyphicon glyphicon-remove-circle" style="color: #fcac28;" aria-hidden="true"></span>删除</span>
 							<span>
@@ -87,7 +87,7 @@
 							</span>
 						</div>
 						<div>
-							<span><input type="text" style="height: 35px;" placeholder="匹配  车型编号/车型名称"/></span>
+							<span><input type="text" style="height: 35px;" placeholder="匹配  车型编号/车型名称" class="cxbh"/></span>
 							<span><button type="button" class="btn btn-warning">搜索</button></span>
 							<span><input type="text" style="width: 30px; height: 35px; background: #f7f7f7; color: #f7f7f7; border: none;" class="zs"/></span>
 							<span><input type="text" style="width: 30px; height: 35px; background: #f7f7f7; color: #f7f7f7; border: none;" class="zhs"/></span>
@@ -200,7 +200,7 @@
 				<h4 class="modal-title" id="myModalLabel">车型定义</h4>
 			</div>
 					<div class="modal-body">
-						<div class="dy"><span style="color: red;">*</span><span style="">车辆品牌</span><span><input type="text" class="clid" v-model="selr.brandid"/><input type="text" class="clmc" v-model="selr.brandname"/></span></div>
+						<div class="dy"><span style="color: red;">*</span><span style="">车辆品牌</span><span><input type="text" class="clid" v-model="selr.brandid" readonly="readonly" style="background: #d6d6ce;"/><input type="text"  style="background: #d6d6ce;" class="clmc" readonly="readonly"  v-model="selr.brandname"/></span></div>
 						<table id="dier">
 							<tr>
 								<td  style="color: red;">*</td>
@@ -217,10 +217,12 @@
 									<form class="form-inline">
 									  <div class="form-group">
 									    <div class="input-group">
-									     <select  style="width: 140px; height: 30px;">
-										    <option>1</option>
+									     <select  style="width: 140px; height: 30px;" class="zsd">
+										    <option  v-for="i in chaj">
+										    	<span>{{i.imp}}</span>
+										    </option>
 										</select>
-									      <div class="input-group-addon"  style="background: white; margin-bottom: 20px;" >
+									      <div class="input-group-addon"  style="background: white; margin-bottom: 20px;"  v-on:click="cha()">
 									      	<span class="glyphicon glyphicon-triangle-bottom"   data-toggle="modal" data-target="#import"></span>
 									      </div>
 									    </div>
@@ -229,43 +231,45 @@
 								</td>
 								<td  style="color: red;"></td>
 								<td>参考价格</td>
-								<td><input type="text"/></td>
+								<td><input type="text" class="cxjg"/></td>
 							</tr>
 							<tr>
 								<td  style="color: red;"></td>
 								<td>车辆年款</td>
-								<td><input type="text"/></td>
+								<td><input type="text" class="cxnk"/></td>
 								<td  style="color: red;"></td>
 								<td>功率</td>
-								<td><input type="text"/></td>
+								<td><input type="text" class="cxgl"/></td>
 							</tr>
 							<tr>
 								<td  style="color: red;"></td>
 								<td>燃油标记</td>
-								<td><input type="text"/></td>
+								<td><input type="text" class="cxbj"/></td>
 								<td  style="color: red;"></td>
 								<td>载重</td>
-								<td><input type="text"/></td>
+								<td><input type="text" class="cxzz"/></td>
 							</tr>
 						</table>
 					<div class="dy">
 						<span style="color: red;">*</span>
 						<span style="">发动机品牌</span>
 						<span>
-							<select style="width: 340px;">
-								<option>111</option>
+							<select style="width: 340px;" class="cxpp">
+								<option  v-for="i in fdjpp">
+									<span>{{i.brandname}}</span>
+								</option>
 							</select>
 						</span>
 					</div>
 					</div>
 
 					<div class="modal-footer  dy">
-						<button type="button" class="btn btn-success">保存</button>
+						<button type="button" class="btn btn-success" v-on:click="bao()">保存</button>
 					</div>
 		</div>
 	</div>
 </div>	
-
+<!--进口国产-->
 <div class="modal fade" id="import" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	<div class="modal-dialog" role="document" style="width: 400px;">
 		<div class="modal-content">
@@ -277,7 +281,7 @@
 							<div class="col-sm-7 col-lg-7 col-md-7 " style="height:30px;">&nbsp;</div>
 							<div class="col-sm-5 col-lg-5 col-md-5 " style="height:30px; line-height: 30px;">
 								<span style="padding-right: 10px;"><span class="glyphicon glyphicon-edit" style="color: #fcac28;" aria-hidden="true"></span>修改</span>
-								<span><span class="glyphicon glyphicon-floppy-disk" style="color: #fcac28;" aria-hidden="true"></span>保存</span>
+								<span  v-on:click="jinkuo()"><span class="glyphicon glyphicon-floppy-disk" style="color: #fcac28;" aria-hidden="true"></span>保存</span>
 							</div>
 						
 						<table class="table">
@@ -285,9 +289,9 @@
 								<th>序号</th>
 								<th>进口国产</th>
 							</tr>
-							<tr  style="background: white;">
-								<td>1</td>
-								<td>国产</td>
+							<tr  style="background: white;"  v-for="i in chaj">
+								<td><input type="text" v-model="i.disid" style="border: none; text-align: center; width: 100px;" class="disid" v-on:click="ji(i.disid,i.imp)"/></td>
+								<td><input type="text" v-model="i.imp" style="border: none; text-align: center; width: 100px;" class="imp" v-on:click="ji(i.disid,i.imp)"/></td>
 							</tr>
 						</table>
 					</div>
@@ -297,7 +301,117 @@
 		</div>
 	</div>
 </div>
-			
+<!--发动机修改-->	
+<div class="modal fade" id="motorcycles" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel">车型定义</h4>
+			</div>
+					<div class="modal-body">
+						<div class="dy"><span style="color: red;">*</span><span style="">车辆品牌</span><span><input type="text" class="clids" v-model="selr.brandid" readonly="readonly" style="background: #d6d6ce;"/><input type="text"  style="background: #d6d6ce;" class="clmcs" readonly="readonly"  v-model="selr.brandname"/></span></div>
+						<table id="dier">
+							<tr>
+								<td  style="color: red;">*</td>
+								<td>车型ID</td>
+								<td><input type="text" v-model="selrs.cid" class="cxids"/></td>
+								<td  style="color: red;">*</td>
+								<td>车型名称</td>
+								<td><input type="text" class="cxmcs" v-model="selrs.cname"/></td>
+							</tr>
+							<tr>
+								<td  style="color: red;"></td>
+								<td>进口国产</td>
+								<td>
+									<form class="form-inline">
+									  <div class="form-group">
+									    <div class="input-group">
+									     <select  style="width: 140px; height: 30px;" class="zsds">
+										    <option  v-for="i in chaj">
+										    	<span>{{i.imp}}</span>
+										    </option>
+										</select>
+									      <div class="input-group-addon"  style="background: white; margin-bottom: 20px;"  v-on:click="cha()">
+									      	<span class="glyphicon glyphicon-triangle-bottom"   data-toggle="modal" data-target="#imports"></span>
+									      </div>
+									    </div>
+									  </div>
+									</form>
+								</td>
+								<td  style="color: red;"></td>
+								<td>参考价格</td>
+								<td><input type="text" class="cxjgs" v-model="selrs.cprice"/></td>
+							</tr>
+							<tr>
+								<td  style="color: red;"></td>
+								<td>车辆年款</td>
+								<td><input type="text" class="cxnks" v-model="selrs.cyear"/></td>
+								<td  style="color: red;"></td>
+								<td>功率</td>
+								<td><input type="text" class="cxgls" v-model="selrs.cdischarge"/></td>
+							</tr>
+							<tr>
+								<td  style="color: red;"></td>
+								<td>燃油标记</td>
+								<td><input type="text" class="cxbjs" v-model="selrs.cfuel"/></td>
+								<td  style="color: red;"></td>
+								<td>载重</td>
+								<td><input type="text" class="cxzzs" v-model="selrs.cfour"/></td>
+							</tr>
+						</table>
+					<div class="dy">
+						<span style="color: red;">*</span>
+						<span style="">发动机品牌</span>
+						<span>
+							<select style="width: 340px;" class="cxpps">
+								<option  v-for="i in fdjpp">
+									<span>{{i.brandname}}</span>
+								</option>
+							</select>
+						</span>
+					</div>
+					</div>
+
+					<div class="modal-footer  dy">
+						<button type="button" class="btn btn-success" v-on:click="baos()">保存</button>
+					</div>
+		</div>
+	</div>
+</div>	
+<!--进口-->
+<div class="modal fade" id="imports" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document" style="width: 400px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel">选择内容设置</h4>
+			</div>
+					<div class="modal-body">
+							<div class="col-sm-7 col-lg-7 col-md-7 " style="height:30px;">&nbsp;</div>
+							<div class="col-sm-5 col-lg-5 col-md-5 " style="height:30px; line-height: 30px;">
+								<span style="padding-right: 10px;"><span class="glyphicon glyphicon-edit" style="color: #fcac28;" aria-hidden="true"></span>修改</span>
+								<span  v-on:click="jinkuo()"><span class="glyphicon glyphicon-floppy-disk" style="color: #fcac28;" aria-hidden="true"></span>保存</span>
+							</div>
+						
+						<table class="table">
+							<tr  style="background: #39cede;color: white;">
+								<th>序号</th>
+								<th>进口国产</th>
+							</tr>
+							<tr  style="background: white;"  v-for="i in chaj">
+								<td><input type="text" v-model="i.disid" style="border: none; text-align: center; width: 100px;" class="disid" v-on:click="ji(i.disid,i.imp)"/></td>
+								<td><input type="text" v-model="i.imp" style="border: none; text-align: center; width: 100px;" class="imp" v-on:click="ji(i.disid,i.imp)"/></td>
+							</tr>
+						</table>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-success">选择</button>
+					</div>
+		</div>
+	</div>
+</div>
+<!--照片-->
 <div class="modal fade" id="photograph" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	<div class="modal-dialog" role="document" style="width: 400px;">
 		<div class="modal-content">
@@ -336,8 +450,9 @@
 						updas:{},
 						sel:{},
 						selr:{},
-						cxsel:{},
-						gc:{}
+						chaj:{},
+						fdjpp:{},
+						selrs:{}
 					};
 				},
 				methods:{
@@ -353,17 +468,69 @@
 								that.selr=res;
 							}
 						});
-						
+				
 						$.ajax({
-							url: data.ip + "gcs",
+							url: data.ip + "fdjpps",	
 							type: "post",
 							dataType: "json",
 							success: function(res) {
-								that.gc=res;
+								that.fdjpp=res;
 							}
 						});
-					},
-				   baochuen:function(){
+						
+						$.ajax({
+							url: data.ip + "chas",	
+							type: "post",
+							dataType: "json",
+							success: function(res) {
+								that.chaj=res;
+							}
+						});
+
+					},upds:function(){
+						var cno= $(".zhs").val()
+						var that = this;
+						$.ajax({
+							url: data.ip + "selr",	
+							data:{"cno":cno},
+							type: "post",
+							dataType: "json",
+							success: function(res) {
+								that.selr=res;
+							}
+						});
+						
+						var cid= $(".zs").val()
+						$.ajax({
+							url: data.ip + "selrs",	
+							data:{"cid":cid},
+							type: "post",
+							dataType: "json",
+							success: function(res) {
+								console.log(res);
+								that.selrs=res;
+							}
+						});
+				
+						$.ajax({
+							url: data.ip + "fdjpps",	
+							type: "post",
+							dataType: "json",
+							success: function(res) {
+								that.fdjpp=res;
+							}
+						});
+						
+						$.ajax({
+							url: data.ip + "chas",	
+							type: "post",
+							dataType: "json",
+							success: function(res) {
+								that.chaj=res;
+							}
+						});
+
+					},baochuen:function(){
 				   		var brandid=$(".ids").val();
 				   		var brandname=$(".names").val();
 				   		var initial=$(".shozhi").val();
@@ -470,6 +637,92 @@
 								} else{
 									alert("删除失败")
 								}
+							}
+						});
+				   },cha:function(){
+				   		var that=this;
+				   		$.ajax({
+							url: data.ip + "chas",	
+							type: "post",
+							dataType: "json",
+							success: function(res) {
+								that.chaj=res;
+							}
+						});
+				   },jinkuo:function(){
+				   			var disid=$(".disid").val();
+				   			var imp=$(".imp").val();
+				   			$.ajax({
+							url: data.ip + "distinctionupdate",	
+							data:{"disid":disid,"imp":imp},
+							type: "post",
+							dataType: "json",
+							success: function(res) {
+								if (res>0) {
+									alert("修改成功")
+								} else{
+									alert("修改失败")
+								}
+							}
+						});
+				   },bao:function(){
+				   		var cid=$(".cxid").val();
+				   		var cno=$(".clid").val();
+				   		var cname=$(".cxmc").val();
+				   		var cprice=$(".cxjg").val();
+				   		var cyear=$(".cxnk").val();
+				   		var cdischarge=$(".cxgl").val();
+				   		var cdomestic=$(".zsd").val();
+				   		var cfuel=$(".cxbj").val();
+				   		var cfour=$(".cxzz").val();
+				   		var remark1=$(".cxpp").val();
+				   		$.ajax({
+							url: data.ip + "carbrandinfoinsert",	
+							data:{"cno":cno,"cid":cid,"cname":cname,"cprice":cprice,"cyear":cyear,"cdischarge":cdischarge,"cdomestic":cdomestic,"cfuel":cfuel,"cfour":cfour,"remark1":remark1},
+							type: "post",
+							dataType: "json",
+							success: function(res) {
+								if (res>0) {
+									alert("新增成功")
+								} else{
+									alert("新增失败")
+								}
+							}
+						});
+				   },baos:function(){
+				   		var cid=$(".cxids").val();
+				   		var cno=$(".clids").val();
+				   		var cname=$(".cxmcs").val();
+				   		var cprice=$(".cxjgs").val();
+				   		var cyear=$(".cxnks").val();
+				   		var cdischarge=$(".cxgls").val();
+				   		var cdomestic=$(".zsds").val();
+				   		var cfuel=$(".cxbjs").val();
+				   		var cfour=$(".cxzzs").val();
+				   		var remark1=$(".cxpps").val();
+				   		$.ajax({
+							url: data.ip + "carbrandinfoupdate",	
+							data:{"cno":cno,"cid":cid,"cname":cname,"cprice":cprice,"cyear":cyear,"cdischarge":cdischarge,"cdomestic":cdomestic,"cfuel":cfuel,"cfour":cfour,"remark1":remark1},
+							type: "post",
+							dataType: "json",
+							success: function(res) {
+								if (res>0) {
+									alert("修改成功")
+								} else{
+									alert("修改失败")
+								}
+							}
+						});
+				   },ss:function(){
+				   		var zhis=$(".ppbh").val();
+				   		var that = this;
+						$.ajax({
+							url: data.ip + "carbrands",	
+							data:{"brandname":zhis,"initial":zhis},
+							type: "post",
+							dataType: "json",
+							success: function(res) {
+								console.log(res);
 							}
 						});
 				   }

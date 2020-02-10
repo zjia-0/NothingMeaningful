@@ -19,6 +19,11 @@ public class CarbrandController {
 		return carbrandService.car();
 	}
 	
+	@PostMapping("/fdjpps")
+	public List<Carbrand> fdjpp(){
+		return carbrandService.car();
+	}
+	
 	@PostMapping("/carbrandinsert")
 	public int carbrandinsert(Carbrand carbrand){
 		return carbrandService.cari(carbrand);
@@ -42,5 +47,10 @@ public class CarbrandController {
 	@PostMapping("/selr")
 	public Carbrand selr(int cno){
 		return carbrandService.selr(cno);
+	}
+	
+	@PostMapping("/carbrands")
+	public List<Carbrand> select(int brandid,String brandname,String initial){
+		return carbrandService.select(brandid, brandname, initial);
 	}
 }
