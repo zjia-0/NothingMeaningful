@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<style type="text/css">
+			*{
+				margin: 0px;
+				padding: 0px;
+			}
+			
+			#gwdiv{
+				border: 0px solid red;
+				
+			}
+			#gwdiv1{
+				border: 0px solid red;
+				background-color: honeydew;
+			}
+			#gwdiv1 li{
+				list-style: none;
+				display: inline-block;
+			}
+			#gwdiv2{
+				border: 0px solid red;
+			}
+			#gwdiv2 li{
+				list-style: none;
+				display: inline-block;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container-fluid" id="ctx">
+			<div id="gwdiv1">
+				<ul>
+					<li><h3>外勤车辆</h3></li>
+					<li style="float: right;"><button type="button" class="btn btn-default">关闭</button></li>
+				</ul>
+			</div>
+			<div id="gwdiv2"> 
+				<ul style="float: right;">
+					<li @click="insert()"><span class="glyphicon glyphicon-align-justify"></span>增加</li>
+					<li id="del"><span class="glyphicon glyphicon-remove-circle"></span>删除</li>
+					<li @click="update()"><span class="glyphicon glyphicon-folder-open"></span>保存</li>
+				</ul>
+				<br />
+				<br />
+				<ul >
+					<input type="hidden" v-model="list2.carid" class="carid">
+					<li>车牌号<input type="text" v-model="list2.platenumber" class="platenumber"></li>
+					<li>品牌<input type="text" v-model="list2.brand" class="brand"></li>
+					<li>车型<input type="text" v-model="list2.models" class="models"></li>
+					<li>当前里程<input type="text" v-model="list2.mileage" class="mileage"></li>
+					<li>班组<input type="text" v-model="list2.departid"disabled="true" style="width: 50px;" class="departid"></li>
+				</ul>
+			</div>
+			<div>
+				<table class="table table-bordered" style="width: 800px;">
+					<thead>
+						<tr>
+							<th>车牌号</th>
+							<th>品牌</th>
+							<th>车型</th>
+							<th>当前里程</th>
+							<th>归属班组</th>
+							
+						</tr>			
+					</thead>
+					<tbody> 
+						<tr v-for="item in list" @click="danji(item.carid)">
+							<td>{{item.platenumber}}</td>
+							<td>{{item.brand}}</td>
+							<td>{{item.models}}</td>
+							<td>{{item.mileage}}</td>
+							<td>{{item.departid}}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<script src="js/canvas-nest.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/jquery-1.12.4.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" src="js/jquery.ztree.core.js"></script>
+		<script src="js/jquery.ztree.excheck.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/my.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			
+			var vm=new Vue({
+			el:"#ctx",
+			data(){
+				return {
+					list:[],
+					list2:{}
+				}
+			},created:function(){
+				$.ajax({
+					url:data.ip + "carsselect",
+					type:"post",
+					"success":function(re){
+						vm.list=re;
+						console.log(re);
+					},"error":function(re){
+						console.log(re);
+					}
+				});
+			},methods:{
+				danji:function(carid){
+					
+					$.ajax({
+						url:data.ip + "carids",
+						data:{"carid":carid},
+						type:"post",
+						dataType:"json",
+						success:function(re){
+							vm.list2=re;
+							console.log(re);
+						}
+					});
+				},insert:function(){
+					var platenumber=$(".platenumber").val()
+				    var brand=$(".brand").val()
+				    var models=$(".models").val()
+				    var mileage=$(".mileage").val()
+				    var departid=$(".departid").val()
+				    
+					$.ajax({
+						url:data.ip + "carsadd",
+						data:{"platenumber":platenumber,"brand":brand,"models":models,"mileage":mileage,"departid":departid},
+						type:"post",
+						dataType:"json",
+					"success":function(re){
+							console.log(re);
+					//新增成功则查询查询一次		
+				      $.ajax({
+						url:data.ip + "carsselect",
+						type:"post",
+						"success":function(re){
+						vm.list=re;
+						console.log(re);
+						},"error":function(re){
+						console.log(re);
+						}
+					});
+				
+						},"error":function(re){
+							console.log(re);
+						}
+					});
+				},update:function(){
+					var carid=$(".carid").val()
+					var platenumber=$(".platenumber").val()
+				    var brand=$(".brand").val()
+				    var models=$(".models").val()
+				    var mileage=$(".mileage").val()
+				    var departid=$(".departid").val()
+				    
+					$.ajax({
+						url:data.ip + "carsupdate",
+						data:{"carid":carid,"platenumber":platenumber,"brand":brand,"models":models,"mileage":mileage,"departid":departid},
+						type:"post",
+						dataType:"json",
+						"success":function(re){
+							console.log(re);
+					//新增成功则查询查询一次		
+				      $.ajax({
+						url:data.ip + "carsselect",
+						type:"post",
+						"success":function(re){
+						vm.list=re;
+						console.log(re);
+						},"error":function(re){
+						console.log(re);
+						}
+					});
+						},"error":function(re){
+							console.log(re);
+						}
+					});
+				}
+			}
+		});
+		
+		$(function(){
+			$("#del").click(function(){
+				var carid=$(".carid").val()
+				$.ajax({
+					url:data.ip + "carsRemove",
+					type:"post",
+					data:{
+						carid:carid
+					},
+					"success":function(re){
+						//新增成功则查询查询一次		
+				      $.ajax({
+						url:data.ip + "carsselect",
+						type:"post",
+						dataType:"json",
+						"success":function(re){
+						vm.list=re;
+						console.log(re);
+						},"error":function(re){
+						console.log(re);
+						}
+					});
+						console.log(re);
+					},"error":function(re){
+						console.log(re);
+					}
+				});
+			});
+		});
+		</script>
+	</body>
+</html>
