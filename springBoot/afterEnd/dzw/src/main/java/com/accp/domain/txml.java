@@ -15,13 +15,13 @@ public class txml {
 	 private String card;//身份证号码
 	 private String address;//住址
 	 private String degree;//学位
-	 private String birthplace;//出生地
+	 private String birthplace;//籍贯
 	 private String nation;//民族
 	 private String schooltag;//毕业学校
 	 private String martial;//婚姻状态
 	 private String compile;//编制
 	 private String hiredate;//入职日期
-	 private String applicable;//使用日期
+	 private String applicable;//适用日期
 	 private String borndate;//出生日期
 	 private String startdate;//合同开始日
 	 private String enddate;//合同结束日
