@@ -6,6 +6,9 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface CustomerMapper {
+	
+	List<Customer> queryKey(String cno);
+	
     int countByExample(CustomerExample example);
 
     int deleteByExample(CustomerExample example);

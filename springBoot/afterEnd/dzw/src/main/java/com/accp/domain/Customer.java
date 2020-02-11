@@ -21,7 +21,7 @@ public class Customer {
 
     private Float climit;
 
-    private Integer personnelid;
+    private String personnelid;
 
     private String cadviserphone;
 
@@ -41,7 +41,21 @@ public class Customer {
 
     private String cregistaddress;
 
-    private String remark1;
+    private String ctname;
+    
+	private String vno;
+    
+    private Date vjoindate;
+    
+    private Date venddate;
+    
+    private Integer currentjifen;
+    
+    private Double money;
+    
+    private String personnelname;
+
+	private String remark1;
 
     private String remark2;
 
@@ -50,6 +64,54 @@ public class Customer {
     private String remark4;
 
     private String remark5;
+
+	public String getCtname() {
+		return ctname;
+	}
+
+	public void setCtname(String ctname) {
+		this.ctname = ctname;
+	}
+
+	public String getVno() {
+		return vno;
+	}
+
+	public void setVno(String vno) {
+		this.vno = vno;
+	}
+
+	public Date getVjoindate() {
+		return vjoindate;
+	}
+
+	public void setVjoindate(Date vjoindate) {
+		this.vjoindate = vjoindate;
+	}
+
+	public Date getVenddate() {
+		return venddate;
+	}
+
+	public void setVenddate(Date venddate) {
+		this.venddate = venddate;
+	}
+
+	public Integer getCurrentjifen() {
+		return currentjifen;
+	}
+
+	public void setCurrentjifen(Integer currentjifen) {
+		this.currentjifen = currentjifen;
+	}
+
+	public Double getMoney() {
+		return money;
+	}
+
+	public void setMoney(Double money) {
+		this.money = money;
+	}
 
     public String getCno() {
         return cno;
@@ -74,6 +136,14 @@ public class Customer {
     public void setCname(String cname) {
         this.cname = cname;
     }
+    
+    public String getPersonnelname() {
+		return personnelname;
+	}
+
+	public void setPersonnelname(String personnelname) {
+		this.personnelname = personnelname;
+	}
 
     public String getCpeople() {
         return cpeople;
@@ -123,11 +193,11 @@ public class Customer {
         this.climit = climit;
     }
 
-    public Integer getPersonnelid() {
+    public String getPersonnelid() {
         return personnelid;
     }
 
-    public void setPersonnelid(Integer personnelid) {
+    public void setPersonnelid(String personnelid) {
         this.personnelid = personnelid;
     }
 
@@ -242,4 +312,50 @@ public class Customer {
     public void setRemark5(String remark5) {
         this.remark5 = remark5;
     }
+    
+
+    
+    public Customer(String cno, String ctno, String cname, String cpeople, String cphone, String caddress,
+			Date cbirthday, Integer cperiod, Float climit, String personnelid, String cadviserphone, String cprovince,
+			String cremark, String ctaxes, String cregistphone, String cbank, String cbanknumber, String cdlicense,
+			String cregistaddress, String ctname, String vno, Date vjoindate, Date venddate, Integer currentjifen,
+			Double money, String personnelname, String remark1, String remark2, String remark3, String remark4,
+			String remark5) {
+		super();
+		this.cno = cno;
+		this.ctno = ctno;
+		this.cname = cname;
+		this.cpeople = cpeople;
+		this.cphone = cphone;
+		this.caddress = caddress;
+		this.cbirthday = cbirthday;
+		this.cperiod = cperiod;
+		this.climit = climit;
+		this.personnelid = personnelid;
+		this.cadviserphone = cadviserphone;
+		this.cprovince = cprovince;
+		this.cremark = cremark;
+		this.ctaxes = ctaxes;
+		this.cregistphone = cregistphone;
+		this.cbank = cbank;
+		this.cbanknumber = cbanknumber;
+		this.cdlicense = cdlicense;
+		this.cregistaddress = cregistaddress;
+		this.ctname = ctname;
+		this.vno = vno;
+		this.vjoindate = vjoindate;
+		this.venddate = venddate;
+		this.currentjifen = currentjifen;
+		this.money = money;
+		this.personnelname = personnelname;
+		this.remark1 = remark1;
+		this.remark2 = remark2;
+		this.remark3 = remark3;
+		this.remark4 = remark4;
+		this.remark5 = remark5;
+	}
+
+	public Customer() {
+
+	}
 }

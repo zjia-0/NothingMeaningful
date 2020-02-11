@@ -34,6 +34,53 @@
     <result column="remark4" property="remark4" jdbcType="VARCHAR" />
     <result column="remark5" property="remark5" jdbcType="VARCHAR" />
   </resultMap>
+    <resultMap id="BaseResultMapTwo" type="com.accp.domain.Carinfo" >
+    <id column="cdlicense" property="cdlicense" jdbcType="VARCHAR" />
+    <result column="cdno" property="cdno" jdbcType="VARCHAR" />
+    <result column="cbiid" property="cbiid" jdbcType="VARCHAR" />
+    <result column="cddricer" property="cddricer" jdbcType="VARCHAR" />
+    <result column="cddriverphone" property="cddriverphone" jdbcType="VARCHAR" />
+    <result column="cddriverbirth" property="cddriverbirth" jdbcType="TIMESTAMP" />
+    <result column="clid" property="clid" jdbcType="INTEGER" />
+    <result column="cdlicenseend" property="cdlicenseend" jdbcType="TIMESTAMP" />
+    <result column="cdframe" property="cdframe" jdbcType="VARCHAR" />
+    <result column="cdengine" property="cdengine" jdbcType="VARCHAR" />
+    <result column="cdyearprice" property="cdyearprice" jdbcType="REAL" />
+    <result column="cdmileage" property="cdmileage" jdbcType="REAL" />
+    <result column="cdload" property="cdload" jdbcType="VARCHAR" />
+    <result column="cdbuydate" property="cdbuydate" jdbcType="TIMESTAMP" />
+    <result column="cdgolicense" property="cdgolicense" jdbcType="TIMESTAMP" />
+    <result column="cdcarcheckdate" property="cdcarcheckdate" jdbcType="TIMESTAMP" />
+    <result column="fuelid" property="fuelid" jdbcType="INTEGER" />
+    <result column="cdsystem" property="cdsystem" jdbcType="VARCHAR" />
+    <result column="cdcompulsoryinsuranceid" property="cdcompulsoryinsuranceid" jdbcType="INTEGER" />
+    <result column="cdcompulsoryinsurancedate" property="cdcompulsoryinsurancedate" jdbcType="TIMESTAMP" />
+    <result column="cdcommerceinsuranceid" property="cdcommerceinsuranceid" jdbcType="INTEGER" />
+    <result column="cdcommerceinsurancedate" property="cdcommerceinsurancedate" jdbcType="TIMESTAMP" />
+    <result column="cdisinsure" property="cdisinsure" jdbcType="INTEGER" />
+    <result column="cdnextmileage" property="cdnextmileage" jdbcType="REAL" />
+    <result column="cdnextkeep" property="cdnextkeep" jdbcType="TIMESTAMP" />
+    <result column="cno" property="cno" jdbcType="VARCHAR" />
+    <result column="remark1" property="remark1" jdbcType="VARCHAR" />
+    <result column="remark2" property="remark2" jdbcType="VARCHAR" />
+    <result column="remark3" property="remark3" jdbcType="VARCHAR" />
+    <result column="remark4" property="remark4" jdbcType="VARCHAR" />
+    <result column="remark5" property="remark5" jdbcType="VARCHAR" />
+    <result column="brandname" property="brandname" jdbcType="VARCHAR" />
+    <result column="cname" property="cname" jdbcType="VARCHAR" />
+    <result column="carname" property="carname" jdbcType="VARCHAR" />
+    <result column="motorname" property="motorname" jdbcType="VARCHAR" />
+    <result column="fuelname" property="fuelname" jdbcType="VARCHAR" />
+  </resultMap>
+  <select id="queryCarinfo" resultMap="BaseResultMapTwo">
+  		SELECT cinfo.*,cbrand.`brandname`,cbrandinfo.`cname`,cbl.`carname`,en.`motorname`,fu.`fuelname`
+		FROM carinfo cinfo
+		INNER JOIN carbrand cbrand ON cbrand.`brandid`=cinfo.`cdno`
+		INNER JOIN carbrandinfo cbrandinfo ON cbrand.`brandid`=cbrandinfo.`cno`
+		INNER JOIN carbelong cbl ON cinfo.`clid`=cbl.`carid`
+		INNER JOIN `engine` en ON en.`motorid`=cinfo.`cdenginebrandid`
+		INNER JOIN fuel fu ON cinfo.`fuelid`=fu.`fuelid`
+  </select>
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >

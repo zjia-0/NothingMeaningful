@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.accp.domain.Carinfo;
+import com.accp.domain.Customer;
 import com.accp.service.VehicleService;
 
 @RestController
@@ -21,6 +22,11 @@ public class VehicleController {
 	@GetMapping("/queryCarinfo")
 	public List<Carinfo> queryCarinfo(){
 		return vehicleService.queryCarinfo();
+	}
+	//根据车资料查询客户信息
+	@GetMapping("/queryCustomerKey")
+	public List<Customer> queryCustomer(String cno){
+		return vehicleService.queryCustomer(cno);
 	}
 	//新增车辆信息
 	@GetMapping("/insertCarinfo")

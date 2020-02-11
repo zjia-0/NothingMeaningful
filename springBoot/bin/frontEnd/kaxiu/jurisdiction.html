@@ -12,7 +12,7 @@
 		</style>
 	</head>
 	<body>
-		<div class="container-fluid">
+		<div class="container-fluid" id="ctx">
 			<div class="row" style="background-color: #DFF0D8;">
 				<div class="col-xs-4">
 					<h2>角色权限控制</h2>
@@ -34,10 +34,7 @@
 					      <span class="caret"></span>
 					    </button>
 					    <ul style="width: 200px;" class="dropdown-menu">
-					      	<li><a href="#">总经理</a></li>
-						    <li><a href="#">站长</a></li>
-						    <li><a href="#">技术顾问</a></li>
-						    <li><a href="#">技术经理</a></li>
+					      	<li v-for="item in roles"><a class="text-center" href="#">{{item.name}}</a></li>
 					    </ul>
 					  </div>
 					</div>
@@ -52,7 +49,7 @@
 			</div>
 			<div class="row" id="ctx">
 				<h2>模块权限</h2>
-				<ptree :list="perm.childrens"></ptree>	
+				<ul id="treeDemo" class="ztree"></ul>
 			</div>
 		
 		
@@ -134,51 +131,60 @@
         	描述：树状菜单栏
         -->
 		<script type="text/javascript">
-			var permsTree = Vue.component("ptree",{
-				props: ["list"],
-				template: `
-					<ul>
-						<li v-for='item in list'>
-							<span v-if="item.path" @click="openHTML('html/'+item.path)"><input type="checkbox"/>{{item.name}}</span>
-							<span v-else><input type="checkbox"/>{{item.name}}</span>
-							<ptree :list = "item.childrens"></ptree>
-						</li>
-					</ul>
-				`,
-				methods:{
-					openHTML(src){
-						$("iframe").attr("src",src);
+			var vm=new Vue({
+				el:"#ctx",
+				data(){
+					return{
+						roles:[]
 					}
 				}
-			});
-			var vm = new Vue({
-				el: "#ctx",
-				data() {
-					return {
-						perms: [],
-						perm: {}
+			})
+			$(function(){	
+				$.ajax({
+					type:"get",
+					url:data.ip+"per/per",
+					dateType:"json",
+					xhrFields:{
+						withCredentials:true
+					},
+					success:function(response){
+						console.log(response);
+						$.fn.zTree.init($("#treeDemo"), setting, response);
 					}
-				},methods:{
-					levels(index){
-						vm.perm=vm.perms[index]	
-					}					
-				},
-				created: function() {
-					var that = this;
-					$.ajax({
-						url: data.ip + "per/perms",
-						type: "get",
-						xhrFields: {
-							withCredentials: true
-						},
-						dataType: "json",
-						success: function(response) {
-							that.perms = response;
-							that.perm=that.perms[0]
-						}
-					});
-				}
+				});
+				$.ajax({
+					type:"get",
+					url:data.ip+"per/findRoles",
+					dateType:"json",
+					xhrFields:{
+						withCredentials:true
+					},
+					success:function(response){
+						vm.roles=response;
+					}
+				});
 			});
+		var setting = {
+			  view: {
+			         selectedMulti: true,
+			         showIcon:false
+			     },
+			  check: {
+			   enable: true
+			  },
+			  data: {
+				   key: {
+				        name: "name",//树节点名称
+				   },
+				   simpleData: {
+				    enable: true,//是否采用简单数据模式
+				        idKey: "id",//树节点ID名称
+				        pIdKey: "parentid",//父节点ID名称
+				        rootPId: -1,//根节点ID
+				   }
+			  	}
+			 };
+		 
 		</script>
 	</body>
 </html>

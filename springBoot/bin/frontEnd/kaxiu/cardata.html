@@ -35,7 +35,7 @@
 							<li>车架号：<input /></li>
 						</ul>
 						<ul class="menue" style="padding: 0px;margin: 0px;float: right;">
-							<li @click="addcar"><span class="glyphicon glyphicon-plus-sign"></span>增加</li>
+							<li data-toggle="modal" data-target="#myModal" ><span class="glyphicon glyphicon-plus-sign"></span>增加</li>
 							<li><span class="glyphicon glyphicon-leaf"></span>修改</li>
 							<li><span class="glyphicon glyphicon-remove-sign"></span>删除</li>
 							<li @click="checkstaff"><span class="glyphicon glyphicon-sunglasses"></span>查询</li>
@@ -78,34 +78,34 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
+								<tr v-for="item,index in vehicle">
 									<td> </td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
+									<td>{{item.cdlicense}}</td>
+									<td>{{item.cdno}}</td>
+									<td>{{item.cdlicense}}</td>
+									<td>{{item.cdlicense}}</td>
+									<td>{{item.cdlicense}}</td>
+									<td>{{item.cdlicense}}</td>
+									<td>{{item.cdlicense}}</td>
+									<td>{{item.cdlicense}}</td>
+									<td>{{item.cdlicense}}</td>
+									<td>{{item.cdlicense}}</td>
+									<td>{{item.cdlicense}}</td>
+									<td>{{item.cdlicense}}</td>
+									<td>{{item.cdlicense}}</td>
+									<td>{{item.cdlicense}}</td>
+									<td>{{item.cdlicense}}</td>
+									<td>{{item.cdlicense}}</td>
+									<td>{{item.cdlicense}}</td>
+									<td>{{item.cdlicense}}</td>
+									<td>{{item.cdlicense}}</td>
+									<td>{{item.cdlicense}}</td>
+									<td>{{item.cdlicense}}</td>
+									<td>{{item.cdlicense}}</td>
+									<td>{{item.cdlicense}}</td>
+									<td>{{item.cdlicense}}</td>
+									<td>{{item.cdlicense}}</td>
+									<td>{{item.cdlicense}}</td>
 								</tr>
 							</tbody>
 						</table>
@@ -162,6 +162,7 @@
 					合计：<span>2</span>条记录
 				</div>
 			</div>
+			<!--客户查询-->
 			<div id="checkstaff">
 				<p style="padding: 2px;background-color: #858585;font-weight: bold;color: #D6D6CE;">客户查询</p>
 				<div style="width: 880px;height: 550px;border:1px solid white;margin-left: 10px;background-color: white;">
@@ -288,90 +289,104 @@
 							<input style="width: 70px;" type="text">
 						</p>
 					</div>
+					
 				</div>
 			</div>
-			<div id="addcar">
-				<p style="padding: 2px;background-color: #858585;font-weight: bold;color: #D6D6CE;">车辆资料编辑</p>
-				<div style="width: 1080px;height: 550px;border:1px solid white;margin-left: 10px;background-color: white;">
-					<div style="width: 1060px;height: 50px;margin-left: 10px;">
-						<div style="display: inline-block;width: 200px;height: 40px;font-size: 24px;box-sizing: border-box;padding-top: 5px;border-left: 4px solid orange;">车辆资料编辑</div>
-						<div @click="closeadd" class="clo" style="display: inline-block;width: 100px;height: 40px;box-sizing: border-box;float:right;font-size: 50px;text-align: right;padding: 0px;">X</div>
-						<button class="btn-success" style="float: right;width: 100px;height: 40px;margin-top: 5px;">确定</button>
-					</div>
-					<div style="width: 1060px;height: 490px;margin-left: 10px;background-color: #D6D6CE;color:#44BDCA;box-sizing: border-box;padding-left: 20px;">
-						<p style="padding-top: 15px;">
-							<label>车牌号码：</label>
-							<select @click="opencarnumber()" style="width: 100px;">
-
-							</select>
-							<label>车辆品牌：</label>
-							<select @click="openbrandmodels()" style="width: 100px;">
-
-							</select>
-							<label>车辆型号：</label>
-							<input style="width: 145px;" type="text">
-							<label>驾驶员：</label>
-							<input style="width: 145px;" type="text">
-						</p>
-						<p style="padding-top: 10px;">
-							<label>驾驶员电话：</label><input type="text">
-							<label>出生日期：</label><input type="date" style="width: 120px;">
-							<label>车辆归属：</label>
-							<select @click="openfueltype()" style="width: 100px;">
-
-							</select>
-							<label>驾证到期：</label><input type="date" style="width: 120px;">
-						</p>
-						<p style="padding-top: 10px;">
-							<label>车架号：</label><input type="text">
-							<label>发动机号：</label><input type="text">
-							<label>车辆年款：</label><input type="text">
-							<label>里程：</label><input type="text">
-						</p>
-						<p style="padding-top: 10px;">
-							<label>发动机品牌：</label>
-							<select style="width: 100px;">
-								<option></option>
-							</select>
-							<label>载重：</label><input type="text">
-							<label>购买日期：</label><input type="date" style="width: 120px;">
-						</p>
-						<p style="padding-top: 10px;">
-							<label>上牌日期：</label><input type="date" style="width: 120px;">
-							<label>车检日期：</label><input type="date" style="width: 120px;">
-							<label>燃油类别：</label>
-							<select @click="openfueltype()" style="width: 100px;">
-							</select>
-							<label>车系：</label>
-							<input type="text">
-							
-						</p>
-						<p style="padding-top: 10px;">
-							<label>保险：交强险保险公司：</label>
-							<select style="width: 100px;">
-								<option></option>
-							</select>
-							<label>交强险到期：</label><input type="date" style="width: 120px;">
-							<label>在我投保车：</label>
-							<input type="checkbox">
-						</p>
-						<p style="padding-top: 10px;">
-							<label>商业险保险公司：</label>
-							<select style="width: 100px;">
-								<option></option>
-							</select>
-							<label>商业险到期：</label><input type="date" style="width: 120px;">
-						</p>
-						<p style="padding-top: 10px;">
-							<label>下次保养里程：</label>
-							<input type="text">
-							<label>下次保养日期：</label><input type="date" style="width: 120px;">
-							<label>客户名称：</label>
-							<input style="width: 255px;" type="text">
-						</p>
-					</div>
-				</div>
+			
+			
+			<!-- Modal -->
+			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			  <div class="modal-dialog" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			        <h4 class="modal-title" id="myModalLabel">车辆资料编辑</h4>
+			      </div>
+			      <div class="modal-body">
+			        
+						<div style="width: 1000px;height: 400px;border:1px solid white;background-color: white;">
+							<div style="width: 1000px;height: 400px;background-color: #D6D6CE;color:#44BDCA;box-sizing: border-box;padding-left: 20px;">
+								<p style="padding-top: 15px;">
+									<label>车牌号码：</label>
+									<select @click="opencarnumber()" style="width: 100px;">
+		
+									</select>
+									<label>车辆品牌：</label>
+									<select @click="openbrandmodels()" style="width: 100px;">
+		
+									</select>
+									<label>车辆型号：</label>
+									<input style="width: 145px;" type="text">
+									<label>驾驶员：</label>
+									<input style="width: 145px;" type="text">
+								</p>
+								<p style="padding-top: 10px;">
+									<label>驾驶员电话：</label><input type="text">
+									<label>出生日期：</label><input type="date" style="width: 120px;">
+									<label>车辆归属：</label>
+									<select @click="openfueltype()" style="width: 100px;">
+		
+									</select>
+									<label>驾证到期：</label><input type="date" style="width: 120px;">
+								</p>
+								<p style="padding-top: 10px;">
+									<label>车架号：</label><input type="text">
+									<label>发动机号：</label><input type="text">
+									<label>车辆年款：</label><input type="text">
+									<label>里程：</label><input type="text">
+								</p>
+								<p style="padding-top: 10px;">
+									<label>发动机品牌：</label>
+									<select style="width: 100px;">
+										<option></option>
+									</select>
+									<label>载重：</label><input type="text">
+									<label>购买日期：</label><input type="date" style="width: 120px;">
+								</p>
+								<p style="padding-top: 10px;">
+									<label>上牌日期：</label><input type="date" style="width: 120px;">
+									<label>车检日期：</label><input type="date" style="width: 120px;">
+									<label>燃油类别：</label>
+									<select @click="openfueltype()" style="width: 100px;">
+									</select>
+									<label>车系：</label>
+									<input type="text">
+									
+								</p>
+								<p style="padding-top: 10px;">
+									<label>保险：交强险保险公司：</label>
+									<select style="width: 100px;">
+										<option></option>
+									</select>
+									<label>交强险到期：</label><input type="date" style="width: 120px;">
+									<label>在我投保车：</label>
+									<input type="checkbox">
+								</p>
+								<p style="padding-top: 10px;">
+									<label>商业险保险公司：</label>
+									<select style="width: 100px;">
+										<option></option>
+									</select>
+									<label>商业险到期：</label><input type="date" style="width: 120px;">
+								</p>
+								<p style="padding-top: 10px;">
+									<label>下次保养里程：</label>
+									<input type="text">
+									<label>下次保养日期：</label><input type="date" style="width: 120px;">
+									<label>客户名称：</label>
+									<input style="width: 255px;" type="text">
+								</p>
+							</div>
+						</div>  
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-default col-md-1 col-lg-push-10" data-dismiss="modal">取消</button>
+			        <button type="button" class="btn btn-primary col-md-1 col-lg-push-10">确认</button>
+			      </div>
+			    </div>
+			  </div>
 			</div>
+			
 			<div id="setting">
 				<p style="padding: 2px;background-color: #858585;font-weight: bold;color: #D6D6CE;">字段设置</p>
 				<div style="width: 580px;height: 550px;border:1px solid white;margin-left: 10px;background-color: white;">
@@ -413,6 +428,7 @@
 			<script src="js/jquery.ztree.core.js" type="text/javascript" charset="utf-8"></script>
 			<script src="js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
 			<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+			<script type="text/javascript" src="js/my.js" ></script>
 			<script type="text/javascript">
 				var vm = new Vue({
 					el:"#ctx",
@@ -420,7 +436,8 @@
 						return {
 							data: [],
 							carinfo: ["客户编码", "客户名称", "详细地址", "联系人", "手机", "客户生日", "客户类别", "会员卡号", "入会日期", "会员到期", "备注", "建档日期", "服务顾问", "业务员电话", "账期(天)", "挂账额度", "累计积分", "定金余额", "客户省", "客户市", "客户区", "纳税人识别号", "注册电话", "开户银行", "银行账号"],
-							pastbuy: ["单据类型", "销售单号", "车牌号", "进厂时间", "完工时间", "结算时间", "消费时间"]
+							pastbuy: ["单据类型", "销售单号", "车牌号", "进厂时间", "完工时间", "结算时间", "消费时间"],
+							vehicle: []
 						}
 					},
 					methods:{
@@ -439,10 +456,24 @@
 						},
 						checkstaff:function(){
 							$("#checkstaff").show();
+						},
+						queryCarinfo:function(){
+							$.ajax({
+								url:data.ip + "/vehicle/queryCarinfo",
+								type:"get",
+								xhrFields: {
+									withCredentials: true
+								},
+								dataType:"json",
+								success:function(result){
+									vm.vehicle=result
+									console.log(result)
+								}
+							})
 						}
 					}
 				});
-				
+				vm.queryCarinfo();
 		
 		</script>
 	</body>

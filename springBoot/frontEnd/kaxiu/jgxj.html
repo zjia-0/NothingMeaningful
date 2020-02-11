@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<style type="text/css">
+			*{
+				margin: 0px;
+				padding: 0px;
+			}
+			
+			#ctx{
+				border: 0px solid red;
+				
+			}
+			#gwdiv1{
+				border: 0px solid red;
+				background-color: honeydew;
+			}
+			#gwdiv1 li{
+				list-style: none;
+				display: inline-block;
+			}
+			#gwdiv2{
+				border: 0px solid red;
+			}
+			#gwdiv2 li{
+				list-style: none;
+				display: inline-block;
+				 padding-right: 40px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container-fluid" id="ctx">
+			<div id="gwdiv1">
+				<ul>
+					<li><h3>技工星级</h3></li>
+					<li style="float: right;"><button type="button" class="btn btn-default">关闭</button></li>
+				</ul>
+			</div>
+			<div id="gwdiv2"> 
+				<ul style="float: right;">
+					<li @click="add()"><span class="glyphicon glyphicon-menu-hamburger"></span>增加</li>
+					<li @click="remove()"> <span class="glyphicon glyphicon-remove-circle"></span>删除</li>
+					<li @click="update()"> <span class="glyphicon glyphicon-log-in"></span>保存</li>
+				</ul>
+				<br />
+				<br />
+				<ul>
+					<li>等级编号<input type="text" v-model="starleve.starleveid" class="id"></li>
+					<li>等级名称<input type="text" v-model="starleve.starlevelname" class="name"></li>
+					<li>提成权重<input type="text" v-model="starleve.weight" class="weight"></li>
+				</ul>
+			</div>
+			<div>
+				<table class="table table-bordered" style="width: 800px;">
+					<thead>
+						<tr>
+							<th>等级编码</th>
+							<th>等级名称</th>
+							<th>提成权重</th>
+						</tr>			
+					</thead>
+					<tbody>
+						<tr v-for="item in page" @click="chak(item.starleveid)">
+							<td>{{item.starleveid}}</td>
+							<td>{{item.starlevelname}}</td>
+							<td>{{item.weight}}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		
+		<script src="js/canvas-nest.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/jquery-1.12.4.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" src="js/jquery.ztree.core.js"></script>
+		<script src="js/jquery.ztree.excheck.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/my.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			
+		var vm  = new Vue({
+			el:"#ctx",
+			data:{
+				page:[],
+				starleve:{}
+			},methods:{
+				chak:function(starleveid){
+						$.ajax({
+							url:data.ip + "selectid",
+							data:{"starleveid":starleveid},
+							type:"post",
+							dataType:"json",
+							success:function(result){
+								console.log(result)
+								vm.starleve = result;
+							}
+						});
+				},
+				update:function(){
+					var starleveid=$(".id").val()
+				    var starlevelname=$(".name").val()
+				    var weight=$(".weight").val()
+				    	
+					$.ajax({
+							url:data.ip + "artupdate",
+							data:{"starleveid":starleveid,"starlevelname":starlevelname,"weight":weight},
+							type:"post",
+							dataType:"json",
+							success:function(result){
+								findPage();
+							}
+						});
+				},
+				add:function(){
+					var starleveid=$(".id").val()
+				    var starlevelname=$(".name").val()
+				    var weight=$(".weight").val()
+				    	
+					$.ajax({
+							url:data.ip + "artadd",
+							data:{"starleveid":starleveid,"starlevelname":starlevelname,"weight":weight},
+							type:"post",
+							dataType:"json",
+							success:function(result){
+								
+								findPage();
+								
+								
+							}
+						});
+				},
+				remove:function(){
+					var starleveid=$(".id").val()
+				    var starlevelname=$(".name").val()
+				    var weight=$(".weight").val()
+				    	
+					$.ajax({
+							url:data.ip + "artRemove",
+							data:{"starleveid":starleveid},
+							type:"post",
+							dataType:"json",
+							success:function(result){
+								findPage();
+							}
+						});
+				}
+			}
+
+		})
+		$(function(){
+			findPage();
+
+		})
+		function findPage(){
+			$.ajax({
+				url:data.ip + "Jselect",
+				type:"post",
+				dataType:"json",
+				success:function(result){
+					console.log(result)
+					vm.page = result;
+				}
+			});
+		}
+		</script>
+	</body>
+</html>
