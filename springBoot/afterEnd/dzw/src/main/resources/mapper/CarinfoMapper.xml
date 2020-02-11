@@ -75,11 +75,32 @@
   <select id="queryCarinfo" resultMap="BaseResultMapTwo">
   		SELECT cinfo.*,cbrand.`brandname`,cbrandinfo.`cname`,cbl.`carname`,en.`motorname`,fu.`fuelname`
 		FROM carinfo cinfo
-		INNER JOIN carbrand cbrand ON cbrand.`brandid`=cinfo.`cdno`
-		INNER JOIN carbrandinfo cbrandinfo ON cbrand.`brandid`=cbrandinfo.`cno`
-		INNER JOIN carbelong cbl ON cinfo.`clid`=cbl.`carid`
-		INNER JOIN `engine` en ON en.`motorid`=cinfo.`cdenginebrandid`
-		INNER JOIN fuel fu ON cinfo.`fuelid`=fu.`fuelid`
+		LEFT JOIN carbrand cbrand ON cbrand.`brandid`=cinfo.`cdno`
+		LEFT JOIN carbrandinfo cbrandinfo ON cbrand.`brandid`=cbrandinfo.`cno`
+		LEFT JOIN carbelong cbl ON cinfo.`clid`=cbl.`carid`
+		LEFT JOIN `engine` en ON en.`motorid`=cinfo.`cdenginebrandid`
+		LEFT JOIN fuel fu ON cinfo.`fuelid`=fu.`fuelid`
+  </select>
+  <select id="queryCarinfoLike" resultMap="BaseResultMapTwo">
+  	SELECT cinfo.*,cbrand.`brandname`,cbrandinfo.`cname`,cbl.`carname`,en.`motorname`,fu.`fuelname`
+		FROM carinfo cinfo
+		LEFT JOIN carbrand cbrand ON cbrand.`brandid`=cinfo.`cdno`
+		LEFT JOIN carbrandinfo cbrandinfo ON cbrand.`brandid`=cbrandinfo.`cno`
+		LEFT JOIN carbelong cbl ON cinfo.`clid`=cbl.`carid`
+		LEFT JOIN `engine` en ON en.`motorid`=cinfo.`cdenginebrandid`
+		LEFT JOIN fuel fu ON cinfo.`fuelid`=fu.`fuelid`
+		<where>
+            <if test="mohu != null and mohu !='' ">
+                (cinfo.`cddricer` LIKE CONCAT('%',#{mohu},'%' ) OR cinfo.`cddriverphone` LIKE CONCAT('%',#{mohu},'%' ) OR cinfo.`cdlicense` LIKE CONCAT('%',#{mohu},'%' ))
+            </if>
+            <if test="chepai != null and chepai !='' ">
+                and cinfo.`cdlicense` LIKE CONCAT('%',#{chepai},'%' )
+            </if>
+            <if test="chejia != null and chejia !=''">
+            	and cinfo.`cdframe` LIKE CONCAT('%',#{chejia},'%' )
+            </if>
+            
+        </where>
   </select>
   <sql id="Example_Where_Clause" >
     <where >

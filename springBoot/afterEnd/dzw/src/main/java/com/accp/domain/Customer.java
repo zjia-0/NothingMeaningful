@@ -20,14 +20,13 @@ public class Customer {
     private String caddress;
 
     @JsonFormat(pattern = "yyyy-MM-dd")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date cbirthday;
 
     private Integer cperiod;
 
     private Float climit;
 
-    private Integer personnelid;
+    private String personnelid;
 
     private String cadviserphone;
 
@@ -56,8 +55,82 @@ public class Customer {
     private String remark4;
 
     private String remark5;
+    
+    private String ctname;
+    
+    private String personnelname;
+    
+    private String vno;
+    
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private Date vjoindate;
+    
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private Date venddate;
+    
+    private Integer currentjifen;
+    
+    private Double money;
+    
+    
 
-    public String getCno() {
+    public String getCtname() {
+		return ctname;
+	}
+
+	public void setCtname(String ctname) {
+		this.ctname = ctname;
+	}
+
+	public String getPersonnelname() {
+		return personnelname;
+	}
+
+	public void setPersonnelname(String personnelname) {
+		this.personnelname = personnelname;
+	}
+
+	public String getVno() {
+		return vno;
+	}
+
+	public void setVno(String vno) {
+		this.vno = vno;
+	}
+
+	public Date getVjoindate() {
+		return vjoindate;
+	}
+
+	public void setVjoindate(Date vjoindate) {
+		this.vjoindate = vjoindate;
+	}
+
+	public Date getVenddate() {
+		return venddate;
+	}
+
+	public void setVenddate(Date venddate) {
+		this.venddate = venddate;
+	}
+
+	public Integer getCurrentjifen() {
+		return currentjifen;
+	}
+
+	public void setCurrentjifen(Integer currentjifen) {
+		this.currentjifen = currentjifen;
+	}
+
+	public Double getMoney() {
+		return money;
+	}
+
+	public void setMoney(Double money) {
+		this.money = money;
+	}
+
+	public String getCno() {
         return cno;
     }
 
@@ -129,11 +202,11 @@ public class Customer {
         this.climit = climit;
     }
 
-    public Integer getPersonnelid() {
+    public String getPersonnelid() {
         return personnelid;
     }
 
-    public void setPersonnelid(Integer personnelid) {
+    public void setPersonnelid(String personnelid) {
         this.personnelid = personnelid;
     }
 

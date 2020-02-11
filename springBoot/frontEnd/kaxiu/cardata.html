@@ -22,8 +22,8 @@
 					</div>
 					<div>
 						<div style="float: right;box-sizing: border-box;padding-right: 100px;padding-top: 13px;">
-							<input type="text" placeholder=" 匹配驾驶员姓名/简码/手机/车牌号" style="height: 35px;margin-right: 10px;width: 300px;outline:none;" />
-							<button class="btn btn-success" style="width: 100px;margin-right: 10px;">搜索</button>
+							<input name="mohu" type="text" placeholder=" 匹配驾驶员姓名/简码/手机/车牌号" style="height: 35px;margin-right: 10px;width: 300px;outline:none;" />
+							<button @click="queryLike" class="btn btn-success" style="width: 100px;margin-right: 10px;">搜索</button>
 							<button class="btn btn-default" style="width: 70px;">关闭</button>
 						</div>
 					</div>
@@ -31,11 +31,11 @@
 				<div class="row">
 					<div class="col-md-12 col-xs-12" style="box-sizing: border-box;background-color: #F7F7F7;border: 1px solid #E9E9E9;">
 						<ul>
-							<li>车牌号：<input /></li>
-							<li>车架号：<input /></li>
+							<li>车牌号：<input name="chepai" type="text" /></li>
+							<li>车架号：<input name="chejia" type="text" /></li>
 						</ul>
 						<ul class="menue" style="padding: 0px;margin: 0px;float: right;">
-							<li data-toggle="modal" data-target="#myModal" ><span class="glyphicon glyphicon-plus-sign"></span>增加</li>
+							<li @click="addBind" data-toggle="modal" data-target="#myModal" ><span class="glyphicon glyphicon-plus-sign"></span>增加</li>
 							<li><span class="glyphicon glyphicon-leaf"></span>修改</li>
 							<li><span class="glyphicon glyphicon-remove-sign"></span>删除</li>
 							<li @click="checkstaff"><span class="glyphicon glyphicon-sunglasses"></span>查询</li>
@@ -79,33 +79,33 @@
 							</thead>
 							<tbody>
 								<tr v-for="item,index in vehicles">
-									<td> </td>
-									<td>{{item.cdlicense}}</td>
-									<td>{{item.brandname}}</td>
-									<td>{{item.cname}}</td>
-									<td>{{item.cddricer}}</td>
-									<td>{{item.cddriverphone}}</td>
-									<td>{{item.cddriverbirth}}</td>
-									<td>{{item.carname}}</td>
-									<td>{{item.cdlicenseend}}</td>
-									<td>{{item.cdframe}}</td>
-									<td>{{item.cdengine}}</td>
-									<td>{{item.motorname}}</td>
-									<td>{{item.cdyearprice}}</td>
-									<td>{{item.cdmileage}}</td>
-									<td>{{item.cdload}}</td>
-									<td>{{item.cdbuydate}}</td>
-									<td>{{item.cdgolicense}}</td>
-									<td>{{item.cdcarcheckdate}}</td>
-									<td>{{item.cdcompulsoryinsurancename}}</td>
-									<td>{{item.cdcompulsoryinsurancedate}}</td>
-									<td>{{item.cdcommerceinsurancename}}</td>
-									<td>{{item.cdcommerceinsurancedate}}</td>
-									<td v-if="item.cdisinsure == 1">是</td>
-									<td v-else>否</td>
-									<td>{{item.fuelname}}</td>
-									<td>{{item.cdnextmileage}}</td>
-									<td>{{item.cdnextkeep}}</td>
+									<td @click="clickCustomer(item.cno)"> </td>
+									<td @click="clickCustomer(item.cno)">{{item.cdlicense}}</td>
+									<td @click="clickCustomer(item.cno)">{{item.brandname}}</td>
+									<td @click="clickCustomer(item.cno)">{{item.cname}}</td>
+									<td @click="clickCustomer(item.cno)">{{item.cddricer}}</td>
+									<td @click="clickCustomer(item.cno)">{{item.cddriverphone}}</td>
+									<td @click="clickCustomer(item.cno)">{{item.cddriverbirth}}</td>
+									<td @click="clickCustomer(item.cno)">{{item.carname}}</td>
+									<td @click="clickCustomer(item.cno)">{{item.cdlicenseend}}</td>
+									<td @click="clickCustomer(item.cno)">{{item.cdframe}}</td>
+									<td @click="clickCustomer(item.cno)">{{item.cdengine}}</td>
+									<td @click="clickCustomer(item.cno)">{{item.motorname}}</td>
+									<td @click="clickCustomer(item.cno)">{{item.cdyearprice}}</td>
+									<td @click="clickCustomer(item.cno)">{{item.cdmileage}}</td>
+									<td @click="clickCustomer(item.cno)">{{item.cdload}}</td>
+									<td @click="clickCustomer(item.cno)">{{item.cdbuydate}}</td>
+									<td @click="clickCustomer(item.cno)">{{item.cdgolicense}}</td>
+									<td @click="clickCustomer(item.cno)">{{item.cdcarcheckdate}}</td>
+									<td @click="clickCustomer(item.cno)">{{item.cdcompulsoryinsurancename}}</td>
+									<td @click="clickCustomer(item.cno)">{{item.cdcompulsoryinsurancedate}}</td>
+									<td @click="clickCustomer(item.cno)">{{item.cdcommerceinsurancename}}</td>
+									<td @click="clickCustomer(item.cno)">{{item.cdcommerceinsurancedate}}</td>
+									<td @click="clickCustomer(item.cno)" v-if="item.cdisinsure == 1">是</td>
+									<td @click="clickCustomer(item.cno)" v-else>否</td>
+									<td @click="clickCustomer(item.cno)">{{item.fuelname}}</td>
+									<td @click="clickCustomer(item.cno)">{{item.cdnextmileage}}</td>
+									<td @click="clickCustomer(item.cno)">{{item.cdnextkeep}}</td>
 								</tr>
 							</tbody>
 						</table>
@@ -127,32 +127,32 @@
 							</thead>
 							<tbody>
 								<tr v-for="item in customer">
-									<td> </td>
-									<td>{{item.cno}}</td>
-									<td>{{item.cname}}</td>
-									<td>{{item.caddress}}</td>
-									<td>{{item.cpeople}}</td>
-									<td>{{item.cphone}}</td>
-									<td>{{item.cbirthday}}</td>
-									<td>{{item.ctname}}</td>
-									<td>{{item.vno}}</td>
-									<td>{{item.vjoindate}}</td>
-									<td>{{item.venddate}}</td>
-									<td>{{item.cremark}}</td>
-									<td>{{item.createdate}}</td>
-									<td>{{item.personnelname}}</td>
-									<td>{{item.cadviserphone}}</td>
-									<td>{{item.cperiod}}</td>
-									<td>{{item.climit}}</td>
-									<td>{{item.currentjifen}}</td>
-									<td>{{item.money}}</td>
-									<td>{{item.province}}</td>
-									<td>{{item.city}}</td>
-									<td>{{item.district}}</td>
-									<td>{{item.ctaxes}}</td>
-									<td>{{item.cregistphone}}</td>
-									<td>{{item.cbank}}</td>
-									<td>{{item.cbanknumber}}</td>
+									<td @click="clickCustomer(item.cno)"> </td>
+									<td @click="clickCustomer(item.cno)">{{item.cno}}</td>
+									<td @click="clickCustomer(item.cno)">{{item.cname}}</td>
+									<td @click="clickCustomer(item.cno)">{{item.caddress}}</td>
+									<td @click="clickCustomer(item.cno)">{{item.cpeople}}</td>
+									<td @click="clickCustomer(item.cno)">{{item.cphone}}</td>
+									<td @click="clickCustomer(item.cno)">{{item.cbirthday}}</td>
+									<td @click="clickCustomer(item.cno)">{{item.ctname}}</td>
+									<td @click="clickCustomer(item.cno)">{{item.vno}}</td>
+									<td @click="clickCustomer(item.cno)">{{item.vjoindate}}</td>
+									<td @click="clickCustomer(item.cno)">{{item.venddate}}</td>
+									<td @click="clickCustomer(item.cno)">{{item.cremark}}</td>
+									<td @click="clickCustomer(item.cno)">{{item.createdate}}</td>
+									<td @click="clickCustomer(item.cno)">{{item.personnelname}}</td>
+									<td @click="clickCustomer(item.cno)">{{item.cadviserphone}}</td>
+									<td @click="clickCustomer(item.cno)">{{item.cperiod}}</td>
+									<td @click="clickCustomer(item.cno)">{{item.climit}}</td>
+									<td @click="clickCustomer(item.cno)">{{item.currentjifen}}</td>
+									<td @click="clickCustomer(item.cno)">{{item.money}}</td>
+									<td @click="clickCustomer(item.cno)">{{item.province}}</td>
+									<td @click="clickCustomer(item.cno)">{{item.city}}</td>
+									<td @click="clickCustomer(item.cno)">{{item.district}}</td>
+									<td @click="clickCustomer(item.cno)">{{item.ctaxes}}</td>
+									<td @click="clickCustomer(item.cno)">{{item.cregistphone}}</td>
+									<td @click="clickCustomer(item.cno)">{{item.cbank}}</td>
+									<td @click="clickCustomer(item.cno)">{{item.cbanknumber}}</td>
 								</tr>
 							</tbody>
 						</table>
@@ -363,14 +363,14 @@
 									<label>车辆型号：</label>
 									<input v-model="vehicle.cbiid" readonly="readonly" type="text">
 									<label>驾驶员：</label>
-									<input v-model="vehicle.cddricer" type="text">
+									<input v-model="vehicle.cddricer" style="width: 100px" type="text">
 								</p>
 								<p style="padding-top: 10px;">
 									<label>驾驶员电话：</label><input v-model="vehicle.cddriverphone" type="text">
 									<label>出生日期：</label><input v-model="vehicle.cddriverbirth" type="date" style="width: 120px;">
 									<label>车辆归属：</label>
 									<select v-model="vehicle.clid" style="width: 100px;">
-		
+										<option :value="item.carid" v-for="item in carbelong">{{item.carname}}</option>
 									</select>
 									<label>驾证到期：</label><input v-model="vehicle.cdlicenseend" type="date" style="width: 120px;">
 								</p>
@@ -426,7 +426,7 @@
 			      </div>
 			      <div class="modal-footer">
 			        <button type="button" class="btn btn-default col-md-1 col-lg-push-10" data-dismiss="modal">取消</button>
-			        <button type="button" class="btn btn-primary col-md-1 col-lg-push-10">确认</button>
+			        <button type="button" @click="insert" class="btn btn-primary col-md-1 col-lg-push-10">确认</button>
 			      </div>
 			    </div>
 			  </div>
@@ -484,7 +484,11 @@
 							pastbuy: ["单据类型", "销售单号", "车牌号", "进厂时间", "完工时间", "结算时间", "消费时间"],
 							vehicles: [],
 							vehicle:{},
-							customer:[]
+							customer:[],
+							carbelong:[],
+							engine:[],
+							fuel:[],
+							insurance:[]
 						}
 					},
 					methods:{
@@ -520,7 +524,6 @@
 							})
 						},
 						queryCustomer:function(cno){
-							alert(cno)
 							$.ajax({
 								url:data.ip + "/vehicle/queryCustomerKey",
 								type:"get",
@@ -533,6 +536,78 @@
 									vm.customer=result
 								}
 							})
+						},
+						clickCustomer:function(cno){
+							vm.queryCustomer(cno);
+						},
+						queryLike:function(){
+							let mohu=$("[name=mohu]").val();
+							let chepai=$("[name=chepai]").val();
+							let chejia=$("[name=chejia]").val();
+							$.ajax({
+								url:data.ip + "/vehicle/queryLike",
+								type:"get",
+								data:{"mohu":mohu,"chepai":chepai,"chejia":chejia},
+								xhrFields: {
+									withCredentials: true
+								},
+								dataType:"json",
+								success:function(result){
+									vm.vehicles=result
+									console.log(result)
+									vm.queryCustomer(vm.vehicles[0].cno);
+								}
+							})
+						},
+						addBind:function(){
+							$.ajax({
+								url:data.ip + "/vehicle/bindCarbelong",
+								type:"get",
+								xhrFields: {
+									withCredentials: true
+								},
+								dataType:"json",
+								success:function(result){
+									vm.carbelong=result									
+								}
+							});
+							$.ajax({
+								url:data.ip + "/vehicle/bindEngine",
+								type:"get",
+								xhrFields: {
+									withCredentials: true
+								},
+								dataType:"json",
+								success:function(result){
+									vm.engine=result									
+								}
+							});
+							$.ajax({
+								url:data.ip + "/vehicle/bindFuel",
+								type:"get",
+								xhrFields: {
+									withCredentials: true
+								},
+								dataType:"json",
+								success:function(result){
+									vm.fuel=result									
+								}
+							});
+							$.ajax({
+								url:data.ip + "/vehicle/bindInsurance",
+								type:"get",
+								xhrFields: {
+									withCredentials: true
+								},
+								dataType:"json",
+								success:function(result){
+									vm.insurance=result									
+								}
+							})
+							
+						},
+						insert:function(){
+							console.log(vm.vehicle)
 						}
 					}
 				});

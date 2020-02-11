@@ -16,6 +16,8 @@ public interface CarinfoMapper {
 
     int insertSelective(Carinfo record);
     
+    List<Carinfo> queryCarinfoLike(@Param("mohu") String mohu,@Param("chepai") String chepai,@Param("chejia") String chejia);
+    
     List<Carinfo> queryCarinfo();
 
     List<Carinfo> selectByExample(CarinfoExample example);
