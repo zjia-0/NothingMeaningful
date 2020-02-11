@@ -75,24 +75,39 @@
 			      <div class="modal-body">
 			      	<form class="form-inline">
 			      		<div class="form-group">
-			      			<select name="viplevel">
-			      				<option value="0">请选择</option>
-			      				<option :value="item.levelid" v-for="item in vipType">{{item.viplevel}}</option>
-			      			</select>
+			      			<div class="row col-xs-10 col-xs-push-1">
+								<h4>客户信息</h4>
+							</div>
 			      			<div class="text-center row" style="margin-bottom: 10px;">
 			      				<div class="input-group col-xs-3">
-								  <span class="input-group-addon" id="sizing-addon1">客户姓名</span>
-								  <input type="text" class="form-control" placeholder="" aria-describedby="sizing-addon1">
+								  <span class="input-group-addon" id="sizing-addon1">客户编号</span>
+								  <input type="text" readonly="readonly" v-model="cust.cno" class="form-control" placeholder="" aria-describedby="sizing-addon1">
 								</div>
 								
 								<div class="input-group col-xs-3">
-								  <span class="input-group-addon" id="sizing-addon2">卡号</span>
-								  <input type="text" class="form-control" placeholder="" aria-describedby="sizing-addon2">
+								  <span class="input-group-addon" id="sizing-addon2">客户姓名</span>
+								  <input type="text" v-model="cust.cname" class="form-control" placeholder="" aria-describedby="sizing-addon2">
 								</div>
 								
 								<div class="input-group col-xs-3">
-								  <span class="input-group-addon" id="sizing-addon3">电话</span>
-								  <input type="text" class="form-control" placeholder="" aria-describedby="sizing-addon3">
+								  <span class="input-group-addon" id="sizing-addon3">客户联系人</span>
+								  <input type="text" v-model="cust.cpeople" class="form-control" placeholder="" aria-describedby="sizing-addon3">
+								</div>
+			      			</div>
+			      			<div class="text-center row" style="margin-bottom: 10px;">
+			      				<div class="input-group col-xs-3">
+								  <span class="input-group-addon" id="sizing-addon1">客户电话</span>
+								  <input type="text" v-model="cust.cphone" class="form-control" placeholder="" aria-describedby="sizing-addon1">
+								</div>
+								
+								<div class="input-group col-xs-3">
+								  <span class="input-group-addon" id="sizing-addon2">客户地址</span>
+								  <input type="text" v-model="cust.caddress" class="form-control" placeholder="" aria-describedby="sizing-addon2">
+								</div>
+								
+								<div class="input-group col-xs-3">
+								  <span class="input-group-addon" id="sizing-addon3">客户生日</span>
+								  <input type="date" v-model="cust.cbirthday" class="form-control" placeholder="" aria-describedby="sizing-addon3">
 								</div>
 			      			</div>
 			      			<div class="text-center row" style="margin-bottom: 10px;">
@@ -101,37 +116,84 @@
 								  <input type="text" class="form-control" placeholder="" aria-describedby="sizing-addon1">
 								</div>
 								
-								<div class="input-group col-xs-3">
-								  <span class="input-group-addon" id="sizing-addon2">卡号</span>
-								  <input type="text" class="form-control" placeholder="" aria-describedby="sizing-addon2">
-								</div>
 								
 								<div class="input-group col-xs-3">
-								  <span class="input-group-addon" id="sizing-addon3">电话</span>
-								  <input type="text" class="form-control" placeholder="" aria-describedby="sizing-addon3">
+								  <span class="input-group-addon" id="sizing-addon3">挂账余额</span>
+								  <input type="text" v-model="cust.climit" class="form-control" placeholder="" aria-describedby="sizing-addon3">
 								</div>
 			      			</div>
 			      			<div class="text-center row" style="margin-bottom: 10px;">
 			      				<div class="input-group col-xs-3">
-								  <span class="input-group-addon" id="sizing-addon1">客户姓名</span>
-								  <input type="text" class="form-control" placeholder="" aria-describedby="sizing-addon1">
+								  <span class="input-group-addon" id="sizing-addon1">顾问电话</span>
+								  <input type="text" v-model="cust.cadviserphone" class="form-control" placeholder="" aria-describedby="sizing-addon1">
 								</div>
 								
 								<div class="input-group col-xs-3">
-								  <span class="input-group-addon" id="sizing-addon2">卡号</span>
-								  <input type="text" class="form-control" placeholder="" aria-describedby="sizing-addon2">
+								  <span class="input-group-addon" id="sizing-addon2">省市区</span>
+								  <input type="text" v-model="cust.cprovince" class="form-control" placeholder="" aria-describedby="sizing-addon2">
 								</div>
 								
 								<div class="input-group col-xs-3">
-								  <span class="input-group-addon" id="sizing-addon3">电话</span>
-								  <input type="text" class="form-control" placeholder="" aria-describedby="sizing-addon3">
+								  <span class="input-group-addon" id="sizing-addon3">备注</span>
+								  <input type="text" v-model="cust.cremark" class="form-control" placeholder="" aria-describedby="sizing-addon3">
 								</div>
+			      			</div>
+			      			<div class="text-center row" style="margin-bottom: 10px;">
+			      				<div class="input-group col-xs-3">
+								  <span class="input-group-addon" id="sizing-addon1">注册电话</span>
+								  <input type="text" v-model="cust.cregistphone" class="form-control" placeholder="" aria-describedby="sizing-addon1">
+								</div>
+								
+								<div class="input-group col-xs-3">
+								  <span class="input-group-addon" id="sizing-addon2">银行</span>
+								  <input type="text" v-model="cust.cbank" class="form-control" placeholder="" aria-describedby="sizing-addon2">
+								</div>
+								
+								<div class="input-group col-xs-3">
+								  <span class="input-group-addon" id="sizing-addon3">银行账户</span>
+								  <input type="text" v-model="cust.cbanknumber" class="form-control" placeholder="" aria-describedby="sizing-addon3">
+								</div>
+			      			</div>
+			      			<div class="row col-xs-10 col-xs-push-1">
+									<h4>会员信息</h4>
+							</div>
+								
+			      			<div class="text-center row" style="margin-bottom: 10px;">
+			      				<div class="input-group col-xs-3">
+								  <span class="input-group-addon" id="sizing-addon1">会员卡号</span>
+								  <input type="text" v-model="vipadd.vno" class="form-control" placeholder="" aria-describedby="sizing-addon1">
+								</div>
+								<div class="input-group col-xs-3">
+								  <span class="input-group-addon" id="sizing-addon2">入会日期</span>
+								  <input type="date" v-model="vipadd.vjoindate" class="form-control" placeholder="" aria-describedby="sizing-addon2">
+								</div>
+								<div class="input-group col-xs-3">
+								  <span class="input-group-addon" id="sizing-addon3">会员到期</span>
+								  <input type="date" v-model="vipadd.venddate" class="form-control" placeholder="" aria-describedby="sizing-addon3">
+								</div>
+			      			</div>
+			      			<div class="text-center row" style="margin-bottom: 10px;">
+			      				<div class="input-group col-xs-3">
+								  <span class="input-group-addon" id="sizing-addon1">客户编号</span>
+								  <input type="text" readonly="readonly" v-model="vipadd.cno" class="form-control" placeholder="" aria-describedby="sizing-addon1">
+								</div>
+								<div class="input-group col-xs-3">
+								  <span class="input-group-addon" id="sizing-addon2">账户余额</span>
+								  <input type="text" v-model="vipadd.money" class="form-control" placeholder="" aria-describedby="sizing-addon2">
+								</div>
+						会员类型：<select id="vipType" @change="findjifen" v-model="vipadd.levelid">
+					      		<option :value="item.levelid" v-for="item in vipType">{{item.viplevel}}</option>
+					      	</select>
+					      	<div class="input-group col-xs-3">
+								  <span class="input-group-addon" id="sizing-addon3">会员积分</span>
+								  <input type="text" readonly="readonly" v-model="vipadd.currentjifen" class="form-control" aria-describedby="sizing-addon2">
+							</div>
 			      			</div>
 			      		</div>
 			      	</form>
 			      </div>
 			      <div class="modal-footer">
-			        <button type="button" class="btn btn-primary">新增</button>
+			        <button type="button" @click="addVip" class="btn btn-primary">新增</button>
 			      </div>
 			    </div>
 			  </div>
@@ -185,12 +247,58 @@
 					return{
 						vip:[],
 						name:"",
-						vipType:[]
+						vipType:[],
+						vipadd:{currentjifen:0},
+						cust:{cno:0}
 					}
 				},methods:{
 					queryName(){
 						var that=this;
 						queryByName(that.name);
+					},
+					addVip(){
+						if(this.vipadd.levelid==undefined){
+							alert("请选择会员类型");
+							return false;
+						}
+						console.log(this.cust);
+						console.log(this.vipadd);
+						$.ajax({
+							type:"post",
+							url:data.ip+"vip/addVip",
+							data:this.cust,
+							xhrFields: {
+								withCredentials: true
+							}
+						})
+						$.ajax({
+							type:"post",
+							url:data.ip+"vip/addVips",
+							data:this.vipadd,
+							xhrFields: {
+								withCredentials: true
+							},
+							success:function(result){
+								location.reload();
+							}
+						})
+					},
+					findjifen(){
+						var that=this;
+						$.ajax({
+							type:"get",
+							url:data.ip+"vip/findjifen",
+							data:{levelid:this.vipadd.levelid},
+							dataType:"text",
+							xhrFields: {
+								withCredentials: true
+							},
+							success:function(result){
+								that.vipadd.currentjifen=result;
+							}
+						});
+					},queryCustBycno(){//根据cno查询用户进行会员修改
+						
 					}
 				},created:function(){
 					var that=this;
@@ -206,26 +314,51 @@
 							that.vipType=result;
 						}
 					});
+					$.ajax({
+						type:"get",
+						url:data.ip+"vip/findCno",
+						dataType:"text",
+						xhrFields: {
+							withCredentials: true
+						},
+						success:function(result){
+							that.cust.cno=parseInt(result)+1;
+							that.vipadd.cno=parseInt(result)+1;
+							var date = new Date();
+							var nowYear=date.getFullYear();
+							var nowMonth=date.getMonth()+1;
+							if (nowMonth >= 1 && nowMonth <= 9) {
+							   nowMonth = "0" + nowMonth;
+							}
+							var strDate = date.getDate();
+							if (strDate >= 0 && strDate <= 9) {
+							   strDate = "0" + strDate;
+							}
+							that.vipadd.vno=nowYear+nowMonth+strDate+that.cust.cno;
+						}
+					});
 				}
 				
 			});
 			function queryByName(name){
 				$.ajax({
-							type:"get",
-							url:data.ip+"vip/find",
-							data:{name:name},
-							dataType:"json",
-							xhrFields: {
-								withCredentials: true
-							},
-							success:function(result){
-								console.log(result)
-								vm.vip=result;
-							},error:function(a){
-								console.log(a)
-							}
-						});
+					type:"get",
+					url:data.ip+"vip/find",
+					data:{name:name},
+					dataType:"json",
+					xhrFields: {
+					withCredentials: true
+					},
+					success:function(result){
+						console.log(result)
+						vm.vip=result;
+					},error:function(a){
+						console.log(a)
+					}
+				});
 			}
+			
+
 		</script>
 	</body>
 </html>

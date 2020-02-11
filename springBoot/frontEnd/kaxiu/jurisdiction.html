@@ -19,13 +19,14 @@
 				</div>
 				<div class="col-xs-4 col-xs-offset-4">
 					<div style="float: right;margin-top: 20px;">
-						<button class="btn btn-success"><span class="glyphicon glyphicon-ok"></span>&nbsp;&nbsp;保存</button>
+						<button class="btn btn-success" onclick="onCheck()"><span class="glyphicon glyphicon-ok"></span>&nbsp;&nbsp;保存</button>
 						<button class="btn btn-default">关闭</button>
 					</div>
 				</div>
 			</div>
 			<div class="row" style="background-color: #F5F5F5;">
 				<div class="col-xs-6">
+					
 					<div class="btn-group" role="group" aria-label="..."style="height: 50px;margin-top: 20px;">
 					  <span style="width: 100px;" type="button" class="btn btn-default">角色名称：</span>
 					  <div class="btn-group" role="group">
@@ -34,15 +35,16 @@
 					      <span class="caret"></span>
 					    </button>
 					    <ul style="width: 200px;" class="dropdown-menu">
-					      	<li v-for="item in roles"><a class="text-center" href="#">{{item.name}}</a></li>
+					      	<li v-for="item in roles"><a @click="queryByRid(item)" class="text-center">{{item.name}}</a></li>
 					    </ul>
 					  </div>
 					</div>
+					
 				</div>
 				<div class="col-xs-6">
 					<div style="margin-top: 20px;float: right;">
-						<button class="btn btn-success"><span class="glyphicon glyphicon-book"></span>&nbsp;全部选择</button>
-						<button class="btn btn-success"><span class="glyphicon glyphicon-check"></span>&nbsp;全部取消</button>
+						<button class="btn btn-success" @click="checkAll"><span class="glyphicon glyphicon-book"></span>&nbsp;全部选择</button>
+						<button class="btn btn-success" @click="chengdel"><span class="glyphicon glyphicon-check"></span>&nbsp;全部取消</button>
 						<button class="btn btn-success" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;角色定义</button>
 					</div>
 				</div>
@@ -115,15 +117,14 @@
 			    </div>
 			  </div>
 			</div>
-			
 		</div>
-		
 		<script src="js/canvas-nest.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/jquery-1.12.4.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript" src="js/jquery.ztree.core.js"></script>
 		<script src="js/jquery.ztree.excheck.js" type="text/javascript" charset="utf-8"></script>
+		
 		<script src="js/my.js" type="text/javascript" charset="utf-8"></script>
 		<!--
         	作者：1795022470@qq.com
@@ -131,15 +132,50 @@
         	描述：树状菜单栏
         -->
 		<script type="text/javascript">
+			
+			
 			var vm=new Vue({
 				el:"#ctx",
 				data(){
 					return{
-						roles:[]
+						roles:[],
+						pers:[],
+						per:[],
+						rid:{}
+					}
+				},methods:{
+					queryByRid:function(item){
+						this.rid=item;
+						$.ajax({
+						type:"get",
+						url:data.ip+"per/queryByRid",
+						data:{rid:item.id},
+						dateType:"json",
+						xhrFields:{
+							withCredentials:true
+						},
+						success:function(response){
+							var zTree=$.fn.zTree.getZTreeObj("treeDemo");
+							var node=zTree.getNodes();
+							var nodes=zTree.transformToArray(node);
+							zTree.checkAllNodes(false);
+							$.each(nodes, function(index,nid) {
+								if(response.filter(item=>item.pid==nid.id).length>0){
+									zTree.checkNode(nid,true,false);
+								}
+							});
+						}
+					});
+					},checkAll(){
+						var zTree=$.fn.zTree.getZTreeObj("treeDemo");
+						zTree.checkAllNodes(true);//给全部节点设置为true
+					},chengdel(){
+						var zTree=$.fn.zTree.getZTreeObj("treeDemo");
+						zTree.checkAllNodes(false);//给全部节点设置为false
 					}
 				}
 			})
-			$(function(){	
+			$(function(){
 				$.ajax({
 					type:"get",
 					url:data.ip+"per/per",
@@ -148,8 +184,8 @@
 						withCredentials:true
 					},
 					success:function(response){
-						console.log(response);
-						$.fn.zTree.init($("#treeDemo"), setting, response);
+						vm.pers=response;
+						$.fn.zTree.init($("#treeDemo"), setting, response);//初始化节点数据
 					}
 				});
 				$.ajax({
@@ -184,7 +220,54 @@
 				   }
 			  	}
 			 };
-		 
+			 function onCheck(e,treeId,treeNode){
+			 	if(vm.rid.id==undefined){
+			 		alert("请选择角色！")
+			 		return false;
+			 	}
+			 	vm.per=[];
+	            var treeObj=$.fn.zTree.getZTreeObj("treeDemo"),
+	            nodes=treeObj.getCheckedNodes(true);
+	            for(var i=0;i<nodes.length;i++){
+	            	vm.per.push({rid:vm.rid.id,pid:nodes[i].id});
+	            }
+	            console.log(vm.per)
+	            var id=vm.rid.id;
+	            if(vm.per.length<=0){
+	            	$.ajax({
+	            	type:"post",
+	            	url:data.ip+"per/delPer?rid="+id,
+	            	dataType:"json",
+					xhrFields:{
+						withCredentials:true
+					},
+					success:function(result){
+						if(result>0){
+							alert("保存成功！")
+							location.reload();
+						}
+					}
+	            });
+	            }else{
+	            	$.ajax({
+	            	type:"post",
+	            	url:data.ip+"per/addPer",
+	            	data:JSON.stringify(vm.per),
+	            	dataType:"json",
+					contentType:"application/json",
+					xhrFields:{
+						withCredentials:true
+					},
+					success:function(result){
+						if(result>0){
+							alert("保存成功！")
+							location.reload();
+						}
+					}
+	            });
+	            }
+	            
+            }
 		</script>
 	</body>
 </html>

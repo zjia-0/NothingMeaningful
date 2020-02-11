@@ -6,8 +6,9 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface VipMapper {
-	
+	List<Vip> findMaxCno();
 	List<Vip> findVipByname(String name);
+	int findstarjifen(int levelid);
     int countByExample(VipExample example);
 
     int deleteByExample(VipExample example);
