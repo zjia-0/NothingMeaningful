@@ -48,6 +48,14 @@ public class JurisdictionServie {
 		example.createCriteria().andRidEqualTo(rid);
 		return rpMapper.deleteByExample(example);
 	}
-	
+	public int upRole(Roles role) {
+		return rMapper.updateByPrimaryKey(role);
+	}
+	public int addRole(Roles role) {
+		return rMapper.insert(role);
+	}
+	public int delRole(Integer id) {
+		return rMapper.deleteByPrimaryKey(id);
+	}
 	
 }
