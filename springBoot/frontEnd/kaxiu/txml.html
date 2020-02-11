@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="css/bootstrap.min.css" />
+		<link rel="stylesheet" href="fonts/font_4aigx4do0lb/iconfont.css" />
+		<link rel="stylesheet" href="css/bootstrapStyle/bootstrapStyle.css" type="text/css">
+		<style>
+			
+			#tbss{
+				padding: 1em 2em;
+				display: flex;
+			}
+			#dhl a{
+				font-size: 15px;
+			}
+			
+		</style>
+	</head>
+	<body>
+	
+		<div class="container-fluid" id="ctx">
+			<div class="row" style="border: 1px solid #E6E6E6;">
+				<h3 class="col-md-2">通讯名录</h3>
+				<div class="col-md-7"></div>
+				<div class="col-md-3" id="tbss">
+					<input class="form-control input-sm" type="text" style="margin-top: 2px;" />&nbsp;&nbsp;&nbsp;
+					<button type="button" class="btn btn-warning" style="width: 150px;">搜索</button>&nbsp;&nbsp;&nbsp;
+					<button type="button" class="btn btn-default">关闭</button>
+				</div>
+			</div>
+			
+			<div id="dhl" class="container-fluid">
+				<div class="col-md-10"></div>
+				<ol class="breadcrumb col-md-2">
+				  <li  @click="update()"><span class="iconfont" style="vertical-align: middle">&#xe6b6;</span><a href="#" style="vertical-align: middle">保存</a></li>
+				  <li @click="chak()"><span class="iconfont" style="vertical-align: middle">&#xe78a;</span><a data-toggle="modal" data-target="#myModalcx"  style="vertical-align: middle" >查询</a></li>
+				  <li><span class="iconfont" style="vertical-align: middle">&#xe6a5;</span><a href="#" style="vertical-align: middle">导出</a></li>
+				</ol>
+			</div>
+			
+			<div class="row">
+				
+				<div class="row" id="tbss" style=" border: 1px solid #E6E6E6;height:780px;">
+					
+				<table class="table table-hover table-bordered" style="width:1000px;">
+					 
+						<tr>
+							<td></td>
+							<td>部门</td>
+							<td>员工编号</td>
+							<td>姓名</td>
+							<td>分机/短号</td>
+							<td>直拨</td>
+							<td>手机</td>
+							<td>邮箱</td>
+						</tr>
+						
+						<tr v-for="item in list">
+							<td><input type="radio" name="ck" v-bind:sid="item.personnelid" ></td>
+							<td>{{item.departname}}</td>
+							<td>{{item.staffid}}</td>
+							<td>{{item.personnelname}}</td>
+							<td><input type="text" value="" style="border: 0px;" class=""/></td>
+							<td><input type="text" value="" style="border: 0px;" class=""/></td>
+							<td><input type="text" :value="item.phone" style="border: 0px;" class="phone"/></td>
+							<td><input type="text" :value="item.email" style="border: 0px;" class="email"/></td>
+						</tr>
+						
+				</table>
+
+			</div>
+			
+		</div>
+				<!--查询-->
+		 <div class="modal fade bs-example-modal-lg" id="myModalcx" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"> 
+		  <div class="modal-dialog modal-lg" role="document" >
+		    <div class="modal-content"  style="width: 1000px;">
+		      <div class="modal-header" id="mydiv_5">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<ul>
+					<li><h4 class="modal-title" id="myModalLabel1">员工查询</h4></li>
+					<li style="padding-left: 870px;"><button type="button" class="btn btn-success">确定</button></li>
+				</ul>
+		      </div>
+		      <div class="modal-body">
+				<div>
+					<table>
+						<tr>
+							<td>员工编号 <input type="text" v-model="personnel.staffid"></td>
+							<td>员工姓名 <input type="text" v-model="personnel.personnelname"></td>
+							<td>
+								性别 <span style="padding-left: 28px;"></span>  <input type="text" v-model="personnel.sex">
+								
+							</td>
+						</tr>
+						<tr>
+							<td>
+								岗位<span style="padding-left: 28px;"></span> <input type="text" v-model="personnel.post">
+								
+							</td>
+							<td>
+								所在部门:<input type="text" v-model="personnel.departname">
+								
+							</td>
+						</tr>
+						<tr>
+							<td>身体状况 <input type="text" v-model="personnel.physicalstate"></td>
+							<td>身高<span style="padding-left: 28px;"></span>  <input type="text" v-model="personnel.height"></td>
+							<td>
+								籍贯:<input type="text" v-model="personnel.birthplace">
+							</td>
+						</tr>
+						<tr>
+							<td>
+								民族<span style="padding-left: 28px;"></span> <input type="text" v-model="personnel.nation">
+								
+							</td>
+							<td>
+								婚姻状况:<input type="text" v-model="personnel.martial">
+								
+							</td>
+							<td>
+								学历<span style="padding-left: 28px;"></span> <input type="text" v-model="personnel.degree">
+								
+							</td>
+						</tr>
+						<tr>
+							<td>
+								毕业学校:<input type="text" v-model="personnel.schooltag">
+								
+							</td>
+							
+						</tr>
+						<tr>
+							<td>生日<span style="padding-left: 28px;"></span>  <input type="datetime" v-model="personnel.borndate"> </td>
+							
+							<td>
+								编制<span style="padding-left: 28px;"></span> <input type="text" v-model="personnel.compile">
+								
+							</td>
+						</tr>
+						<tr>
+							<td>身份证号 <input type="text" v-model="personnel.card"></td>
+							<td>入职日期 <input type="datetime" v-model="personnel.hiredate">
+						</tr>
+						<tr>	
+							<td>试用到期 <input type="datetime" v-model="personnel.applicable">
+						</tr>
+						<tr>
+							<td>出生日期 <input type="datetime" v-model="personnel.borndate">
+							
+						</tr>
+						<tr>
+							<td>合同开始 <input type="datetime" v-model="personnel.startdate">
+						</tr>
+					</table>
+				</div>
+		      </div>
+		      
+		    </div>
+		  </div>
+		 </div>
+		  </div>
+		
+		<script src="js/canvas-nest.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/jquery-1.12.4.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" src="js/jquery.ztree.core.js"></script>
+		<script src="js/jquery.ztree.excheck.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/my.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+				var vm=new Vue({
+						el:"#ctx",
+						data(){
+							return {
+								list:[],
+								personnel:{}
+							}
+						},created:function(){
+							$.ajax({
+								url:data.ip + "txmlselect",
+								type:"post",
+								"success":function(re){
+									vm.list=re;
+									console.log(re);
+								}
+							});
+						},methods:{
+							update:function(){
+								var ck = $("[name=ck]");
+									for(var i =0;i<ck.length;i++){
+										if(ck[i].checked){
+												var personnelid = $(ck[i]).attr("sid");
+												var phone=$(".phone").val()	
+				  								var email=$(".email").val()
+				  							
+												$.ajax({
+													url:data.ip + "txmlupdate",
+													data:{"personnelid":personnelid,"phone":phone,"email":email},
+													type:"post",
+													dataType:"json",
+													success:function(result){
+															alert("成功")
+														}
+													});
+									
+											}
+									}
+							},
+							chak:function(){
+								var ck = $("[name=ck]");
+									for(var i =0;i<ck.length;i++){
+										if(ck[i].checked){
+											var personnelid = $(ck[i]).attr("sid");
+											$.ajax({
+													url:data.ip + "txmlid",
+													data:{"personnelid":personnelid},
+													type:"post",
+													dataType:"json",
+													success:function(result){
+															vm.personnel=result;
+														}
+													});
+										}
+									}
+							}
+						}
+					});
+		</script>
+	</body>
+</html>

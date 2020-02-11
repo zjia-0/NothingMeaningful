@@ -2,10 +2,16 @@ package com.accp.mapper;
 
 import com.accp.domain.Personnel;
 import com.accp.domain.PersonnelExample;
+import com.accp.domain.txml;
+
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface PersonnelMapper {
+	txml txmlselectid( int personnelid);
+	
+	List<txml> txmlselect();
+	
     int countByExample(PersonnelExample example);
 
     int deleteByExample(PersonnelExample example);
