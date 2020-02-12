@@ -718,4 +718,14 @@ INNER JOIN `department` d  ON p.remark1=d.departid
 WHERE  s.staffid=#{staffid}
   </select>
 
+<select id="lzdjdakai" resultType="com.accp.domain.txml">
+SELECT p.`personnelid`,p.`personnelname`,p.`phone`,p.`email`,s.`staffid`,d.departname,p.`sex`,p.`post`,p.`physicalstate`,p.`height`,p.`card`,p.`address`
+,p.`degree`,p.`birthplace`,p.`nation`,p.`schooltag`,p.`martial`,p.`compile`,p.`hiredate`,p.`applicable`,p.`borndate`,p.`startdate`,p.`enddate`,p.storeid,d.departid,
+p.enterid,p.bankcode,p.emergencyname,p.emergencyphone,p.referrer,st.storename
+FROM `personnel` p 
+INNER JOIN staff s ON p.personnelid=s.personnelid 
+INNER JOIN `department` d  ON p.remark1=d.departid
+INNER JOIN `store` st ON p.storeid=st.storeid
+WHERE p.personnelid=#{personnelid}
+</select>
 </mapper>

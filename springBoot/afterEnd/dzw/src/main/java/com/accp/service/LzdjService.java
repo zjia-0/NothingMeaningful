@@ -60,4 +60,9 @@ public class LzdjService {
 	public int remove(int id ) {
 		return dmapper.deleteByPrimaryKey(id);
 	}
+	
+	//打开查看详情
+	public txml dakai(Integer personnelid) {
+		return pmap.lzdjdakai(personnelid);
+	}
 }

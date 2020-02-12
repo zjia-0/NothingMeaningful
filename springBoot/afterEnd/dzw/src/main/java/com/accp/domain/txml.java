@@ -26,9 +26,51 @@ public class txml {
 	 private String startdate;//合同开始日
 	 private String enddate;//合同结束日
 	 private String departid;//部门id
-
+	 private String enterid;//登录账户
+	 private String bankcode;//银行账号
+	 private String emergencyname;//紧急联系人
+	 private String emergencyphone;//紧急联系人电话
+	 private String referrer;//推荐人
+	 private String storename;//门店名称
 	 
-	 public String getSex() {
+	 
+	 public String getEnterid() {
+		return enterid;
+	}
+	public void setEnterid(String enterid) {
+		this.enterid = enterid;
+	}
+	public String getBankcode() {
+		return bankcode;
+	}
+	public void setBankcode(String bankcode) {
+		this.bankcode = bankcode;
+	}
+	public String getEmergencyname() {
+		return emergencyname;
+	}
+	public void setEmergencyname(String emergencyname) {
+		this.emergencyname = emergencyname;
+	}
+	public String getEmergencyphone() {
+		return emergencyphone;
+	}
+	public void setEmergencyphone(String emergencyphone) {
+		this.emergencyphone = emergencyphone;
+	}
+	public String getReferrer() {
+		return referrer;
+	}
+	public void setReferrer(String referrer) {
+		this.referrer = referrer;
+	}
+	public String getStorename() {
+		return storename;
+	}
+	public void setStorename(String storename) {
+		this.storename = storename;
+	}
+	public String getSex() {
 		return sex;
 	}
 	public String getStoreid() {

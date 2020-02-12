@@ -8,6 +8,8 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface PersonnelMapper {
+	txml lzdjdakai(int personnelid );
+	
 	txml lizhi(String staffid);
 	
 	List<txml> lzdjselectid(int storeid);

@@ -35,84 +35,41 @@
 					</div>
 					<div class="row modal-body">
 						<p>
-							*员工编号:<input type="text" readonly ="readonly" style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							*员工姓名:<input type="text" style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							*性别:
-								<select style="vertical-align: middle">
-									<option value="1">男</option>
-									<option value="2">女</option>
-								</select>
+							*员工编号:<input type="text" v-model="dakai.staffid" readonly ="readonly" style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							*员工姓名:<input type="text"  v-model="dakai.personnelname" style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							*性别:<input type="text"  v-model="dakai.sex" />
+								
 						</p>
 						
 						<p>
-							*所在门店:<input type="text" readonly ="readonly" style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							*所在门店:<input type="text" v-model="dakai.storename" readonly ="readonly" style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							*所在部门:
-									<select style="vertical-align: middle">
-										<option value="1">管理</option>
-										<option value="2">财务</option>
-										<option value="3">股东</option>
-									</select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									<input type="text"  v-model="dakai.departname" />
 						</p>
 						
 						<p>
-							登录账号:<input type="text" style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							岗位:
-								<select style="vertical-align: middle">
-									<option value="1">展厅经理</option>
-									<option value="2">销售顾问</option>
-									<option value="3">DCC主管</option>
-								</select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							身体状况:<input type="text" style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							登录账号:<input type="text" v-model="dakai.enterid" style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							岗位:<input type="text"  v-model="dakai.post" />
+								
+							身体状况:<input type="text"  v-model="dakai.physicalstate" style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						</p>
 						
 						<p>
-							身高:<input type="text" style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							籍贯:
-								<select style="vertical-align: middle">
-									<option value="1">北京</option>
-									<option value="2">湖南</option>
-									<option value="3">上海</option>
-									<option value="3">深圳</option>
-								</select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							民族:
-								<select style="vertical-align: middle">
-									<option value="1">汉</option>
-									<option value="2">满</option>
-									<option value="3">蒙</option>
-								</select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							身高:<input type="text" v-model="dakai.height"  style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							籍贯:<input type="text"  v-model="dakai.birthplace" />
+								
+							民族:<input type="text"  v-model="dakai.nation" />
+								
+						
+						<p>
+							婚姻状况:<input type="text"  v-model="dakai.martial" />
+							学历:<input type="text"  v-model="dakai.degree" />
+							毕业学校:<input type="text"  v-model="dakai.schooltag" />
 						</p>
 						
 						<p>
-							婚姻状况:
-									<select style="vertical-align: middle">
-										<option value="1">未婚</option>
-										<option value="2">已婚</option>
-									</select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							学历:
-								<select style="vertical-align: middle">
-									<option value="1">汉</option>
-									<option value="2">满</option>
-									<option value="3">蒙</option>
-								</select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							毕业学校:
-									<select style="vertical-align: middle">
-										<option value="1">北京大学</option>
-										<option value="2">清华</option>
-									</select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						</p>
-						
-						<p>
-							专业:
-								<select style="vertical-align: middle">
-									<option value="1">计算机软件</option>
-									<option value="2">网络工程</option>
-								</select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							专业资格:
-									<select style="vertical-align: middle">
-										<option value="1">初级工程师</option>
-										<option value="2">中级工程师</option>
-										<option value="3">高级工程师</option>
-									</select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							专业:<input type="text"  value="软件" />
+							专业资格:<input type="text"  value="中级软件工程师"/>
 							*属性:
 								<select style="vertical-align: middle">
 									<option value="1">不考勤计薪</option>
@@ -128,47 +85,42 @@
 						</p>
 						
 						<p>
-							编制:
-								<select style="vertical-align: middle">
-									<option value="1">劳务派遣</option>
-									<option value="2">劳务外包</option>
-									<option value="3">正式员工</option>
-								</select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							身份证号	:<input type="text" style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							户口地址:<input type="text" style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							编制:<input type="text"  v-model="dakai.compile" />
+							身份证号	:<input type="text"  v-model="dakai.card"  style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							户口地址:<input type="text" v-model="dakai.address"  style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						</p>
 						
 						<p>
-							现住地址:<input type="text" style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							联系电话:<input type="text" style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							手机:<input type="text" style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							现住地址:<input type="text"  v-model="dakai.address"  style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							联系电话:<input type="text"  v-model="dakai.phone"  style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							手机:<input type="text"  v-model="dakai.phone"  style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						</p>
 						
 						<p>
-							EMail:<input type="text" style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							EMail:<input type="text" v-model="dakai.email" style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							开户银行:
 									<select style="vertical-align: middle">
 										<option value="1">建设银行</option>
 										<option value="2">中国银行</option>
 										<option value="3">交通银行</option>
 									</select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							银行账号:<input type="text" style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							银行账号:<input type="text" v-model="dakai.bankcode" style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						</p>
 						
 						<p>
-							紧急联系人:<input type="text" style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							联系电话:<input type="text" style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							入职日期:<input type="date" style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							紧急联系人:<input type="text" v-model="dakai.emergencyname" style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							联系电话:<input type="text" v-model="dakai.emergencyphone" style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							入职日期:<input type="date" v-model="dakai.hiredate" style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						</p>
 						
 						<p>
-							试用日期:<input type="date" style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							出生日期:<input type="date" style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							合同开始:<input type="date" style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							试用日期:<input type="date" v-model="dakai.applicable" style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							出生日期:<input type="date" v-model="dakai.borndate" style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							合同开始:<input type="date" v-model="dakai.startdate" style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						</p>
 						
 						<p>
-							合同结束:<input type="date" style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							合同结束:<input type="date" v-model="dakai.enddate" style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							卡自编号:<input type="text" style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							卡内编号:<input type="text" style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						</p>
@@ -394,7 +346,7 @@
 				<ol class="breadcrumb col-md-4">
 				  <li><span class="iconfont" style="vertical-align: middle">&#xe614;</span><a href="#" style="vertical-align: middle" data-toggle="modal" data-target="#lzmtk">离职</a></li>
 				  <li @click="huigun"><span class="iconfont" style="vertical-align: middle">&#xe6b6;</span><a href="#" style="vertical-align: middle">回滚</a></li>
-				  <li><span class="iconfont" style="vertical-align: middle">&#xe62c;</span><a href="#" style="vertical-align: middle" data-toggle="modal" data-target="#lzdkmtk">打开</a></li>
+				  <li @click="dakai1"><span class="iconfont" style="vertical-align: middle">&#xe62c;</span><a href="#" style="vertical-align: middle" data-toggle="modal" data-target="#lzdkmtk">打开</a></li>
 				  <li @click="shanchu"><span class="iconfont" style="vertical-align: middle">&#xe613;</span><a href="#" style="vertical-align: middle">删除</a></li>
 				  <li @click="chaxun"><span class="iconfont" style="vertical-align: middle">&#xe78a;</span><a href="#" style="vertical-align: middle" data-toggle="modal" data-target="#lzcxmtk">查询</a></li>
 				  <li><span class="iconfont" style="vertical-align: middle">&#xe6a5;</span><a href="#" style="vertical-align: middle">导出</a></li>
@@ -453,7 +405,8 @@
 								lists:[],
 								mendian:[],
 								personnel:{},
-								dange:[]
+								dange:[],
+								dakai:{}
 							}
 						},methods:{
 							yuangong:function(){
@@ -553,7 +506,7 @@
 									for(var i =0;i<ck.length;i++){
 										if(ck[i].checked){
 											var personnelid = $(ck[i]).attr("cid");
-											alert(personnelid)
+											
 											$.ajax({
 													url:data.ip + "txmlid",
 													data:{"personnelid":personnelid},
@@ -561,6 +514,25 @@
 													dataType:"json",
 													success:function(result){
 															vm.personnel=result;
+														}
+													});
+										}
+									}
+						},
+						dakai1:function(){
+							alert("111")
+								var ck = $("[name=ck]");
+									for(var i =0;i<ck.length;i++){
+										if(ck[i].checked){
+											var personnelid = $(ck[i]).attr("cid");
+											
+											$.ajax({
+													url:data.ip + "dakai",
+													data:{"personnelid":personnelid},
+													type:"post",
+													dataType:"json",
+													success:function(result){
+															vm.dakai=result;
 														}
 													});
 										}

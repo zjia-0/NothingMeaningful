@@ -60,4 +60,11 @@ public class LzdjController {
 	public int remove(int dimissionid ) {
 			return lser.remove(dimissionid);
 	}
+	
+	//打开查看详情
+	@RequestMapping("/dakai")
+	public txml dakai(int personnelid) {
+		
+		return lser.dakai(personnelid);
+	}
 }
