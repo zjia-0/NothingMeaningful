@@ -7,7 +7,7 @@ public class txml {
 	 private String email;//邮箱
 	 private String staffid;//员工编号
 	 private String departname;//部门
-	 
+	 private String storeid;//门店id
 	 private String sex;//性别
 	 private String post;//岗位
 	 private String physicalstate;//身体状态
@@ -25,10 +25,23 @@ public class txml {
 	 private String borndate;//出生日期
 	 private String startdate;//合同开始日
 	 private String enddate;//合同结束日
-	 
+	 private String departid;//部门id
 
+	 
 	 public String getSex() {
 		return sex;
+	}
+	public String getStoreid() {
+		return storeid;
+	}
+	public void setStoreid(String storeid) {
+		this.storeid = storeid;
+	}
+	public String getDepartid() {
+		return departid;
+	}
+	public void setDepartid(String departid) {
+		this.departid = departid;
 	}
 	public void setSex(String sex) {
 		this.sex = sex;

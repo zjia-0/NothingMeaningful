@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="css/bootstrap.min.css" />
+		<link rel="stylesheet" href="fonts/font_4aigx4do0lb/iconfont.css" />
+		<link rel="stylesheet" href="css/bootstrapStyle/bootstrapStyle.css" type="text/css">
+		<style>
+			
+			#tbss{
+				padding: 1em 2em;
+				display: flex;
+			}
+			#dhl a{
+				font-size: 15px;
+			}
+			
+		</style>
+	</head>
+	<body>
+		<div class="container-fluid" id="ctx" >
+		<!--离职打开模态框-->
+		<div class="modal fade" tabindex="-1" role="dialog" id="lzdkmtk">
+			<div class="modal-dialog" role="document" style="width:800px;">
+				<div class="modal-content">
+					<div class="modal-header" id="dhl">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<div class="col-md-6"></div>
+							<div>
+								<button type="button" class="btn btn-success" style="vertical-align: middle; width: 150px;">保存</button>&nbsp;&nbsp;&nbsp;
+								<span class="iconfont" style="vertical-align: middle">&#xe613;</span><a href="#" style="vertical-align: middle">打印</a>&nbsp;&nbsp;&nbsp;
+								<span class="iconfont" style="vertical-align: middle">&#xe613;</span><a href="#" style="vertical-align: middle">实名认证</a>
+							</div>
+					</div>
+					<div class="row modal-body">
+						<p>
+							*员工编号:<input type="text" readonly ="readonly" style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							*员工姓名:<input type="text" style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							*性别:
+								<select style="vertical-align: middle">
+									<option value="1">男</option>
+									<option value="2">女</option>
+								</select>
+						</p>
+						
+						<p>
+							*所在门店:<input type="text" readonly ="readonly" style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							*所在部门:
+									<select style="vertical-align: middle">
+										<option value="1">管理</option>
+										<option value="2">财务</option>
+										<option value="3">股东</option>
+									</select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						</p>
+						
+						<p>
+							登录账号:<input type="text" style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							岗位:
+								<select style="vertical-align: middle">
+									<option value="1">展厅经理</option>
+									<option value="2">销售顾问</option>
+									<option value="3">DCC主管</option>
+								</select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							身体状况:<input type="text" style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						</p>
+						
+						<p>
+							身高:<input type="text" style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							籍贯:
+								<select style="vertical-align: middle">
+									<option value="1">北京</option>
+									<option value="2">湖南</option>
+									<option value="3">上海</option>
+									<option value="3">深圳</option>
+								</select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							民族:
+								<select style="vertical-align: middle">
+									<option value="1">汉</option>
+									<option value="2">满</option>
+									<option value="3">蒙</option>
+								</select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						</p>
+						
+						<p>
+							婚姻状况:
+									<select style="vertical-align: middle">
+										<option value="1">未婚</option>
+										<option value="2">已婚</option>
+									</select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							学历:
+								<select style="vertical-align: middle">
+									<option value="1">汉</option>
+									<option value="2">满</option>
+									<option value="3">蒙</option>
+								</select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							毕业学校:
+									<select style="vertical-align: middle">
+										<option value="1">北京大学</option>
+										<option value="2">清华</option>
+									</select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						</p>
+						
+						<p>
+							专业:
+								<select style="vertical-align: middle">
+									<option value="1">计算机软件</option>
+									<option value="2">网络工程</option>
+								</select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							专业资格:
+									<select style="vertical-align: middle">
+										<option value="1">初级工程师</option>
+										<option value="2">中级工程师</option>
+										<option value="3">高级工程师</option>
+									</select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							*属性:
+								<select style="vertical-align: middle">
+									<option value="1">不考勤计薪</option>
+									<option value="2">计考勤不计薪</option>
+									<option value="3">不考勤不计薪</option>
+								</select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							学位:
+								<select style="vertical-align: middle">
+									<option value="1">本科</option>
+									<option value="2">硕士</option>
+									<option value="3">博士</option>
+								</select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						</p>
+						
+						<p>
+							编制:
+								<select style="vertical-align: middle">
+									<option value="1">劳务派遣</option>
+									<option value="2">劳务外包</option>
+									<option value="3">正式员工</option>
+								</select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							身份证号	:<input type="text" style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							户口地址:<input type="text" style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						</p>
+						
+						<p>
+							现住地址:<input type="text" style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							联系电话:<input type="text" style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							手机:<input type="text" style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						</p>
+						
+						<p>
+							EMail:<input type="text" style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							开户银行:
+									<select style="vertical-align: middle">
+										<option value="1">建设银行</option>
+										<option value="2">中国银行</option>
+										<option value="3">交通银行</option>
+									</select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							银行账号:<input type="text" style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						</p>
+						
+						<p>
+							紧急联系人:<input type="text" style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							联系电话:<input type="text" style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							入职日期:<input type="date" style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						</p>
+						
+						<p>
+							试用日期:<input type="date" style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							出生日期:<input type="date" style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							合同开始:<input type="date" style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						</p>
+						
+						<p>
+							合同结束:<input type="date" style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							卡自编号:<input type="text" style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							卡内编号:<input type="text" style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						</p>
+						
+						<p>
+							推荐人:<input type="text" style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							整单折扣权%<input type="text" style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							工时折扣权%<input type="text" style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						</p>
+						
+						<p>
+							商品折扣权%<input type="text" style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							减免权<input type="text" style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						</p>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<!--离职查询模态框-->
+				<div class="modal fade" tabindex="-1" role="dialog" id="lzcxmtk">
+			<div class="modal-dialog" role="document" style="width:800px;">
+				<div class="modal-content">
+					<div class="modal-header" id="dhl">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<div class="col-md-9"></div>
+							<div>
+								<button type="button" @click="chaxun" class="btn btn-success" style="vertical-align: middle; width: 150px;">保存</button>&nbsp;&nbsp;&nbsp;
+							</div>
+					</div>
+			<div class="row modal-body">
+						
+				<div>
+					<table>
+						<tr>
+							<td>员工编号 <input type="text" v-model="personnel.staffid"></td>
+							<td>员工姓名 <input type="text" v-model="personnel.personnelname"></td>
+							<td>
+								性别 <span style="padding-left: 28px;"></span>  <input type="text" v-model="personnel.sex">
+								
+							</td>
+						</tr>
+						<tr>
+							<td>
+								岗位<span style="padding-left: 28px;"></span> <input type="text" v-model="personnel.post">
+								
+							</td>
+							<td>
+								所在部门:<input type="text" v-model="personnel.departname">
+								
+							</td>
+						</tr>
+						<tr>
+							<td>身体状况 <input type="text" v-model="personnel.physicalstate"></td>
+							<td>身高<span style="padding-left: 28px;"></span>  <input type="text" v-model="personnel.height"></td>
+							<td>
+								籍贯:<input type="text" v-model="personnel.birthplace">
+							</td>
+						</tr>
+						<tr>
+							<td>
+								民族<span style="padding-left: 28px;"></span> <input type="text" v-model="personnel.nation">
+								
+							</td>
+							<td>
+								婚姻状况:<input type="text" v-model="personnel.martial">
+								
+							</td>
+							<td>
+								学历<span style="padding-left: 28px;"></span> <input type="text" v-model="personnel.degree">
+								
+							</td>
+						</tr>
+						<tr>
+							<td>
+								毕业学校:<input type="text" v-model="personnel.schooltag">
+								
+							</td>
+							
+						</tr>
+						<tr>
+							<td>生日<span style="padding-left: 28px;"></span>  <input type="datetime" v-model="personnel.borndate"> </td>
+							
+							<td>
+								编制<span style="padding-left: 28px;"></span> <input type="text" v-model="personnel.compile">
+								
+							</td>
+						</tr>
+						<tr>
+							<td>身份证号 <input type="text" v-model="personnel.card"></td>
+							<td>入职日期 <input type="datetime" v-model="personnel.hiredate">
+						</tr>
+						<tr>	
+							<td>试用到期 <input type="datetime" v-model="personnel.applicable">
+						</tr>
+						<tr>
+							<td>出生日期 <input type="datetime" v-model="personnel.borndate">
+							
+						</tr>
+						<tr>
+							<td>合同开始 <input type="datetime" v-model="personnel.startdate">
+						</tr>
+					</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<!--离职模态框-->
+			<div class="modal fade" tabindex="-1" role="dialog" id="lzmtk">
+			<div class="modal-dialog" role="document" style="width:550px;">
+				<div class="modal-content">
+					<div class="modal-header" id="dhl">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<div class="col-md-7">
+							<h4>离职登记</h4>
+						</div>
+							<div>
+								<button type="button" @click="lizhi" class="btn btn-success" style="vertical-align: middle; width: 150px;">保存</button>&nbsp;&nbsp;&nbsp;
+							</div>
+					</div>
+					<div class="row modal-body">
+						
+						<p>
+							员工姓名:<input type="text" style="vertical-align: middle;width: 70px;"   readonly ="readonly" class="staffid" v-model="dange.staffid"/>
+								<input type="text" style="vertical-align: middle;width: 70px; "  readonly ="readonly" v-model="dange.personnelname"/>
+							<button @click="yuangong" class="btn btn-success" style="vertical-align: middle; width: 80px;" data-toggle="modal" data-target="#xzyg">选择员工</button>
+							离职日期:<input type="date" style="vertical-align: middle" class="dimissiondates"/>
+						</p>
+						<p>
+							离职原因:<input type="text" class="causes" style="vertical-align: middle; width: 475px;"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						</p>
+					</div>
+					<div style=" border: 1px solid #E6E6E6; margin-top:-35px;">
+						
+						<table class="table table-hover table-bordered" style="overflow:scroll;">
+					 
+							<tr>
+								<td>领用日期</td>
+								<td>员工编号</td>
+								<td>员工姓名</td>
+								<td>类别编号</td>
+								<td>类别名称</td>
+								<td>名称描述</td>
+								<td>单位</td>
+								<td>领用数量</td>
+								<td>归还数量</td>
+								<td>未还数量</td>
+								<td>备注</td>
+								
+							</tr>
+						
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<!--选择员工-->
+			<div class="modal fade" tabindex="-1" role="dialog" id="xzyg">
+			<div class="modal-dialog" role="document" style="width:550px;">
+				<div class="modal-content">
+					<div class="modal-header" id="dhl">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<div class="col-md-7">
+							<h4>离职登记</h4>
+						</div>
+							<div>
+								<button type="button" @click="baocun()" class="btn btn-success" style="vertical-align: middle; width: 150px;">保存</button>&nbsp;&nbsp;&nbsp;
+							</div>
+					</div>
+					<div class="row modal-body">
+						
+						<p>
+							<select style="vertical-align: middle; width: 548px; height: 35px;" v-model="selectp" @change="chooseSelect(selectp)">
+								<option v-for="men in mendian"  :value="men.storeid">{{men.storename}}</option>
+										
+							</select>
+						</p>
+						<span @click="yuangong">所有</span>
+					</div>
+					<div style=" border: 1px solid #E6E6E6; ">
+						
+						<table class="table table-hover table-bordered">
+					 
+							<tr>
+								<td>选择</td>
+								<td>部门名称</td>
+								<td>工号</td>
+								<td>姓名</td>
+							</tr>
+							
+							<tr v-for="item in lists">
+								<td><input type="radio" name="ck" v-bind:sid="item.personnelid"></td>
+								<td>{{item.departname}}</td>
+								<td>{{item.staffid}}</td>
+								<td>{{item.personnelname}}</td>
+							</tr>
+						
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		
+		
+		
+			<div class="row" style="border: 1px solid #E6E6E6;">
+				<h3 class="col-md-2">离职登记</h3>
+				<div class="col-md-7"></div>
+				<div class="col-md-3" id="tbss">
+					<input class="form-control input-sm" type="text" style="margin-top: 2px;" />&nbsp;&nbsp;&nbsp;
+					<button type="button" class="btn btn-warning" style="width: 150px;">搜索</button>&nbsp;&nbsp;&nbsp;
+					<button type="button" class="btn btn-default">关闭</button>
+				</div>
+			</div>
+			
+			<div id="dhl">
+				<div class="col-md-8"></div>
+				<ol class="breadcrumb col-md-4">
+				  <li><span class="iconfont" style="vertical-align: middle">&#xe614;</span><a href="#" style="vertical-align: middle" data-toggle="modal" data-target="#lzmtk">离职</a></li>
+				  <li @click="huigun"><span class="iconfont" style="vertical-align: middle">&#xe6b6;</span><a href="#" style="vertical-align: middle">回滚</a></li>
+				  <li><span class="iconfont" style="vertical-align: middle">&#xe62c;</span><a href="#" style="vertical-align: middle" data-toggle="modal" data-target="#lzdkmtk">打开</a></li>
+				  <li @click="shanchu"><span class="iconfont" style="vertical-align: middle">&#xe613;</span><a href="#" style="vertical-align: middle">删除</a></li>
+				  <li @click="chaxun"><span class="iconfont" style="vertical-align: middle">&#xe78a;</span><a href="#" style="vertical-align: middle" data-toggle="modal" data-target="#lzcxmtk">查询</a></li>
+				  <li><span class="iconfont" style="vertical-align: middle">&#xe6a5;</span><a href="#" style="vertical-align: middle">导出</a></li>
+				</ol>
+			</div>
+			
+			<div class="row">
+				
+				<div class="row" id="tbss" style=" border: 1px solid #E6E6E6;height:780px;">
+					
+				<table class="table table-hover table-bordered" style="width:800px;">
+					 
+						<tr>
+							<td></td>
+							<td>部门</td>
+							<td>员工编号</td>
+							<td>姓名</td>
+							<td>性别</td>
+							<td>职位</td>
+							<td>离职日期</td>
+							<td>离职原因</td>
+						</tr>
+						
+						<tr v-for="item in list" v-if="item.remark1==0"> 
+							<td><input type="radio" name="ck" v-bind:sid="item.dimissionid" v-bind:cid="item.personnelid"></td>
+							<td>{{item.departname}}</td>
+							<td>{{item.staffid}}</td>
+							<td>{{item.name}}</td>
+							<td>{{item.sex}}</td>
+							<td>{{item.post}}</td>
+							<td>{{item.dimissiondate}}</td>
+							<td>{{item.cause}}</td>
+						</tr>
+						
+				</table>
+
+			</div>
+			
+		</div>
+	</div>
+		
+		<script src="js/canvas-nest.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/jquery-1.12.4.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" src="js/jquery.ztree.core.js"></script>
+		<script src="js/jquery.ztree.excheck.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/my.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+					var vm=new Vue({
+						el:"#ctx",
+						data(){
+							return {
+								selectp:"",
+								list:[],
+								lists:[],
+								mendian:[],
+								personnel:{},
+								dange:[]
+							}
+						},methods:{
+							yuangong:function(){
+								
+								$.ajax({
+								url:data.ip + "yuangong",
+								data:{"storeid":0},
+								type:"post",
+								"success":function(re){
+									vm.lists=re;
+									console.log(re);
+								}
+							});
+							
+							$.ajax({
+								url:data.ip + "mendian",
+								type:"post",
+								"success":function(re){
+									vm.mendian=re;
+									console.log(re);
+								}
+							});
+						},
+						chooseSelect:function(selectp){
+
+								$.ajax({
+								url:data.ip + "yuangong",
+								data:{"storeid":selectp},
+								type:"post",
+								"success":function(re){
+									vm.lists=re;
+									console.log(re);
+								}
+							});
+						},
+						baocun:function(){
+								var ck = $("[name=ck]");
+									for(var i =0;i<ck.length;i++){
+										if(ck[i].checked){
+											var personnelid = $(ck[i]).attr("sid");
+											dengji(personnelid);
+										}
+									}
+						},
+						lizhi:function(){
+								var staffid=$(".staffid").val()
+								var dimissiondates=$(".dimissiondates").val()
+								var causes=$(".causes").val()
+								
+							$.ajax({
+								url:data.ip + "lizhi",
+								data:{"staffid":staffid,"dimissiondates":dimissiondates,"causes":causes},
+								type:"post",
+								dataType:"json",
+								"success":function(re){
+									
+									findPage();
+								}
+							});
+						},
+						huigun:function(){
+								var ck = $("[name=ck]");
+									for(var i =0;i<ck.length;i++){
+										if(ck[i].checked){
+											var dimissionid = $(ck[i]).attr("sid");
+											$.ajax({
+												url:data.ip + "huigun",
+												data:{"dimissionid":dimissionid,"remark1":1 },
+												type:"post",
+												dataType:"json",
+												"success":function(re){
+													findPage();
+												}
+											});
+										}
+									}
+						},
+						shanchu:function(){
+								var ck = $("[name=ck]");
+									for(var i =0;i<ck.length;i++){
+										if(ck[i].checked){
+											var dimissionid = $(ck[i]).attr("sid");
+											$.ajax({
+												url:data.ip + "rempve",
+												data:{"dimissionid":dimissionid},
+												type:"post",
+												dataType:"json",
+												"success":function(re){
+													findPage();
+												}
+											});
+										}
+									}
+						},
+						chaxun:function(){
+								var ck = $("[name=ck]");
+									for(var i =0;i<ck.length;i++){
+										if(ck[i].checked){
+											var personnelid = $(ck[i]).attr("cid");
+											alert(personnelid)
+											$.ajax({
+													url:data.ip + "txmlid",
+													data:{"personnelid":personnelid},
+													type:"post",
+													dataType:"json",
+													success:function(result){
+															vm.personnel=result;
+														}
+													});
+										}
+									}
+							}
+					}
+				});
+					
+					$(function(){
+						findPage();
+					})
+					
+					function dengji(personnelid){
+
+							$.ajax({
+								url:data.ip + "txmlid",
+								data:{"personnelid":personnelid},
+								type:"post",
+								"success":function(re){
+									vm.dange=re;
+									console.log(re);
+								}
+							});
+						}
+					
+					
+					function findPage(){
+							$.ajax({
+								url:data.ip + "lzdjselect",
+								type:"post",
+								"success":function(re){
+									vm.list=re;
+									vm.lists=re;
+									console.log(re);
+								}
+							});
+						}
+		</script>
+		
+	</body>
+</html>

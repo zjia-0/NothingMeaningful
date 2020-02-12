@@ -2,10 +2,14 @@ package com.accp.mapper;
 
 import com.accp.domain.Dimission;
 import com.accp.domain.DimissionExample;
+import com.accp.domain.lldj;
+
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface DimissionMapper {
+	List<lldj> lldjselect();
+	
     int countByExample(DimissionExample example);
 
     int deleteByExample(DimissionExample example);

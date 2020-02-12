@@ -2,6 +2,8 @@ package com.accp.domain;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class Dimission {
     private Integer dimissionid;
 
@@ -14,8 +16,9 @@ public class Dimission {
     private String sex;
 
     private String post;
-
-    private Date dimissiondate;
+    
+	/* @DateTimeFormat(pattern = "yyyy-MM-dd") */
+    private String dimissiondate;
 
     private String cause;
 
@@ -28,8 +31,33 @@ public class Dimission {
     private String remark4;
 
     private String remark5;
+    
+    
+    
 
-    public Integer getDimissionid() {
+    public Dimission( String departid, String staffid, String name, String sex, String post,
+			String dimissiondate, String cause, String remark1) {
+		super();
+		
+		this.departid = departid;
+		this.staffid = staffid;
+		this.name = name;
+		this.sex = sex;
+		this.post = post;
+		this.dimissiondate = dimissiondate;
+		this.cause = cause;
+		this.remark1 = remark1;
+	}
+    
+    
+
+	public Dimission() {
+		super();
+	}
+
+
+
+	public Integer getDimissionid() {
         return dimissionid;
     }
 
@@ -77,15 +105,21 @@ public class Dimission {
         this.post = post;
     }
 
-    public Date getDimissiondate() {
-        return dimissiondate;
-    }
 
-    public void setDimissiondate(Date dimissiondate) {
-        this.dimissiondate = dimissiondate;
-    }
 
-    public String getCause() {
+    public String getDimissiondate() {
+		return dimissiondate;
+	}
+
+
+
+	public void setDimissiondate(String dimissiondate) {
+		this.dimissiondate = dimissiondate;
+	}
+
+
+
+	public String getCause() {
         return cause;
     }
 
