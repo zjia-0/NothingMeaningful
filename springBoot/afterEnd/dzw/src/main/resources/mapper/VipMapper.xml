@@ -16,9 +16,15 @@
     <result column="remark5" property="remark5" jdbcType="VARCHAR" />
     <result column="money" property="money" jdbcType="DOUBLE" />
   </resultMap>
+  <update id="jifenReset" parameterType="java.lang.String">
+  	UPDATE `vip` SET currentjifen=0 WHERE vno =#{vno}
+  </update>
+  <update id="upZt" parameterType="java.lang.String">
+  	UPDATE `vip` SET remark1=2 WHERE vno =#{vno}
+  </update>
   <select id="findVipByname" resultMap="BaseResultMap">
   	SELECT c.cno,v.vno,vl.viplevel,c.cname,c.cphone,v.money,v.currentjifen,v.summoney,v.venddate FROM `customer` AS c JOIN `vip` AS v ON v.cno=c.cno
-	JOIN `viplevel` AS vl ON v.levelid=vl.levelid 
+	JOIN `viplevel` AS vl ON v.levelid=vl.levelid and v.remark1=1
 	<if test="name!=null">
 		WHERE c.cname like #{name} OR c.cphone like #{name} OR v.vno like #{name}
 	</if>

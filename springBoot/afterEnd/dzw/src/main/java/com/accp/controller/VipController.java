@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -52,5 +53,13 @@ public class VipController {
 	@PostMapping("/addVips")
 	public int addVips(Vip vip) {
 		return Vservice.addVip(vip);
+	}
+	@PutMapping("/upzt")
+	public int upZt(String vno) {
+		return Vservice.upZt(vno);
+	}
+	@PutMapping("/upJifen")
+	public int upJifen(String vno) {
+		return Vservice.upJifen(vno);
 	}
 }

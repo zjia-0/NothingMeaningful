@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.accp.domain.Customer;
 import com.accp.domain.Vip;
+import com.accp.domain.VipExample;
 import com.accp.domain.Viplevel;
 import com.accp.mapper.CustomerMapper;
 import com.accp.mapper.VipMapper;
@@ -55,10 +56,21 @@ public class VipCenterService {
 		return custMapper.insert(cust);
 	}
 	/**
-	 * 
+	 * 新增会员
 	 */
 	public int addVip(Vip vip) {
 		return vMapper.insert(vip); 
 	}
-	
+	/**
+	 * 根据会员卡号修改会员状态
+	 */
+	public int upZt(String vno) {
+		return vMapper.upZt(vno);
+	}
+	/**
+	 * 根据会员卡号清零积分
+	 */
+	public int upJifen(String vno) {
+		return vMapper.jifenReset(vno);
+	}
 }
