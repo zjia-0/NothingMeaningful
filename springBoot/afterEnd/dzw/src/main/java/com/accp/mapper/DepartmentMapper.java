@@ -2,10 +2,22 @@ package com.accp.mapper;
 
 import com.accp.domain.Department;
 import com.accp.domain.DepartmentExample;
+import com.accp.domain.txml;
+
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface DepartmentMapper {
+	txml xzbumen(String departid);
+	
+	txml selectupdate(Integer personnelid);
+	
+	txml add(String departid);
+	
+	List<txml> chaxun(@Param("departid") String departid, @Param("storeid") String storeid);
+	
+	 List<Department> selectids(String storeid); 
+	 
     int countByExample(DepartmentExample example);
 
     int deleteByExample(DepartmentExample example);

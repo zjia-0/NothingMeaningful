@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<link rel="stylesheet" href="css/bootstrap.min.css" />
+		<link rel="stylesheet" href="fonts/font_4aigx4do0lb/iconfont.css" />
+		<link rel="stylesheet" href="css/bootstrapStyle/bootstrapStyle.css" type="text/css">
+		<style>
+			
+			#tbss{
+				padding: 1em 2em;
+				display: flex;
+			}
+			#dhl a{
+				font-size: 15px;
+			}
+			
+		</style>
+	</head>
+	<body>
+		<div id="ctx">
+		<!--新增模态框-->
+		<div class="modal fade" tabindex="-1" role="dialog" id="ygxzmtk">
+			<div class="modal-dialog" role="document" style="width:800px;">
+				<div class="modal-content">
+					<div class="modal-header" id="dhl">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<div class="col-md-6"></div>
+							<div>
+								<button type="button" @click="addyg" class="btn btn-success" style="vertical-align: middle; width: 150px;">保存</button>&nbsp;&nbsp;&nbsp;
+								<span class="iconfont" style="vertical-align: middle">&#xe613;</span><a href="#" style="vertical-align: middle">打印</a>&nbsp;&nbsp;&nbsp;
+								<span class="iconfont" style="vertical-align: middle">&#xe613;</span><a href="#" style="vertical-align: middle">实名认证</a>
+							</div>
+					</div>
+					<div class="row modal-body">
+						<p>
+							员工id：<input type="text" class="Personnelid" v-model="ids" />
+							*员工编号:<input type="text" class="staffid" v-model="dakai.staffid"  style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							*员工姓名:<input type="text" class="personnelname" v-model="dakai.personnelname" style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							*性别:<input type="text" class="sex" v-model="dakai.sex" />
+								
+						</p>
+						
+						<p>
+							*所在门店:<input type="text"  name="stoid" v-bind:stoid="add.storeid" v-model="add.storename" readonly ="readonly" style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							*所在部门:
+									<input type="text" name="depid" v-bind:depid="add.departid"  v-model="add.departname" />
+						</p>
+						
+						<p>
+							登录账号:<input type="text" class="enterid" v-model="dakai.enterid" style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							岗位:<input type="text" class="post" v-model="dakai.post" />
+								
+							身体状况:<input type="text" class="physicalstate" v-model="dakai.physicalstate" style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						</p>
+						
+						<p>
+							身高:<input type="text" class="height" v-model="dakai.height"  style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							籍贯:<input type="text" class="birthplace"  v-model="dakai.birthplace" />
+								
+							民族:<input type="text" class="nation"  v-model="dakai.nation" />
+								
+						
+						<p>
+							婚姻状况:<input type="text" class="martial" v-model="dakai.martial" />
+							学历:<input type="text" class="degree" v-model="dakai.degree" />
+							毕业学校:<input type="text" class="schooltag" v-model="dakai.schooltag" />
+						</p>
+						
+						<p>
+							专业:<input type="text"  value="软件" />
+							专业资格:<input type="text"  value="中级软件工程师"/>
+							*属性:
+								<select style="vertical-align: middle">
+									<option value="1">不考勤计薪</option>
+									<option value="2">计考勤不计薪</option>
+									<option value="3">不考勤不计薪</option>
+								</select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							学位:
+								<select style="vertical-align: middle">
+									<option value="1">本科</option>
+									<option value="2">硕士</option>
+									<option value="3">博士</option>
+								</select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						</p>
+						
+						<p>
+							编制:<input type="text" class="compile" v-model="dakai.compile" />
+							身份证号	:<input type="text" class="card" v-model="dakai.card"  style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							户口地址:<input type="text"class="address" v-model="dakai.address"  style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						</p>
+						
+						<p>
+							现住地址:<input type="text"  v-model="dakai.address"  style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							联系电话:<input type="text"class="phone"  v-model="dakai.phone"  style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							手机:<input type="text" v-model="dakai.phone"  style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						</p>
+						
+						<p>
+							EMail:<input type="text" class="email" v-model="dakai.email" style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							开户银行:
+									<select style="vertical-align: middle">
+										<option value="1">建设银行</option>
+										<option value="2">中国银行</option>
+										<option value="3">交通银行</option>
+									</select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							银行账号:<input type="text" class="bankcode" v-model="dakai.bankcode" style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						</p>
+						
+						<p>
+							紧急联系人:<input type="text" class="emergencyname" v-model="dakai.emergencyname" style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							联系电话:<input type="text" class="emergencyphone" v-model="dakai.emergencyphone" style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							入职日期:<input type="date" class="hiredate" v-model="dakai.hiredate" style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						</p>
+						
+						<p>
+							试用日期:<input type="date" class="applicable" v-model="dakai.applicable" style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							出生日期:<input type="date" class="borndate" v-model="dakai.borndate" style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							合同开始:<input type="date" class="startdate" v-model="dakai.startdate" style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						</p>
+						
+						<p>
+							合同结束:<input type="date" class="enddate" v-model="dakai.enddate" style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							卡自编号:<input type="text" style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							卡内编号:<input type="text" style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						</p>
+						
+						<p>
+							推荐人:<input type="text" style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							整单折扣权%<input type="text" style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							工时折扣权%<input type="text" style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						</p>
+						
+						<p>
+							商品折扣权%<input type="text" style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							减免权<input type="text" style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						</p>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<!--修改模态框-->
+		<div class="modal fade" tabindex="-1" role="dialog" id="ygxgmtk">
+						<div class="modal-dialog" role="document" style="width:800px;">
+				<div class="modal-content">
+					<div class="modal-header" id="dhl">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<div class="col-md-6"></div>
+							<div>
+								<button type="button" @click="updateyg" class="btn btn-success" style="vertical-align: middle; width: 150px;">保存</button>&nbsp;&nbsp;&nbsp;
+								<span class="iconfont" style="vertical-align: middle">&#xe613;</span><a href="#" style="vertical-align: middle">打印</a>&nbsp;&nbsp;&nbsp;
+								<span class="iconfont" style="vertical-align: middle">&#xe613;</span><a href="#" style="vertical-align: middle">实名认证</a>
+							</div>
+					</div>
+					<div class="row modal-body">
+						<p>
+							员工id：<input type="text" class="Personnelid1" v-model="update.personnelid" />
+							*员工编号:<input type="text" class="staffid1" v-model="update.staffid" readonly="readonly"  style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							*员工姓名:<input type="text" class="personnelname1" v-model="update.personnelname" style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							*性别:<input type="text" class="sex1" v-model="update.sex" />
+								
+						</p>
+						
+						<p>
+							*所在门店:<input type="text"  name="stoid"  v-model="update.storename" readonly ="readonly" style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							*所在部门:
+									<input type="text" name="depid"   v-model="update.departname" readonly="readonly" />
+						</p>
+						
+						<p>
+							登录账号:<input type="text" class="enterid1" v-model="update.enterid" style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							岗位:<input type="text" class="post1" v-model="update.post" />
+								
+							身体状况:<input type="text" class="physicalstate1" v-model="update.physicalstate" style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						</p>
+						
+						<p>
+							身高:<input type="text" class="height1" v-model="update.height"  style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							籍贯:<input type="text" class="birthplace1"  v-model="update.birthplace" />
+								
+							民族:<input type="text" class="nation1"  v-model="update.nation" />
+								
+						
+						<p>
+							婚姻状况:<input type="text" class="martial1" v-model="update.martial" />
+							学历:<input type="text" class="degree1" v-model="update.degree" />
+							毕业学校:<input type="text" class="schooltag1" v-model="update.schooltag" />
+						</p>
+						
+						<p>
+							专业:<input type="text"  value="软件" />
+							专业资格:<input type="text"  value="中级软件工程师"/>
+							*属性:
+								<select style="vertical-align: middle">
+									<option value="1">不考勤计薪</option>
+									<option value="2">计考勤不计薪</option>
+									<option value="3">不考勤不计薪</option>
+								</select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							学位:
+								<select style="vertical-align: middle">
+									<option value="1">本科</option>
+									<option value="2">硕士</option>
+									<option value="3">博士</option>
+								</select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						</p>
+						
+						<p>
+							编制:<input type="text" class="compile1" v-model="update.compile" />
+							身份证号	:<input type="text" class="card1" v-model="update.card"  style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							户口地址:<input type="text"class="address1" v-model="update.address"  style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						</p>
+						
+						<p>
+							现住地址:<input type="text"  v-model="update.address"  style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							联系电话:<input type="text"class="phone1"  v-model="update.phone"  style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							手机:<input type="text" v-model="update.phone"  style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						</p>
+						
+						<p>
+							EMail:<input type="text" class="email1" v-model="update.email" style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							开户银行:
+									<select style="vertical-align: middle">
+										<option value="1">建设银行</option>
+										<option value="2">中国银行</option>
+										<option value="3">交通银行</option>
+									</select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							银行账号:<input type="text" class="bankcode1" v-model="update.bankcode" style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						</p>
+						
+						<p>
+							紧急联系人:<input type="text" class="emergencyname1" v-model="update.emergencyname" style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							联系电话:<input type="text" class="emergencyphone1" v-model="update.emergencyphone" style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							入职日期:<input type="date" class="hiredate1" v-model="update.hiredate" style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						</p>
+						
+						<p>
+							试用日期:<input type="date" class="applicable1" v-model="update.applicable" style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							出生日期:<input type="date" class="borndate1" v-model="update.borndate" style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							合同开始:<input type="date" class="startdate1" v-model="update.startdate" style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						</p>
+						
+						<p>
+							合同结束:<input type="date" class="enddate1" v-model="update.enddate" style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							卡自编号:<input type="text" style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							卡内编号:<input type="text" style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						</p>
+						
+						<p>
+							推荐人:<input type="text" style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							整单折扣权%<input type="text" style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							工时折扣权%<input type="text" style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						</p>
+						
+						<p>
+							商品折扣权%<input type="text" style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							减免权<input type="text" style="vertical-align: middle"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						</p>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<!--查询模态框-->
+		<div class="modal fade" tabindex="-1" role="dialog" id="cxygmtk">
+	 		<div class="modal-dialog modal-lg" role="document" >
+		    <div class="modal-content"  style="width: 1000px;">
+		      <div class="modal-header" id="mydiv_5">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<ul>
+					<li><h4 class="modal-title" id="myModalLabel1">员工查询</h4></li>
+					<li style="padding-left: 870px;"><button type="button" class="btn btn-success">确定</button></li>
+				</ul>
+		      </div>
+		      <div class="modal-body">
+				<div>
+					<table>
+						<tr>
+							<td>员工编号 <input type="text" v-model="personnel.staffid"></td>
+							<td>员工姓名 <input type="text" v-model="personnel.personnelname"></td>
+							<td>
+								性别 <span style="padding-left: 28px;"></span>  <input type="text" v-model="personnel.sex">
+								
+							</td>
+						</tr>
+						<tr>
+							<td>
+								岗位<span style="padding-left: 28px;"></span> <input type="text" v-model="personnel.post">
+								
+							</td>
+							<td>
+								所在部门:<input type="text" v-model="personnel.departname">
+								
+							</td>
+						</tr>
+						<tr>
+							<td>身体状况 <input type="text" v-model="personnel.physicalstate"></td>
+							<td>身高<span style="padding-left: 28px;"></span>  <input type="text" v-model="personnel.height"></td>
+							<td>
+								籍贯:<input type="text" v-model="personnel.birthplace">
+							</td>
+						</tr>
+						<tr>
+							<td>
+								民族<span style="padding-left: 28px;"></span> <input type="text" v-model="personnel.nation">
+								
+							</td>
+							<td>
+								婚姻状况:<input type="text" v-model="personnel.martial">
+								
+							</td>
+							<td>
+								学历<span style="padding-left: 28px;"></span> <input type="text" v-model="personnel.degree">
+								
+							</td>
+						</tr>
+						<tr>
+							<td>
+								毕业学校:<input type="text" v-model="personnel.schooltag">
+								
+							</td>
+							
+						</tr>
+						<tr>
+							<td>生日<span style="padding-left: 28px;"></span>  <input type="datetime" v-model="personnel.borndate"> </td>
+							
+							<td>
+								编制<span style="padding-left: 28px;"></span> <input type="text" v-model="personnel.compile">
+								
+							</td>
+						</tr>
+						<tr>
+							<td>身份证号 <input type="text" v-model="personnel.card"></td>
+							<td>入职日期 <input type="datetime" v-model="personnel.hiredate">
+						</tr>
+						<tr>	
+							<td>试用到期 <input type="datetime" v-model="personnel.applicable">
+						</tr>
+						<tr>
+							<td>出生日期 <input type="datetime" v-model="personnel.borndate">
+							
+						</tr>
+						<tr>
+							<td>合同开始 <input type="datetime" v-model="personnel.startdate">
+						</tr>
+					</table>
+				</div>
+		      </div>
+		      
+		    </div>
+		  </div>
+		</div>
+		
+		<!--新增同级模态框-->
+		<div class="modal fade" tabindex="-1" role="dialog" id="ygjsmtk">
+			<div class="modal-dialog" role="document" style="width:400px;">
+				<div class="modal-content" id="dhl">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							<div class="col-md-5">
+								<h4>新增同级</h4>
+							</div>
+							<div>
+								<button type="button" class="btn btn-success" style="vertical-align: middle; width: 150px;" @click="xztj">保存</button>&nbsp;&nbsp;&nbsp;
+							</div>
+					</div>
+					<div>
+						门店:<input type="text" readonly="readonly" v-model="xzbumen.storename"  name="bumenming" v-bind:storeid="xzbumen.storeid"/>
+						<br />
+						部门id:<input type="text" class="departid5"/>
+						<br />
+						部门名称:<input type="text" class="departname5" />
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<!--修改部门模态框-->
+		<div class="modal fade" tabindex="-1" role="dialog" id="updatebmmtk">
+			<div class="modal-dialog" role="document" style="width:400px;">
+				<div class="modal-content" id="dhl">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							<div class="col-md-5">
+								<h4>修改</h4>
+							</div>
+							<div>
+								<button type="button" class="btn btn-success" style="vertical-align: middle; width: 150px;" @click="updatebm">保存</button>&nbsp;&nbsp;&nbsp;
+							</div>
+					</div>
+					<div>
+						门店:<input type="text" readonly="readonly" v-model="xzbumen.storename"  name="bumenming" v-bind:storeid="xzbumen.storeid"/>
+						<br />
+						部门id:<input type="text" class="departid4" v-model="xzbumen.departid"/>
+						<br />
+						部门名称:<input type="text" class="departname4"  v-model="xzbumen.departname"/>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		
+		<div class="container-fluid" >
+			<div class="row" style="border: 1px solid #E6E6E6;">
+				<h3 class="col-md-2">组织结构定义</h3>
+				<div class="col-md-7"></div>
+				<div class="col-md-3" id="tbss">
+					<input class="form-control input-sm" type="text" style="margin-top: 2px;" />&nbsp;&nbsp;&nbsp;
+					<button type="button" class="btn btn-warning" style="width: 150px;">搜索</button>&nbsp;&nbsp;&nbsp;
+					<button type="button" class="btn btn-default">关闭</button>
+				</div>
+			</div>
+			
+			<div id="dhl">
+				<ol class="breadcrumb">
+				  <li @click="dakai1"><span class="iconfont" style="vertical-align: middle">&#xe62c;</span><a href="#" style="vertical-align: middle" data-toggle="modal" data-target="#ygxzmtk">增加员工</a></li>
+				  <li @click="xiugai"><span class="iconfont" style="vertical-align: middle">&#xe612;</span><a href="#" style="vertical-align: middle" data-toggle="modal" data-target="#ygxgmtk">修改</a></li>
+				  <li @click="removeyg"><span class="iconfont" style="vertical-align: middle">&#xe614;</span><a href="#" style="vertical-align: middle">删除</a></li>
+				  <li @click="chak"><span class="iconfont" style="vertical-align: middle">&#xe78a;</span><a href="#" style="vertical-align: middle" data-toggle="modal" data-target="#cxygmtk">查询</a></li>
+				  <li><span class="iconfont" style="vertical-align: middle">&#xe648;</span><a href="#" style="vertical-align: middle">置空密码</a></li>
+				  <li><span class="iconfont" style="vertical-align: middle">&#xe6a5;</span><a href="#" style="vertical-align: middle">导出</a></li>
+				  <li><span class="iconfont" style="vertical-align: middle">&#xe6b6;</span><a href="#" style="vertical-align: middle">导入</a></li>
+				  <li><span class="iconfont" style="vertical-align: middle">&#xe68e;</span><a href="#" style="vertical-align: middle" >员工角色</a></li>
+				  <li><span class="iconfont" style="vertical-align: middle">&#xe613;</span><a href="#" style="vertical-align: middle">字段设置</a></li>
+				</ol>
+				<div id="zsgc" style="display:none">
+					<button data-toggle="modal" data-target="#ygjsmtk" >新增同级</button>
+					<button data-toggle="modal" data-target="#updatebmmtk" >修改部门</button>
+					<button @click="scbm">删除</button>
+				</div>
+			</div>
+			
+			<div class="row">
+				
+				<div class="col-md-2" style="border: 1px solid #E6E6E6; height:780px; overflow:scroll;">
+					<ul v-for="item,index in list">
+						<li style="font-size: 20px;" @click="chabumen(index+1)" v-bind:sid="item.storeid" name="ck">{{item.remark1}}--{{item.storename}}</li>
+							<ul v-for="bumen,index in lists" v-if="item.storeid==bumen.storeid">
+								 <li @click="bumen1()"><input type="radio" name="cks" v-bind:sid="bumen.departid" @click="bumen1()"/>{{bumen.departid}}--{{bumen.departname}}</li>
+							</ul>
+					</ul>
+					<br />
+					
+				</div>
+				
+				<div class="col-md-10" style="height:780px; overflow:scroll;">
+					
+					<table class="table table-hover table-bordered" style="width: 3500px;">
+						<tr>
+							<td>选择</td>
+							<td>机构</td>
+							<td>部门代码</td>
+							<td>部门名称</td>
+							<td>工号</td>
+							<td>姓名</td>
+							<td>性别</td>
+							<td>岗位名称</td>
+							<td>身体状况</td>
+							<td>身高</td>
+							<td>籍贯</td>
+							<td>民族</td>
+							<td>婚姻状况</td>
+							<td>学历</td>
+							<td>毕业学校</td>
+							<td>专业</td>
+							<td>专业资格</td>
+							<td>学位</td>
+							<td>编制</td>
+							<td>身份证号</td>
+							<td>户口地址</td>
+							<td>邮编</td>
+							<td>现住地址</td>
+							<td>联系电话</td>
+							<td>手机</td>
+							<td>EMail</td>
+							<td>紧急情况联系人</td>
+							<td>联系电话</td>
+							<td>现在何处</td>
+							<td>试用到期</td>
+							<td>入职日期</td>
+							<td>出生日期</td>
+							<td>合同开始日期</td>
+							<td>合同结束日期</td>
+							<td>生日</td>
+							
+							
+						</tr>
+						
+						<tr v-for="yg in yuangong">
+							<td><input type="radio" name="ygid" v-bind:ygid="yg.personnelid"></td>
+							<td>{{yg.storename}}</td>
+							<td>{{yg.departid}}</td>
+							<td>{{yg.departname}}</td>
+							<td>{{yg.staffid}}</td>
+							<td>{{yg.personnelname}}</td>
+							<td>{{yg.sex}}</td>
+							<td>{{yg.post}}</td>
+							<td>{{yg.physicalstate}}</td>
+							<td>{{yg.height}}</td>
+							<td>{{yg.birthplace}}</td>
+							<td>{{yg.nation}}</td>
+							<td>{{yg.martial}}</td>
+							<td>{{yg.degree}}</td>
+							<td>{{yg.schooltag}}</td>
+							<td>软件</td>
+							<td>中级软件工程师</td>
+							<td>{{yg.degree}}</td>
+							<td>{{yg.compile}}</td>
+							<td>{{yg.card}}</td>
+							<td>{{yg.address}}</td>
+							<td> </td>
+							<td>{{yg.address}}</td>
+							<td>{{yg.phone}}</td>
+							<td>{{yg.phone}}</td>
+							<td>{{yg.email}}</td>
+							<td>{{yg.emergencyname}}</td>
+							<td>{{yg.emergencyphone}}</td>
+							<td>{{yg.address}}</td>
+							<td>{{yg.applicable}}</td>
+							<td>{{yg.hiredate}}</td>
+							<td>{{yg.borndate}}</td>
+							<td>{{yg.applicable}}</td>
+							<td>{{yg.enddate}}</td>
+							<td>{{yg.borndate}}</td>
+							
+						</tr>
+						
+					</table>
+					
+				</div>
+				
+			</div>
+		</div>
+	</div>
+		
+		<script src="js/canvas-nest.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/jquery-1.12.4.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" src="js/jquery.ztree.core.js"></script>
+		<script src="js/jquery.ztree.excheck.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/my.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			var vm=new Vue({
+						el:"#ctx",
+						data(){
+							return { 
+								list:[],
+								lists:[],
+								yuangong:[],
+								dakai:{},
+								add:{},
+								ids:{},
+								update:{},  
+								personnel:{},
+								xzbumen:{}
+							}
+						},methods:{
+						chabumen:function(index){
+							
+								$.ajax({
+								url:data.ip + "selectbumen",
+								data:{"storeid":index},
+								type:"post",
+								"success":function(re){
+									vm.lists=re;
+									console.log(re);
+									
+										$.ajax({
+											url:data.ip + "chaxunyuangong",
+											data:{"storeid":index,"departid":0},
+											type:"post",
+											"success":function(re){
+												vm.yuangong=re;;
+												
+												console.log(re);
+											}
+										});
+									
+								}
+							});
+					},
+						bumen1:function(){
+							
+							$("#zsgc").attr("style","display:block;");//显示div
+								var ck = $("[name=cks]");
+								
+									for(var i =0;i<ck.length;i++){
+										if(ck[i].checked){
+											var departid = $(ck[i]).attr("sid");
+											
+												$.ajax({
+													url:data.ip + "chaxunyuangong",
+													data:{"storeid":0,"departid":departid},
+													type:"post",
+													"success":function(re){
+														vm.yuangong=re;
+														console.log(re);
+														
+														$.ajax({
+															url:data.ip + "xzbumenselect",
+															data:{"departid":departid},
+															type:"post",
+															"success":function(re){
+																vm.xzbumen=re;
+																
+																console.log(re);
+															}
+														});
+													}
+												});
+										}
+									}
+							},
+						dakai1:function(){
+								var ck = $("[name=cks]");
+								
+									for(var i =0;i<ck.length;i++){
+										if(ck[i].checked){
+											var departid = $(ck[i]).attr("sid");
+											
+												$.ajax({
+													url:data.ip + "selectadd",
+													data:{"departid":departid},
+													type:"post",
+													"success":function(re){
+														vm.add=re;
+														
+														$.ajax({
+															url:data.ip + "count",
+															data:{"departid":departid},
+															type:"post",
+															"success":function(re){
+																vm.ids=re+1;
+																console.log(re);
+															}
+														});
+														
+														console.log(re);
+													}
+												});
+										}
+									}
+							},
+						addyg:function(index){
+							var ck = $("[name=stoid]");
+							var storeid = $(ck).attr("stoid");//门店id
+							
+							var ck1 = $("[name=depid]");
+							var remark1 = $(ck1).attr("depid");//部门id
+							
+							var Personnelid=$(".Personnelid").val()//员工id
+							var staffid=$(".staffid").val()//员工编号
+							var personnelname=$(".personnelname").val()//员工姓名
+						    var sex=$(".sex").val()//员工性别
+						    var enterid=$(".enterid").val()//登录账户
+						    var post=$(".post").val()//岗位
+						    var physicalstate=$(".physicalstate").val()//身体状况
+							var height=$(".height").val()//身高
+							var birthplace=$(".birthplace").val()//籍贯
+						    var nation=$(".nation").val()//民族
+						    var martial=$(".martial").val()//婚姻状况
+						    var degree=$(".degree").val()//学历
+						    var schooltag=$(".schooltag").val()//毕业学校
+						    var compile=$(".compile").val()//编制
+							var card=$(".card").val()//身份证
+						    var address=$(".address").val()//户口地址
+						    var phone=$(".phone").val()//手机
+						    var email=$(".email").val()//邮箱
+						    var bankcode=$(".bankcode").val()//银行账户
+						    var emergencyname=$(".emergencyname").val()//紧急联系人
+							var emergencyphone=$(".emergencyphone").val()//紧急联系人电话
+						    var hiredate=$(".hiredate").val()//入职日期
+						    var applicable=$(".applicable").val()//适用日期
+						    var borndate=$(".borndate").val()//出生日期
+						    var startdate=$(".startdate").val()//合同开始
+							var enddate=$(".enddate").val()//合同结束
+									$.ajax({
+										url:data.ip + "addyg",
+										data:{"staffid":staffid,"remark1":remark1,"storeid":storeid,"Personnelid":Personnelid,
+										"personnelname":personnelname,"sex":sex,"enterid":enterid,"post":post,
+										"physicalstate":physicalstate,"height":height,"birthplace":birthplace,"nation":nation,
+										"martial":martial,"degree":degree,"schooltag":schooltag,"compile":compile,
+										"card":card,"address":address,"phone":phone,"email":email,
+										"bankcode":bankcode,"emergencyname":emergencyname,"emergencyphone":emergencyphone,"hiredate":hiredate,
+										"applicable":applicable,"borndate":borndate,"startdate":startdate,"enddate":enddate
+										},
+										type:"post",
+										"success":function(re){
+											findPage();									
+											console.log(re);
+											}
+									});
+						},
+						xiugai:function(){
+								var ck = $("[name=ygid]");
+									for(var i =0;i<ck.length;i++){
+										if(ck[i].checked){
+											var personnelid = $(ck[i]).attr("ygid");
+												
+												$.ajax({
+													url:data.ip + "selectupdate",
+													data:{"personnelid":personnelid},
+													type:"post",
+													"success":function(re){
+														vm.update=re;
+														alert("123")
+														console.log(re);
+													}
+												});
+										}
+									}
+						},
+						updateyg:function(){
+							var ck1 = $("[name=depid]");
+							var remark1 = $(ck1).attr("depid");//部门id
+							
+							var Personnelid=$(".Personnelid1").val()//员工id
+							var staffid=$(".staffid1").val()//员工编号
+							var personnelname=$(".personnelname1").val()//员工姓名
+						    var sex=$(".sex1").val()//员工性别
+						    var enterid=$(".enterid1").val()//登录账户
+						    var post=$(".post1").val()//岗位
+						    var physicalstate=$(".physicalstate1").val()//身体状况
+							var height=$(".height1").val()//身高
+							var birthplace=$(".birthplace1").val()//籍贯
+						    var nation=$(".nation1").val()//民族
+						    var martial=$(".martial1").val()//婚姻状况
+						    var degree=$(".degree1").val()//学历
+						    var schooltag=$(".schooltag1").val()//毕业学校
+						    var compile=$(".compile1").val()//编制
+							var card=$(".card1").val()//身份证
+						    var address=$(".address1").val()//户口地址
+						    var phone=$(".phone1").val()//手机
+						    var email=$(".email1").val()//邮箱
+						    var bankcode=$(".bankcode1").val()//银行账户
+						    var emergencyname=$(".emergencyname1").val()//紧急联系人
+							var emergencyphone=$(".emergencyphone1").val()//紧急联系人电话
+						    var hiredate=$(".hiredate1").val()//入职日期
+						    var applicable=$(".applicable1").val()//适用日期
+						    var borndate=$(".borndate1").val()//出生日期
+						    var startdate=$(".startdate1").val()//合同开始
+							var enddate=$(".enddate1").val()//合同结束
+							alert(personnelname)
+									$.ajax({
+										url:data.ip + "updateyg",
+										data:{"Personnelid":Personnelid,"staffid":staffid,
+										"personnelname":personnelname,"sex":sex,"enterid":enterid,"post":post,
+										"physicalstate":physicalstate,"height":height,"birthplace":birthplace,"nation":nation,
+										"martial":martial,"degree":degree,"schooltag":schooltag,"compile":compile,
+										"card":card,"address":address,"phone":phone,"email":email,
+										"bankcode":bankcode,"emergencyname":emergencyname,"emergencyphone":emergencyphone,"hiredate":hiredate,
+										"applicable":applicable,"borndate":borndate,"startdate":startdate,"enddate":enddate
+										},
+										type:"post",
+										"success":function(re){
+											findPage();									
+											console.log(re);
+											}
+									});
+						},
+						chak:function(){
+								var ck = $("[name=ygid]");
+								
+									for(var i =0;i<ck.length;i++){
+										if(ck[i].checked){
+											var personnelid = $(ck[i]).attr("ygid");
+											$.ajax({
+													url:data.ip + "txmlid",
+													data:{"personnelid":personnelid},
+													type:"post",
+													dataType:"json",
+													success:function(result){
+															vm.personnel=result;
+														}
+													});
+										}
+									}
+						},
+						removeyg:function(){
+								var ck = $("[name=ygid]");
+								
+									for(var i =0;i<ck.length;i++){
+										if(ck[i].checked){
+											var personnelid = $(ck[i]).attr("ygid");
+											$.ajax({
+													url:data.ip + "remove",
+													data:{"personnelid":personnelid},
+													type:"post",
+													dataType:"json",
+													success:function(result){
+															findPage()
+														}
+													});
+										}
+									}
+						},
+						xztj:function(){
+							var ck = $("[name=bumenming]");
+							var storeid = $(ck).attr("storeid");//门店id
+							var departid=$(".departid5").val()
+							var departname=$(".departname5").val()
+							
+							
+							$.ajax({
+								url:data.ip + "xztj1",
+								data:{"storeid":storeid,"departid":departid,"departname":departname},
+								type:"post",
+								dataType:"json",
+								success:function(result){
+									findPage()
+								}
+							});					
+							
+						},
+						updatebm:function(){
+							
+							var departid=$(".departid4").val()
+							var departname=$(".departname4").val()
+							
+							alert(departid+departname)
+							$.ajax({
+								url:data.ip + "updatebms",
+								data:{"departid":departid,"departname":departname},
+								type:"post",
+								dataType:"json",
+								success:function(result){
+									
+									findPage()
+								}
+							});					
+							
+						},
+						scbm:function(){
+								var ck = $("[name=cks]");
+									for(var i =0;i<ck.length;i++){
+										if(ck[i].checked){
+											var departids = $(ck[i]).attr("sid");
+											alert(departids)
+												$.ajax({
+													url:data.ip + "bmsc",
+													data:{"departid":departids},
+													type:"post",
+													dataType:"json",
+													"success":function(re){
+											
+														if(re>0){
+															alert("成功")
+														}
+														
+													}
+												});
+										}
+									}
+							}
+				}
+			});
+				
+				$(function(){
+						findPage();
+					})
+				
+				function findPage(){
+							
+							$.ajax({
+								url:data.ip + "selectmendian",
+								type:"post",
+								"success":function(re){
+									vm.list=re;
+									
+									console.log(re);
+								}
+							});
+							
+							$.ajax({
+								url:data.ip + "chaxunyuangong",
+								data:{"storeid":0,"departid":0},
+								type:"post",
+								"success":function(re){
+									vm.yuangong=re;
+									
+									console.log(re);
+								}
+							});
+						}
+		</script>
+					
+</body>
+</html>

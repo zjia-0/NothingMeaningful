@@ -19,7 +19,21 @@ public class Staff {
 
     private String remark5;
 
-    public String getStaffid() {
+    
+    
+    public Staff(String staffid, String personnelid) {
+		super();
+		this.staffid = staffid;
+		this.personnelid = personnelid;
+	}
+
+    
+	public Staff() {
+		super();
+	}
+
+
+	public String getStaffid() {
         return staffid;
     }
 
