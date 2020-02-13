@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" href="css/bootstrap.min.css" />
+		<link rel="stylesheet" href="css/bootstrapStyle/bootstrapStyle.css" />
+		<style>
+			*{
+				margin: 0px;
+				padding: 0px;
+			}
+			.bq span{
+				margin-left:5px;				
+			}
+			.hh td{
+				padding: 4px 3px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="ctx">
+			<div style="background: #f7ffff; height: 50px;  padding-left: 10px; line-height:50px;">
+				<span style="font-size: 25px;" class="col-sm-4 col-lg-4 col-md-4">维修项目</span>
+				<span class="col-lg-7 col-md-7 col-sm-7" style="text-align: right;">
+					<input type="text" placeholder="匹配编号/名称/名称简码" style="height: 35px; width: 345px;"/>
+					<button type="button" class="btn btn-warning">搜索</button>
+				</span>
+				<span class="col-lg-1 col-md-1 col-sm-1"><button type="button"class="btn btn-default">关闭</button></span>
+				
+			</div>
+			
+			<div style="background: #f7f7f7; height: 1200px;  padding-left: 10px; line-height:50px;">
+				<div class="bq col-sm-12 col-lg-12 col-md-12" style="text-align: right;">
+					<span><input type="text" style="width: 30px; height: 35px; background: #f7f7f7; color: #f7f7f7; border: none;" class="zhi"/></span>
+					<span>
+						<span class="glyphicon glyphicon-align-left" style="color: #fcac28;" aria-hidden="true"></span>
+						<span data-toggle="modal" data-target="#myModal" v-on:click="zen()">增加</span>
+					</span>	
+					<span>
+						<span class="glyphicon glyphicon-edit" style="color: #fcac28;" aria-hidden="true"></span>
+						<span data-toggle="modal" data-target="#myModals" v-on:click="xg()">修改</span>			
+					</span>
+					<span v-on:click="shan()"><span class="glyphicon glyphicon-remove-sign" style="color: #fcac28;" aria-hidden="true"></span>删除</span>
+					<span>
+						<span class="glyphicon glyphicon-list-alt" style="color: #fcac28;" aria-hidden="true"></span>
+						<span data-toggle="modal" data-target="#price">调价</span>							
+					</span>
+					<span><span class="glyphicon glyphicon-floppy-disk" style="color: #fcac28;" aria-hidden="true"></span>导出</span>
+					<span><span class="glyphicon glyphicon-log-in" style="color: #fcac28;" aria-hidden="true"></span>保存</span>
+				</div>
+				
+				<div>
+					<div  class="col-sm-2 col-lg-2 col-md-2" style="background: white; height: 500px;">
+						<ul id="treeDemo" class="ztree"></ul>
+					</div>
+					
+					<div class="col-sm-10 col-lg-10 col-md-10">
+						<table class="table">
+							<tr style="background: #39cede;color: white;">
+								<th>项目类别</th>
+								<th>项目编码</th>
+								<th>项目名称</th>
+								<th>售价按</th>
+								<th>收入种类</th>
+								<th>标准价</th>
+								<th>会员价</th>
+								<th>VIP价</th>
+								<th>协议价</th>
+								<th>索赔价</th>
+								<th>保险价</th>
+							</tr>
+							<tr style="background: white;" v-for="i in en">
+								<td><input type="text" v-model="i.maintainid" style="border: none; text-align: center; width: 80px;" v-on:click="daozhi(i.id)"/></td>
+								<td><input type="text" v-model="i.pnum" style="border: none; text-align: center; width: 80px;"  v-on:click="daozhi(i.id)"/></td>
+								<td><input type="text" v-model="i.pname" style="border: none; text-align: center; width: 80px;"  v-on:click="daozhi(i.id)"/></td>
+								<td><input type="text" v-model="i.incomeid" style="border: none; text-align: center; width: 80px;"  v-on:click="daozhi(i.id)"/></td>
+								<td><input type="text" v-model="i.incomeid" style="border: none; text-align: center; width: 80px;"  v-on:click="daozhi(i.id)"/></td>
+								<td><input type="text" v-model="i.standardprice" style="border: none; text-align: center; width: 80px;"  v-on:click="daozhi(i.id)"/></td>
+								<td><input type="text" v-model="i.memberprice" style="border: none; text-align: center; width: 80px;"  v-on:click="daozhi(i.id)"/></td>
+								<td><input type="text" v-model="i.vipprice" style="border: none; text-align: center; width: 80px;"  v-on:click="daozhi(i.id)"/></td>
+								<td><input type="text" v-model="i.dealprice" style="border: none; text-align: center; width: 80px;"  v-on:click="daozhi(i.id)"/></td>
+								<td><input type="text" v-model="i.claimprice" style="border: none; text-align: center; width: 80px;"  v-on:click="daozhi(i.id)"/></td>
+								<td><input type="text" v-model="i.insuranceprice" style="border: none; text-align: center; width: 80px;"  v-on:click="daozhi(i.id)"/></td>
+							</tr>
+						</table>
+					</div>
+				</div>
+		</div>
+<!--新增服务项目定义-->		
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document" style="width: 570px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel">
+					<span class="col-sm-4 col-lg-4 col-md-4">服务项目定义</span>
+					<span style="text-align: right;" class="col-sm-7 col-lg-7 col-md-7">
+						<button type="button" class="btn btn-success" style="width: 90px;"  v-on:click="bc()">保存</button>
+					</span>
+				</h4>
+			</div>
+					<div class="modal-body hh">
+						<table>
+							<tr>
+								<td  style="color: red;">*</td>
+								<td>项目编码</td>
+								<td><input type="text" class="xmbm"/></td>
+								<td style="color: red;">*</td>
+								<td>项目名称</td>
+								<td><input type="text" class="xmmc"/></td>
+							</tr>
+							<tr>
+								<td  style="color: red;">*</td>
+								<td>收入种类</td>
+								<td>
+									<form class="form-inline">
+									  <div class="form-group">
+									    <div class="input-group">
+									     <select  style="width: 140px; height: 30px;" class="xmzl">
+									     	<option>1</option>
+										    <option v-for="i in mains">{{i.incomename}}</option>
+										</select>
+									      <div class="input-group-addon"  style="background: white; margin-bottom: 20px;" >
+									      	<span class="glyphicon glyphicon-triangle-bottom"   data-toggle="modal" data-target="#import"></span>
+									      </div>
+									    </div>
+									  </div>
+									</form>
+								</td>
+								<td style="color: red;">*</td>
+								<td>项目类别</td>
+								<td>
+									<select style="width: 180px; height: 25px;" class="xmlb" value="">
+										<option>1</option>
+										<option v-for="i in main">{{i.typename}}</option>
+									</select>
+								</td>
+							</tr>
+							<tr>
+								<td  style="color: red;">&nbsp;</td>
+								<td>备注</td>
+								<td  colspan="4"><input type="text" style="width: 418px;" class="bz"/></td>
+							</tr>
+						</table>
+						<table>
+							<tr>
+								<td>标准价</td>
+								<td><input type="text" style="width: 80px;" class="bzj"/></td>
+								<td>会员价</td>
+								<td><input type="text" style="width: 80px;" class="hyj"/></td>
+								<td>VIP价</td>
+								<td><input type="text" style="width: 80px;" class="vipj"/></td>
+								<td>协议价</td>
+								<td><input type="text" style="width: 80px;" class="xyj"/></td>
+							</tr>
+							<tr>
+								<td>索赔价</td>
+								<td><input type="text" style="width: 80px;" class="spj"/></td>
+								<td>保险价</td>
+								<td><input type="text" style="width: 80px;" class="bxj"/></td>
+							</tr>
+						</table>
+					</div>
+		</div>
+	</div>
+</div>		
+<!--维修项目收入种类-->		
+<div class="modal fade" id="import" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document" style="width: 400px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel">选择内容设置</h4>
+			</div>
+					<div class="modal-body">
+							<div class="col-sm-7 col-lg-7 col-md-7 " style="height:30px;">&nbsp;</div>
+							<div class="col-sm-5 col-lg-5 col-md-5 " style="height:30px; line-height: 30px;">
+								<span style="padding-right: 10px;"><span class="glyphicon glyphicon-edit" style="color: #fcac28;" aria-hidden="true"></span>修改</span>
+								<span><span class="glyphicon glyphicon-floppy-disk" style="color: #fcac28;" aria-hidden="true"></span>保存</span>
+							</div>
+						
+						<table class="table">
+							<tr  style="background: #39cede;color: white;">
+								<th>序号</th>
+								<th>收入分类</th>
+							</tr>
+							<tr  style="background: white;" v-for="i in mains">
+								<td><input type="text" v-model="i.incomeid" style="border: none; text-align: center; width: 100px;" class="disid"/></td>
+								<td><input type="text" v-model="i.incomename" style="border: none; text-align: center; width: 100px;" class="disid"/></td>
+							</tr>
+						</table>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-success">选择</button>
+					</div>
+		</div>
+	</div>
+</div>		
+<!--修改服务项目定义-->
+<div class="modal fade" id="myModals" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document" style="width: 570px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel">
+					<span class="col-sm-4 col-lg-4 col-md-4">服务项目定义</span>
+					<span style="text-align: right;" class="col-sm-7 col-lg-7 col-md-7">
+						<button type="button" class="btn btn-success" style="width: 90px;"  v-on:click="bcs()">保存</button>
+					</span>
+				</h4>
+			</div>
+					<div class="modal-body hh">
+						<table>
+							<tr>
+								<td  style="color: red;">*</td>
+								<td>项目编码</td>
+								<td><input type="text" class="xmbms" v-model="xgs.pnum"/></td>
+								<td style="color: red;">*</td>
+								<td>项目名称</td>
+								<td><input type="text" class="xmmcs" v-model="xgs.pname"/></td>
+							</tr>
+							<tr>
+								<td  style="color: red;">*</td>
+								<td>收入种类</td>
+								<td>
+									<form class="form-inline">
+									  <div class="form-group">
+									    <div class="input-group">
+									     <select  style="width: 140px; height: 30px;" class="xmzls" v-model="xgs.incomeid">
+									     	<option>1</option>
+										    <option v-for="i in mains">{{i.incomename}}</option>
+										</select>
+									      <div class="input-group-addon"  style="background: white; margin-bottom: 20px;" >
+									      	<span class="glyphicon glyphicon-triangle-bottom"   data-toggle="modal" data-target="#import"></span>
+									      </div>
+									    </div>
+									  </div>
+									</form>
+								</td>
+								<td style="color: red;">*</td>
+								<td>项目类别</td>
+								<td>
+									<select style="width: 180px; height: 25px;" class="xmlbs" v-model="xgs.maintainid">
+										<option>1</option>
+										<option v-for="i in main">{{i.typename}}</option>
+									</select>
+								</td>
+							</tr>
+							<tr>
+								<td  style="color: red;">&nbsp;</td>
+								<td>备注</td>
+								<td  colspan="4"><input type="text" style="width: 418px;" class="bzs" v-model="xgs.remark1"/></td>
+							</tr>
+						</table>
+						<table>
+							<tr>
+								<td>标准价</td>
+								<td><input type="text" style="width: 80px;" class="bzjs" v-model="xgs.standardprice"/></td>
+								<td>会员价</td>
+								<td><input type="text" style="width: 80px;" class="hyjs" v-model="xgs.memberprice"/></td>
+								<td>VIP价</td>
+								<td><input type="text" style="width: 80px;" class="vipjs" v-model="xgs.vipprice"/></td>
+								<td>协议价</td>
+								<td><input type="text" style="width: 80px;" class="xyjs" v-model="xgs.dealprice"/></td>
+							</tr>
+							<tr>
+								<td>索赔价</td>
+								<td><input type="text" style="width: 80px;" class="spjs" v-model="xgs.claimprice"/></td>
+								<td>保险价</td>
+								<td><input type="text" style="width: 80px;" class="bxjs" v-model="xgs.insuranceprice"/></td>
+							</tr>
+						</table>
+					</div>
+		</div>
+	</div>
+</div>	
+
+<div class="modal fade" id="price" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document" style="width: 470px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h3 class="modal-title" id="myModalLabel">				
+					<span class="col-sm-4 col-lg-4 col-md-4">调价</span>
+					<span style="text-align: right;" class="col-sm-7 col-lg-7 col-md-7">
+						<button type="button" class="btn btn-success" style="width: 90px;">保存</button>
+					</span>
+				</h3>
+			</div>
+					<div class="modal-body">
+							<span>
+								<select style="width: 180px; height: 25px;">
+										<option>1</option>
+								</select>
+							</span>
+							<span style="color: #4fc9d7;">=标准价*</span>
+							<span>
+								<input type="text"/>
+							</span>
+					</div>
+		</div>
+	</div>
+</div>		
+
+</div>
+		<script type="text/javascript" src="js/jquery-1.12.4.js" ></script>
+		<script type="text/javascript" src="js/bootstrap.min.js" ></script>
+		<script type="text/javascript" src="js/vue.js" ></script>
+		<script type="text/javascript" src="js/my.js" ></script>
+		<script type="text/javascript" src="js/jquery.min.js" ></script>
+		<script type="text/javascript" src="js/jquery.ztree.core.js" ></script>
+		<script>
+			var setting = {
+				check: {
+					enable: true
+				},
+				data: {
+					simpleData: {
+						enable: true
+					}
+				},
+				edit: {
+					enable: true
+				}
+			};
+			//数据结构，从后台查询数据进行赋值就可使用
+			var zNodes =[
+			{id:1, pId:0, name:"车型", open:true},
+			{id:101, pId:1, name:"0001-1111"},
+			{id:102, pId:1, name:"500-中国重汽"},
+			
+			{id:2, pId:0, name:"发动机", open:false},
+			{id:201, pId:2, name:"10002-sss"},
+			{id:202, pId:2, name:"0001-1111"},
+			];
+		
+			$(document).ready(function(){
+				$.fn.zTree.init($("#treeDemo"), setting, zNodes);
+			});
+			
+			var vm=new Vue({
+		 	el: "#ctx",
+				data() {
+					return {
+						en:{},
+						main:{},
+						mains:{},
+						xgs:{}
+					};
+				},
+				methods:{
+				    daozhi:function(id){
+				    	$(".zhi").val(id);
+				    },zen:function(){
+				    	var that = this;
+						$.ajax({
+							url: data.ip + "maintaintypeselect",	
+							type: "post",
+							dataType: "json",
+							success: function(res) {
+								that.main=res;
+							}
+						});
+						
+						$.ajax({
+							url: data.ip + "incometypeselect",	
+							type: "post",
+							dataType: "json",
+							success: function(res) {
+								that.mains=res;
+							}
+						});
+				    	
+				    },shan:function(){
+				    	var id=$(".zhi").val();
+				    	$.ajax({
+							url: data.ip + "projectdelete",	
+							data:{"id":id},
+							type: "post",
+							dataType: "json",
+							success: function(res) {
+								if (res>0) {
+									alert("删除成功")
+								} else{
+									alert("删除失败")
+								}
+							}
+						});
+				    },bc:function(){
+				    	var maintainid=$(".xmlb").val()
+				    	var pnum=$(".xmbm").val()
+				    	var pname=$(".xmmc").val()
+				    	var incomeid=$(".xmzl").val()
+				    	var standardprice=$(".bzj").val()
+				    	var memberprice=$(".hyj").val()
+				    	var vipprice=$(".vipj").val()
+				    	var dealprice=$(".xyj").val()
+				    	var claimprice=$(".spj").val()
+				    	var insuranceprice=$(".bxj").val()
+				    	$.ajax({
+							url: data.ip + "projectinsert",	
+							data:{"maintainid":maintainid,"pnum":pnum,"pname":pname,"incomeid":incomeid,"standardprice":standardprice,"memberprice":memberprice,"vipprice":vipprice,"dealprice":dealprice,"claimprice":claimprice,"insuranceprice":insuranceprice},
+							type: "post",
+							dataType: "json",
+							success: function(res) {
+								if (res>0) {
+									alert("新增成功")
+								} else{
+									alert("新增失败")
+								}
+							}
+						});
+				    },xg:function(){
+				    	var that = this;
+						$.ajax({
+							url: data.ip + "maintaintypeselect",	
+							type: "post",
+							dataType: "json",
+							success: function(res) {
+								that.main=res;
+							}
+						});
+						
+						$.ajax({
+							url: data.ip + "incometypeselect",	
+							type: "post",
+							dataType: "json",
+							success: function(res) {
+								that.mains=res;
+							}
+						});
+						
+						var id=$(".zhi").val();
+						$.ajax({
+							url: data.ip + "projectupse",	
+							data:{"id":id},
+							type: "post",
+							dataType: "json",
+							success: function(res) {
+								that.xgs=res;
+							}
+						});
+				    },bcs:function(){
+				    	var id=$(".zhi").val();
+				    	var maintainid=$(".xmlbs").val()
+				    	var pnum=$(".xmbms").val()
+				    	var pname=$(".xmmcs").val()
+				    	var incomeid=$(".xmzls").val()
+				    	var standardprice=$(".bzjs").val()
+				    	var memberprice=$(".hyjs").val()
+				    	var vipprice=$(".vips").val()
+				    	var dealprice=$(".xyjs").val()
+				    	var claimprice=$(".spjs").val()
+				    	var insuranceprice=$(".bxjs").val()
+				    	$.ajax({
+							url: data.ip + "projectupdate",	
+							data:{"id":id,"maintainid":maintainid,"pnum":pnum,"pname":pname,"incomeid":incomeid,"standardprice":standardprice,"memberprice":memberprice,"vipprice":vipprice,"dealprice":dealprice,"claimprice":claimprice,"insuranceprice":insuranceprice},
+							type: "post",
+							dataType: "json",
+							success: function(res) {
+								if (res>0) {
+									alert("修改成功")
+								} else{
+									alert("修改失败")
+								}
+							}
+						});
+				    }
+				},created:function(){
+						var that = this;
+						$.ajax({
+							url: data.ip + "projectselect",	
+							type: "post",
+							dataType: "json",
+							success: function(res) {
+								that.en=res;
+							}
+						});
+				}
+	  })
+			
+			
+		</script>
+	</body>
+</html>

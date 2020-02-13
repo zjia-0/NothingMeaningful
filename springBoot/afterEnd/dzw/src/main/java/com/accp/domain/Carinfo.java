@@ -17,12 +17,12 @@ public class Carinfo {
 
     private String cddriverphone;
 
-    @DateTimeFormat(pattern = "yy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date cddriverbirth;
 
     private Integer clid;
     
-    @DateTimeFormat(pattern = "yy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date cdlicenseend;
 
     private String cdframe;

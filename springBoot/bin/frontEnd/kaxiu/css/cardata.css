@@ -30,3 +30,8 @@
 /*模态框*/
 #myModal .modal-content{ width: 1033px; height: 550px; }
 @media (min-width: 768px){ .modal-dialog { width: 1200px; margin: 30px auto; } }
+
+#myChePaiHao button{
+	width: 50px;
+	margin-bottom: 5px;
+}

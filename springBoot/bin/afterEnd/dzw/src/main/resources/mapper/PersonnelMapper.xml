@@ -681,4 +681,22 @@
       remark5 = #{remark5,jdbcType=VARCHAR}
     where personnelid = #{personnelid,jdbcType=VARCHAR}
   </update>
+  
+   <select id="txmlselect" resultType="com.accp.domain.txml">
+SELECT p.`personnelid`,p.`personnelname`,p.`phone`,p.`email`,s.`staffid`,d.departname,p.`sex`,p.`post`,p.`physicalstate`,p.`height`,p.`card`,p.`address`
+,p.`degree`,p.`birthplace`,p.`nation`,p.`schooltag`,p.`martial`,p.`compile`,p.`hiredate`,p.`applicable`,p.`borndate`,p.`startdate`,p.`enddate`
+FROM `personnel` p 
+INNER JOIN staff s ON p.personnelid=s.personnelid 
+INNER JOIN `department` d  ON p.remark1=d.departid
+  </select>
+  
+     <select id="txmlselectid" resultType="com.accp.domain.txml">
+SELECT p.`personnelid`,p.`personnelname`,p.`phone`,p.`email`,s.`staffid`,d.departname,p.`sex`,p.`post`,p.`physicalstate`,p.`height`,p.`card`,p.`address`
+,p.`degree`,p.`birthplace`,p.`nation`,p.`schooltag`,p.`martial`,p.`compile`,p.`hiredate`,p.`applicable`,p.`borndate`,p.`startdate`,p.`enddate`
+FROM `personnel` p 
+INNER JOIN staff s ON p.personnelid=s.personnelid 
+INNER JOIN `department` d  ON p.remark1=d.departid
+WHERE p.personnelid=#{personnelid}
+  </select>
+  
 </mapper>

@@ -4,7 +4,10 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.accp.domain.Carbelong;
@@ -55,18 +58,20 @@ public class VehicleController {
 		public List<Insurance> bindInsurance(){
 			return vehicleService.bindInsurance();
 		}
-	//新增车辆信息
-	@GetMapping("/insertCarinfo")
-	public int insertCarinfo(Carinfo carinfo) {
+	//新增车辆信息	
+	@PostMapping("/addCarinfo")	
+	@ResponseBody
+	public int insertCarinfo(@RequestBody Carinfo carinfo) {
 		return vehicleService.insertCarinfo(carinfo);
 	}
 	//修改车辆信息
-	@GetMapping("/updateCarinfo")
-	public int updateCarinfo(Carinfo carinfo) {
+	@PostMapping("/updCarinfo")	
+	@ResponseBody
+	public int updateCarinfo(@RequestBody Carinfo carinfo) {
 		return vehicleService.updateCarinfo(carinfo);
 	}
 	//删除车辆信息
-	@GetMapping("/deleteCarinfo")
+	@GetMapping("/delCarinfo")
 	public int deleteCarinfo(String cdlicense) {
 		return vehicleService.deleteCarinfo(cdlicense);
 	}

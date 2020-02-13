@@ -27,6 +27,46 @@
     <result column="remark4" property="remark4" jdbcType="VARCHAR" />
     <result column="remark5" property="remark5" jdbcType="VARCHAR" />
   </resultMap>
+  <resultMap id="BaseResultMapTwo" type="com.accp.domain.Customer" >
+    <id column="cno" property="cno" jdbcType="VARCHAR" />
+    <result column="ctno" property="ctno" jdbcType="VARCHAR" />
+    <result column="cname" property="cname" jdbcType="VARCHAR" />
+    <result column="cpeople" property="cpeople" jdbcType="VARCHAR" />
+    <result column="cphone" property="cphone" jdbcType="VARCHAR" />
+    <result column="caddress" property="caddress" jdbcType="VARCHAR" />
+    <result column="cbirthday" property="cbirthday" jdbcType="TIMESTAMP" />
+    <result column="cperiod" property="cperiod" jdbcType="INTEGER" />
+    <result column="climit" property="climit" jdbcType="REAL" />
+    <result column="personnelid" property="personnelid" jdbcType="INTEGER" />
+    <result column="cadviserphone" property="cadviserphone" jdbcType="VARCHAR" />
+    <result column="cprovince" property="cprovince" jdbcType="VARCHAR" />
+    <result column="cremark" property="cremark" jdbcType="VARCHAR" />
+    <result column="ctaxes" property="ctaxes" jdbcType="VARCHAR" />
+    <result column="cregistphone" property="cregistphone" jdbcType="VARCHAR" />
+    <result column="cbank" property="cbank" jdbcType="VARCHAR" />
+    <result column="cbanknumber" property="cbanknumber" jdbcType="VARCHAR" />
+    <result column="cdlicense" property="cdlicense" jdbcType="VARCHAR" />
+    <result column="cregistaddress" property="cregistaddress" jdbcType="VARCHAR" />
+        
+    <result column="ctname" property="ctname" jdbcType="VARCHAR" />
+    <result column="vno" property="vno" jdbcType="VARCHAR" />
+    <result column="vjoindate" property="vjoindate" jdbcType="DATE" />
+    <result column="venddate" property="venddate" jdbcType="DATE" />
+    <result column="currentjifen" property="currentjifen" jdbcType="INTEGER" />
+    <result column="money" property="money" jdbcType="DOUBLE" />
+    <result column="remark1" property="remark1" jdbcType="VARCHAR" />
+    <result column="remark2" property="remark2" jdbcType="VARCHAR" />
+    <result column="remark3" property="remark3" jdbcType="VARCHAR" />
+    <result column="remark4" property="remark4" jdbcType="VARCHAR" />
+    <result column="remark5" property="remark5" jdbcType="VARCHAR" />
+  </resultMap>
+  <select id="queryKey" resultMap="BaseResultMapTwo" parameterType="java.lang.String" >
+  		SELECT cus.*,(SELECT ctname FROM customertype WHERE customertype.ctno=cus.`ctno`) AS ctname
+		,(SELECT personnelname FROM `personnel` WHERE personnel.`personnelid`=cus.`personnelid`) AS personnelname
+		,vip.`vno`,vip.`vjoindate`,vip.`venddate`,vip.`currentjifen`,vip.`money` FROM customer cus
+		LEFT JOIN vip ON vip.`cno`=cus.`cno`
+		WHERE cus.`cno`=#{cno}
+  </select>
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
