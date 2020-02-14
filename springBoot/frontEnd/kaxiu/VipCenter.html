@@ -59,7 +59,7 @@
 						<td>
 							<button class="btn btn-danger" @click="deletevip(item)" type="button">注销</button>
 							<button class="btn btn-danger" @click="upJifen(item)" type="button">积分清空</button>
-							<button class="btn btn-success" type="button" data-toggle="modal" data-target="#PayModal"><span class="glyphicon glyphicon-zoom-in"></span>&nbsp;会员充值</button>
+							<button class="btn btn-success" @click="opendeposit(item)" type="button" data-toggle="modal" data-target="#PayModal"><span class="glyphicon glyphicon-zoom-in"></span>&nbsp;会员充值</button>
 						</td>
 					</tr>
 				</table>
@@ -199,19 +199,37 @@
 			    </div>
 			  </div>
 			</div>
+			
 			<!-- Modal -->
 			<div class="modal fade" data-backdrop="static" data-keyboard="false" id="PayModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-			  <div class="modal-dialog" role="document">
+			  <div class="modal-dialog" role="document" style="width: 700px;">
 			    <div class="modal-content">
 			      <div class="modal-header">
 			         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" class="btn btn-default">关闭</span></button>
 			        <h4 class="modal-title" id="myModalLabel">会员充值</h4>
 			      </div>
 			      <div class="modal-body">
-					
+						<form class="form-inline">
+							<div class="form-group">
+								<div class="text-center row" style="margin-bottom: 10px;">
+					      			<div class="input-group col-xs-3">
+									  <span class="input-group-addon" id="sizing-addon1">当前余额</span>
+									  <input type="text" name="money" v-model="moneys" class="form-control" placeholder="" aria-describedby="sizing-addon1">
+									</div>
+									<div class="input-group col-xs-3">
+									  <span class="input-group-addon" id="sizing-addon2">奖励积分</span>
+									  <input type="text" v-model="scores" class="form-control" placeholder="" aria-describedby="sizing-addon2">
+									</div>
+									<div class="input-group col-xs-3">
+									  <span class="input-group-addon" id="sizing-addon3">充值金额</span>
+									  <input type="text" @change="changes()" id="prices" value="" class="form-control" aria-describedby="sizing-addon3">
+									</div>
+					      		</div>
+							</div>
+						</form>
 			      </div>
 			      <div class="modal-footer">
-			        <button type="button" class="btn btn-primary">确定充值</button>
+			        <button type="button" @click="updateMoney()" class="btn btn-primary">确定充值</button>
 			      </div>
 			    </div>
 			  </div>
@@ -232,7 +250,10 @@
 						vipadd:{currentjifen:0},
 						cust:{cno:0},
 						updatecust:{},
-						updatevip:{}
+						updatevip:{},
+						scores:0,
+						moneys:0,
+						upvipmoney:{}
 					}
 				},methods:{
 					queryName(){
@@ -316,6 +337,31 @@
 								}
 							});
 						}
+					},opendeposit(item){
+						this.vipadd={};
+						this.upvipmoney=item;
+						this.moneys=item.money;
+					},changes(){
+						var price=parseInt($("#prices").val());
+						this.scores=parseInt(price*0.1);
+						this.upvipmoney.money=price;
+					},updateMoney(){
+						$.ajax({
+							type:"put",
+							url:data.ip+"vip/upMoney",
+							data:JSON.stringify(this.upvipmoney),
+							dataType:"json",
+							contentType:"application/json",
+							xhrFields: {
+								withCredentials: true
+							},
+							success:function(result){
+								if(result>0){
+									alert("充值成功！");
+								}
+								location.reload();
+							}
+						});
 					}
 				},created:function(){
 					var that=this;
@@ -358,6 +404,7 @@
 				
 			});
 			function queryByName(name){
+			
 				$.ajax({
 					type:"get",
 					url:data.ip+"vip/find",

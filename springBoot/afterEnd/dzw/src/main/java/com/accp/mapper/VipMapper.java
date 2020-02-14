@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface VipMapper {
+	int upMoney(Vip vip);
 	int jifenReset(String vno);
 	int upZt(String vno);
 	List<Vip> findMaxCno();

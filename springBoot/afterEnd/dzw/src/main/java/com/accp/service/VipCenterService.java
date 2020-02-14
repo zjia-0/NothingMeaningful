@@ -73,4 +73,7 @@ public class VipCenterService {
 	public int upJifen(String vno) {
 		return vMapper.jifenReset(vno);
 	}
+	public int upMoney(Vip vip) {
+		return vMapper.upMoney(vip);
+	}
 }

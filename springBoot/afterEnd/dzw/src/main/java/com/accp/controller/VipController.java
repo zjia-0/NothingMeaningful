@@ -62,4 +62,10 @@ public class VipController {
 	public int upJifen(String vno) {
 		return Vservice.upJifen(vno);
 	}
+	@PutMapping("/upMoney")
+	public int upMoney(@RequestBody Vip vip) {
+		double price=vip.getMoney();
+		vip.setCurrentjifen((int)(price*0.1));
+		return Vservice.upMoney(vip);
+	}
 }
