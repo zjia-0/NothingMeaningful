@@ -26,7 +26,7 @@
 		<!-- 实体生成位置 -->
 		<javaModelGenerator targetPackage="com.accp.domain"
 			targetProject="src/main/java" />
-		<!-- mapper配置文件生成 -->
+		<!-- mapper配置文件生成 --> 
 		<sqlMapGenerator targetPackage="mapper"
 			targetProject="src/main/resources" />
 		<!-- mapper接口生成 -->
