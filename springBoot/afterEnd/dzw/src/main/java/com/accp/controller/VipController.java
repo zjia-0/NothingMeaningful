@@ -68,4 +68,4 @@ public class VipController {
 		vip.setCurrentjifen((int)(price*0.1));
 		return Vservice.upMoney(vip);
 	}
-}
+} 
