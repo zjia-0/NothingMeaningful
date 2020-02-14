@@ -898,14 +898,14 @@
 								var ck = $("[name=ygid]");
 									for(var i =0;i<ck.length;i++){
 										if(ck[i].checked){
-											var staffid = $(ck[i]).attr("bh");
+											var staffid = $(ck[i]).attr("bh");//员工编号
 												
 											
 												var ck1 = $("[name=jsid]");
 												for(var i =0;i<ck1.length;i++){
 													if(ck1[i].checked){
-														var roleid = $(ck1[i]).attr("jsids");
-														alert(roleid+staffid)
+														var roleid = $(ck1[i]).attr("jsids");//角色id
+														
 															$.ajax({
 																url:data.ip + "updatejs",
 																data:{"staffid":staffid,"roleid":roleid},

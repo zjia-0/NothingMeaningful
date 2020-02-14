@@ -303,4 +303,9 @@
       remark5 = #{remark5,jdbcType=VARCHAR}
     where carid = #{carid,jdbcType=INTEGER}
   </update>
+  
+  <select id="selectid" resultType="com.accp.domain.wqcl">
+  SELECT c.carid,c.platenumber,c.brand,c.models,c.mileage,c.departid,b.id,b.name FROM cars c INNER JOIN banzu b ON c.departid =b.id
+WHERE c.carid=#{carid}
+  </select>
 </mapper>

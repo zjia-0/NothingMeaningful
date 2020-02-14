@@ -4,9 +4,12 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.accp.domain.Banzu;
 import com.accp.domain.Cars;
+import com.accp.domain.wqcl;
 import com.accp.service.CarsService;
 
 @RestController
@@ -22,7 +25,7 @@ public class CarsController {//外勤车辆
 	
 	//根据点击进行单个查询
 		@PostMapping("/carids")
-		public Cars selectid(int carid) {
+		public wqcl selectid(String carid) {
 			
 			return cser.selectid(carid);
 		}
@@ -43,5 +46,11 @@ public class CarsController {//外勤车辆
 		@PostMapping("/carsRemove")
 		public int ArtisanstarsRemove(int carid) {
 			return cser.ArtisanstarsRemove(carid);
+		}
+		
+		//查询班组
+		@RequestMapping("/selectbz")
+		public Banzu selectbz(String id) {
+			return cser.selectbz(id);
 		}
 }

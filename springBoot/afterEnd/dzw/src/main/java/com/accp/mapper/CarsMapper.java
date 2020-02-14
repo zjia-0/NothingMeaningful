@@ -2,10 +2,14 @@ package com.accp.mapper;
 
 import com.accp.domain.Cars;
 import com.accp.domain.CarsExample;
+import com.accp.domain.wqcl;
+
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface CarsMapper {
+	wqcl selectid(String carid);
+	
     int countByExample(CarsExample example);
 
     int deleteByExample(CarsExample example);
