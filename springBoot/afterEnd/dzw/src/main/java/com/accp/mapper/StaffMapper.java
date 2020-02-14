@@ -6,6 +6,8 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface StaffMapper {
+	int updatejs(@Param("staffid") String staffid, @Param("roleid") String roleid);
+	
     int countByExample(StaffExample example);
 
     int deleteByExample(StaffExample example);

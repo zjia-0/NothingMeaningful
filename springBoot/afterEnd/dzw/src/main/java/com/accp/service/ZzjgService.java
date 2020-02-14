@@ -8,11 +8,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.accp.domain.Department;
 import com.accp.domain.Personnel;
+import com.accp.domain.Roles;
 import com.accp.domain.Staff;
 import com.accp.domain.Store;
 import com.accp.domain.txml;
 import com.accp.mapper.DepartmentMapper;
 import com.accp.mapper.PersonnelMapper;
+import com.accp.mapper.RolesMapper;
 import com.accp.mapper.StaffMapper;
 import com.accp.mapper.StoreMapper;
 
@@ -31,6 +33,9 @@ public class ZzjgService {
 	
 	@Autowired
 	StaffMapper stamapp;
+	
+	@Autowired
+	RolesMapper rmapp;
 
 	// 查询门店
 	public List<Store> selectmendian() {
@@ -104,5 +109,15 @@ public class ZzjgService {
 	//删除部门
 	public int removebm(String departid) {
 		return dmapp.deleteByPrimaryKey(departid);
+	}
+	
+	//查询角色
+	public List<Roles> js(){
+		return rmapp.selectByExample(null);
+	}
+	
+	//修改员工编号表
+	public int updatejs(String staffid,String roleid) {
+		return stamapp.updatejs(staffid, roleid);
 	}
 }

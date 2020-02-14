@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.accp.domain.Department;
 import com.accp.domain.Personnel;
+import com.accp.domain.Roles;
+import com.accp.domain.Staff;
 import com.accp.domain.Store;
 import com.accp.domain.txml;
 import com.accp.service.ZzjgService;
@@ -97,5 +99,17 @@ public class ZzjgController {
 	public int removebm(String departid) {
 		System.out.println(departid+"123");
 		return zser.removebm(departid);
+	}
+	
+	//查询角色
+	@RequestMapping("/selectjs")
+	public List<Roles> js(){
+		return zser.js();
+	}
+	
+	//修改员工编号表
+	@RequestMapping("/updatejs")
+	public int updatejs(String staffid,String roleid) {
+		return zser.updatejs(staffid,roleid);
 	}
 }

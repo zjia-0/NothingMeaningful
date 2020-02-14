@@ -402,6 +402,34 @@
 			</div>
 		</div>
 
+		<!--员工角色模态框-->
+		<div class="modal fade" tabindex="-1" role="dialog" id="ygjssmtk">
+			<div class="modal-dialog" role="document" style="width:400px;">
+				<div class="modal-content" id="dhl">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							<div class="col-md-5">
+								<h4>员工角色</h4>
+							</div>
+							<div>
+								<button type="button" @click="ygjsbaocun" class="btn btn-success" style="vertical-align: middle; width: 150px;">保存</button>&nbsp;&nbsp;&nbsp;
+							</div>
+					</div>
+					<div>
+						<table class="table table-hover table-bordered">
+							<tr>
+								<td>角色名称</td>
+								<td>选择</td>
+							</tr>
+							<tr v-for="jss in ygjs">
+								<td>{{jss.name}}</td>
+								<td><input type="radio" name="jsid" v-bind:jsids="jss.id"></td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
 		
 		<div class="container-fluid" >
 			<div class="row" style="border: 1px solid #E6E6E6;">
@@ -421,9 +449,9 @@
 				  <li @click="removeyg"><span class="iconfont" style="vertical-align: middle">&#xe614;</span><a href="#" style="vertical-align: middle">删除</a></li>
 				  <li @click="chak"><span class="iconfont" style="vertical-align: middle">&#xe78a;</span><a href="#" style="vertical-align: middle" data-toggle="modal" data-target="#cxygmtk">查询</a></li>
 				  <li><span class="iconfont" style="vertical-align: middle">&#xe648;</span><a href="#" style="vertical-align: middle">置空密码</a></li>
-				  <li><span class="iconfont" style="vertical-align: middle">&#xe6a5;</span><a href="#" style="vertical-align: middle">导出</a></li>
+				  <li @click="daochu"><span class="iconfont" style="vertical-align: middle">&#xe6a5;</span><a href="#" style="vertical-align: middle">导出</a></li>
 				  <li><span class="iconfont" style="vertical-align: middle">&#xe6b6;</span><a href="#" style="vertical-align: middle">导入</a></li>
-				  <li><span class="iconfont" style="vertical-align: middle">&#xe68e;</span><a href="#" style="vertical-align: middle" >员工角色</a></li>
+				  <li data-toggle="modal" data-target="#ygjssmtk" @click="js"><span class="iconfont" style="vertical-align: middle">&#xe68e;</span><a href="#" style="vertical-align: middle" >员工角色</a></li>
 				  <li><span class="iconfont" style="vertical-align: middle">&#xe613;</span><a href="#" style="vertical-align: middle">字段设置</a></li>
 				</ol>
 				<div id="zsgc" style="display:none">
@@ -490,7 +518,7 @@
 						</tr>
 						
 						<tr v-for="yg in yuangong">
-							<td><input type="radio" name="ygid" v-bind:ygid="yg.personnelid"></td>
+							<td><input type="radio" name="ygid" v-bind:ygid="yg.personnelid"  v-bind:bh="yg.staffid"></td>
 							<td>{{yg.storename}}</td>
 							<td>{{yg.departid}}</td>
 							<td>{{yg.departname}}</td>
@@ -556,7 +584,8 @@
 								ids:{},
 								update:{},  
 								personnel:{},
-								xzbumen:{}
+								xzbumen:{},
+								ygjs:{}
 							}
 						},methods:{
 						chabumen:function(index){
@@ -699,7 +728,7 @@
 								var ck = $("[name=ygid]");
 									for(var i =0;i<ck.length;i++){
 										if(ck[i].checked){
-											var personnelid = $(ck[i]).attr("ygid");
+											var personnelid = $(ck[i]).attr("bh");
 												
 												$.ajax({
 													url:data.ip + "selectupdate",
@@ -855,7 +884,60 @@
 												});
 										}
 									}
-							}
+						},
+						daochu:function(){
+								var ck = $("[name=cks]");
+									for(var i =0;i<ck.length;i++){
+										if(ck[i].checked){
+											var mid = $(ck[i]).attr("sid");
+											window.location.href="http://127.0.0.1:8080/exportexcel/export?mid="+mid;
+										}
+									}
+						},
+						ygjsbaocun:function(){
+								var ck = $("[name=ygid]");
+									for(var i =0;i<ck.length;i++){
+										if(ck[i].checked){
+											var staffid = $(ck[i]).attr("bh");
+												
+											
+												var ck1 = $("[name=jsid]");
+												for(var i =0;i<ck1.length;i++){
+													if(ck1[i].checked){
+														var roleid = $(ck1[i]).attr("jsids");
+														alert(roleid+staffid)
+															$.ajax({
+																url:data.ip + "updatejs",
+																data:{"staffid":staffid,"roleid":roleid},
+																type:"post",
+																dataType:"json",
+																"success":function(re){
+														
+																	if(re>0){
+																		alert("成功")
+																	}
+																	
+																}
+															});
+															
+													}
+												}
+										}
+									}
+						},
+						js:function(){
+							$.ajax({
+								url:data.ip + "selectjs",
+						
+								type:"post",
+								dataType:"json",
+								success:function(result){
+									vm.ygjs=result;
+								
+								}
+							});					
+							
+						}
 				}
 			});
 				
