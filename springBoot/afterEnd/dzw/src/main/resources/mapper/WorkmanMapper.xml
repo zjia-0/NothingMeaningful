@@ -300,4 +300,12 @@ INNER JOIN banzu b ON w.remark2 =b.id
        WHERE  b.banzuid=#{banzuid}
       </if>
   </select>
+  
+  <select id="jgxiugai" resultType="com.accp.domain.bzjg">
+    SELECT w.workid,w.`stars`,w.`craft`,w.`brand`,w.`remark1`,w.remark2,p.`personnelid`,p.`personnelname`,p.`enterid`,
+p.`sex`,p.`phone`,p.`card`,p.`address`,p.`borndate`,b.id,b.name,p.`bankcode`,b.banzuid
+ FROM `workman` w INNER JOIN `personnel` p ON w.personnelid=p.personnelid
+INNER JOIN banzu b ON w.remark2 =b.id
+WHERE w.workid=#{workid}
+  </select>
 </mapper>
