@@ -8,14 +8,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.accp.domain.Banzu;
+import com.accp.domain.Personnel;
 import com.accp.domain.bzjg;
 import com.accp.service.BzjgService;
+import com.accp.service.ZzjgService;
 
 @RestController
 public class BzjgController {
 
 	@Autowired
 	BzjgService bser;
+	
+	@Autowired
+	ZzjgService zser;
 	
 	//查询班组树状图
 	@RequestMapping("/bzszt")
@@ -36,4 +41,59 @@ public class BzjgController {
 	}
 	
 
+	//新增员工
+	@RequestMapping("/addjg")
+	public int addjg(Personnel per,String workid,String stars,String craft,String brand,String remark1,String remark2) {
+		return bser.addjg(per, workid, stars, craft, brand, remark1, remark2);
+	}
+	
+	//新增模态框查询班组id
+	@RequestMapping("/addbanzuid")
+	public Banzu addbanzuid(String id) {
+			return bser.addbanzuid(id);
+	}
+	
+	//根据id查询技工修改
+	@RequestMapping("/jgxiugaiid")
+	public bzjg jgxiugai(String workid) {
+		return bser.jgxiugai(workid);
+	}
+	
+
+
+	//修改员工
+	@RequestMapping("/updatejg")
+	public int updatejg(Personnel per,String workid,String stars,String craft,String brand,String remark1,String remark2) {
+		return bser.updatejg(per, workid, stars, craft, brand, remark1, remark2);
+	}
+	
+	//删除技工
+	@RequestMapping("/removejg")
+	public int removejg(String workid) {
+		return bser.removejg(workid);
+	}
+	
+	//新增班组
+	@RequestMapping("/bzadd")
+	public int bzadd(Banzu bz) {
+			return bser.bzadd(bz);
+	}
+	
+	//修改树状图
+	@RequestMapping("/xiugaijgid")
+	public Banzu xiugaijgid(String id) {
+		return bser.xiugaijgid(id);
+	}
+	
+	//修改班组
+	@RequestMapping("/updatebz")
+	public int updatebz(Banzu bz) {
+			return bser.updatebz(bz);
+	}
+	
+	//删除班组
+	@RequestMapping("/removebzid")
+	public int removebzid(String id) {
+			return bser.removebzid(id);
+	}
 }

@@ -21,7 +21,29 @@ public class Workman {
 
     private String remark5;
 
-    public String getWorkid() {
+    
+    
+    public Workman(String workid, String stars, String craft, String brand, String personnelid, String remark1,
+			String remark2) {
+		super();
+		this.workid = workid;
+		this.stars = stars;
+		this.craft = craft;
+		this.brand = brand;
+		this.personnelid = personnelid;
+		this.remark1 = remark1;
+		this.remark2 = remark2;
+	}
+
+    
+    
+	public Workman() {
+		super();
+	}
+
+
+
+	public String getWorkid() {
         return workid;
     }
 

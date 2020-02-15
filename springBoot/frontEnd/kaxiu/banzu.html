@@ -58,23 +58,27 @@
 			<div id="mydiv_1">
 				<ul>
 					<li><a  class="" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-menu-hamburger"></span>增加员工</a></li>
-					<li><a  class="" data-toggle="modal" data-target="#myModalupdate"> <span class="glyphicon glyphicon-edit"></span>修改</a></li>
-					<li> <span class="glyphicon glyphicon-remove-circle"></span>删除</li>
-					<li> <span class="glyphicon glyphicon-search"></span>查询</li>
+					<li @click="xiugaiid"><a  class="" data-toggle="modal" data-target="#myModalupdate"> <span class="glyphicon glyphicon-edit"></span>修改</a></li>
+					<li @click="removejg"> <span class="glyphicon glyphicon-remove-circle"></span>删除</li>
+					<li @click="chakanjg" data-toggle="modal" data-target="#myModalupdates"> <span class="glyphicon glyphicon-search"></span>查询</li>
 					<li> <span class="glyphicon glyphicon-asterisk"></span>置空密码</li>
 					<li> <span class="glyphicon glyphicon-globe"></span>班组权重</li>
 					<li> <span class="glyphicon glyphicon-log-in"></span>导出</li>
-					<li><a  class="" data-toggle="modal" data-target="#myModalbz" id="xzbz"> <span class="glyphicon glyphicon-menu-hamburger"></span>新增班组</a></li>
 				</ul>
 			</div>
+				<div id="zsgc" style="display:none">
+					<button data-toggle="modal" data-target="#myModalbzsss" >新增班组</button>
+					<button data-toggle="modal" data-target="#myModalbzssss" @click="xiugaijgid">修改班组</button>
+					<button @click="removebz">删除班组</button>
+				</div>
 			
 			<div id="mydiv_2" class="col-md-2">
 				<ul v-for="item in list" >
-					<li  style="font-size:17px" @click="chabanzu(item.id)" v-bind:sid="item.id" name="ck">{{item.id}}--{{item.name}}</li>
+					<li  style="font-size:17px" @click="chabanzu(item.id)"><input type="radio" name="cka" name="ckas" v-bind:sid="item.id" @click="banzu"/>{{item.id}}--{{item.name}}</li>
 					<br />
 					
 								<ul v-for="it in lists" >
-									<li v-if="item.id==it.banzuid"><input type="radio" name="cks" v-bind:sid="it.id" @click="banzu"/>{{it.id}}--{{it.name}}</li>
+									<li v-if="item.id==it.banzuid"><input type="radio" name="cka" v-bind:sid="it.id" @click="banzu"/>{{it.id}}--{{it.name}}</li>
 								</ul>
 				</ul>
 				
@@ -106,7 +110,7 @@
 					</thead>
 					<tbody>
 						<tr v-for="jg in jigong">	
-							<td><input type="radio"/></td>
+							<td><input type="radio" name="jgid" v-bind:jgid="jg.workid"/></td>
 							<td>{{jg.id}}</td>
 							<td>{{jg.name}}</td>
 							<td>{{jg.workid}}</td>
@@ -128,7 +132,7 @@
 					</tbody>
 				</table>
 			</div>
-		</div>
+		
 		
 		
 		<!-- 增加 -->
@@ -139,60 +143,52 @@
 		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 				<ul>
 					<li><h4 class="modal-title" id="myModalLabel">技工资料</h4></li>
-					<li style="padding-left: 700px;  padding-top: 10px;"><button type="button" class="btn btn-success">保存</button></li>
+					<li style="padding-left: 700px;  padding-top: 10px;"><button type="button" @click="addjgs" class="btn btn-success">保存</button></li>
 				</ul>
 		      </div>
 		      <div class="modal-body">
 				<div>
 					<table>
 						<tr>
-							<td>技工编号 <input type="text"></td>
-							<td>技工姓名 <input type="text"></td>
+							 <input type="hidden" v-model="count" class="personnelid" >
+							<td>技工编号 <input type="text" class="workid"></td>
+							<td>技工姓名 <input type="text" class="personnelname"></td>
 							<td>
-								性别 
-								<select>
-									<option value="男">男</option>
-									<option value="男">女</option>
-								</select>
+								性别  <input type="text" class="sex">
 							</td>
-							<td><input type="checkbox">组长</td>
+							<td><input type="checkbox" id="box" checked>组长</td>
 						</tr>
 						<tr>
-							<td>所在班组 <input type="text"></td>
-							<td>手机 <input type="text"></td>
-							<td>登录账号 <input type="text"></td>
+							<td >所在班组 <input type="text" v-model="xzbanid.id" class="remark2" readonly="readonly"/> <input type="text" v-model="xzbanid.name" readonly="readonly"/></td>
+							<td>手机 <input type="text" class="phone"></td>
+							<td>登录账号 <input type="text" class="enterid"></td>
 						</tr>
 						<tr>
-							<td>地址 <input type="text"></td>
-							<td>出生日期 <input type="datetime"></td>
-							<td>微信号 <input type="text"></td>
+							<td>地址 <input type="text" ></td>
+							<td>出生日期 <input type="datetime" class="borndate"></td>
 						</tr>
 						<tr>
-							<td>身份证号 <input type="text"></td>
-							<td>户口地址 <input type="text"></td>
+							<td>身份证号 <input type="text" class="card"></td>
+							<td>户口地址 <input type="text" class="card"></td>
 						</tr>
 						<tr>
 							<td>
-								开户银行
-								<select>
-									<option value="男">男</option>
-									<option value="男">女</option>
-								</select>
+								开户银行  <input type="text">
 							</td>
-							<td>银行账号 <input type="text"></td>
+							<td>银行账号 <input type="text" class="bankcode"></td>
 							<td>
 								星级
-								<select>
-									<option value="男">男</option>
-									<option value="男">女</option>
+								<select class="xlk">
+									<option v-for="xj in jgxj" :value="xj.starlevelname" >{{xj.starlevelname}}</option>
+									
 								</select>
 							</td>
 						</tr>
 						<tr>
-							<td>维修工种 <input type="text"></td>
+							<td>维修工种 <input type="text" class="craft"></td>
 						</tr>
 						<tr>
-							<td>维修品牌 <input type="text"></td>
+							<td>维修品牌 <input type="text" class="brand"></td>
 						</tr>
 					</table>
 				</div>
@@ -207,68 +203,63 @@
 		</div>
 		<!--修改-->
 		<div class="modal fade bs-example-modal-lg" id="myModalupdate" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-		  <div class="modal-dialog modal-lg" role="document" >
+		 <div class="modal-dialog modal-lg" role="document" >
 		    <div class="modal-content"  style="width: 1100px;">
-		      <div class="modal-header" id="mydiv_5">
+		      <div class="modal-header" id="mydiv_4">
 		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 				<ul>
-					<li><h4 class="modal-title" id="myModalLabel1">技工资料</h4></li>
-					<li style="padding-left: 800px; "><button type="button" class="btn btn-success">保存</button></li>
+					<li><h4 class="modal-title" id="myModalLabel">技工资料</h4></li>
+					<li style="padding-left: 700px;  padding-top: 10px;"><button type="button"  @click="updatejg" class="btn btn-success">保存</button></li>
 				</ul>
 		      </div>
 		      <div class="modal-body">
 				<div>
 					<table>
 						<tr>
-							<td>技工编号 <input type="text"></td>
-							<td>技工姓名 <input type="text"></td>
+							 <input type="text" v-model="jgup.personnelid" class="personnelid1" >
+							<td>技工编号 <input type="text" class="workid1" v-model="jgup.workid"></td>
+							<td>技工姓名 <input type="text" class="personnelname1" v-model="jgup.personnelname"></td>
 							<td>
-								性别 
-								<select>
-									<option value="男">男</option>
-									<option value="男">女</option>
-								</select>
+								性别  <input type="text" class="sex" v-model="jgup.sex1">
 							</td>
-							<td><input type="checkbox">组长</td>
+						
+							<td ><input type="checkbox" id="boxt" checked>组长</td>
+							
 						</tr>
 						<tr>
-							<td>所在班组 <input type="text"></td>
-							<td>手机 <input type="text"></td>
-							<td>登录账号 <input type="text"></td>
+							<td >所在班组 <input type="text"  v-model="jgup.id" class="remark21" readonly="readonly"/> <input type="text" v-model="jgup.name" readonly="readonly"/></td>
+							<td>手机 <input type="text" class="phone1" v-model="jgup.phone"></td>
+							<td>登录账号 <input type="text" class="enterid1" v-model="jgup.enterid"></td>
 						</tr>
 						<tr>
-							<td>地址 <input type="text"></td>
-							<td>出生日期 <input type="datetime"></td>
-							<td>微信号 <input type="text"></td>
+							<td>地址 <input type="text" v-model="jgup.address"></td>
+							<td>出生日期 <input type="datetime" class="borndate1" v-model="jgup.borndate"></td>
 						</tr>
 						<tr>
-							<td>身份证号 <input type="text"></td>
-							<td>户口地址 <input type="text"></td>
+							<td>身份证号 <input type="text" class="card1" v-model="jgup.card"></td>
+							<td>户口地址 <input type="text" class="address1" v-model="jgup.address"></td>
 						</tr>
 						<tr>
 							<td>
-								开户银行
-								<select>
-									<option value="男">男</option>
-									<option value="男">女</option>
-								</select>
+								开户银行  <input type="text" value="建设">
 							</td>
-							<td>银行账号 <input type="text"></td>
+							<td>银行账号 <input type="text" class="bankcode1" v-model="jgup.bankcode"></td>
 							<td>
 								星级
-								<select>
-									<option value="男">男</option>
-									<option value="男">女</option>
+								<select class="xlk1">
+									
+									<option v-for="xj in jgxj" :value="xj.starlevelname" >{{xj.starlevelname}}</option>
+									
 								</select>
 							</td>
 						</tr>
 						<tr>
-							<td>维修工种 <input type="text"></td>
+							<td>维修工种 <input type="text" class="craft1" v-model="jgup.craft"></td>
 						</tr>
 						<tr>
-							<td>维修品牌 <input type="text"></td>
+							<td>维修品牌 <input type="text" class="brand1" v-model="jgup.brand"></td>
 						</tr>
-					</table>		
+					</table>
 				</div>
 		      </div>
 		      <div class="modal-footer">
@@ -279,29 +270,130 @@
 		  </div>
 		  
 		</div>
+		<!--查询-->
+		<div class="modal fade bs-example-modal-lg" id="myModalupdates" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		 <div class="modal-dialog modal-lg" role="document" >
+		    <div class="modal-content"  style="width: 1100px;">
+		      <div class="modal-header" id="mydiv_4">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<ul>
+					<li><h4 class="modal-title" id="myModalLabel">技工资料</h4></li>
+					<li style="padding-left: 700px;  padding-top: 10px;"><button type="button"  @click="updatejg" class="btn btn-success">保存</button></li>
+				</ul>
+		      </div>
+		      <div class="modal-body">
+				<div>
+					<table>
+						<tr>
+							 <input type="text" v-model="jgup.personnelid" class="personnelid1" >
+							<td>技工编号 <input type="text" class="workid1" v-model="jgup.workid"></td>
+							<td>技工姓名 <input type="text" class="personnelname1" v-model="jgup.personnelname"></td>
+							<td>
+								性别  <input type="text" class="sex" v-model="jgup.sex">
+							</td>
+						
+							<td ><input type="checkbox" v-if="jgup.remark1=='组长'" checked >组长 <input type="checkbox" v-if="jgup.remark1==''"  ></td>
+							
+						</tr>
+						<tr>
+							<td >所在班组 <input type="text"  v-model="jgup.id" class="remark21" readonly="readonly"/> <input type="text" v-model="jgup.name" readonly="readonly"/></td>
+							<td>手机 <input type="text" class="phone1" v-model="jgup.phone"></td>
+							<td>登录账号 <input type="text" class="enterid1" v-model="jgup.enterid"></td>
+						</tr>
+						<tr>
+							<td>地址 <input type="text" v-model="jgup.address"></td>
+							<td>出生日期 <input type="datetime" class="borndate1" v-model="jgup.borndate"></td>
+						</tr>
+						<tr>
+							<td>身份证号 <input type="text" class="card1" v-model="jgup.card"></td>
+							<td>户口地址 <input type="text" class="address1" v-model="jgup.address"></td>
+						</tr>
+						<tr>
+							<td>
+								开户银行  <input type="text" value="建设">
+							</td>
+							<td>银行账号 <input type="text" class="bankcode1" v-model="jgup.bankcode"></td>
+							<td>
+								星级:<input type="text" v-model="jgup.stars" />
+							</td>
+						</tr>
+						<tr>
+							<td>维修工种 <input type="text" class="craft1" v-model="jgup.craft"></td>
+						</tr>
+						<tr>
+							<td>维修品牌 <input type="text" class="brand1" v-model="jgup.brand"></td>
+						</tr>
+					</table>
+				</div>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		        <button type="button" class="btn btn-primary">Save changes</button>
+		      </div>
+		    </div>
+		  </div>
+		  
+		</div>
+			
+			
 		<!--新增班组-->
-		<div class="modal fade " id="myModalbz" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal fade " id="myModalbzsss" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 		  <div class="modal-dialog " role="document" >
 		    <div class="modal-content"  style="width: 500px;">
 		      <div class="modal-header" id="mydiv_6">
 		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 				
 				<ul>
-					<li><h4 class="modal-title" id="myModalLabel2">维修班组</h4></li>
-					<li style="padding-left: 200px;  "><button type="button" class="btn btn-success">保存</button></li>
+					<li><h4 class="modal-title" id="myModalLabel2">新增班组</h4></li>
+					<li style="padding-left: 200px;  "><button type="button" @click="bzaddsss" class="btn btn-success">保存</button></li>
 				</ul>
 		      </div>
 		      <div class="modal-body">
 				<div>
 					<table class="table table-bordered">
 						<tr>
-							<td>班组编号<input type="text"></td>		
+							<td>班组编号<input type="text" class="id"></td>		
 						</tr>
 						<tr>
-							<td>班组名称<input type="text"></td>		
+							<td>班组名称<input type="text" class="name"></td>		
 						</tr>
 						<tr>
-							<td>班组权重<input type="text"></td>		
+							<td>班组权重<input type="text" class="gn"></td>		
+						</tr>
+					</table>
+				</div>
+		      </div>
+		      <div class="modal-footer">
+		       <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		        <button type="button" class="btn btn-primary">Save changes</button> -->
+		      </div>
+		    </div>
+		  </div>
+		</div>
+		
+		<!--修改班组-->
+		<div class="modal fade " id="myModalbzssss" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		  <div class="modal-dialog " role="document" >
+		    <div class="modal-content"  style="width: 500px;">
+		      <div class="modal-header" id="mydiv_6">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				
+				<ul>
+					<li><h4 class="modal-title" id="myModalLabel2">修改班组</h4></li>
+					<li style="padding-left: 200px;  "><button type="button" @click="xiugaibzs" class="btn btn-success">保存</button></li>
+				</ul>
+		      </div>
+		      <div class="modal-body">
+				<div>
+					<table class="table table-bordered">
+						<tr>
+							<td>班组编号<input type="text" class="id1" v-model="jgid.id" ></td>		
+						</tr>
+						<tr>
+							<td>班组名称<input type="text" class="name1" v-model="jgid.name"></td>		
+						</tr>
+						<tr>
+							<td>班组权重<input type="text" class="gn1" v-model="jgid.gn"></td>		
 						</tr>
 					</table>
 				</div>
@@ -313,6 +405,7 @@
 		    </div>
 		  </div>
 		  
+		</div>
 		</div>
 	</body>
 
@@ -330,11 +423,17 @@
 							return { 
 								list:[],
 								lists:[],
-								jigong:{}
+								jigong:{},
+								xzbanid:{},
+								count:[],
+								counts:[],
+								jgxj:{},
+								jgup:{},
+								jgid:{}
 							}
 						},methods:{
 								chabanzu:function(id){
-											
+										$("#zsgc").attr("style","display:block;");//显示div
 											$.ajax({
 												url:data.ip + "xiaozu",
 												data:{"banzuid":id},
@@ -358,7 +457,7 @@
 											
 								},banzu:function(){
 											
-									var ck = $("[name=cks]");
+									var ck = $("[name=cka]");
 									for(var i =0;i<ck.length;i++){
 										if(ck[i].checked){
 											var remark2 = $(ck[i]).attr("sid");
@@ -368,12 +467,235 @@
 												type:"post",
 												"success":function(re){
 													vm.jigong=re;
+													
+													
+													$.ajax({
+														url:data.ip + "addbanzuid",
+														data:{"id":remark2},
+														type:"post",
+														"success":function(res){
+															vm.xzbanid=res;
+															console.log(res);
+														}
+													});
 													console.log(re);
 												}
 											});
 										}
 									}
+								},
+								addjgs:function(){
+									var workid=$(".workid").val()//技工编号
+									var personnelname=$(".personnelname").val()//技工姓名
+								    var sex=$(".sex").val()//技工性别
+								    var enterid=$(".enterid").val()//技工账户
+								    var personnelid=$(".personnelid").val()//人员id
+								    var remark2=$(".remark2").val()//所在班组
+									var phone=$(".phone").val()//电话
+									var borndate=$(".borndate").val()//出生日期
+								    var card=$(".card").val()//身份证
+								    var address=$(".address").val()//户口地址
+								    var bankcode=$(".bankcode").val()//银行卡账户
+								    var stars=$(".xlk").val()//星级
+								    var craft=$(".craft").val()//工作
+								    var brand=$(".brand").val()//维修品牌
+								    
+								    var box = document.getElementById('box')
+									if(box.checked) {
+									 var remark1='组长';
+									}else{
+									var remark1='';
+									}
+								    
+								    $.ajax({
+										url:data.ip + "addjg",
+										data:{"workid":workid,"personnelname":personnelname,"sex":sex,"remark2":remark2,
+										"phone":phone,"borndate":borndate,"borndate":borndate,"card":card,"personnelid":personnelid,
+										"address":address,"bankcode":bankcode,"stars":stars,"craft":craft,"brand":brand,"remark1":remark1
+										},
+										type:"post",
+										"success":function(re){
+											find()
+											console.log(re);
+										}
+									});
+								},
+								xiugaiid:function(){
+											
+									var ck = $("[name=jgid]");
+									for(var i =0;i<ck.length;i++){
+										if(ck[i].checked){
+											var workid = $(ck[i]).attr("jgid");
+											$.ajax({
+												url:data.ip + "jgxiugaiid",
+												data:{"workid":workid},
+												type:"post",
+												"success":function(re){
+													vm.jgup=re;
+													console.log(re);
+												}
+											});
+										}
+									}
+								},
+								updatejg:function(){
+									var workid=$(".workid1").val()//技工编号
+									var personnelname=$(".personnelname1").val()//技工姓名
+								    var sex=$(".sex1").val()//技工性别
+								    var enterid=$(".enterid1").val()//技工账户
+								    var personnelid=$(".personnelid1").val()//人员id
+								    var remark2=$(".remark21").val()//所在班组
+									var phone=$(".phone1").val()//电话
+									var borndate=$(".borndate1").val()//出生日期
+								    var card=$(".card1").val()//身份证
+								    var address=$(".address1").val()//户口地址
+								    var bankcode=$(".bankcode1").val()//银行卡账户
+								    var stars=$(".xlk1").val()//星级
+								    var craft=$(".craft1").val()//工作
+								    var brand=$(".brand1").val()//维修品牌
+								    
+								    alert(personnelid)
+								   var box = document.getElementById('boxt')
+									if(box.checked) {
+									 var remark1='组长';
+									}else{
+									var remark1='';
+									}
+									
+								    $.ajax({
+										url:data.ip + "updatejg",
+										data:{"workid":workid,"personnelname":personnelname,"sex":sex,"remark2":remark2,
+										"phone":phone,"borndate":borndate,"borndate":borndate,"card":card,"personnelid":personnelid,
+										"address":address,"bankcode":bankcode,"stars":stars,"craft":craft,"brand":brand,"remark1":remark1
+										},
+										type:"post",
+										"success":function(re){
+											find()
+											console.log(re);
+										}
+									});
+								},
+								removejg:function(){
+											
+									var ck = $("[name=jgid]");
+									for(var i =0;i<ck.length;i++){
+										if(ck[i].checked){
+											var workid = $(ck[i]).attr("jgid");
+											$.ajax({
+												url:data.ip + "removejg",
+												data:{"workid":workid},
+												type:"post",
+												"success":function(re){
+													find()
+													console.log(re);
+												}
+											});
+										}
+									}
+								},
+								chakanjg:function(){
+											
+									var ck = $("[name=jgid]");
+									for(var i =0;i<ck.length;i++){
+										if(ck[i].checked){
+											var workid = $(ck[i]).attr("jgid");
+											$.ajax({
+												url:data.ip + "jgxiugaiid",
+												data:{"workid":workid},
+												type:"post",
+												"success":function(re){
+													vm.jgup=re;
+													console.log(re);
+												}
+											});
+										}
+									}
+								},
+								bzaddsss:function(){
+									
+									var id=$(".id").val()
+								    var name=$(".name").val()
+								    var gn=$(".gn").val()
+								    if(gn==0){
+								    	$.ajax({
+											url:data.ip + "bzadd",
+											data:{"id":id,"name":name,"gn":gn,"banzuid":0},
+											type:"post",
+											"success":function(re){
+												findPage();
+												console.log(re);
+												
+											}
+										});
+								    }else{
+										var ck = $("[name=cka]");
+										for(var i =0;i<ck.length;i++){
+										if(ck[i].checked){
+											var banzuid = $(ck[i]).attr("sid");
+											alert(banzuid)
+											$.ajax({
+											url:data.ip + "bzadd",
+											data:{"id":id,"name":name,"gn":gn,"banzuid":banzuid},
+											type:"post",
+											"success":function(re){
+												findPage();
+												console.log(re);
+											}
+										});
+										}
+									}
 								}
+							},
+							xiugaijgid:function(){
+											var ck = $("[name=cka]");
+											for(var i =0;i<ck.length;i++){
+											if(ck[i].checked){
+											var ids = $(ck[i]).attr("sid");
+											$.ajax({
+												url:data.ip + "xiugaijgid",
+												data:{"id":ids},
+												type:"post",
+												"success":function(re){
+													vm.jgid=re;
+													console.log(re);
+												}
+											});
+										}
+									}
+							},
+							xiugaibzs:function(){
+									
+									var id=$(".id1").val()
+								    var name=$(".name1").val()
+								    var gn=$(".gn1").val()
+								    
+								    	$.ajax({
+											url:data.ip + "updatebz",
+											data:{"id":id,"name":name,"gn":gn},
+											type:"post",
+											"success":function(re){
+												findPage();
+												console.log(re);
+											}
+										});
+							},
+							removebz:function(){
+											var ck = $("[name=cka]");
+											for(var i =0;i<ck.length;i++){
+											if(ck[i].checked){
+											var ids = $(ck[i]).attr("sid");
+											$.ajax({
+												url:data.ip + "removebzid",
+												data:{"id":ids},
+												type:"post",
+												"success":function(re){
+													
+													console.log(re);
+												}
+											});
+										}
+									}
+							}
 					}
 				});
 						
@@ -389,6 +711,25 @@
 								type:"post",
 								"success":function(re){
 									vm.list=re;
+									console.log(re);
+								}
+							});
+							
+							$.ajax({
+								url:data.ip + "count",
+								type:"post",
+								"success":function(re){
+									vm.count=re+1;
+									vm.counts=re;
+									console.log(re);
+								}
+							});
+							
+							$.ajax({
+								url:data.ip + "Jselect",
+								type:"post",
+								"success":function(re){
+									vm.jgxj=re;
 									console.log(re);
 								}
 							});

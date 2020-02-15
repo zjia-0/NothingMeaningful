@@ -8,6 +8,8 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface WorkmanMapper {
+	bzjg jgxiugai(String workid);
+	
 	List<bzjg> bzjgselect(@Param("remark2") String remark2, @Param("banzuid") String banzuid);
 	
     int countByExample(WorkmanExample example);
