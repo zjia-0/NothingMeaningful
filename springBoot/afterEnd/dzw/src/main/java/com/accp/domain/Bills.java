@@ -2,9 +2,28 @@ package com.accp.domain;
 
 import java.util.Date;
 
-public class Bills {
-    private String bid;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+public class Bills {
+	private String rbname;
+	private String mbname;
+	private String personnelname;
+	private String billname;
+	private String cname;
+	private String cartype;
+	private String cphone;
+	private int astate;
+    private String bid;	
+    
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date starttime;
+    
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date endtime;
     private Integer bstate;
 
     private String cdlicense;
@@ -29,8 +48,12 @@ public class Bills {
 
     private String reworkreason;
 
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date expectedtime;
 
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date completiontime;
 
     private Float penaltyamount;
@@ -39,8 +62,12 @@ public class Bills {
 
     private String pickcar;
 
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date ordertime;
 
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date clearingtime;
 
     private Float forecastmoney;
@@ -55,7 +82,88 @@ public class Bills {
 
     private String remark5;
 
-    public String getBid() {
+    
+    public Date getStarttime() {
+		return starttime;
+	}
+
+	public void setStarttime(Date starttime) {
+		this.starttime = starttime;
+	}
+
+	public Date getEndtime() {
+		return endtime;
+	}
+
+	public void setEndtime(Date endtime) {
+		this.endtime = endtime;
+	}
+
+	public int getAstate() {
+		return astate;
+	}
+
+	public void setAstate(int astate) {
+		this.astate = astate;
+	}
+
+	public String getRbname() {
+		return rbname;
+	}
+
+	public void setRbname(String rbname) {
+		this.rbname = rbname;
+	}
+
+	public String getMbname() {
+		return mbname;
+	}
+
+	public void setMbname(String mbname) {
+		this.mbname = mbname;
+	}
+
+	public String getPersonnelname() {
+		return personnelname;
+	}
+
+	public void setPersonnelname(String personnelname) {
+		this.personnelname = personnelname;
+	}
+
+	public String getBillname() {
+		return billname;
+	}
+
+	public void setBillname(String billname) {
+		this.billname = billname;
+	}
+
+	public String getCname() {
+		return cname;
+	}
+
+	public void setCname(String cname) {
+		this.cname = cname;
+	}
+
+	public String getCartype() {
+		return cartype;
+	}
+
+	public void setCartype(String cartype) {
+		this.cartype = cartype;
+	}
+
+	public String getCphone() {
+		return cphone;
+	}
+
+	public void setCphone(String cphone) {
+		this.cphone = cphone;
+	}
+
+	public String getBid() {
         return bid;
     }
 
