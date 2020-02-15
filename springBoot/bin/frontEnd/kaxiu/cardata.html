@@ -35,9 +35,9 @@
 							<li>车架号：<input name="chejia" type="text" /></li>
 						</ul>
 						<ul class="menue" style="padding: 0px;margin: 0px;float: right;">
-							<li @click="addBind" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-plus-sign"></span>增加</li>
-							<li><span class="glyphicon glyphicon-leaf"></span>修改</li>
-							<li><span class="glyphicon glyphicon-remove-sign"></span>删除</li>
+							<li @click="addBind" class="insert"><span class="glyphicon glyphicon-plus-sign"></span>增加</li>
+							<li class="update" data-toggle="modal" data-target="#myModal" ><span class="glyphicon glyphicon-leaf"></span>修改</li>
+							<li @click="del"><span class="glyphicon glyphicon-remove-sign"></span>删除</li>
 							<li @click="checkstaff"><span class="glyphicon glyphicon-sunglasses"></span>查询</li>
 							<li><span class="glyphicon glyphicon-lock"></span>保养</li>
 
@@ -47,7 +47,7 @@
 					</div>
 					<!--车辆信息-->
 					<div class="col-md-12 col-xs-12" style="overflow: auto;height: 400px;">
-						<table class="table table-bordered" style="width: 3000px;">
+						<table class="table table-hover" style="width: 3000px;">
 							<thead>
 								<tr>
 									<td></td>
@@ -78,35 +78,35 @@
 									<td>下次保养日期</td>
 								</tr>
 							</thead>
-							<tbody>
+							<tbody class="cinfo">
 								<tr v-for="item,index in vehicles">
-									<td @click="clickCustomer(item.cno)"> </td>
-									<td @click="clickCustomer(item.cno)">{{item.cdlicense}}</td>
-									<td @click="clickCustomer(item.cno)">{{item.brandname}}</td>
-									<td @click="clickCustomer(item.cno)">{{item.cname}}</td>
-									<td @click="clickCustomer(item.cno)">{{item.cddricer}}</td>
-									<td @click="clickCustomer(item.cno)">{{item.cddriverphone}}</td>
-									<td @click="clickCustomer(item.cno)">{{item.cddriverbirth}}</td>
-									<td @click="clickCustomer(item.cno)">{{item.carname}}</td>
-									<td @click="clickCustomer(item.cno)">{{item.cdlicenseend}}</td>
-									<td @click="clickCustomer(item.cno)">{{item.cdframe}}</td>
-									<td @click="clickCustomer(item.cno)">{{item.cdengine}}</td>
-									<td @click="clickCustomer(item.cno)">{{item.motorname}}</td>
-									<td @click="clickCustomer(item.cno)">{{item.cdyearprice}}</td>
-									<td @click="clickCustomer(item.cno)">{{item.cdmileage}}</td>
-									<td @click="clickCustomer(item.cno)">{{item.cdload}}</td>
-									<td @click="clickCustomer(item.cno)">{{item.cdbuydate}}</td>
-									<td @click="clickCustomer(item.cno)">{{item.cdgolicense}}</td>
-									<td @click="clickCustomer(item.cno)">{{item.cdcarcheckdate}}</td>
-									<td @click="clickCustomer(item.cno)">{{item.cdcompulsoryinsurancename}}</td>
-									<td @click="clickCustomer(item.cno)">{{item.cdcompulsoryinsurancedate}}</td>
-									<td @click="clickCustomer(item.cno)">{{item.cdcommerceinsurancename}}</td>
-									<td @click="clickCustomer(item.cno)">{{item.cdcommerceinsurancedate}}</td>
-									<td @click="clickCustomer(item.cno)" v-if="item.cdisinsure == 1">是</td>
-									<td @click="clickCustomer(item.cno)" v-else>否</td>
-									<td @click="clickCustomer(item.cno)">{{item.fuelname}}</td>
-									<td @click="clickCustomer(item.cno)">{{item.cdnextmileage}}</td>
-									<td @click="clickCustomer(item.cno)">{{item.cdnextkeep}}</td>
+									<td @click="clickCustomer(item,index)"> </td>
+									<td @click="clickCustomer(item,index)">{{item.cdlicense}}</td>
+									<td @click="clickCustomer(item,index)">{{item.brandname}}</td>
+									<td @click="clickCustomer(item,index)">{{item.cname}}</td>
+									<td @click="clickCustomer(item,index)">{{item.cddricer}}</td>
+									<td @click="clickCustomer(item,index)">{{item.cddriverphone}}</td>
+									<td @click="clickCustomer(item,index)">{{item.cddriverbirth}}</td>
+									<td @click="clickCustomer(item,index)">{{item.carname}}</td>
+									<td @click="clickCustomer(item,index)">{{item.cdlicenseend}}</td>
+									<td @click="clickCustomer(item,index)">{{item.cdframe}}</td>
+									<td @click="clickCustomer(item,index)">{{item.cdengine}}</td>
+									<td @click="clickCustomer(item,index)">{{item.motorname}}</td>
+									<td @click="clickCustomer(item,index)">{{item.cdyearprice}}</td>
+									<td @click="clickCustomer(item,index)">{{item.cdmileage}}</td>
+									<td @click="clickCustomer(item,index)">{{item.cdload}}</td>
+									<td @click="clickCustomer(item,index)">{{item.cdbuydate}}</td>
+									<td @click="clickCustomer(item,index)">{{item.cdgolicense}}</td>
+									<td @click="clickCustomer(item,index)">{{item.cdcarcheckdate}}</td>
+									<td @click="clickCustomer(item,index)">{{item.cdcompulsoryinsurancename}}</td>
+									<td @click="clickCustomer(item,index)">{{item.cdcompulsoryinsurancedate}}</td>
+									<td @click="clickCustomer(item,index)">{{item.cdcommerceinsurancename}}</td>
+									<td @click="clickCustomer(item,index)">{{item.cdcommerceinsurancedate}}</td>
+									<td @click="clickCustomer(item,index)" v-if="item.cdisinsure == 1">是</td>
+									<td @click="clickCustomer(item,index)" v-else>否</td>
+									<td @click="clickCustomer(item,index)">{{item.fuelname}}</td>
+									<td @click="clickCustomer(item,index)">{{item.cdnextmileage}}</td>
+									<td @click="clickCustomer(item,index)">{{item.cdnextkeep}}</td>
 								</tr>
 							</tbody>
 						</table>
@@ -129,32 +129,32 @@
 							</thead>
 							<tbody>
 								<tr v-for="item in customer">
-									<td @click="clickCustomer(item.cno)"> </td>
-									<td @click="clickCustomer(item.cno)">{{item.cno}}</td>
-									<td @click="clickCustomer(item.cno)">{{item.cname}}</td>
-									<td @click="clickCustomer(item.cno)">{{item.caddress}}</td>
-									<td @click="clickCustomer(item.cno)">{{item.cpeople}}</td>
-									<td @click="clickCustomer(item.cno)">{{item.cphone}}</td>
-									<td @click="clickCustomer(item.cno)">{{item.cbirthday}}</td>
-									<td @click="clickCustomer(item.cno)">{{item.ctname}}</td>
-									<td @click="clickCustomer(item.cno)">{{item.vno}}</td>
-									<td @click="clickCustomer(item.cno)">{{item.vjoindate}}</td>
-									<td @click="clickCustomer(item.cno)">{{item.venddate}}</td>
-									<td @click="clickCustomer(item.cno)">{{item.cremark}}</td>
-									<td @click="clickCustomer(item.cno)">{{item.createdate}}</td>
-									<td @click="clickCustomer(item.cno)">{{item.personnelname}}</td>
-									<td @click="clickCustomer(item.cno)">{{item.cadviserphone}}</td>
-									<td @click="clickCustomer(item.cno)">{{item.cperiod}}</td>
-									<td @click="clickCustomer(item.cno)">{{item.climit}}</td>
-									<td @click="clickCustomer(item.cno)">{{item.currentjifen}}</td>
-									<td @click="clickCustomer(item.cno)">{{item.money}}</td>
-									<td @click="clickCustomer(item.cno)">{{item.province}}</td>
-									<td @click="clickCustomer(item.cno)">{{item.city}}</td>
-									<td @click="clickCustomer(item.cno)">{{item.district}}</td>
-									<td @click="clickCustomer(item.cno)">{{item.ctaxes}}</td>
-									<td @click="clickCustomer(item.cno)">{{item.cregistphone}}</td>
-									<td @click="clickCustomer(item.cno)">{{item.cbank}}</td>
-									<td @click="clickCustomer(item.cno)">{{item.cbanknumber}}</td>
+									<td> </td>
+									<td>{{item.cno}}</td>
+									<td>{{item.cname}}</td>
+									<td>{{item.caddress}}</td>
+									<td>{{item.cpeople}}</td>
+									<td>{{item.cphone}}</td>
+									<td>{{item.cbirthday}}</td>
+									<td>{{item.ctname}}</td>
+									<td>{{item.vno}}</td>
+									<td>{{item.vjoindate}}</td>
+									<td>{{item.venddate}}</td>
+									<td>{{item.cremark}}</td>
+									<td>{{item.createdate}}</td>
+									<td>{{item.personnelname}}</td>
+									<td>{{item.cadviserphone}}</td>
+									<td>{{item.cperiod}}</td>
+									<td>{{item.climit}}</td>
+									<td>{{item.currentjifen}}</td>
+									<td>{{item.money}}</td>
+									<td>{{item.province}}</td>
+									<td>{{item.city}}</td>
+									<td>{{item.district}}</td>
+									<td>{{item.ctaxes}}</td>
+									<td>{{item.cregistphone}}</td>
+									<td>{{item.cbank}}</td>
+									<td>{{item.cbanknumber}}</td>
 								</tr>
 							</tbody>
 						</table>
@@ -342,7 +342,7 @@
 				</div>
 			</div>
 
-			<!-- 新增——模态框 -->
+			<!-- 新增and修改——模态框 -->
 			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 				<div class="modal-dialog" role="document">
 					<div class="modal-content">
@@ -351,7 +351,6 @@
 							<h4 class="modal-title" id="myModalLabel">车辆资料编辑</h4>
 						</div>
 						<div class="modal-body">
-
 							<div style="width: 1000px;height: 400px;border:1px solid white;background-color: white;">
 								<div style="width: 1000px;height: 400px;background-color: #D6D6CE;color:#44BDCA;box-sizing: border-box;padding-left: 20px;">
 									<p style="padding-top: 15px;">
@@ -359,22 +358,22 @@
 										<input v-model="vehicle.cdlicense" name="cdlicense"type="text" ></input>
 										<span  data-toggle="modal" data-target="#myChePaiHao" style="margin: 0px 10px 0px -25px;" class="glyphicon glyphicon-th"></span>
 										<label>车辆品牌：</label>
-										<input type="text" v-model="vehicle.cdno" readonly="readonly" name="carBrand">
+										<input type="text" v-model="vehicle.cdno"  name="carBrand">
 										</input>
 										<label>车辆型号：</label>
-										<input v-model="vehicle.cbiid" readonly="readonly" type="text">
+										<input v-model="vehicle.cbiid"  type="text">
 										<label>驾驶员：</label>
 										<input v-model="vehicle.cddricer" style="width: 100px" type="text">
 									</p>
 									<p style="padding-top: 10px;">
 										<label>驾驶员电话：</label><input v-model="vehicle.cddriverphone" type="text">
-										<label>出生日期：</label><input v-model="vehicle.cddriverbirth" type="date" style="width: 120px;">
+										<label>出生日期：</label><input v-model="vehicle.cddriverbirth" type="date" style="width: 140px;">
 										<label>车辆归属：</label>
 										<select id="guishu" v-model="vehicle.clid" style="width: 100px;">
 											<option selected="selected" >请选择</option>
 											<option :value="item.carid" v-for="item in carbelong">{{item.carname}}</option>
 										</select>
-										<label>驾证到期：</label><input v-model="vehicle.cdlicenseend" type="date" style="width: 120px;">
+										<label>驾证到期：</label><input v-model="vehicle.cdlicenseend" type="date" style="width: 140px;">
 									</p>
 									<p style="padding-top: 10px;">
 										<label>车架号：</label><input v-model="vehicle.cdframe" type="text">
@@ -389,11 +388,11 @@
 											<option :value="item.motorid" v-for="item in engine">{{item.motorname}}</option>
 										</select>
 										<label>载重：</label><input v-model="vehicle.cdload" type="text">
-										<label>购买日期：</label><input v-model="vehicle.cdbuydate" type="date" style="width: 120px;">
+										<label>购买日期：</label><input v-model="vehicle.cdbuydate" type="date" style="width: 140px;">
 									</p>
 									<p style="padding-top: 10px;">
-										<label>上牌日期：</label><input v-model="vehicle.cdgolicense" type="date" style="width: 120px;">
-										<label>车检日期：</label><input v-model="vehicle.cdcarcheckdate" type="date" style="width: 120px;">
+										<label>上牌日期：</label><input v-model="vehicle.cdgolicense" type="date" style="width: 140px;">
+										<label>车检日期：</label><input v-model="vehicle.cdcarcheckdate" type="date" style="width: 140px;">
 										<label>燃油类别：</label>
 										<select v-model="vehicle.fuelid" style="width: 100px;">
 											<option selected="selected" >请选择</option>
@@ -401,7 +400,6 @@
 										</select>
 										<label>车系：</label>
 										<input v-model="vehicle.cdsystem" type="text">
-
 									</p>
 									<p style="padding-top: 10px;">
 										<label>保险：交强险保险公司：</label>
@@ -409,9 +407,9 @@
 											<option selected="selected" >请选择</option>
 											<option :value="item.insuranceid" v-for="item in insurance">{{item.insurancename}}</option>
 										</select>
-										<label>交强险到期：</label><input v-model="vehicle.cdcompulsoryinsurancedate" type="date" style="width: 120px;">
+										<label>交强险到期：</label><input v-model="vehicle.cdcompulsoryinsurancedate" type="date" style="width: 140px;">
 										<label>在我投保车：</label>
-										<input v-model="vehicle.cdisinsure" type="checkbox">
+										<input name="tbc"  type="checkbox" onchange="tbc(this)" >
 									</p>
 									<p style="padding-top: 10px;">
 										<label>商业险保险公司：</label>
@@ -419,12 +417,12 @@
 											<option selected="selected" >请选择</option>
 											<option :value="item.insuranceid" v-for="item in insurance">{{item.insurancename}}</option>
 										</select>
-										<label>商业险到期：</label><input v-model="vehicle.cdcompulsoryinsurancedate" type="date" style="width: 120px;">
+										<label>商业险到期：</label><input v-model="vehicle.cdcommerceinsurancedate" type="date" style="width: 140px;">
 									</p>
 									<p style="padding-top: 10px;">
 										<label>下次保养里程：</label>
 										<input v-model="vehicle.cdnextmileage" type="text">
-										<label>下次保养日期：</label><input v-model="vehicle.cdnextkeep" type="date" style="width: 120px;">
+										<label>下次保养日期：</label><input v-model="vehicle.cdnextkeep" type="date" style="width: 140px;">
 										<label>客户名称：</label>
 										<input v-model="vehicle.cno" style="width: 255px;" type="text">
 									</p>
@@ -433,12 +431,12 @@
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-default col-md-1 col-lg-push-10" data-dismiss="modal">取消</button>
-							<button type="button" @click="insert" class="btn btn-primary col-md-1 col-lg-push-10">确认</button>
+							<button type="button" data-dismiss="modal" @click="update" class="btn btn-primary col-md-1 col-lg-push-10">确认</button>
 						</div>
 					</div>
 				</div>
 			</div>
-
+			
 			<div id="setting">
 				<p style="padding: 2px;background-color: #858585;font-weight: bold;color: #D6D6CE;">字段设置</p>
 				<div style="width: 580px;height: 550px;border:1px solid white;margin-left: 10px;background-color: white;">
@@ -482,6 +480,9 @@
 		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript" src="js/my.js"></script>
 		<script type="text/javascript">
+			//定义新增修改的路径
+			var updateUrl="";
+			
 			var vm = new Vue({
 				el: "#ctx",
 				data() {
@@ -515,7 +516,8 @@
 					checkstaff: function() {
 						$("#checkstaff").show();
 					},
-					queryCarinfo: function() {//查询车辆集合
+					//查询车辆集合
+					queryCarinfo: function() {
 						$.ajax({
 							url: data.ip + "/vehicle/queryCarinfo",
 							type: "get",
@@ -530,6 +532,7 @@
 							}
 						})
 					},
+					//查询客户
 					queryCustomer: function(cno) {
 						$.ajax({
 							url: data.ip + "/vehicle/queryCustomerKey",
@@ -544,9 +547,14 @@
 							}
 						})
 					},
-					clickCustomer: function(cno) {
-						vm.queryCustomer(cno);
+					//单击车资料项查询客户信息
+					clickCustomer: function(cno,index) {
+						vm.vehicle=cno;
+						$(".cinfo tr").removeClass("active");
+						$(".cinfo tr:eq("+index+")").addClass("active");
+						vm.queryCustomer(cno.cno);
 					},
+					//顶部多条件模糊查询
 					queryLike: function() {
 						let mohu = $("[name=mohu]").val();
 						let chepai = $("[name=chepai]").val();
@@ -566,6 +574,7 @@
 							}
 						})
 					},
+					//绑定新增功能模态框里的下拉框
 					addBind: function() {
 						$.ajax({
 							url: data.ip + "/vehicle/bindCarbelong",
@@ -613,8 +622,44 @@
 						})
 
 					},
-					insert: function() {
+					//新增and修改车资料
+					update: function() {
 						console.log(vm.vehicle)
+						let vehicle=JSON.stringify(vm.vehicle)
+						console.log(vehicle)
+						$.ajax({
+							url: data.ip + "/vehicle/" + updateUrl,
+							type: "post",
+							data:vehicle,
+							xhrFields: {
+								withCredentials: true
+							},
+							contentType:"application/json;charset=utf-8",
+							success: function(result) {
+								window.location.reload()
+							},
+							error:function(error){
+								console.log(error)
+							}
+						})
+					},
+					//删除车资料
+					del: function() {	
+						alert(vm.vehicle.cdlicense)
+						$.ajax({
+							url: data.ip + "/vehicle/delCarinfo",
+							type: "get",
+							data:{"cdlicense":vm.vehicle.cdlicense},
+							xhrFields: {
+								withCredentials: true
+							},
+							success: function(result) {
+								window.location.reload()
+							},
+							error:function(error){
+								console.log(error)
+							}
+						})
 					}
 				}
 			});
@@ -623,12 +668,28 @@
 			$(".chepai button").click(function() {
 				$("input[name=cdlicense]").val($(this).text());
 			})
+			function tbc(obj){
+				if(obj.checked){
+					vm.vehicle.cdisinsure=1;
+				}else{
+					vm.vehicle.cdisinsure=0;
+				}
+			}
+			$(".insert").click(function(){
+				updateUrl="addCarinfo"
+				vm.vehicle="";
+            	$("#myModal").modal("show");
+			})
+			$(".update").click(function(){
+				updateUrl="updCarinfo"
+			})
 			//新增功能模态框下拉框默认选中第一项
 			vm.vehicle.clid="请选择";
 			vm.vehicle.cdenginebrandid="请选择";
 			vm.vehicle.cdcommerceinsuranceid="请选择";
 			vm.vehicle.cdcompulsoryinsuranceid="请选择";
 			vm.vehicle.fuelid="请选择";
+			
 		</script>
 	</body>
 

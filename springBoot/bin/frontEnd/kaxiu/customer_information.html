@@ -10,6 +10,9 @@
 		<link rel="stylesheet" type="text/css" href="fonts/mdi/css/materialdesignicons.min.css" />
 		<link rel="stylesheet" type="text/css" href="css/customer_information.css" />
 		<link rel="stylesheet" type="text/css" href="css/bootstrapStyle/bootstrapStyle.css"/>
+		<style>
+			
+		</style>
 	</head>
 
 	<body>
@@ -29,29 +32,17 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-md-12 col-xs-12" style="box-sizing: border-box;background-color: #F7F7F7;border: 1px solid #E9E9E9;">
+					<div class="row col-md-12 col-xs-12" style="box-sizing: border-box;background-color: #F7F7F7;border: 1px solid #E9E9E9;">
 						<ul class="menue" style="padding: 0px;margin: 0px;">
 							<li class="btn-group" style="margin-left: 100px;">
-								<button  type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								<button href=".hide-btn-customer" data-toggle="collapse" type="button" style="background-color: #A6E1EC;" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								    客户编辑 <span class="caret"></span>
-								</button>
-								<ul class="dropdown-menu">
-								    <li @click="addcusandcar"><a >增加客户和车</a></li>
-								    <li @click="addcus"><a>增加客户</a></li>
-								    <li><a href="#">修改客户</a></li>
-								    <li><a href="#">删除客户</a></li>
-								    <li><a href="#">设置密码</a></li>
-								 </ul>
+								</button>								
 							</li>
 							<li class="btn-group">
-								<button  type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								<button href=".hide-btn-carinfo" data-toggle="collapse" type="button" style="background-color: #EEA236;" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								    车资料 <span class="caret"></span>
-								</button>
-								<ul class="dropdown-menu">
-								    <li @click="addcar"><a>增加车资料</a></li>
-								    <li><a href="#">修改车资料</a></li>
-								    <li><a href="#">删除车资料</a></li>
-								 </ul>
+								</button>								
 							</li>
 							<li class="btn-group">
 								<button  type="button" class="btn btn-default">
@@ -66,8 +57,25 @@
 							<li><span class="glyphicon glyphicon-export"></span>导出</li>
 							<li @click="setting"><span class="glyphicon glyphicon-cog"></span>字段设置</li>
 						</ul>
+						
 					</div>
+						<div class="nav nav-list collapse menu-second hide-btn-customer col-md-12 " style="height: 30px; background-color: #A6E1EC;">
+							<ul id="customer">
+								<li><a href="javascript:void(0)">增加客户和车</a></li>
+								<li><a href="javascript:void(0)">增加客户</a></li>
+								<li><a href="javascript:void(0)">修改客户</a></li>
+								<li><a href="javascript:void(0)">删除客户</a></li>
+							</ul>							
+						</div>
+						<div class="nav nav-list collapse menu-second hide-btn-carinfo col-md-12 " style="height: 30px; background-color: #EEA236;">
+							<ul id="carinfo">
+								<li><a href="javascript:void(0)">增加车资料</a></li>
+								<li><a href="javascript:void(0)">修改车资料</a></li>
+								<li><a href="javascript:void(0)">删除车资料</a></li>
+							</ul>							
+						</div>
 					<div class="col-md-12 col-xs-12" style="overflow: auto;height: 400px;">
+						
 						<table class="table table-bordered" style="width: 3000px;">
 							<thead>
 								<tr>
@@ -141,8 +149,8 @@
 							</tbody>
 						</table>
 					</div>
-					<div class="col-md-12 col-xs-12" style="box-sizing: border-box;background-color: #F7F7F7;border: 1px solid #E9E9E9;">
-						<ul style="padding: 0px;margin: 0px;">
+					<div class="col-md-12 col-xs-12" >
+						<ul id="lists" style="padding: 0px;margin: 0px;">
 							<li>车辆信息</li>
 							<li>历史消费</li>
 							<li>历史回访</li>

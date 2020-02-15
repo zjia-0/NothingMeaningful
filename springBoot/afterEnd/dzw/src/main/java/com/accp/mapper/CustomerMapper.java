@@ -9,6 +9,8 @@ public interface CustomerMapper {
 	
 	List<Customer> queryKey(String cno);
 	
+	List<Customer> query();
+	
     int countByExample(CustomerExample example);
 
     int deleteByExample(CustomerExample example);

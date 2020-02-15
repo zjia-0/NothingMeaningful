@@ -10,6 +10,9 @@
 		<link rel="stylesheet" type="text/css" href="fonts/mdi/css/materialdesignicons.min.css" />
 		<link rel="stylesheet" type="text/css" href="css/customer_information.css" />
 		<link rel="stylesheet" type="text/css" href="css/bootstrapStyle/bootstrapStyle.css"/>
+		<style>
+			
+		</style>
 	</head>
 
 	<body>
@@ -29,29 +32,17 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-md-12 col-xs-12" style="box-sizing: border-box;background-color: #F7F7F7;border: 1px solid #E9E9E9;">
+					<div class="row col-md-12 col-xs-12" style="box-sizing: border-box;background-color: #F7F7F7;border: 1px solid #E9E9E9;">
 						<ul class="menue" style="padding: 0px;margin: 0px;">
 							<li class="btn-group" style="margin-left: 100px;">
-								<button  type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								<button href=".hide-btn-customer" data-toggle="collapse" type="button" style="background-color: #A6E1EC;" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								    客户编辑 <span class="caret"></span>
-								</button>
-								<ul class="dropdown-menu">
-								    <li @click="addcusandcar"><a >增加客户和车</a></li>
-								    <li @click="addcus"><a>增加客户</a></li>
-								    <li><a href="#">修改客户</a></li>
-								    <li><a href="#">删除客户</a></li>
-								    <li><a href="#">设置密码</a></li>
-								 </ul>
+								</button>								
 							</li>
 							<li class="btn-group">
-								<button  type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								<button href=".hide-btn-carinfo" data-toggle="collapse" type="button" style="background-color: #EEA236;" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								    车资料 <span class="caret"></span>
-								</button>
-								<ul class="dropdown-menu">
-								    <li @click="addcar"><a>增加车资料</a></li>
-								    <li><a href="#">修改车资料</a></li>
-								    <li><a href="#">删除车资料</a></li>
-								 </ul>
+								</button>								
 							</li>
 							<li class="btn-group">
 								<button  type="button" class="btn btn-default">
@@ -66,9 +57,26 @@
 							<li><span class="glyphicon glyphicon-export"></span>导出</li>
 							<li @click="setting"><span class="glyphicon glyphicon-cog"></span>字段设置</li>
 						</ul>
+						
 					</div>
+						<div class="nav nav-list collapse menu-second hide-btn-customer col-md-12 " style="height: 30px; background-color: #A6E1EC;">
+							<ul id="customer">
+								<li><a href="javascript:void(0)">增加客户和车</a></li>
+								<li><a href="javascript:void(0)">增加客户</a></li>
+								<li><a href="javascript:void(0)">修改客户</a></li>
+								<li><a href="javascript:void(0)">删除客户</a></li>
+							</ul>							
+						</div>
+						<div class="nav nav-list collapse menu-second hide-btn-carinfo col-md-12 " style="height: 30px; background-color: #EEA236;">
+							<ul id="carinfo">
+								<li><a href="javascript:void(0)">增加车资料</a></li>
+								<li><a href="javascript:void(0)">修改车资料</a></li>
+								<li><a href="javascript:void(0)">删除车资料</a></li>
+							</ul>							
+						</div>
 					<div class="col-md-12 col-xs-12" style="overflow: auto;height: 400px;">
-						<table class="table table-bordered" style="width: 3000px;">
+						
+						<table class="table table-hover" style="width: 3000px;">
 							<thead>
 								<tr>
 									<td> </td>
@@ -104,45 +112,40 @@
 									<td>其他四</td>
 								</tr>
 							</thead>
-							<tbody>
-								<tr>
+							<tbody class="cinfo">
+								<tr v-for="item,index in customers">
 									<td> </td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-								</tr>
+									<td @click="clickCustomer(item,index)">{{item.cno}}</td>
+									<td @click="clickCustomer(item,index)">{{item.cname}}</td>
+									<td @click="clickCustomer(item,index)">{{item.caddress}}</td>
+									<td @click="clickCustomer(item,index)">{{item.cpeople}}</td>
+									<td @click="clickCustomer(item,index)">{{item.cphone}}</td>
+									<td @click="clickCustomer(item,index)">{{item.cbirthday}}</td>
+									<td @click="clickCustomer(item,index)">{{item.ctname}}</td>
+									<td @click="clickCustomer(item,index)">{{item.vno}}</td>
+									<td @click="clickCustomer(item,index)">{{item.vjoindate}}</td>
+									<td @click="clickCustomer(item,index)">{{item.venddate}}</td>
+									<td @click="clickCustomer(item,index)">{{item.cremark}}</td>
+									<td @click="clickCustomer(item,index)">{{item.createdate}}</td>
+									<td @click="clickCustomer(item,index)">{{item.personnelname}}</td>
+									<td @click="clickCustomer(item,index)">{{item.cadviserphone}}</td>
+									<td @click="clickCustomer(item,index)">{{item.cperiod}}</td>
+									<td @click="clickCustomer(item,index)">{{item.climit}}</td>
+									<td @click="clickCustomer(item,index)">{{item.currentjifen}}</td>
+									<td @click="clickCustomer(item,index)">{{item.money}}</td>
+									<td @click="clickCustomer(item,index)">{{item.province}}</td>
+									<td @click="clickCustomer(item,index)">{{item.city}}</td>
+									<td @click="clickCustomer(item,index)">{{item.district}}</td>
+									<td @click="clickCustomer(item,index)">{{item.ctaxes}}</td>
+									<td @click="clickCustomer(item,index)">{{item.cregistphone}}</td>
+									<td @click="clickCustomer(item,index)">{{item.cbank}}</td>
+									<td @click="clickCustomer(item,index)">{{item.cbanknumber}}</td>
+								</tr>   
 							</tbody>
 						</table>
 					</div>
-					<div class="col-md-12 col-xs-12" style="box-sizing: border-box;background-color: #F7F7F7;border: 1px solid #E9E9E9;">
-						<ul style="padding: 0px;margin: 0px;">
+					<div class="col-md-12 col-xs-12" >
+						<ul id="lists" style="padding: 0px;margin: 0px;">
 							<li>车辆信息</li>
 							<li>历史消费</li>
 							<li>历史回访</li>
@@ -180,34 +183,35 @@
 									<td>下次保养日期</td>
 								</tr>
 							</thead>
-							<tbody>
-								<tr>
+							<tbody class="cinfo">
+								<tr v-for="item,index in vehicles">
 									<td> </td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
+									<td>{{item.cdlicense}}</td>
+									<td>{{item.brandname}}</td>
+									<td>{{item.cname}}</td>
+									<td>{{item.cddricer}}</td>
+									<td>{{item.cddriverphone}}</td>
+									<td>{{item.cddriverbirth}}</td>
+									<td>{{item.carname}}</td>
+									<td>{{item.cdlicenseend}}</td>
+									<td>{{item.cdframe}}</td>
+									<td>{{item.cdengine}}</td>
+									<td>{{item.motorname}}</td>
+									<td>{{item.cdyearprice}}</td>
+									<td>{{item.cdmileage}}</td>
+									<td>{{item.cdload}}</td>
+									<td>{{item.cdbuydate}}</td>
+									<td>{{item.cdgolicense}}</td>
+									<td>{{item.cdcarcheckdate}}</td>
+									<td>{{item.cdcompulsoryinsurancename}}</td>
+									<td>{{item.cdcompulsoryinsurancedate}}</td>
+									<td>{{item.cdcommerceinsurancename}}</td>
+									<td>{{item.cdcommerceinsurancedate}}</td>
+									<td v-if="item.cdisinsure == 1">是</td>
+									<td v-else>否</td>
+									<td>{{item.fuelname}}</td>
+									<td>{{item.cdnextmileage}}</td>
+									<td>{{item.cdnextkeep}}</td>
 								</tr>
 							</tbody>
 						</table>
@@ -502,11 +506,21 @@
 			<script src="js/jquery.ztree.core.js" type="text/javascript" charset="utf-8"></script>
 			<script src="js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
 			<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+			<script type="text/javascript" src="js/my.js"></script>
 			<script type="text/javascript">
 				var vm = new Vue({
 					el:"#ctx",
 					data(){
-						return {}
+						return {
+							vehicles: [],
+							vehicle: {},
+							customers: [],
+							customer:{},
+							carbelong: [],
+							engine: [],
+							fuel: [],
+							insurance: []
+						}
 					},
 					methods:{
 						addcusandcar:function(){
@@ -530,10 +544,45 @@
 						},
 						setting:function(){
 							$("#setting").show();
+						},
+						//单击客户项查询车辆信息
+						clickCustomer: function(item,index) {
+							vm.customer=item;
+							$(".cinfo tr").removeClass("active");
+							$(".cinfo tr:eq("+index+")").addClass("active");
+							vm.queryCarinfo(item.cno);
+						},
+						queryCustomer: function() {
+							$.ajax({
+								url: data.ip + "customer/queryCustomer",
+								type: "get",
+								xhrFields: {
+									withCredentials: true
+								},
+								dataType: "json",
+								success: function(result) {
+									vm.customers = result
+									vm.queryCarinfo(vm.customers[0].cno)
+								}
+							})
+						},
+						queryCarinfo: function(cno) {
+							$.ajax({
+								url: data.ip + "customer/queryCarinfo",
+								type: "get",
+								data:{"cno":cno},
+								xhrFields: {
+									withCredentials: true
+								},
+								dataType: "json",
+								success: function(result) {
+									vm.vehicles = result
+								}
+							})
 						}
 					}
 				});
-				
+				vm.queryCustomer();
 		
 		</script>
 	</body>

@@ -19,7 +19,11 @@ import com.accp.mapper.CustomerMapper;
 import com.accp.mapper.EngineMapper;
 import com.accp.mapper.FuelMapper;
 import com.accp.mapper.InsuranceMapper;
-
+/**
+ * 车资料
+ * @author ASUS
+ *
+ */
 @Service
 @Transactional
 public class VehicleService {

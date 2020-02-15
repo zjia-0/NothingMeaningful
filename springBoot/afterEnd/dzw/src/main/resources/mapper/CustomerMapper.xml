@@ -67,6 +67,12 @@
 		LEFT JOIN vip ON vip.`cno`=cus.`cno`
 		WHERE cus.`cno`=#{cno}
   </select>
+  <select id="query" resultMap="BaseResultMapTwo" >
+  		SELECT cus.*,(SELECT ctname FROM customertype WHERE customertype.ctno=cus.`ctno`) AS ctname
+		,(SELECT personnelname FROM `personnel` WHERE personnel.`personnelid`=cus.`personnelid`) AS personnelname
+		,vip.`vno`,vip.`vjoindate`,vip.`venddate`,vip.`currentjifen`,vip.`money` FROM customer cus
+		LEFT JOIN vip ON vip.`cno`=cus.`cno`
+  </select>
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >

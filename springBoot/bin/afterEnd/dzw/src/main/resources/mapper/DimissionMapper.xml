@@ -335,4 +335,11 @@
       remark5 = #{remark5,jdbcType=VARCHAR}
     where dimissionid = #{dimissionid,jdbcType=INTEGER}
   </update>
+  
+  <select id="lldjselect" resultType="com.accp.domain.lldj">
+SELECT d.staffid,d.sex,d.post,d.dimissiondate,d.cause,d.remark1,e.departname,d.name ,p.personnelid FROM 
+`dimission` d INNER JOIN `department` e ON d.departid=e.departid
+INNER JOIN `personnel` p ON p.remark1=e.departid
+  </select>
+  
 </mapper>

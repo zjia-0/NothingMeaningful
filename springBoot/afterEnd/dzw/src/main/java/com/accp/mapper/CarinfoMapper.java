@@ -19,6 +19,8 @@ public interface CarinfoMapper {
     List<Carinfo> queryCarinfoLike(@Param("mohu") String mohu,@Param("chepai") String chepai,@Param("chejia") String chejia);
     
     List<Carinfo> queryCarinfo();
+    
+    List<Carinfo> queryCarinfoKey(String cno);
 
     List<Carinfo> selectByExample(CarinfoExample example);
 

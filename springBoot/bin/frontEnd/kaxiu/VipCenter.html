@@ -4,7 +4,6 @@
 		<meta charset="UTF-8">
 		<title>会员中心</title>
 		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
-		
 	</head>
 	<body>
 		<div class="container-fluid" id="ctx">
@@ -29,10 +28,6 @@
 						      </span>
 						    </div><!-- /input-group -->
 						    <button class="btn btn-success" type="button" data-toggle="modal" data-target="#AddVipModal"><span class="glyphicon glyphicon-plus"></span>&nbsp;添加</button>
-						    <button class="btn btn-success" type="button" data-toggle="modal" data-target="#upVipModal"><span class="glyphicon glyphicon-edit"></span>&nbsp;编辑</button>
-						    <button class="btn btn-danger" type="button"><span class="glyphicon glyphicon-trash"></span>&nbsp;删除</button>
-						    <button class="btn btn-danger" type="button"><span class="glyphicon glyphicon-refresh"></span>&nbsp;积分清零</button>
-							<button class="btn btn-success" type="button" data-toggle="modal" data-target="#PayModal"><span class="glyphicon glyphicon-zoom-in"></span>&nbsp;会员充值</button>
 						</div><!-- /.col-lg-6 -->
 					</div>
 				</form>
@@ -40,7 +35,7 @@
 			<div class="row" >
 				<table class="table table-bordered">
 					<tr style="background-color: #DFF0D8;">
-						<td><input type="checkbox" class="form"/></td>
+						<td>序号</td>
 						<td>会员卡号</td>
 						<td>会员等级</td>
 						<td>会员姓名</td>
@@ -49,9 +44,10 @@
 						<td>积分</td>
 						<td>累计消费</td>
 						<td>会员期限</td>
+						<td>操作</td>
 					</tr>
-					<tr v-for="item in vip">
-						<td><input type="checkbox"/></td>
+					<tr v-for="item,index in vip">
+						<td>{{index+1}}</td>
 						<td>{{item.vno}}</td>
 						<td>{{item.viplevel}}</td>
 						<td>{{item.cname}}</td>
@@ -60,6 +56,11 @@
 						<td>{{item.currentjifen}}</td>
 						<td>{{item.summoney}}</td>
 						<td>{{item.venddate}}</td>
+						<td>
+							<button class="btn btn-danger" @click="deletevip(item)" type="button">注销</button>
+							<button class="btn btn-danger" @click="upJifen(item)" type="button">积分清空</button>
+							<button class="btn btn-success" type="button" data-toggle="modal" data-target="#PayModal"><span class="glyphicon glyphicon-zoom-in"></span>&nbsp;会员充值</button>
+						</td>
 					</tr>
 				</table>
 			</div>
@@ -198,25 +199,6 @@
 			    </div>
 			  </div>
 			</div>
-			
-			<!-- Modal -->
-			<div class="modal fade" data-backdrop="static" data-keyboard="false" id="upVipModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-			  <div class="modal-dialog" role="document">
-			    <div class="modal-content">
-			      <div class="modal-header">
-			         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" class="btn btn-default">关闭</span></button>
-			        <h4 class="modal-title" id="myModalLabel">修改会员</h4>
-			      </div>
-			      <div class="modal-body">
-					
-			      </div>
-			      <div class="modal-footer">
-			        <button type="button" class="btn btn-primary">修改</button>
-			      </div>
-			    </div>
-			  </div>
-			</div>
-			
 			<!-- Modal -->
 			<div class="modal fade" data-backdrop="static" data-keyboard="false" id="PayModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 			  <div class="modal-dialog" role="document">
@@ -234,7 +216,6 @@
 			    </div>
 			  </div>
 			</div>
-			
 		</div>
 		<script src="js/jquery-1.12.4.js" type="text/javascript" charset="utf-8"></script>	
 		<script src="js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
@@ -249,7 +230,9 @@
 						name:"",
 						vipType:[],
 						vipadd:{currentjifen:0},
-						cust:{cno:0}
+						cust:{cno:0},
+						updatecust:{},
+						updatevip:{}
 					}
 				},methods:{
 					queryName(){
@@ -297,8 +280,42 @@
 								that.vipadd.currentjifen=result;
 							}
 						});
-					},queryCustBycno(){//根据cno查询用户进行会员修改
-						
+					},deletevip(item){//根据vno查询用户进行会员修改
+						isok=confirm("确定注销“"+item.vno+"”，这个会员吗？");
+						if(isok){
+							$.ajax({
+								type:"put",
+								url:data.ip+"vip/upzt?vno="+item.vno,
+								dataType:"json",
+								xhrFields: {
+									withCredentials: true
+								},
+								success:function(result){
+									if(result>0){
+										alert("注销成功！")
+									}
+									location.reload();
+								}
+							});
+						}
+					},upJifen(item){
+						isok=confirm("确定清空“"+item.vno+"”的所有积分吗？");
+						if(isok){
+							$.ajax({
+								type:"put",
+								url:data.ip+"vip/upJifen?vno="+item.vno,
+								dataType:"json",
+								xhrFields: {
+									withCredentials: true
+								},
+								success:function(result){
+									if(result>0){
+										alert("清除成功!");
+									}
+									location.reload();
+								}
+							});
+						}
 					}
 				},created:function(){
 					var that=this;
