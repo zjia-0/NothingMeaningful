@@ -67,4 +67,33 @@ public class BzjgController {
 		return bser.updatejg(per, workid, stars, craft, brand, remark1, remark2);
 	}
 	
+	//删除技工
+	@RequestMapping("/removejg")
+	public int removejg(String workid) {
+		return bser.removejg(workid);
+	}
+	
+	//新增班组
+	@RequestMapping("/bzadd")
+	public int bzadd(Banzu bz) {
+			return bser.bzadd(bz);
+	}
+	
+	//修改树状图
+	@RequestMapping("/xiugaijgid")
+	public Banzu xiugaijgid(String id) {
+		return bser.xiugaijgid(id);
+	}
+	
+	//修改班组
+	@RequestMapping("/updatebz")
+	public int updatebz(Banzu bz) {
+			return bser.updatebz(bz);
+	}
+	
+	//删除班组
+	@RequestMapping("/removebzid")
+	public int removebzid(String id) {
+			return bser.removebzid(id);
+	}
 }

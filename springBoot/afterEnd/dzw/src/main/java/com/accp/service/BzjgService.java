@@ -68,4 +68,29 @@ public class BzjgService {
 		 int b=wmapp.updateByPrimaryKeySelective(wo);
 		 return a;
 	}
+	
+	//删除技工
+	public int removejg(String workid) {
+		return wmapp.deleteByPrimaryKey(workid);
+	} 
+	
+	//新增班组
+	public int bzadd(Banzu bz) {
+		return bmapp.insertSelective(bz);
+	}
+	
+	//修改树状图
+	public Banzu xiugaijgid(String id) {
+		return bmapp.selectByPrimaryKey(id);
+	}
+	
+	//修改班组
+	public int updatebz(Banzu bz) {
+		return bmapp.updateByPrimaryKeySelective(bz);
+	}
+	
+	//删除班组
+	public int removebzid(String id) {
+		return bmapp.deleteByPrimaryKey(id);
+	}
 }
