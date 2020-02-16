@@ -57,7 +57,7 @@
 	ORDER BY b.ordertime DESC
   </select>
   
-  <select id="aaa" resultMap="BaseResultMap" >
+  <select id="findby" resultMap="BaseResultMap" >
 	SELECT b.bstate,bt.billname,c.cname,cd.cdlicense,c.cphone,v.vno,b.bid,mb.mbname,rb.rbname,b.Clearingtime,b.Completiontime,b.`Ordertime`,
 	a.atime,b.forecastmoney,p.personnelname,pp.personnelname AS pnames,bt.billname ,b.forecastmoney,cd.cdframe,c.cphone AS cphone,cbi.cname AS cartype,a.astate
 	FROM `bills` AS b
