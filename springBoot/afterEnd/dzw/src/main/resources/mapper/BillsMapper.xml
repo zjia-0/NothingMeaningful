@@ -31,7 +31,7 @@
   </resultMap>
   <!-- 不带条件查询所有 -->
   <select id="findAllBills" resultMap="BaseResultMap">
-  	SELECT b.bstate,bt.billname,c.cname,cd.cdlicense,c.cphone,v.vno,b.bid,mb.mbname,rb.rbname,b.Clearingtime,b.Completiontime,
+  	SELECT b.bstate,bt.billname,c.cname,cd.cdlicense,c.cphone,v.vno,b.bid,mb.mbname,rb.rbname,b.Clearingtime,b.Completiontime,b.`Ordertime`,
 	a.atime,b.forecastmoney,p.personnelname,pp.personnelname AS  pnames,bt.billname ,b.forecastmoney,cd.cdframe,c.cphone AS cphone,cbi.cname AS cartype,a.astate
 	 FROM `bills` AS b
 	LEFT JOIN `maintain_bill` AS mb
@@ -57,7 +57,7 @@
 	ORDER BY b.ordertime DESC
   </select>
   
-  <select id="findby" resultMap="BaseResultMap" >
+  <select id="findbytj" resultMap="BaseResultMap" parameterType="map" >
 	SELECT b.bstate,bt.billname,c.cname,cd.cdlicense,c.cphone,v.vno,b.bid,mb.mbname,rb.rbname,b.Clearingtime,b.Completiontime,b.`Ordertime`,
 	a.atime,b.forecastmoney,p.personnelname,pp.personnelname AS pnames,bt.billname ,b.forecastmoney,cd.cdframe,c.cphone AS cphone,cbi.cname AS cartype,a.astate
 	FROM `bills` AS b
@@ -81,17 +81,17 @@
 	ON b.bid=a.bid
 	LEFT JOIN `carbrandinfo` AS cbi 
 	ON cd.cdlicense=cbi.cno
-	WHERE 1=1
+	WHERE 1=1  
 	<if test="bid!=null">
 		AND b.`bid`=#{bid}
 	</if>
-	<if test="astate!=null||astate!=0">
+	<if test="astate!=null and astate!=0">
 		AND a.astate=#{astate}
 	</if>
-	<if test="cno!=0||cno!=null">
+	<if test="cno!=0 and cno!=null">
 		AND c.`cno`=#{cno}
 	</if>
-	<if test="pno!=null">
+	<if test="pno!=null and pno!=0">
 		AND b.`pno`=#{pno}
 	</if>
 	<if test="starttime!=null and endtime!=null">
@@ -101,10 +101,10 @@
 		]]>
 	</if>
 	<!-- 2月16要做的，将if写完 -->
-	<if test="btid!=0||btid!=null">
+	<if test="btid!=0 and btid!=null">
 	AND b.`btid` =#{btid}
 	</if>
-	<if test="cdlicense!=0||cdlicense!=null">
+	<if test="cdlicense!=0 and cdlicense!=null">
 	AND b.`cdlicense`=#{cdlicense}
 	</if>
 	ORDER BY b.ordertime DESC

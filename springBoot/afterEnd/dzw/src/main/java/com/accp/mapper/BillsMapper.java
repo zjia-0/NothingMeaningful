@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface BillsMapper {
+	List<Bills> findbytj(Bills bill);
 	List<Bills> findAllBills();
 
 	int countByExample(BillsExample example);
