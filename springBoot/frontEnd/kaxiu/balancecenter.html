@@ -87,6 +87,7 @@
 						<td>车牌号</td>
 						<td>车型</td>
 						<td>车架号</td>
+						<td>开单时间</td>
 						<td>联系电话</td>
 					</tr>
 					<tr v-for="item in bills">
@@ -106,6 +107,7 @@
 						<td>{{item.cdlicense}}</td>
 						<td>{{item.cartype}}</td>
 						<td>{{item.cdframe}}</td>
+						<td>{{item.ordertime}}</td>
 						<td>{{item.cphone}}</td>
 					</tr>
 				</table>
@@ -216,13 +218,26 @@
 							withCredentials: true
 						},
 						success:function(result){
+							console.log(result)
 							that.bills=result;
 						}
 					})
 				},methods:{
 					queryByscreen(){
 						var that=this;
-						console.log(that.bill)
+						$.ajax({
+							url:data.ip+"balance/findbytj",
+							type:"get",
+							data:that.bill,
+							dataType:"json",
+							contentType:"application/json",
+							xhrFields: {
+								withCredentials: true
+							},
+							success:function(result){
+								that.bills=result;
+							}
+						})
 					}
 				}
 			})

@@ -43,5 +43,8 @@ public class BalanceService {
 	public List<Bills> queryAllBills() {
 		return billMapper.findAllBills();
 	}
-
+	public List<Bills> findbytj(Bills bill){
+		return billMapper.findbytj(bill);
+	}
+ 
 }
