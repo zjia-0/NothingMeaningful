@@ -8,8 +8,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.accp.domain.Carinfo;
 import com.accp.domain.Customer;
+import com.accp.domain.Personnel;
 import com.accp.mapper.CarinfoMapper;
 import com.accp.mapper.CustomerMapper;
+import com.accp.mapper.PersonnelMapper;
 
 /**
  * 客户档案
@@ -23,6 +25,8 @@ public class CustomerService {
 	CustomerMapper customerMapper;
 	@Autowired
 	CarinfoMapper carinfoMapper;
+	@Autowired
+	PersonnelMapper personnelMapper;
 	
 	//查询客户信息
 	public List<Customer> query(){
@@ -32,4 +36,17 @@ public class CustomerService {
 	public List<Carinfo> queryKey(String cno){
 		return carinfoMapper.queryCarinfoKey(cno);
 	}
+	//根据姓名，电话，会员卡号，车牌号模糊查询
+	public List<Customer> queryLike(String mohu){
+		return customerMapper.queryLike(mohu);
+	}
+	//绑定专属顾问下拉框
+	public List<Personnel> bindPers(){
+		return personnelMapper.selectByExample(null);
+	}
+	//新增客户
+	public int addCus(Customer customer) {
+		return customerMapper.insert(customer);
+	}
+	
 }
