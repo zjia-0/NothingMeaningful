@@ -15,75 +15,83 @@ public class Bills {
 	private String cartype;
 	private String cphone;
 	private int astate;
-    private String bid;	
-    
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date starttime;
-    
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date endtime;
-    private Integer bstate;
+	private String bid;
 
-    private String cdlicense;
+	@JsonFormat(pattern = "yyyy-MM-dd")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date starttime;
 
-    private String pno;
+	@JsonFormat(pattern = "yyyy-MM-dd")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date endtime;
+	private Integer bstate;
 
-    private Integer btid;
+	private Integer cno;
+	private String cdlicense;
 
-    private Integer id;
+	private String pno;
 
-    private Integer pmid;
+	private Integer btid;
 
-    private Integer inid;
+	private Integer id;
 
-    private Integer qualified;
+	private Integer pmid;
 
-    private Integer reworknum;
+	private Integer inid;
 
-    private String respeople;
+	private Integer qualified;
 
-    private String delaysreason;
+	private Integer reworknum;
 
-    private String reworkreason;
+	private String respeople;
 
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date expectedtime;
+	private String delaysreason;
 
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date completiontime;
+	private String reworkreason;
 
-    private Float penaltyamount;
+	@JsonFormat(pattern = "yyyy-MM-dd")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date expectedtime;
 
-    private String qmember;
+	@JsonFormat(pattern = "yyyy-MM-dd")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date completiontime;
 
-    private String pickcar;
+	private Float penaltyamount;
 
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date ordertime;
+	private String qmember;
 
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date clearingtime;
+	private String pickcar;
 
-    private Float forecastmoney;
+	@JsonFormat(pattern = "yyyy-MM-dd")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date ordertime;
 
-    private String remark1;
+	@JsonFormat(pattern = "yyyy-MM-dd")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date clearingtime;
 
-    private String remark2;
+	private Float forecastmoney;
 
-    private String remark3;
+	private String remark1;
 
-    private String remark4;
+	private String remark2;
 
-    private String remark5;
+	private String remark3;
 
-    
-    public Date getStarttime() {
+	private String remark4;
+
+	private String remark5;
+
+	public Integer getCno() {
+		return cno;
+	}
+
+	public void setCno(Integer cno) {
+		this.cno = cno;
+	}
+
+	public Date getStarttime() {
 		return starttime;
 	}
 
@@ -164,210 +172,210 @@ public class Bills {
 	}
 
 	public String getBid() {
-        return bid;
-    }
+		return bid;
+	}
 
-    public void setBid(String bid) {
-        this.bid = bid;
-    }
+	public void setBid(String bid) {
+		this.bid = bid;
+	}
 
-    public Integer getBstate() {
-        return bstate;
-    }
+	public Integer getBstate() {
+		return bstate;
+	}
 
-    public void setBstate(Integer bstate) {
-        this.bstate = bstate;
-    }
+	public void setBstate(Integer bstate) {
+		this.bstate = bstate;
+	}
 
-    public String getCdlicense() {
-        return cdlicense;
-    }
+	public String getCdlicense() {
+		return cdlicense;
+	}
 
-    public void setCdlicense(String cdlicense) {
-        this.cdlicense = cdlicense;
-    }
+	public void setCdlicense(String cdlicense) {
+		this.cdlicense = cdlicense;
+	}
 
-    public String getPno() {
-        return pno;
-    }
+	public String getPno() {
+		return pno;
+	}
 
-    public void setPno(String pno) {
-        this.pno = pno;
-    }
+	public void setPno(String pno) {
+		this.pno = pno;
+	}
 
-    public Integer getBtid() {
-        return btid;
-    }
+	public Integer getBtid() {
+		return btid;
+	}
 
-    public void setBtid(Integer btid) {
-        this.btid = btid;
-    }
+	public void setBtid(Integer btid) {
+		this.btid = btid;
+	}
 
-    public Integer getId() {
-        return id;
-    }
+	public Integer getId() {
+		return id;
+	}
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public Integer getPmid() {
-        return pmid;
-    }
+	public Integer getPmid() {
+		return pmid;
+	}
 
-    public void setPmid(Integer pmid) {
-        this.pmid = pmid;
-    }
+	public void setPmid(Integer pmid) {
+		this.pmid = pmid;
+	}
 
-    public Integer getInid() {
-        return inid;
-    }
+	public Integer getInid() {
+		return inid;
+	}
 
-    public void setInid(Integer inid) {
-        this.inid = inid;
-    }
+	public void setInid(Integer inid) {
+		this.inid = inid;
+	}
 
-    public Integer getQualified() {
-        return qualified;
-    }
+	public Integer getQualified() {
+		return qualified;
+	}
 
-    public void setQualified(Integer qualified) {
-        this.qualified = qualified;
-    }
+	public void setQualified(Integer qualified) {
+		this.qualified = qualified;
+	}
 
-    public Integer getReworknum() {
-        return reworknum;
-    }
+	public Integer getReworknum() {
+		return reworknum;
+	}
 
-    public void setReworknum(Integer reworknum) {
-        this.reworknum = reworknum;
-    }
+	public void setReworknum(Integer reworknum) {
+		this.reworknum = reworknum;
+	}
 
-    public String getRespeople() {
-        return respeople;
-    }
+	public String getRespeople() {
+		return respeople;
+	}
 
-    public void setRespeople(String respeople) {
-        this.respeople = respeople;
-    }
+	public void setRespeople(String respeople) {
+		this.respeople = respeople;
+	}
 
-    public String getDelaysreason() {
-        return delaysreason;
-    }
+	public String getDelaysreason() {
+		return delaysreason;
+	}
 
-    public void setDelaysreason(String delaysreason) {
-        this.delaysreason = delaysreason;
-    }
+	public void setDelaysreason(String delaysreason) {
+		this.delaysreason = delaysreason;
+	}
 
-    public String getReworkreason() {
-        return reworkreason;
-    }
+	public String getReworkreason() {
+		return reworkreason;
+	}
 
-    public void setReworkreason(String reworkreason) {
-        this.reworkreason = reworkreason;
-    }
+	public void setReworkreason(String reworkreason) {
+		this.reworkreason = reworkreason;
+	}
 
-    public Date getExpectedtime() {
-        return expectedtime;
-    }
+	public Date getExpectedtime() {
+		return expectedtime;
+	}
 
-    public void setExpectedtime(Date expectedtime) {
-        this.expectedtime = expectedtime;
-    }
+	public void setExpectedtime(Date expectedtime) {
+		this.expectedtime = expectedtime;
+	}
 
-    public Date getCompletiontime() {
-        return completiontime;
-    }
+	public Date getCompletiontime() {
+		return completiontime;
+	}
 
-    public void setCompletiontime(Date completiontime) {
-        this.completiontime = completiontime;
-    }
+	public void setCompletiontime(Date completiontime) {
+		this.completiontime = completiontime;
+	}
 
-    public Float getPenaltyamount() {
-        return penaltyamount;
-    }
+	public Float getPenaltyamount() {
+		return penaltyamount;
+	}
 
-    public void setPenaltyamount(Float penaltyamount) {
-        this.penaltyamount = penaltyamount;
-    }
+	public void setPenaltyamount(Float penaltyamount) {
+		this.penaltyamount = penaltyamount;
+	}
 
-    public String getQmember() {
-        return qmember;
-    }
+	public String getQmember() {
+		return qmember;
+	}
 
-    public void setQmember(String qmember) {
-        this.qmember = qmember;
-    }
+	public void setQmember(String qmember) {
+		this.qmember = qmember;
+	}
 
-    public String getPickcar() {
-        return pickcar;
-    }
+	public String getPickcar() {
+		return pickcar;
+	}
 
-    public void setPickcar(String pickcar) {
-        this.pickcar = pickcar;
-    }
+	public void setPickcar(String pickcar) {
+		this.pickcar = pickcar;
+	}
 
-    public Date getOrdertime() {
-        return ordertime;
-    }
+	public Date getOrdertime() {
+		return ordertime;
+	}
 
-    public void setOrdertime(Date ordertime) {
-        this.ordertime = ordertime;
-    }
+	public void setOrdertime(Date ordertime) {
+		this.ordertime = ordertime;
+	}
 
-    public Date getClearingtime() {
-        return clearingtime;
-    }
+	public Date getClearingtime() {
+		return clearingtime;
+	}
 
-    public void setClearingtime(Date clearingtime) {
-        this.clearingtime = clearingtime;
-    }
+	public void setClearingtime(Date clearingtime) {
+		this.clearingtime = clearingtime;
+	}
 
-    public Float getForecastmoney() {
-        return forecastmoney;
-    }
+	public Float getForecastmoney() {
+		return forecastmoney;
+	}
 
-    public void setForecastmoney(Float forecastmoney) {
-        this.forecastmoney = forecastmoney;
-    }
+	public void setForecastmoney(Float forecastmoney) {
+		this.forecastmoney = forecastmoney;
+	}
 
-    public String getRemark1() {
-        return remark1;
-    }
+	public String getRemark1() {
+		return remark1;
+	}
 
-    public void setRemark1(String remark1) {
-        this.remark1 = remark1;
-    }
+	public void setRemark1(String remark1) {
+		this.remark1 = remark1;
+	}
 
-    public String getRemark2() {
-        return remark2;
-    }
+	public String getRemark2() {
+		return remark2;
+	}
 
-    public void setRemark2(String remark2) {
-        this.remark2 = remark2;
-    }
+	public void setRemark2(String remark2) {
+		this.remark2 = remark2;
+	}
 
-    public String getRemark3() {
-        return remark3;
-    }
+	public String getRemark3() {
+		return remark3;
+	}
 
-    public void setRemark3(String remark3) {
-        this.remark3 = remark3;
-    }
+	public void setRemark3(String remark3) {
+		this.remark3 = remark3;
+	}
 
-    public String getRemark4() {
-        return remark4;
-    }
+	public String getRemark4() {
+		return remark4;
+	}
 
-    public void setRemark4(String remark4) {
-        this.remark4 = remark4;
-    }
+	public void setRemark4(String remark4) {
+		this.remark4 = remark4;
+	}
 
-    public String getRemark5() {
-        return remark5;
-    }
+	public String getRemark5() {
+		return remark5;
+	}
 
-    public void setRemark5(String remark5) {
-        this.remark5 = remark5;
-    }
+	public void setRemark5(String remark5) {
+		this.remark5 = remark5;
+	}
 }

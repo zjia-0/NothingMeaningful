@@ -57,7 +57,7 @@
 	ORDER BY b.ordertime DESC
   </select>
   
-  <select id="aaa" resultMap="" >
+  <select id="aaa" resultMap="BaseResultMap" >
 	SELECT b.bstate,bt.billname,c.cname,cd.cdlicense,c.cphone,v.vno,b.bid,mb.mbname,rb.rbname,b.Clearingtime,b.Completiontime,b.`Ordertime`,
 	a.atime,b.forecastmoney,p.personnelname,pp.personnelname AS pnames,bt.billname ,b.forecastmoney,cd.cdframe,c.cphone AS cphone,cbi.cname AS cartype,a.astate
 	FROM `bills` AS b
@@ -81,19 +81,32 @@
 	ON b.bid=a.bid
 	LEFT JOIN `carbrandinfo` AS cbi 
 	ON cd.cdlicense=cbi.cno
-	WHERE  b.`bid`=1 
-	AND a.astate=1 
-	AND c.`cno`=1 
-	AND b.`pno`=1 
+	WHERE 1=1
+	<if test="bid!=null">
+		AND b.`bid`=#{bid}
+	</if>
+	<if test="astate!=null||astate!=0">
+		AND a.astate=#{astate}
+	</if>
+	<if test="cno!=0||cno!=null">
+		AND c.`cno`=#{cno}
+	</if>
+	<if test="pno!=null">
+		AND b.`pno`=#{pno}
+	</if>
 	<if test="starttime!=null and endtime!=null">
 		<![CDATA[
-			AND b.`Ordertime`> 
-			AND b.`Ordertime`<'2020-02-19' 
+			AND b.`Ordertime`> #{starttime}
+			AND b.`Ordertime`<#{endtime}
 		]]>
 	</if>
 	<!-- 2月16要做的，将if写完 -->
-	AND b.`btid` =1
-	AND b.`cdlicense`=1
+	<if test="btid!=0||btid!=null">
+	AND b.`btid` =#{btid}
+	</if>
+	<if test="cdlicense!=0||cdlicense!=null">
+	AND b.`cdlicense`=#{cdlicense}
+	</if>
 	ORDER BY b.ordertime DESC
   </select>
   <sql id="Example_Where_Clause" >

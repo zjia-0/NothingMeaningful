@@ -7,25 +7,26 @@ import org.apache.ibatis.annotations.Param;
 
 public interface BillsMapper {
 	List<Bills> findAllBills();
-    int countByExample(BillsExample example);
 
-    int deleteByExample(BillsExample example);
+	int countByExample(BillsExample example);
 
-    int deleteByPrimaryKey(String bid);
+	int deleteByExample(BillsExample example);
 
-    int insert(Bills record);
+	int deleteByPrimaryKey(String bid);
 
-    int insertSelective(Bills record);
+	int insert(Bills record);
 
-    List<Bills> selectByExample(BillsExample example);
+	int insertSelective(Bills record);
 
-    Bills selectByPrimaryKey(String bid);
+	List<Bills> selectByExample(BillsExample example);
 
-    int updateByExampleSelective(@Param("record") Bills record, @Param("example") BillsExample example);
+	Bills selectByPrimaryKey(String bid);
 
-    int updateByExample(@Param("record") Bills record, @Param("example") BillsExample example);
+	int updateByExampleSelective(@Param("record") Bills record, @Param("example") BillsExample example);
 
-    int updateByPrimaryKeySelective(Bills record);
+	int updateByExample(@Param("record") Bills record, @Param("example") BillsExample example);
 
-    int updateByPrimaryKey(Bills record);
+	int updateByPrimaryKeySelective(Bills record);
+
+	int updateByPrimaryKey(Bills record);
 }

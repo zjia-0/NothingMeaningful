@@ -19,21 +19,25 @@ public class BalanceController {
 
 	@Autowired
 	BalanceService bservice;
-	
+
 	@GetMapping("/queryAllType")
-	public List<Billstype> queryTypes(){
+	public List<Billstype> queryTypes() {
 		return bservice.queryTypes();
 	}
+
 	@GetMapping("/queryCust")
-	public List<Customer> queryAllcust(){
+	public List<Customer> queryAllcust() {
 		return bservice.queryAllcust();
 	}
+
 	@GetMapping("/queryPerson")
-	public List<Personnel> queryAllPer(){
+	public List<Personnel> queryAllPer() {
 		return bservice.queryAllPer();
 	}
+
 	@GetMapping("/queryBills")
-	public List<Bills> queryAllBills(){
+	public List<Bills> queryAllBills() {
 		return bservice.queryAllBills();
 	}
+
 }

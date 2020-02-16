@@ -27,18 +27,21 @@ public class BalanceService {
 	BillstypeMapper bMapper;
 	@Autowired
 	BillsMapper billMapper;
-	
-	public List<Customer> queryAllcust(){
+
+	public List<Customer> queryAllcust() {
 		return custMapper.selectByExample(null);
 	}
-	public List<Personnel> queryAllPer(){
+
+	public List<Personnel> queryAllPer() {
 		return personMapper.selectByExample(null);
 	}
-	public List<Billstype> queryTypes(){
+
+	public List<Billstype> queryTypes() {
 		return bMapper.selectByExample(null);
 	}
-	public List<Bills> queryAllBills(){
+
+	public List<Bills> queryAllBills() {
 		return billMapper.findAllBills();
 	}
-	
+
 }
