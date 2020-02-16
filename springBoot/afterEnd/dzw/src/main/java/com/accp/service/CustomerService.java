@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.accp.domain.Carinfo;
+import com.accp.domain.CarinfoExample;
 import com.accp.domain.Customer;
 import com.accp.domain.Personnel;
 import com.accp.mapper.CarinfoMapper;
@@ -48,5 +49,16 @@ public class CustomerService {
 	public int addCus(Customer customer) {
 		return customerMapper.insert(customer);
 	}
-	
+	//修改客户
+	public int updCus(Customer customer) {
+		return customerMapper.updateByPrimaryKey(customer);
+	}
+	//删除客户同时删除绑定该客户的车辆信息
+	public int delCus(String cno) {
+		CarinfoExample ce=new CarinfoExample();
+		ce.createCriteria().andCnoEqualTo(cno);
+		carinfoMapper.deleteByExample(ce);
+		
+		return customerMapper.deleteByPrimaryKey(cno);
+	}
 }

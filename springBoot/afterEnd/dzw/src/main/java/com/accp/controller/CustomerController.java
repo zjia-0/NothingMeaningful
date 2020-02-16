@@ -56,4 +56,15 @@ public class CustomerController {
 	public int addCus(@RequestBody Customer customer) {
 		return customerService.addCus(customer);
 	}
+	//修改客户
+	@PostMapping("/updCus")
+	@ResponseBody
+	public int updCus(@RequestBody Customer customer) {
+		return customerService.updCus(customer);
+	}
+	//删除客户和绑定该客户的车辆信息
+	@GetMapping("/delCus")
+	public int delCus(String cno) {
+		return customerService.delCus(cno);
+	}
 }

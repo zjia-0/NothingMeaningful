@@ -11,22 +11,22 @@
     <result column="cbirthday" property="cbirthday" jdbcType="TIMESTAMP" />
     <result column="cperiod" property="cperiod" jdbcType="INTEGER" />
     <result column="climit" property="climit" jdbcType="REAL" />
-    <result column="personnelid" property="personnelid" jdbcType="INTEGER" />
+    <result column="personnelid" property="personnelid" jdbcType="VARCHAR" />
     <result column="cadviserphone" property="cadviserphone" jdbcType="VARCHAR" />
-    <result column="cprovince" property="cprovince" jdbcType="VARCHAR" />
-    <result column="cremark" property="cremark" jdbcType="VARCHAR" />
+    <result column="province" property="province" jdbcType="VARCHAR" />
+    <result column="city" property="city" jdbcType="VARCHAR" />
+    <result column="district" property="district" jdbcType="VARCHAR" />
     <result column="ctaxes" property="ctaxes" jdbcType="VARCHAR" />
     <result column="cregistphone" property="cregistphone" jdbcType="VARCHAR" />
     <result column="cbank" property="cbank" jdbcType="VARCHAR" />
     <result column="cbanknumber" property="cbanknumber" jdbcType="VARCHAR" />
-    <result column="cdlicense" property="cdlicense" jdbcType="VARCHAR" />
     <result column="cregistaddress" property="cregistaddress" jdbcType="VARCHAR" />
-    <result column="remark1" property="remark1" jdbcType="VARCHAR" />
-    <result column="remark2" property="remark2" jdbcType="VARCHAR" />
-    <result column="remark3" property="remark3" jdbcType="VARCHAR" />
+    <result column="createdate" property="createdate" jdbcType="DATE" />
+    <result column="cremark" property="cremark" jdbcType="VARCHAR" />
     <result column="remark4" property="remark4" jdbcType="VARCHAR" />
     <result column="remark5" property="remark5" jdbcType="VARCHAR" />
   </resultMap>
+  
    <resultMap id="BaseResultMapTwo" type="com.accp.domain.Customer" >
     <id column="cno" property="cno" jdbcType="VARCHAR" />
     <result column="ctno" property="ctno" jdbcType="VARCHAR" />
@@ -82,6 +82,7 @@
 		,vip.`vno`,vip.`vjoindate`,vip.`venddate`,vip.`currentjifen`,vip.`money` FROM customer cus
 		LEFT JOIN vip ON vip.`cno`=cus.`cno`
   </select>
+  
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
@@ -142,8 +143,8 @@
   </sql>
   <sql id="Base_Column_List" >
     cno, ctno, cname, cpeople, cphone, caddress, cbirthday, cperiod, climit, personnelid, 
-    cadviserphone, cprovince, cremark, ctaxes, cregistphone, cbank, cbanknumber, cdlicense, 
-    cregistaddress, remark1, remark2, remark3, remark4, remark5
+    cadviserphone, province, city, district, ctaxes, cregistphone, cbank, cbanknumber, 
+    cregistaddress, createdate, cremark, remark4, remark5
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.accp.domain.CustomerExample" >
     select
@@ -179,21 +180,19 @@
     insert into customer (cno, ctno, cname, 
       cpeople, cphone, caddress, 
       cbirthday, cperiod, climit, 
-      personnelid, cadviserphone, cprovince, 
-      cremark, ctaxes, cregistphone, 
-      cbank, cbanknumber, cdlicense, 
-      cregistaddress, remark1, remark2, 
-      remark3, remark4, remark5
-      )
+      personnelid, cadviserphone, province, 
+      city, district, ctaxes, 
+      cregistphone, cbank, cbanknumber, 
+      cregistaddress, createdate, cremark, 
+      remark4, remark5)
     values (#{cno,jdbcType=VARCHAR}, #{ctno,jdbcType=VARCHAR}, #{cname,jdbcType=VARCHAR}, 
       #{cpeople,jdbcType=VARCHAR}, #{cphone,jdbcType=VARCHAR}, #{caddress,jdbcType=VARCHAR}, 
       #{cbirthday,jdbcType=TIMESTAMP}, #{cperiod,jdbcType=INTEGER}, #{climit,jdbcType=REAL}, 
-      #{personnelid,jdbcType=INTEGER}, #{cadviserphone,jdbcType=VARCHAR}, #{cprovince,jdbcType=VARCHAR}, 
-      #{cremark,jdbcType=VARCHAR}, #{ctaxes,jdbcType=VARCHAR}, #{cregistphone,jdbcType=VARCHAR}, 
-      #{cbank,jdbcType=VARCHAR}, #{cbanknumber,jdbcType=VARCHAR}, #{cdlicense,jdbcType=VARCHAR}, 
-      #{cregistaddress,jdbcType=VARCHAR}, #{remark1,jdbcType=VARCHAR}, #{remark2,jdbcType=VARCHAR}, 
-      #{remark3,jdbcType=VARCHAR}, #{remark4,jdbcType=VARCHAR}, #{remark5,jdbcType=VARCHAR}
-      )
+      #{personnelid,jdbcType=VARCHAR}, #{cadviserphone,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, 
+      #{city,jdbcType=VARCHAR}, #{district,jdbcType=VARCHAR}, #{ctaxes,jdbcType=VARCHAR}, 
+      #{cregistphone,jdbcType=VARCHAR}, #{cbank,jdbcType=VARCHAR}, #{cbanknumber,jdbcType=VARCHAR}, 
+      #{cregistaddress,jdbcType=VARCHAR}, #{createdate,jdbcType=DATE}, #{cremark,jdbcType=VARCHAR}, 
+      #{remark4,jdbcType=VARCHAR}, #{remark5,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.accp.domain.Customer" >
     insert into customer
@@ -231,11 +230,14 @@
       <if test="cadviserphone != null" >
         cadviserphone,
       </if>
-      <if test="cprovince != null" >
-        cprovince,
+      <if test="province != null" >
+        province,
       </if>
-      <if test="cremark != null" >
-        cremark,
+      <if test="city != null" >
+        city,
+      </if>
+      <if test="district != null" >
+        district,
       </if>
       <if test="ctaxes != null" >
         ctaxes,
@@ -249,20 +251,14 @@
       <if test="cbanknumber != null" >
         cbanknumber,
       </if>
-      <if test="cdlicense != null" >
-        cdlicense,
-      </if>
       <if test="cregistaddress != null" >
         cregistaddress,
       </if>
-      <if test="remark1 != null" >
-        remark1,
+      <if test="createdate != null" >
+        createdate,
       </if>
-      <if test="remark2 != null" >
-        remark2,
-      </if>
-      <if test="remark3 != null" >
-        remark3,
+      <if test="cremark != null" >
+        cremark,
       </if>
       <if test="remark4 != null" >
         remark4,
@@ -300,16 +296,19 @@
         #{climit,jdbcType=REAL},
       </if>
       <if test="personnelid != null" >
-        #{personnelid,jdbcType=INTEGER},
+        #{personnelid,jdbcType=VARCHAR},
       </if>
       <if test="cadviserphone != null" >
         #{cadviserphone,jdbcType=VARCHAR},
       </if>
-      <if test="cprovince != null" >
-        #{cprovince,jdbcType=VARCHAR},
+      <if test="province != null" >
+        #{province,jdbcType=VARCHAR},
       </if>
-      <if test="cremark != null" >
-        #{cremark,jdbcType=VARCHAR},
+      <if test="city != null" >
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="district != null" >
+        #{district,jdbcType=VARCHAR},
       </if>
       <if test="ctaxes != null" >
         #{ctaxes,jdbcType=VARCHAR},
@@ -323,20 +322,14 @@
       <if test="cbanknumber != null" >
         #{cbanknumber,jdbcType=VARCHAR},
       </if>
-      <if test="cdlicense != null" >
-        #{cdlicense,jdbcType=VARCHAR},
-      </if>
       <if test="cregistaddress != null" >
         #{cregistaddress,jdbcType=VARCHAR},
       </if>
-      <if test="remark1 != null" >
-        #{remark1,jdbcType=VARCHAR},
+      <if test="createdate != null" >
+        #{createdate,jdbcType=DATE},
       </if>
-      <if test="remark2 != null" >
-        #{remark2,jdbcType=VARCHAR},
-      </if>
-      <if test="remark3 != null" >
-        #{remark3,jdbcType=VARCHAR},
+      <if test="cremark != null" >
+        #{cremark,jdbcType=VARCHAR},
       </if>
       <if test="remark4 != null" >
         #{remark4,jdbcType=VARCHAR},
@@ -383,16 +376,19 @@
         climit = #{record.climit,jdbcType=REAL},
       </if>
       <if test="record.personnelid != null" >
-        personnelid = #{record.personnelid,jdbcType=INTEGER},
+        personnelid = #{record.personnelid,jdbcType=VARCHAR},
       </if>
       <if test="record.cadviserphone != null" >
         cadviserphone = #{record.cadviserphone,jdbcType=VARCHAR},
       </if>
-      <if test="record.cprovince != null" >
-        cprovince = #{record.cprovince,jdbcType=VARCHAR},
+      <if test="record.province != null" >
+        province = #{record.province,jdbcType=VARCHAR},
       </if>
-      <if test="record.cremark != null" >
-        cremark = #{record.cremark,jdbcType=VARCHAR},
+      <if test="record.city != null" >
+        city = #{record.city,jdbcType=VARCHAR},
+      </if>
+      <if test="record.district != null" >
+        district = #{record.district,jdbcType=VARCHAR},
       </if>
       <if test="record.ctaxes != null" >
         ctaxes = #{record.ctaxes,jdbcType=VARCHAR},
@@ -406,20 +402,14 @@
       <if test="record.cbanknumber != null" >
         cbanknumber = #{record.cbanknumber,jdbcType=VARCHAR},
       </if>
-      <if test="record.cdlicense != null" >
-        cdlicense = #{record.cdlicense,jdbcType=VARCHAR},
-      </if>
       <if test="record.cregistaddress != null" >
         cregistaddress = #{record.cregistaddress,jdbcType=VARCHAR},
       </if>
-      <if test="record.remark1 != null" >
-        remark1 = #{record.remark1,jdbcType=VARCHAR},
+      <if test="record.createdate != null" >
+        createdate = #{record.createdate,jdbcType=DATE},
       </if>
-      <if test="record.remark2 != null" >
-        remark2 = #{record.remark2,jdbcType=VARCHAR},
-      </if>
-      <if test="record.remark3 != null" >
-        remark3 = #{record.remark3,jdbcType=VARCHAR},
+      <if test="record.cremark != null" >
+        cremark = #{record.cremark,jdbcType=VARCHAR},
       </if>
       <if test="record.remark4 != null" >
         remark4 = #{record.remark4,jdbcType=VARCHAR},
@@ -443,19 +433,18 @@
       cbirthday = #{record.cbirthday,jdbcType=TIMESTAMP},
       cperiod = #{record.cperiod,jdbcType=INTEGER},
       climit = #{record.climit,jdbcType=REAL},
-      personnelid = #{record.personnelid,jdbcType=INTEGER},
+      personnelid = #{record.personnelid,jdbcType=VARCHAR},
       cadviserphone = #{record.cadviserphone,jdbcType=VARCHAR},
-      cprovince = #{record.cprovince,jdbcType=VARCHAR},
-      cremark = #{record.cremark,jdbcType=VARCHAR},
+      province = #{record.province,jdbcType=VARCHAR},
+      city = #{record.city,jdbcType=VARCHAR},
+      district = #{record.district,jdbcType=VARCHAR},
       ctaxes = #{record.ctaxes,jdbcType=VARCHAR},
       cregistphone = #{record.cregistphone,jdbcType=VARCHAR},
       cbank = #{record.cbank,jdbcType=VARCHAR},
       cbanknumber = #{record.cbanknumber,jdbcType=VARCHAR},
-      cdlicense = #{record.cdlicense,jdbcType=VARCHAR},
       cregistaddress = #{record.cregistaddress,jdbcType=VARCHAR},
-      remark1 = #{record.remark1,jdbcType=VARCHAR},
-      remark2 = #{record.remark2,jdbcType=VARCHAR},
-      remark3 = #{record.remark3,jdbcType=VARCHAR},
+      createdate = #{record.createdate,jdbcType=DATE},
+      cremark = #{record.cremark,jdbcType=VARCHAR},
       remark4 = #{record.remark4,jdbcType=VARCHAR},
       remark5 = #{record.remark5,jdbcType=VARCHAR}
     <if test="_parameter != null" >
@@ -490,16 +479,19 @@
         climit = #{climit,jdbcType=REAL},
       </if>
       <if test="personnelid != null" >
-        personnelid = #{personnelid,jdbcType=INTEGER},
+        personnelid = #{personnelid,jdbcType=VARCHAR},
       </if>
       <if test="cadviserphone != null" >
         cadviserphone = #{cadviserphone,jdbcType=VARCHAR},
       </if>
-      <if test="cprovince != null" >
-        cprovince = #{cprovince,jdbcType=VARCHAR},
+      <if test="province != null" >
+        province = #{province,jdbcType=VARCHAR},
       </if>
-      <if test="cremark != null" >
-        cremark = #{cremark,jdbcType=VARCHAR},
+      <if test="city != null" >
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="district != null" >
+        district = #{district,jdbcType=VARCHAR},
       </if>
       <if test="ctaxes != null" >
         ctaxes = #{ctaxes,jdbcType=VARCHAR},
@@ -513,20 +505,14 @@
       <if test="cbanknumber != null" >
         cbanknumber = #{cbanknumber,jdbcType=VARCHAR},
       </if>
-      <if test="cdlicense != null" >
-        cdlicense = #{cdlicense,jdbcType=VARCHAR},
-      </if>
       <if test="cregistaddress != null" >
         cregistaddress = #{cregistaddress,jdbcType=VARCHAR},
       </if>
-      <if test="remark1 != null" >
-        remark1 = #{remark1,jdbcType=VARCHAR},
+      <if test="createdate != null" >
+        createdate = #{createdate,jdbcType=DATE},
       </if>
-      <if test="remark2 != null" >
-        remark2 = #{remark2,jdbcType=VARCHAR},
-      </if>
-      <if test="remark3 != null" >
-        remark3 = #{remark3,jdbcType=VARCHAR},
+      <if test="cremark != null" >
+        cremark = #{cremark,jdbcType=VARCHAR},
       </if>
       <if test="remark4 != null" >
         remark4 = #{remark4,jdbcType=VARCHAR},
@@ -547,19 +533,18 @@
       cbirthday = #{cbirthday,jdbcType=TIMESTAMP},
       cperiod = #{cperiod,jdbcType=INTEGER},
       climit = #{climit,jdbcType=REAL},
-      personnelid = #{personnelid,jdbcType=INTEGER},
+      personnelid = #{personnelid,jdbcType=VARCHAR},
       cadviserphone = #{cadviserphone,jdbcType=VARCHAR},
-      cprovince = #{cprovince,jdbcType=VARCHAR},
-      cremark = #{cremark,jdbcType=VARCHAR},
+      province = #{province,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      district = #{district,jdbcType=VARCHAR},
       ctaxes = #{ctaxes,jdbcType=VARCHAR},
       cregistphone = #{cregistphone,jdbcType=VARCHAR},
       cbank = #{cbank,jdbcType=VARCHAR},
       cbanknumber = #{cbanknumber,jdbcType=VARCHAR},
-      cdlicense = #{cdlicense,jdbcType=VARCHAR},
       cregistaddress = #{cregistaddress,jdbcType=VARCHAR},
-      remark1 = #{remark1,jdbcType=VARCHAR},
-      remark2 = #{remark2,jdbcType=VARCHAR},
-      remark3 = #{remark3,jdbcType=VARCHAR},
+      createdate = #{createdate,jdbcType=DATE},
+      cremark = #{cremark,jdbcType=VARCHAR},
       remark4 = #{remark4,jdbcType=VARCHAR},
       remark5 = #{remark5,jdbcType=VARCHAR}
     where cno = #{cno,jdbcType=VARCHAR}
