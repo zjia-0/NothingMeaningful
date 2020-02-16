@@ -1,0 +1,1506 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" href="css/bootstrap.min.css" />
+		<link rel="stylesheet" href="css/bootstrapStyle/bootstrapStyle.css" />
+		<style>
+			*{
+				margin: 0px;
+				padding: 0px;
+			}
+			.bq span{
+				margin:0px 5px;
+			}
+			#jju td{
+				padding: 5px 5px;
+			}
+			.jji td{
+				padding: 5px 5px;
+			}
+			.infosbb{
+			width: 1080px;
+			height: 300px;
+			overflow-x: auto;
+			overflow-y: hidden;
+			}
+			.infos{
+				width:2080px;
+				height: 300px;
+			}
+		</style>
+	</head>
+	<body>
+	<div id="ctx">
+		<div class="container-fluid">
+			<div style="background: #f7ffff; height: 50px;  padding-left: 10px; line-height:50px;">
+				<span style="font-size: 25px;" class="col-sm-8 col-lg-7 col-md-7">商品资料</span>
+				<span class="col-lg-4 col-md-4 col-sm-4">
+					<input type="text" placeholder="匹配编码/名称/简码/品牌/型号/大类+号双条件查询" style="height: 35px; width: 345px;"/>
+					<button type="button" class="btn btn-warning">搜索</button>
+				</span>
+				<span class="col-lg-1 col-md-1 col-sm-1"><button type="button"class="btn btn-default">关闭</button></span>
+			</div>
+			<div  style="background: #f7f7f7; height: 1200px;  padding-left: 10px; line-height:50px;">
+				<div class="bq col-lg-3 col-md-3 col-sm-3">
+					<span v-on:click="zen()">
+						<span class="glyphicon glyphicon-align-left" style="color: #fcac28;" aria-hidden="true"></span>
+						<span data-toggle="modal" data-target="#myModal">增加</span>
+					</span>
+					<span v-on:click="gai()">
+						<span class="glyphicon glyphicon-align-left" style="color: #fcac28;" aria-hidden="true"></span>
+						<span data-toggle="modal" data-target="#myModals">修改</span>
+					</span>
+					<span  v-on:click="shan()"><span class="glyphicon glyphicon-remove-circle" style="color: #fcac28;" aria-hidden="true"></span>删除</span>
+					<span>
+						<span class="glyphicon glyphicon-search" style="color: #fcac28;" aria-hidden="true"></span>
+						<span data-toggle="modal" data-target="#selects">查询</span>
+					</span>					
+				</div>
+				<div class="bq col-lg-9 col-md-9 col-sm-9">
+					<span><span class="glyphicon glyphicon-arrow-down" style="color: #fcac28;" aria-hidden="true"></span>下页</span>
+					<span><span class="glyphicon glyphicon-share" style="color: #fcac28;" aria-hidden="true"></span>导出</span>
+					<span><span class="glyphicon glyphicon-picture" style="color: #fcac28;" aria-hidden="true"></span>照片</span>
+					<span>
+						<span class="glyphicon glyphicon-barcode" style="color: #fcac28;" aria-hidden="true"></span>
+						<span data-toggle="modal" data-target="#code">条码</span>
+					</span>
+					<span>
+						<span class="glyphicon glyphicon-folder-close" style="color: #fcac28;" aria-hidden="true"></span>
+						<span data-toggle="modal" data-target="#external">套件商品</span>
+					</span>
+					<span>
+						<span class="glyphicon glyphicon-list-alt" style="color: #fcac28;" aria-hidden="true"></span>
+						<span data-toggle="modal" data-target="#set">分类设置</span>						
+					</span>
+					<span>
+						<span class="glyphicon glyphicon-certificate" style="color: #fcac28;" aria-hidden="true"></span>
+						<span data-toggle="modal" data-target="#field">字段设置</span>					
+					</span>
+					<span>
+						<input type="text" style="width: 30px; height: 35px; background: #f7f7f7; color: #f7f7f7; border: none;" class="zhi"/>
+					</span>
+				
+				</div>
+				<div>
+					<div  class="col-sm-3 col-lg-3 col-md-3">
+						<div>
+							<input type="text" placeholder="匹配 编码/名称" style="height: 35px; "/>
+							<button type="button" class="btn btn-warning">搜索</button>
+						</div>
+						<div  style="background: white; height: 500px;">
+							<ul id="treeDemo" class="ztree"></ul>
+						</div>
+					</div>
+					<div class="bq col-lg-9 col-md-9 col-sm-9">
+						<div class="infosbb">
+							<div class="infos">
+								<table  border="1px" class="table" style="border: 1px solid #d0cbc5;">
+									<tr  style="background: #39cede;color: white;">
+										<th>登记门店</th>
+										<th>照片名</th>
+										<th>商品编码</th>
+										<th>商品名称</th>
+										<th>商品品牌</th>
+										<th>适用车型</th>
+										<th>数量单位</th>
+										<th>商品大类</th>
+										<th>商品中类</th>
+										<th>商品小类</th>
+										<th>收入分类</th>
+										<th>原厂副厂</th>
+										<th>商品等级</th>
+										<th>商品场地</th>
+										<th>厂商名称</th>
+										<th>原厂编码</th>
+										<th>条形码</th>
+										<th>包装规格</th>
+										<th>体积A</th>
+										<th>毛重</th>
+										<th>净重</th>
+										<th>加价率</th>
+										<th>互换码</th>
+										<th>售价按</th>
+									</tr>
+									<tr style="background: white;" v-for="i in go">
+										<td><input type="text" v-model="i.storename" style="border: none; text-align: center; width: 100px;" v-on:click="zhi(i.gid)"/></td>
+										<td><input type="text" v-model="i.remark1" style="border: none; text-align: center; width: 100px;" v-on:click="zhi(i.gid)"/></td>
+										<td><input type="text" v-model="i.gid" style="border: none; text-align: center; width: 100px;" v-on:click="zhi(i.gid)"/></td>
+										<td><input type="text" v-model="i.gname" style="border: none; text-align: center; width: 100px;" v-on:click="zhi(i.gid)"/></td>
+										<td><input type="text" v-model="i.brandname" style="border: none; text-align: center; width: 100px;" v-on:click="zhi(i.gid)"/></td>
+										<td><input type="text" v-model="i.applycar" style="border: none; text-align: center; width: 100px;" v-on:click="zhi(i.gid)"/></td>
+										<td><input type="text" v-model="i.numbename" style="border: none; text-align: center; width: 100px;" v-on:click="zhi(i.gid)"/></td>
+										<td><input type="text" v-model="i.bigclassify" style="border: none; text-align: center; width: 100px;" v-on:click="zhi(i.gid)"/></td>
+										<td><input type="text" v-model="i.centreclassify" style="border: none; text-align: center; width: 100px;" v-on:click="zhi(i.gid)"/></td>
+										<td><input type="text" v-model="i.smallclassify" style="border: none; text-align: center; width: 100px;" v-on:click="zhi(i.gid)"/></td>
+										<td><input type="text" v-model="i.incomename" style="border: none; text-align: center; width: 100px;"/></td>
+										<td><input type="text" v-model="i.Originalname" style="border: none; text-align: center; width: 100px;"/></td>
+										<td><input type="text" v-model="i.placename" style="border: none; text-align: center; width: 100px;"/></td>
+										<td><input type="text" v-model="i.sitename" style="border: none; text-align: center; width: 100px;"/></td>
+										<td><input type="text" v-model="i.coding" style="border: none; text-align: center; width: 100px;"/></td>
+										<td><input type="text" v-model="i.barcodes" style="border: none; text-align: center; width: 100px;"/></td>
+										<td><input type="text" v-model="i.specs" style="border: none; text-align: center; width: 100px;"/></td>
+										<td><input type="text" v-model="i.volume" style="border: none; text-align: center; width: 100px;"/></td>
+										<td><input type="text" v-model="i.netweight" style="border: none; text-align: center; width: 100px;"/></td>
+										<td><input type="text" v-model="i.suttle" style="border: none; text-align: center; width: 100px;"/></td>
+										<td><input type="text" v-model="i.hike" style="border: none; text-align: center; width: 100px;"/></td>
+										<td><input type="text" v-model="i.exchange" style="border: none; text-align: center; width: 100px;"/></td>
+										<td><input type="text" v-model="i.pricename" style="border: none; text-align: center; width: 100px;"/></td>
+										<td><input type="text" v-model="i.yieldiy" style="border: none; text-align: center; width: 100px;"/></td>
+									</tr>
+								</table>
+							</div>
+						</div>
+					</div>					
+				</div>
+			</div>
+		</div>
+<!--商品资料新增-->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document" style="width: 1100px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel">
+					<span class="col-sm-4 col-lg-4 col-md-4">商品资料编辑</span>
+					<span  class="col-sm-5 col-lg-5 col-md-5" style="text-align: right;"><input type="checkbox"/>停用</span>
+					<span style="text-align: right;" class="col-sm-2 col-lg-2 col-md-2"   v-on:click="bao()">
+						<button type="button" class="btn btn-success" style="float: right; width: 90px;">保存</button>
+					</span>
+				</h4>
+			</div>
+					<div class="modal-body">
+							<table id="jju">
+								<tr>
+									<td style="color: red;">*</td>
+									<td>商品编码</td>
+									<td><input type="text" class="gid"/></td>
+									<td style="color: red;">*</td>
+									<td>商品名称</td>
+									<td colspan="3">
+										<input type="text" style="width: 435px;" class="gname"/>
+									</td>
+									<td>商品品牌</td>
+									<td>
+										<form class="form-inline">
+										  <div class="form-group">
+										    <div class="input-group">
+										    	<select  style="width: 140px; height: 30px;" class="remark2">
+										    		<option v-for="i in sp">{{i.brandname}}</option>
+										    	</select>
+										      <div class="input-group-addon"  style="background: white; margin-bottom: 20px;" >
+										      	<span class="glyphicon glyphicon-triangle-bottom"   data-toggle="modal" data-target="#brand"></span>
+										      </div>
+										    </div>
+										  </div>
+										</form>
+									</td>
+								</tr>
+								<tr>
+									<td>&nbsp;</td>
+									<td>适用车型</td>
+									<td><input type="text" class="applycar"/></td>
+									<td>&nbsp;</td>
+									<td>数量单位</td>
+									<td>
+										<form class="form-inline">
+										  <div class="form-group">
+										    <div class="input-group">
+										      <select  style="width: 140px; height: 30px;" class="unit">
+										    		<option v-for="i in dw">{{i.numbename}}</option>
+										    	</select>
+										      <div class="input-group-addon"  style="background: white; margin-bottom: 20px;" >
+										      	<span class="glyphicon glyphicon-triangle-bottom"   data-toggle="modal" data-target="#unit"></span>
+										      </div>
+										    </div>
+										  </div>
+										</form>
+									</td>
+									<td>商品大类</td>
+									<td colspan="3">
+										<form class="form-inline">
+										  <div class="form-group">
+										    <div class="input-group">
+										    	<input  type="text"  style="width: 100px; height: 30px;" class="storeid"/>
+										    	<input type="text"  style="width: 300px; height: 30px;" class="bigclassify"/>
+										      <div class="input-group-addon"  style="background: white; margin-bottom: 20px;" >
+										      	<span class="glyphicon glyphicon-triangle-bottom"   data-toggle="modal" data-target="#heading"></span>
+										      </div>
+										    </div>
+										  </div>
+										</form>
+									</td>
+								</tr>
+								<tr>
+									<td>&nbsp;</td>
+									<td>收入分类</td>
+									<td>
+										<form class="form-inline">
+										  <div class="form-group">
+										    <div class="input-group">
+										     	<select  style="width: 140px; height: 30px;" class="incomeid">
+										    		<option v-for="i in lb">{{i.incomename}}</option>
+										    	</select>
+										      <div class="input-group-addon"  style="background: white; margin-bottom: 20px;" >
+										      	<span class="glyphicon glyphicon-triangle-bottom"   data-toggle="modal" data-target="#income"></span>
+										      </div>
+										    </div>
+										  </div>
+										</form>
+									</td>
+									<td>&nbsp;</td>
+									<td>原厂副厂</td>
+									<td>
+										<form class="form-inline">
+										  <div class="form-group">
+										    <div class="input-group">
+										      <select  style="width: 140px; height: 30px;" class="vender">
+										    		<option v-for="i in fc">{{i.originalname}}</option>
+										    	</select>
+										      <div class="input-group-addon"  style="background: white; margin-bottom: 20px;" >
+										      	<span class="glyphicon glyphicon-triangle-bottom"   data-toggle="modal" data-target="#Deputyfactory"></span>
+										      </div>
+										    </div>
+										  </div>
+										</form>
+									</td>
+									<td>商品等级</td>
+									<td>
+										<form class="form-inline">
+										  <div class="form-group">
+										    <div class="input-group">
+										     	<select  style="width: 140px; height: 30px;" class="level">
+										    		<option v-for="i in dj">{{i.placename}}</option>
+										    	</select>
+										      <div class="input-group-addon"  style="background: white; margin-bottom: 20px;" >
+										      	<span class="glyphicon glyphicon-triangle-bottom"   data-toggle="modal" data-target="#grade"></span>
+										      </div>
+										    </div>
+										  </div>
+										</form>
+									</td>
+									<td>商品场地</td>
+									<td>
+										<form class="form-inline">
+										  <div class="form-group">
+										    <div class="input-group">
+										     	<select  style="width: 140px; height: 30px;" class="yieldiy">
+										    		<option v-for="i in cd">{{i.sitename}}</option>
+										    	</select>
+										      <div class="input-group-addon"  style="background: white; margin-bottom: 20px;" >
+										      	<span class="glyphicon glyphicon-triangle-bottom"   data-toggle="modal" data-target="#origin"></span>
+										      </div>
+										    </div>
+										  </div>
+										</form>
+									</td>
+								</tr>
+								<tr>
+									<td>&nbsp;</td>
+									<td>厂商名称</td>
+									<td colspan="4">
+										<form class="form-inline">
+										  <div class="form-group">
+										    <div class="input-group">
+										    	<input type="text"  style="width: 410px; height: 30px;" class="factoryname"/>
+										      <div class="input-group-addon"  style="background: white; margin-bottom: 20px;" >
+										      	<span class="glyphicon glyphicon-triangle-bottom"   data-toggle="modal" data-target="#name"></span>
+										      </div>
+										    </div>
+										  </div>
+										</form>
+									</td>
+									<td>原厂编码</td>
+									<td><input type="text" class="coding"/></td>
+									<td>条形码</td>
+									<td><input type="text" class="barcodes"/></td>
+								</tr>
+								<tr>
+									<td>&nbsp;</td>
+									<td>包装规格</td>
+									<td><input type="text" class="specs"/></td>
+									<td>&nbsp;</td>
+									<td>体积A</td>
+									<td><input type="text" class="volume"/></td>
+									<td>毛重</td>
+									<td><input type="text" class="netweight"/></td>
+									<td>净重</td>
+									<td><input type="text" class="suttle"/></td>
+								</tr>
+								<tr>
+									<td>&nbsp;</td>
+									<td>进货价</td>
+									<td><input type="text" class="remark9"/></td>
+									<td>&nbsp;</td>
+									<td>销售按</td>
+									<td>
+										<select style="width: 180px; height: 25px;" class="pricean">
+											<option v-for="i in sj">{{i.pricename}}</option>
+										</select>
+									</td>
+									<td>加价率</td>
+									<td><input type="text" class="hike"/></td>
+								</tr>
+								<tr>
+									<td>&nbsp;</td>
+									<td>互换码</td>
+									<td colspan="8">
+										<input type="text" style="width: 965px;" class="exchange"/>
+									</td>
+								</tr>
+								<tr>
+									<td>&nbsp;</td>
+									<td>标准价</td>
+									<td><input type="text" class="remark3"/></td>
+									<td>&nbsp;</td>
+									<td>会员价</td>
+									<td><input type="text" class="remark4"/></td>
+									<td>VIP价</td>
+									<td><input type="text" class="remark5"/></td>
+									<td>协议价</td>
+									<td><input type="text" class="remark6"/></td>
+								</tr>
+								<tr>
+									<td>&nbsp;</td>
+									<td>索赔价</td>
+									<td><input type="text" class="remark7"/></td>
+									<td>&nbsp;</td>
+									<td>保险价</td>
+									<td><input type="text" class="remark8"/></td>
+								</tr>
+							</table>			
+					</div>
+		</div>
+	</div>
+</div>	
+<!--商品修改-->
+<div class="modal fade" id="myModals" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document" style="width: 1100px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel">
+					<span class="col-sm-4 col-lg-4 col-md-4">商品资料编辑</span>
+					<span  class="col-sm-5 col-lg-5 col-md-5" style="text-align: right;"><input type="checkbox"/>停用</span>
+					<span style="text-align: right;" class="col-sm-2 col-lg-2 col-md-2"   v-on:click="baos()">
+						<button type="button" class="btn btn-success" style="float: right; width: 90px;">保存</button>
+					</span>
+				</h4>
+			</div>
+					<div class="modal-body">
+							<table id="jju">
+								<tr>
+									<td style="color: red;">*</td>
+									<td>商品编码</td>
+									<td><input type="text" class="gidr" v-model="goupse.gid" /></td>
+									<td style="color: red;">*</td>
+									<td>商品名称</td>
+									<td colspan="3">
+										<input type="text" style="width: 435px;" class="gnamer"  v-model="goupse.gname" />
+									</td>
+									<td>商品品牌</td>
+									<td>
+										<form class="form-inline">
+										  <div class="form-group">
+										    <div class="input-group">
+										    	<select  style="width: 140px; height: 30px;" class="remark2r" >
+										    		<option v-for="i in sp">{{i.brandname}}</option>
+										    	</select>
+										      <div class="input-group-addon"  style="background: white; margin-bottom: 20px;" >
+										      	<span class="glyphicon glyphicon-triangle-bottom"   data-toggle="modal" data-target="#brand"></span>
+										      </div>
+										    </div>
+										  </div>
+										</form>
+									</td>
+								</tr>
+								<tr>
+									<td>&nbsp;</td>
+									<td>适用车型</td>
+									<td><input type="text" class="applycarr"   v-model="goupse.applycar" /></td>
+									<td>&nbsp;</td>
+									<td>数量单位</td>
+									<td>
+										<form class="form-inline">
+										  <div class="form-group">
+										    <div class="input-group">
+										      <select  style="width: 140px; height: 30px;" class="unitr">
+										    		<option v-for="i in dw">{{i.numbename}}</option>
+										    	</select>
+										      <div class="input-group-addon"  style="background: white; margin-bottom: 20px;" >
+										      	<span class="glyphicon glyphicon-triangle-bottom"   data-toggle="modal" data-target="#unit"></span>
+										      </div>
+										    </div>
+										  </div>
+										</form>
+									</td>
+									<td>商品大类</td>
+									<td colspan="3">
+										<form class="form-inline">
+										  <div class="form-group">
+										    <div class="input-group">
+										    	<input  type="text"  style="width: 100px; height: 30px;" class="storeidsr"  v-model="goupse.storeids"/>
+										    	<input type="text"  style="width: 300px; height: 30px;" class="bigclassifysr"  v-model="goupse.bigclassifys"/>
+										      <div class="input-group-addon"  style="background: white; margin-bottom: 20px;" >
+										      	<span class="glyphicon glyphicon-triangle-bottom"   data-toggle="modal" data-target="#heading"></span>
+										      </div>
+										    </div>
+										  </div>
+										</form>
+									</td>
+								</tr>
+								<tr>
+									<td>&nbsp;</td>
+									<td>收入分类</td>
+									<td>
+										<form class="form-inline">
+										  <div class="form-group">
+										    <div class="input-group">
+										     	<select  style="width: 140px; height: 30px;" class="incomeidr">
+										    		<option v-for="i in lb">{{i.incomename}}</option>
+										    	</select>
+										      <div class="input-group-addon"  style="background: white; margin-bottom: 20px;" >
+										      	<span class="glyphicon glyphicon-triangle-bottom"   data-toggle="modal" data-target="#income"></span>
+										      </div>
+										    </div>
+										  </div>
+										</form>
+									</td>
+									<td>&nbsp;</td>
+									<td>原厂副厂</td>
+									<td>
+										<form class="form-inline">
+										  <div class="form-group">
+										    <div class="input-group">
+										      <select  style="width: 140px; height: 30px;" class="venderr">
+										    		<option v-for="i in fc">{{i.originalname}}</option>
+										    	</select>
+										      <div class="input-group-addon"  style="background: white; margin-bottom: 20px;" >
+										      	<span class="glyphicon glyphicon-triangle-bottom"   data-toggle="modal" data-target="#Deputyfactory"></span>
+										      </div>
+										    </div>
+										  </div>
+										</form>
+									</td>
+									<td>商品等级</td>
+									<td>
+										<form class="form-inline">
+										  <div class="form-group">
+										    <div class="input-group">
+										     	<select  style="width: 140px; height: 30px;" class="levelr">
+										    		<option v-for="i in dj">{{i.placename}}</option>
+										    	</select>
+										      <div class="input-group-addon"  style="background: white; margin-bottom: 20px;" >
+										      	<span class="glyphicon glyphicon-triangle-bottom"   data-toggle="modal" data-target="#grade"></span>
+										      </div>
+										    </div>
+										  </div>
+										</form>
+									</td>
+									<td>商品场地</td>
+									<td>
+										<form class="form-inline">
+										  <div class="form-group">
+										    <div class="input-group">
+										     	<select  style="width: 140px; height: 30px;" class="yieldiyr">
+										    		<option v-for="i in cd">{{i.sitename}}</option>
+										    	</select>
+										      <div class="input-group-addon"  style="background: white; margin-bottom: 20px;" >
+										      	<span class="glyphicon glyphicon-triangle-bottom"   data-toggle="modal" data-target="#origin"></span>
+										      </div>
+										    </div>
+										  </div>
+										</form>
+									</td>
+								</tr>
+								<tr>
+									<td>&nbsp;</td>
+									<td>厂商名称</td>
+									<td colspan="4">
+										<form class="form-inline">
+										  <div class="form-group">
+										    <div class="input-group">
+										    	<input type="text"  style="width: 410px; height: 30px;" class="factorynamer"  v-model="goupse.factoryname"/>
+										      <div class="input-group-addon"  style="background: white; margin-bottom: 20px;" >
+										      	<span class="glyphicon glyphicon-triangle-bottom"   data-toggle="modal" data-target="#name"></span>
+										      </div>
+										    </div>
+										  </div>
+										</form>
+									</td>
+									<td>原厂编码</td>
+									<td><input type="text" class="codingr" v-model="goupse.coding"/></td>
+									<td>条形码</td>
+									<td><input type="text" class="barcodesr"  v-model="goupse.barcodes"/></td>
+								</tr>
+								<tr>
+									<td>&nbsp;</td>
+									<td>包装规格</td>
+									<td><input type="text" class="specsr" v-model="goupse.specs"/></td>
+									<td>&nbsp;</td>
+									<td>体积A</td>
+									<td><input type="text" class="volumer" v-model="goupse.volume"/></td>
+									<td>毛重</td>
+									<td><input type="text" class="netweightr" v-model="goupse.netweight"/></td>
+									<td>净重</td>
+									<td><input type="text" class="suttler" v-model="goupse.suttle"/></td>
+								</tr>
+								<tr>
+									<td>&nbsp;</td>
+									<td>进货价</td>
+									<td><input type="text" class="remark9r"  v-model="goupse.remark9"/></td>
+									<td>&nbsp;</td>
+									<td>销售按</td>
+									<td>
+										<select style="width: 180px; height: 25px;" class="priceanr">
+											<option v-for="i in sj">{{i.pricename}}</option>
+										</select>
+									</td>
+									<td>加价率</td>
+									<td><input type="text" class="hiker" v-model="goupse.hike"/></td>
+								</tr>
+								<tr>
+									<td>&nbsp;</td>
+									<td>互换码</td>
+									<td colspan="8">
+										<input type="text" style="width: 965px;" class="exchanger" v-model="goupse.exchange"/>
+									</td>
+								</tr>
+								<tr>
+									<td>&nbsp;</td>
+									<td>标准价</td>
+									<td><input type="text" class="remark3r" v-model="goupse.remark3"/></td>
+									<td>&nbsp;</td>
+									<td>会员价</td>
+									<td><input type="text" class="remark4r" v-model="goupse.remark4"/></td>
+									<td>VIP价</td>
+									<td><input type="text" class="remark5r" v-model="goupse.remark5"/></td>
+									<td>协议价</td>
+									<td><input type="text" class="remark6r" v-model="goupse.remark6"/></td>
+								</tr>
+								<tr>
+									<td>&nbsp;</td>
+									<td>索赔价</td>
+									<td><input type="text" class="remark7r" v-model="goupse.remark7"/></td>
+									<td>&nbsp;</td>
+									<td>保险价</td>
+									<td><input type="text" class="remark8r" v-model="goupse.remark8"/></td>
+								</tr>
+							</table>			
+					</div>
+		</div>
+	</div>
+</div>
+<!---->
+<div class="modal fade" id="selects" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document" style="width: 820px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel">
+					<span class="col-sm-4 col-lg-4 col-md-4" style="font-size:30px;">商品查询</span>
+					<span  class="col-sm-5 col-lg-5 col-md-5" style="text-align: right;"><input type="checkbox"/>停用</span>
+					<span style="text-align: right;" class="col-sm-2 col-lg-2 col-md-2">
+						<button type="button" class="btn btn-success" style="float: right; width: 90px;">确定</button>
+					</span>
+				</h4>
+			</div>
+					<div class="modal-body">
+							<table class="jji">
+								<tr>
+									<td>商品编码</td>
+									<td><input type="text"/></td>
+									<td>商品名称</td>
+									<td><input type="text"/></td>
+									<td>
+										商品品牌
+									</td>
+									<td>
+										<select  style="width: 180px; height: 25px;">
+											<option>1</option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td>适用车型</td>
+									<td><input type="text"/></td>
+									<td>商品大类</td>
+									<td>
+										<form class="form-inline">
+										  <div class="form-group">
+										    <div class="input-group">
+										      <input type="text" style="width: 140px; height: 30px;">
+										      <div class="input-group-addon"  style="background: white; margin-bottom: 20px;" >
+										      	<span class="glyphicon glyphicon-triangle-bottom"   data-toggle="modal" data-target="#import"></span>
+										      </div>
+										    </div>
+										  </div>
+										</form>
+									</td>
+									<td>商品中类</td>
+									<td><input type="text"/></td>
+								</tr>
+								<tr>
+									<td>商品小类</td>
+									<td><input type="text"/></td>
+									<td>收入分类</td>
+									<td>
+										<select  style="width: 180px; height: 25px;">
+											<option>1</option>
+										</select>
+									</td>
+									<td>原厂副厂</td>
+									<td>
+										<select  style="width: 180px; height: 25px;">
+											<option>1</option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td>商品等级</td>
+									<td>
+										<select  style="width: 180px; height: 25px;">
+											<option>1</option>
+										</select>
+									</td>
+									<td>商品产地</td>
+									<td>
+										<select  style="width: 180px; height: 25px;">
+											<option>1</option>
+										</select>
+									</td>
+									<td>厂商名称</td>
+									<td>
+										<form class="form-inline">
+										  <div class="form-group">
+										    <div class="input-group">
+										      <input type="text" style="width: 140px; height: 30px;">
+										      <div class="input-group-addon"  style="background: white; margin-bottom: 20px;" >
+										      	<span class="glyphicon glyphicon-triangle-bottom"   data-toggle="modal" data-target="#location"></span>
+										      </div>
+										    </div>
+										  </div>
+										</form>
+									</td>
+								</tr>
+								<tr>
+									<td>原厂编码</td>
+									<td><input type="text"/></td>
+									<td>条形码</td>
+									<td><input type="text"/></td>
+									<td>包装规格</td>
+									<td><input type="text"/></td>
+								</tr>
+								<tr>
+									<td>体积A</td>
+									<td><input type="text"/></td>
+									<td>毛重</td>
+									<td><input type="text"/></td>
+									<td>净重</td>
+									<td><input type="text"/></td>
+								</tr>
+								<tr>
+									<td>零部件</td>
+									<td>
+										<select  style="width: 180px; height: 20px;">
+											<option>1</option>
+										</select>
+									</td>
+									<td>品牌车型</td>
+									<td colspan="3">
+										<form class="form-inline">
+										  <div class="form-group">
+										    <div class="input-group">
+										      <input type="text" style="width: 140px; height: 30px;">
+										      <div class="input-group-addon"  style="background: white; margin-bottom: 20px;" >
+										      	<span class="glyphicon glyphicon-triangle-bottom"   data-toggle="modal" data-target="#motorcycle"></span>
+										      </div>
+										    </div>
+										  </div>
+										</form>
+									</td>
+								</tr>
+							</table>					
+					</div>
+		</div>
+	</div>
+</div>
+<!---->
+<div class="modal fade" id="code" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document" style="width: 600px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel">条码打印</h4>
+			</div>
+					<div class="modal-body">
+							<div class="col-sm-12 col-lg-12 col-md-12 " style="text-align: left; background:#F7F7F7 ; ">
+								<span style="padding-right: 10px;"><span class="glyphicon glyphicon-floppy-saved" style="color: #fcac28;" aria-hidden="true"></span>全部选择</span>
+								<span style="padding-right: 10px;"><span class="glyphicon glyphicon-floppy-remove" style="color: #fcac28;" aria-hidden="true"></span>全部取消</span>
+								<span><span class="glyphicon glyphicon-print" style="color: #fcac28;" aria-hidden="true"></span>条码打印</span>
+							</div>
+							<table class="table">  
+								<tr> 
+									<td> 
+										<iframe width="100%" height="150px" src="unitsel.html" class="t-iframe" scrolling="no" security="restricted" sandbox="" frameborder="no" border="0" marginwidth="0" marginheight="0" ></iframe> 
+									</td> 
+								</tr> 
+							</table>
+					</div>
+		</div>
+	</div>
+</div>
+<!---->
+<div class="modal fade" id="external" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document" style="width:800px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel">
+					<span class="col-sm-5 col-lg-5 col-md-5">套件商品关系图</span>
+					<span class="col-sm-6 col-lg-6 col-md-6" style=" text-align: right;">
+					<button type="button" class="btn btn-default"  class="col-sm-3 col-lg-3 col-md-3" style="width: 70px; ">取消</button>
+					</span>
+				</h4>
+			</div>
+					<div class="modal-body"style=" background:#F7F7F7 ;" >
+						<div>
+							<div class="col-sm-5 col-lg-5 col-md-5 " style="text-align: right;">父编码:0280130039</div>
+							<div class="col-sm-7 col-lg-7 col-md-7 " style="text-align: right;">
+								<span style="padding-right: 10px;"><span class="glyphicon glyphicon-floppy-disk" style="color: #fcac28;" aria-hidden="true"></span>保存</span>
+								<span><span class="glyphicon glyphicon-remove-circle" style="color: #fcac28;" aria-hidden="true"></span>删除</span>
+							</div>
+						</div>
+						<table class="table">  
+								<tr> 
+									<td> 
+										<iframe width="100%" height="150px" src="dataexternal.html" class="t-iframe" scrolling="no" security="restricted" sandbox="" frameborder="no" border="0" marginwidth="0" marginheight="0" ></iframe> 
+									</td> 
+								</tr> 
+							</table>
+					</div>	
+					
+		</div>
+	</div>
+</div>
+<!---->
+<div class="modal fade" id="set" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document" style="width: 900px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel">
+					<span class="col-sm-5 col-lg-5 col-md-5">商品标准分类</span>
+					<span class="col-sm-6 col-lg-6 col-md-6" style=" text-align: right;">
+					<button type="button" class="btn btn-default"  class="col-sm-3 col-lg-3 col-md-3" style="width: 70px; ">取消</button>
+					</span>
+				</h4>
+			</div>
+					<div class="modal-body">
+							<div>
+								<span class="col-lg-4 col-md-4 col-sm-4" style="text-align: right;">商品分类<input type="text" style="height: 30px;"/></span>
+								<span class="col-lg-8 col-md-8 col-sm-8" style="text-align: left;">
+									<form class="form-inline">
+									  <div class="form-group">
+									    <div class="input-group">									    
+									    <input type="text" style="width: 400px;" class="form-control" id="exampleInputAmount" placeholder="Amount">
+									     	<div class="input-group-addon"  style="background: white; margin-bottom: 20px;" >
+										      	<span class="glyphicon glyphicon-triangle-bottom"   data-toggle="modal" data-target="#heading"></span>
+										    </div>
+									    </div>
+									  </div>
+									</form>
+								</span>
+							</div>
+							<div>
+								<iframe width="100%" height="150px" src="datastandard.html" class="t-iframe" scrolling="no" security="restricted" sandbox="" frameborder="no" border="0" marginwidth="0" marginheight="0" ></iframe> 
+							</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-success">选择</button>
+					</div>
+		</div>
+	</div>
+</div>
+<!---->
+<div class="modal fade" id="field" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document" style="width: 500px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel">字段设置</h4>
+			</div>
+					<div class="modal-body">
+							<div class="col-sm-7 col-lg-7 col-md-7 " style="text-align: left;">
+								<button type="button" class="btn btn-success" style="width: 80px; height: 30px;">确定</button>
+							</div>
+							<div class="col-sm-5 col-lg-5 col-md-5 " style="text-align: right; line-height: 30px;">
+								<span style="padding-right: 10px;"><span class="glyphicon glyphicon-floppy-saved" style="height: 60px; color: #fcac28;" aria-hidden="true"></span>全部选择</span>
+								<span><span class="glyphicon glyphicon-floppy-remove" style="color: #fcac28;" aria-hidden="true"></span>全部取消</span>
+							</div>
+						
+						<table class="table">
+							<tr  style="background: #39cede;color: white;">
+								<th>显示</th>
+								<th>字段</th>
+								<th>字段名称</th>
+								<th>序号</th>
+								<th>显示宽度</th>
+							</tr>
+							<tr  style="background: white;">
+								<td><input type="checkbox"/></td>
+								<td>1</td>
+								<td>1</td>
+								<td>1</td>
+								<td>1</td>
+							</tr>
+						</table>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-success">选择</button>
+					</div>
+		</div>
+	</div>
+</div>
+<!--商品品牌-->
+<div class="modal fade" id="brand" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document" style="width: 470px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h3 class="modal-title" id="myModalLabel">				
+					选择内容设置
+				</h3>
+			</div>
+					<div class="modal-body">
+							<div style="background: #F7F7F7;" class="col-sm-12 col-lg-12 col-md-12">
+								<span style="margin-right: 5px;"><span class="glyphicon glyphicon-edit" style="color: #fcac28;" aria-hidden="true"></span>修改	</span>
+								<span><span class="glyphicon glyphicon-log-in" style="color: #fcac28;" aria-hidden="true"></span>保存</span>
+							</div>
+							<table class="table">
+								<tr  style="background: #39cede;color: white;">
+									<th>序号</th>
+									<th>商品品牌</th>
+								</tr>
+								<tr  style="background: white;" v-for="i in sp">
+									<td><input type="text" v-model="i.brandid" style="border: none; text-align: center; width: 100px;"/></td>
+									<td><input type="text" v-model="i.brandname" style="border: none; text-align: center; width: 100px;"/></td>
+								</tr>
+							</table>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-success">选择</button>
+					</div>
+		</div>
+	</div>
+</div>		
+<!--数量单位-->
+<div class="modal fade" id="unit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document" style="width: 470px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h3 class="modal-title" id="myModalLabel">				
+					选择内容设置
+				</h3>
+			</div>
+					<div class="modal-body">
+							<div style="background: #F7F7F7;" class="col-sm-12 col-lg-12 col-md-12">
+								<span style="margin-right: 5px;"><span class="glyphicon glyphicon-edit" style="color: #fcac28;" aria-hidden="true"></span>修改	</span>
+								<span><span class="glyphicon glyphicon-log-in" style="color: #fcac28;" aria-hidden="true"></span>保存</span>
+							</div>
+							<table class="table">
+								<tr  style="background: #39cede;color: white;">
+									<th>序号</th>
+									<th>数量单位</th>
+								</tr>
+								<tr  style="background: white;" v-for="i in dw">
+									<td><input type="text" v-model="i.numbeid" style="border: none; text-align: center; width: 100px;"/></td>
+									<td><input type="text" v-model="i.numbename" style="border: none; text-align: center; width: 100px;"/></td>
+								</tr>
+							</table>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-success">选择</button>
+					</div>
+		</div>
+	</div>
+</div>		
+<!--商品大类-->
+<div class="modal fade" id="heading" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document" style="width:800px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h3 class="modal-title" id="myModalLabel">				
+					<span class="col-sm-3 col-lg-3 col-md-3">分类选择</span>
+					<span class="col-sm-2 col-lg-2 col-md-2"><button type="button" class="btn btn-success">选择</button></span>
+					<span class="col-sm-5 col-lg-5 col-md-5" style="text-align: right;">
+						<input type="text"/>					
+					</span>
+					<span class="col-sm-1 col-lg-1 col-md-1">
+						<button type="button" class="btn btn-warning">搜索</button>
+					</span>
+				</h3>
+			</div>
+					<div class="modal-body">
+							<div><ul id="treeDemo" class="ztree"></ul></div>
+					</div>
+		</div>
+	</div>
+</div>		
+<!--收入分类-->
+<div class="modal fade" id="income" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document" style="width: 470px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h3 class="modal-title" id="myModalLabel">				
+					选择内容设置
+				</h3>
+			</div>
+					<div class="modal-body">
+							<div style="background: #F7F7F7;" class="col-sm-12 col-lg-12 col-md-12">
+								<span style="margin-right: 5px;"><span class="glyphicon glyphicon-edit" style="color: #fcac28;" aria-hidden="true"></span>修改	</span>
+								<span><span class="glyphicon glyphicon-log-in" style="color: #fcac28;" aria-hidden="true"></span>保存</span>
+							</div>
+							<table class="table">
+								<tr  style="background: #39cede;color: white;">
+									<th>序号</th>
+									<th>收入分类</th>
+								</tr>
+								<tr  style="background: white;" v-for="i in lb">
+									<td><input type="text" v-model="i.incomeid" style="border: none; text-align: center; width: 100px;"/></td>
+									<td><input type="text" v-model="i.incomename" style="border: none; text-align: center; width: 100px;"/></td>
+								</tr>
+							</table>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-success">选择</button>
+					</div>
+		</div>
+	</div>
+</div>	
+<!--原厂副厂-->
+<div class="modal fade" id="Deputyfactory" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document" style="width: 470px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h3 class="modal-title" id="myModalLabel">				
+					选择内容设置
+				</h3>
+			</div>
+					<div class="modal-body">
+							<div style="background: #F7F7F7;" class="col-sm-12 col-lg-12 col-md-12">
+								<span style="margin-right: 5px;"><span class="glyphicon glyphicon-edit" style="color: #fcac28;" aria-hidden="true"></span>修改	</span>
+								<span><span class="glyphicon glyphicon-log-in" style="color: #fcac28;" aria-hidden="true"></span>保存</span>
+							</div>
+							<table class="table">
+								<tr  style="background: #39cede;color: white;">
+									<th>序号</th>
+									<th>旧件状态</th>
+								</tr>
+								<tr  style="background: white;" v-for="i in fc">
+									<td><input type="text" v-model="i.originalid" style="border: none; text-align: center; width: 100px;"/></td>
+									<td><input type="text" v-model="i.originalname" style="border: none; text-align: center; width: 100px;"/></td>
+								</tr>
+							</table>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-success">选择</button>
+					</div>
+		</div>
+	</div>
+</div>	
+<!--商品等级-->
+<div class="modal fade" id="grade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document" style="width: 470px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h3 class="modal-title" id="myModalLabel">				
+					选择内容设置
+				</h3>
+			</div>
+					<div class="modal-body">
+							<div style="background: #F7F7F7;" class="col-sm-12 col-lg-12 col-md-12">
+								<span style="margin-right: 5px;"><span class="glyphicon glyphicon-edit" style="color: #fcac28;" aria-hidden="true"></span>修改	</span>
+								<span><span class="glyphicon glyphicon-log-in" style="color: #fcac28;" aria-hidden="true"></span>保存</span>
+							</div>
+							<table class="table">
+								<tr  style="background: #39cede;color: white;">
+									<th>序号</th>
+									<th>商品等级</th>
+								</tr>
+								<tr  style="background: white;" v-for="i in dj">
+									<td><input type="text" v-model="i.placeid" style="border: none; text-align: center; width: 100px;"/></td>
+									<td><input type="text" v-model="i.placename" style="border: none; text-align: center; width: 100px;"/></td>
+								</tr>
+							</table>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-success">选择</button>
+					</div>
+		</div>
+	</div>
+</div>	
+<!--商品场地-->
+<div class="modal fade" id="origin" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document" style="width: 470px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h3 class="modal-title" id="myModalLabel">				
+					选择内容设置
+				</h3>
+			</div>
+					<div class="modal-body">
+							<div style="background: #F7F7F7;" class="col-sm-12 col-lg-12 col-md-12">
+								<span style="margin-right: 5px;"><span class="glyphicon glyphicon-edit" style="color: #fcac28;" aria-hidden="true"></span>修改	</span>
+								<span><span class="glyphicon glyphicon-log-in" style="color: #fcac28;" aria-hidden="true"></span>保存</span>
+							</div>
+							<table class="table">
+								<tr  style="background: #39cede;color: white;">
+									<th>序号</th>
+									<th>商品厂地</th>
+								</tr>
+								<tr  style="background: white;" v-for="i in cd">
+									<td><input type="text" v-model="i.siteid" style="border: none; text-align: center; width: 100px;"/></td>
+									<td><input type="text" v-model="i.sitename" style="border: none; text-align: center; width: 100px;"/></td>
+								</tr>
+							</table>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-success">选择</button>
+					</div>
+		</div>
+	</div>
+</div>	
+<!---->
+<div class="modal fade" id="motorcycle" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document" style="width: 470px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h3 class="modal-title" id="myModalLabel">				
+					<span class="col-lg-9 col-md-9 col-sm-9">品牌车型</span>
+					<span class="col-lg-1 col-md-1 col-sm-1"><button type="button" class="btn btn-success">选择</button></span>
+					<span class="col-lg-1 col-md-1 col-sm-1"><button type="button"class="btn btn-default">关闭</button></span>
+				</h3>
+			</div>
+					<div class="modal-body">
+							<div>
+								<span class="col-lg-12 col-md-12 col-sm-12">
+									<input type="text" placeholder="匹配 编码/名称/首字母" style="height: 35px; width: 200px;"/>
+									<button type="button" class="btn btn-warning">搜索</button>
+								</span>
+							</div>
+							<table class="table">
+								<tr style="background: #39cede;color: white;">
+									<th>匹配编码</th>
+									<th>-品牌名称</th>
+									<th>首字母</th>
+								</tr>
+								<tr style="background: white;">
+									<td>1</td>
+									<td>1</td>
+									<td>1</td>
+								</tr>
+							</table>
+					</div>
+		</div>
+	</div>
+</div>	
+</div>
+
+		<script type="text/javascript" src="js/jquery-1.12.4.js" ></script>
+		<script type="text/javascript" src="js/bootstrap.min.js" ></script>
+		<script type="text/javascript" src="js/vue.js" ></script>
+		<script type="text/javascript" src="js/my.js" ></script>
+		<script type="text/javascript" src="js/jquery.min.js" ></script>
+		<script type="text/javascript" src="js/jquery.ztree.core.js" ></script>
+		<script>
+			var setting = {
+				check: {
+					
+					enable: true
+				},
+				data: {
+					simpleData: {
+						enable: true
+					}
+				},
+				edit: {
+					enable: true
+				}
+			};
+			//数据结构，从后台查询数据进行赋值就可使用
+			var zNodes =[
+			{id:1, pId:0, name:"发动机", open:true},
+			{id:101, pId:1, name:"1001-发动机总成"},
+			
+			{id:2, pId:0, name:"传统系统", open:false},
+			{id:201, pId:2, name:"2001-离合器"}
+			];
+		
+			$(document).ready(function(){
+				$.fn.zTree.init($("#treeDemo"), setting, zNodes);
+			});
+			
+			
+			var vm=new Vue({
+		 el: "#ctx",
+				data() {
+					return {
+						go:{},
+						sp:{},
+						dw:{},
+						lb:{},
+						fc:{},
+						dj:{},
+						cd:{},
+						sj:{},
+						goupse:{}
+					};
+				},
+				methods: {
+				    zhi:function(gid){
+				    	$(".zhi").val(gid);
+				    },shan:function(){
+				    	var gid=$(".zhi").val()
+				    	var that = this;
+				    	$.ajax({
+							url: data.ip + "gooddel",
+							data:{"gid":gid},
+							type: "post",
+							dataType: "json",
+							success: function(res) {
+								if (res>0) {
+									alert("删除成功")
+								} else{
+									alert("删除失败")
+								}
+							}
+						});
+				    },zen:function(){
+				    	var that = this;
+				    	$.ajax({
+							url: data.ip + "brandsel",	
+							type: "post",
+							dataType: "json",
+							success: function(res) {
+								that.sp=res;
+							}
+						});
+				    	
+				    	$.ajax({
+							url: data.ip + "numsel",	
+							type: "post",
+							dataType: "json",
+							success: function(res) {
+								that.dw=res;
+							}
+						});
+						
+						$.ajax({
+							url: data.ip + "incometypeselect",	
+							type: "post",
+							dataType: "json",
+							success: function(res) {
+								that.lb=res;
+							}
+						});
+						
+						$.ajax({
+							url: data.ip + "origsel",	
+							type: "post",
+							dataType: "json",
+							success: function(res) {
+								that.fc=res;
+							}
+						});
+						
+						$.ajax({
+							url: data.ip + "plsel",	
+							type: "post",
+							dataType: "json",
+							success: function(res) {
+								that.dj=res;
+							}
+						});
+						
+						
+						$.ajax({
+							url: data.ip + "sitsel",	
+							type: "post",
+							dataType: "json",
+							success: function(res) {
+								that.cd=res;
+							}
+						});
+						
+						$.ajax({
+							url: data.ip + "pricesel",	
+							type: "post",
+							dataType: "json",
+							success: function(res) {
+								that.sj=res;
+							}
+						});
+				    },bao:function(){
+				    	var gid=$(".gid").val()
+				    	var gname=$(".gname").val()
+				    	var remark2s=$(".remark2").val()
+				    	var remark2
+				    	if(remark2s=="别克"){
+				    		remark2="1"
+				    	}else if (remark2s=="米其林") {
+				    		remark2="2"
+				    	}
+				    	var applycar=$(".applycar").val()
+				    	var units=$(".unit").val()
+				    	var unit
+				    	if(units=="个"){
+				    		unit="1"
+				    	}else if (units=="件") {
+				    		unit="2"
+				    	}else if (units=="套") {
+				    		unit="3"
+				    	}else if (units=="把") {
+				    		unit="4"
+				    	}else if (units=="双") {
+				    		unit="5"
+				    	}else if (units=="捆") {
+				    		unit="6"
+				    	}else if (units=="张") {
+				    		unit="7"
+				    	}else if (units=="台") {
+				    		unit="8"
+				    	}
+				    	var bigclassify=$(".bigclassify").val()
+				    	var incomeids=$(".incomeid").val()
+				    	var incomeid
+				    	if(incomeids=="机修"){
+				    		incomeid="1"
+				    	}else if (incomeids=="发动机") {
+				    		incomeid="2"
+				    	}else if (incomeids=="钣喷") {
+				    		incomeid="3"
+				    	}
+				    	var venders=$(".vender").val()
+				    	var vender
+				    	if(venders=="回收"){
+				    		vender="1"
+				    	}else if (venders=="司机带走") {
+				    		vender="2"
+				    	}else if (venders=="自己带走") {
+				    		vender="3"
+				    	}
+				    	var levels=$(".level").val()
+				    	var level
+				    	if(levels=="优"){
+				    		level="1"
+				    	}else if (level=="良") {
+				    		level="2"
+				    	}else if (level=="差") {
+				    		level="3"
+				    	}	
+				    	var yieldiys=$(".yieldiy").val()
+				    	var yieldiy
+				    	if(yieldiys=="上海"){
+				    		yieldiy="1"
+				    	}else if (yieldiys=="北京") {
+				    		yieldiy="2"
+				    	}
+				    	var factoryname=$(".factoryname").val()
+				    	var coding=$(".coding").val()
+				    	var barcodes=$(".barcodes").val()
+				    	var specs=$(".specs").val()
+				    	var volume=$(".volume").val()
+				    	var netweight=$(".netweight").val()
+				    	var suttle=$(".suttle").val()
+				    	var remark9=$(".remark9").val()
+				    	var priceans=$(".pricean").val()
+				    	var pricean
+				    	if(priceans=="加价率"){
+				    		pricean="1"
+				    	}else if (priceans=="售价率") {
+				    		pricean="2"
+				    	}
+				    	var hike=$(".hike").val()
+				    	var exchange=$(".exchange").val()
+				    	var remark3=$(".remark3").val()
+				    	var remark4=$(".remark4").val()
+				    	var remark5=$(".remark5").val()
+				    	var remark6=$(".remark6").val()
+				    	var remark7=$(".remark7").val()
+				    	var remark8=$(".remark8").val()
+				    	var storeid=$(".storeid").val()			    	
+				    	$.ajax({
+							url: data.ip + "goodsins",
+							data:{
+								"gid":gid,"gname":gname,"remark2":remark2,"applycar":applycar,"unit":unit,
+								"bigclassify":bigclassify,"incomeid":incomeid,"vender":vender,"level":level,"yieldiy":yieldiy,
+								"factoryname":factoryname,"coding":coding,"barcodes":barcodes,"specs":specs,"volume":volume,
+								"netweight":netweight,"suttle":suttle,"remark9":remark9,"pricean":pricean,"hike":hike,
+								"exchange":exchange,"remark3":remark3,"remark4":remark4,"remark5":remark5,"remark6":remark6,
+								"remark7":remark7,"remark8":remark8	,"storeid":storeid			
+							},
+							type: "post",
+							dataType: "json",
+							success: function(res) {
+								if (res>0) {
+									alert("新增成功")
+								} else{
+									alert("新增失败")
+								}
+							}
+						});
+				    	
+				    },gai:function(){
+				    	var that=this;
+				    	that.zen()			    	
+				    },gai:function(){
+				    	var that=this
+				    	that.zen();
+				    	var gid=$(".zhi").val()
+				    	$.ajax({
+							url: data.ip + "goodupdsel",	
+							data:{"gid":gid},
+							type: "post",
+							dataType: "json",
+							success: function(res) {
+								that.goupse=res;
+							}
+						});
+				    	
+				    },baos:function(){
+				    	var gid=$(".gidr").val()
+				    	var gname=$(".gnamer").val()
+				    	var remark2s=$(".remark2r").val()
+				    	var remark2
+				    	if(remark2s=="别克"){
+				    		remark2="1"
+				    	}else if (remark2s=="米其林") {
+				    		remark2="2"
+				    	}
+				    	var applycar=$(".applycarr").val()
+				    	var units=$(".unitr").val()
+				    	var unit
+				    	if(units=="个"){
+				    		unit="1"
+				    	}else if (units=="件") {
+				    		unit="2"
+				    	}else if (units=="套") {
+				    		unit="3"
+				    	}else if (units=="把") {
+				    		unit="4"
+				    	}else if (units=="双") {
+				    		unit="5"
+				    	}else if (units=="捆") {
+				    		unit="6"
+				    	}else if (units=="张") {
+				    		unit="7"
+				    	}else if (units=="台") {
+				    		unit="8"
+				    	}
+				    	var bigclassify=$(".bigclassifyr").val()
+				    	var incomeids=$(".incomeidr").val()
+				    	var incomeid
+				    	if(incomeids=="机修"){
+				    		incomeid="1"
+				    	}else if (incomeids=="发动机") {
+				    		incomeid="2"
+				    	}else if (incomeids=="钣喷") {
+				    		incomeid="3"
+				    	}
+				    	var venders=$(".venderr").val()
+				    	var vender
+				    	if(venders=="回收"){
+				    		vender="1"
+				    	}else if (venders=="司机带走") {
+				    		vender="2"
+				    	}else if (venders=="自己带走") {
+				    		vender="3"
+				    	}
+				    	var levels=$(".levelr").val()
+				    	var level
+				    	if(levels=="优"){
+				    		level="1"
+				    	}else if (level=="良") {
+				    		level="2"
+				    	}else if (level=="差") {
+				    		level="3"
+				    	}	
+				    	var yieldiys=$(".yieldiyr").val()
+				    	var yieldiy
+				    	if(yieldiys=="上海"){
+				    		yieldiy="1"
+				    	}else if (yieldiys=="北京") {
+				    		yieldiy="2"
+				    	}
+				    	var factoryname=$(".factorynamer").val()
+				    	var coding=$(".codingr").val()
+				    	var barcodes=$(".barcodesr").val()
+				    	var specs=$(".specsr").val()
+				    	var volume=$(".volumer").val()
+				    	var netweight=$(".netweightr").val()
+				    	var suttle=$(".suttler").val()
+				    	var remark9=$(".remark9r").val()
+				    	var priceans=$(".priceanr").val()
+				    	var pricean
+				    	if(priceans=="加价率"){
+				    		pricean="1"
+				    	}else if (priceans=="售价率") {
+				    		pricean="2"
+				    	}
+				    	var hike=$(".hikes").val()
+				    	var exchange=$(".exchanger").val()
+				    	var remark3=$(".remark3r").val()
+				    	var remark4=$(".remark4r").val()
+				    	var remark5=$(".remark5r").val()
+				    	var remark6=$(".remark6r").val()
+				    	var remark7=$(".remark7r").val()
+				    	var remark8=$(".remark8r").val()
+				    	var storeid=$(".storeidsr").val()			    	
+				    	$.ajax({
+							url: data.ip + "goodupd",
+							data:{
+								"gid":gid,"gname":gname,"remark2":remark2,"applycar":applycar,"unit":unit,
+								"bigclassify":bigclassify,"incomeid":incomeid,"vender":vender,"level":level,"yieldiy":yieldiy,
+								"factoryname":factoryname,"coding":coding,"barcodes":barcodes,"specs":specs,"volume":volume,
+								"netweight":netweight,"suttle":suttle,"remark9":remark9,"pricean":pricean,"hike":hike,
+								"exchange":exchange,"remark3":remark3,"remark4":remark4,"remark5":remark5,"remark6":remark6,
+								"remark7":remark7,"remark8":remark8	,"storeid":storeid			
+							},
+							type: "post",
+							dataType: "json",
+							success: function(res) {
+								if (res>0) {
+									alert("修改成功")
+								} else{
+									alert("修改失败")
+								}
+							}
+						});
+				    	
+				    }
+				    
+				},created:function(){
+						var that = this;
+						$.ajax({
+							url: data.ip + "goodsel",	
+							type: "post",
+							dataType: "json",
+							success: function(res) {
+								that.go=res;
+							}
+						});
+				}
+	  })
+		</script>
+	</body>
+</html>

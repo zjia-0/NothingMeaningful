@@ -1,7 +1,6 @@
 package com.accp.domain;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class SupplierpartyExample {
@@ -375,73 +374,73 @@ public class SupplierpartyExample {
             return (Criteria) this;
         }
 
-        public Criteria andCaseIsNull() {
-            addCriterion("case is null");
+        public Criteria andScaseIsNull() {
+            addCriterion("scase is null");
             return (Criteria) this;
         }
 
-        public Criteria andCaseIsNotNull() {
-            addCriterion("case is not null");
+        public Criteria andScaseIsNotNull() {
+            addCriterion("scase is not null");
             return (Criteria) this;
         }
 
-        public Criteria andCaseEqualTo(String value) {
-            addCriterion("case =", value, "case");
+        public Criteria andScaseEqualTo(String value) {
+            addCriterion("scase =", value, "scase");
             return (Criteria) this;
         }
 
-        public Criteria andCaseNotEqualTo(String value) {
-            addCriterion("case <>", value, "case");
+        public Criteria andScaseNotEqualTo(String value) {
+            addCriterion("scase <>", value, "scase");
             return (Criteria) this;
         }
 
-        public Criteria andCaseGreaterThan(String value) {
-            addCriterion("case >", value, "case");
+        public Criteria andScaseGreaterThan(String value) {
+            addCriterion("scase >", value, "scase");
             return (Criteria) this;
         }
 
-        public Criteria andCaseGreaterThanOrEqualTo(String value) {
-            addCriterion("case >=", value, "case");
+        public Criteria andScaseGreaterThanOrEqualTo(String value) {
+            addCriterion("scase >=", value, "scase");
             return (Criteria) this;
         }
 
-        public Criteria andCaseLessThan(String value) {
-            addCriterion("case <", value, "case");
+        public Criteria andScaseLessThan(String value) {
+            addCriterion("scase <", value, "scase");
             return (Criteria) this;
         }
 
-        public Criteria andCaseLessThanOrEqualTo(String value) {
-            addCriterion("case <=", value, "case");
+        public Criteria andScaseLessThanOrEqualTo(String value) {
+            addCriterion("scase <=", value, "scase");
             return (Criteria) this;
         }
 
-        public Criteria andCaseLike(String value) {
-            addCriterion("case like", value, "case");
+        public Criteria andScaseLike(String value) {
+            addCriterion("scase like", value, "scase");
             return (Criteria) this;
         }
 
-        public Criteria andCaseNotLike(String value) {
-            addCriterion("case not like", value, "case");
+        public Criteria andScaseNotLike(String value) {
+            addCriterion("scase not like", value, "scase");
             return (Criteria) this;
         }
 
-        public Criteria andCaseIn(List<String> values) {
-            addCriterion("case in", values, "case");
+        public Criteria andScaseIn(List<String> values) {
+            addCriterion("scase in", values, "scase");
             return (Criteria) this;
         }
 
-        public Criteria andCaseNotIn(List<String> values) {
-            addCriterion("case not in", values, "case");
+        public Criteria andScaseNotIn(List<String> values) {
+            addCriterion("scase not in", values, "scase");
             return (Criteria) this;
         }
 
-        public Criteria andCaseBetween(String value1, String value2) {
-            addCriterion("case between", value1, value2, "case");
+        public Criteria andScaseBetween(String value1, String value2) {
+            addCriterion("scase between", value1, value2, "scase");
             return (Criteria) this;
         }
 
-        public Criteria andCaseNotBetween(String value1, String value2) {
-            addCriterion("case not between", value1, value2, "case");
+        public Criteria andScaseNotBetween(String value1, String value2) {
+            addCriterion("scase not between", value1, value2, "scase");
             return (Criteria) this;
         }
 
@@ -1215,52 +1214,62 @@ public class SupplierpartyExample {
             return (Criteria) this;
         }
 
-        public Criteria andDaysEqualTo(Date value) {
+        public Criteria andDaysEqualTo(String value) {
             addCriterion("days =", value, "days");
             return (Criteria) this;
         }
 
-        public Criteria andDaysNotEqualTo(Date value) {
+        public Criteria andDaysNotEqualTo(String value) {
             addCriterion("days <>", value, "days");
             return (Criteria) this;
         }
 
-        public Criteria andDaysGreaterThan(Date value) {
+        public Criteria andDaysGreaterThan(String value) {
             addCriterion("days >", value, "days");
             return (Criteria) this;
         }
 
-        public Criteria andDaysGreaterThanOrEqualTo(Date value) {
+        public Criteria andDaysGreaterThanOrEqualTo(String value) {
             addCriterion("days >=", value, "days");
             return (Criteria) this;
         }
 
-        public Criteria andDaysLessThan(Date value) {
+        public Criteria andDaysLessThan(String value) {
             addCriterion("days <", value, "days");
             return (Criteria) this;
         }
 
-        public Criteria andDaysLessThanOrEqualTo(Date value) {
+        public Criteria andDaysLessThanOrEqualTo(String value) {
             addCriterion("days <=", value, "days");
             return (Criteria) this;
         }
 
-        public Criteria andDaysIn(List<Date> values) {
+        public Criteria andDaysLike(String value) {
+            addCriterion("days like", value, "days");
+            return (Criteria) this;
+        }
+
+        public Criteria andDaysNotLike(String value) {
+            addCriterion("days not like", value, "days");
+            return (Criteria) this;
+        }
+
+        public Criteria andDaysIn(List<String> values) {
             addCriterion("days in", values, "days");
             return (Criteria) this;
         }
 
-        public Criteria andDaysNotIn(List<Date> values) {
+        public Criteria andDaysNotIn(List<String> values) {
             addCriterion("days not in", values, "days");
             return (Criteria) this;
         }
 
-        public Criteria andDaysBetween(Date value1, Date value2) {
+        public Criteria andDaysBetween(String value1, String value2) {
             addCriterion("days between", value1, value2, "days");
             return (Criteria) this;
         }
 
-        public Criteria andDaysNotBetween(Date value1, Date value2) {
+        public Criteria andDaysNotBetween(String value1, String value2) {
             addCriterion("days not between", value1, value2, "days");
             return (Criteria) this;
         }

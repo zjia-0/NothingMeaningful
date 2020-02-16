@@ -16,8 +16,11 @@ public class CarbrandinfoService {
 	@Autowired
 	CarbrandinfoMapper carbrandinfoMapper;
 	
-	public List<Carbrandinfo> sel(String con){
-		return carbrandinfoMapper.select(con);
+	public List<Carbrandinfo> sel(String cno,String cxbh){
+		if (cxbh==null||cxbh=="") {
+			return carbrandinfoMapper.select(cno);
+		}
+		return carbrandinfoMapper.selectr(cno, cxbh, cxbh);
 	}
 	
 	public int carbrandinfodelet(String cid) {

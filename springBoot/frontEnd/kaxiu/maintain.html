@@ -24,8 +24,8 @@
 			<div style="background: #f7ffff; height: 50px;  padding-left: 10px; line-height:50px;">
 				<span style="font-size: 25px;" class="col-sm-4 col-lg-4 col-md-4">维修项目</span>
 				<span class="col-lg-7 col-md-7 col-sm-7" style="text-align: right;">
-					<input type="text" placeholder="匹配编号/名称/名称简码" style="height: 35px; width: 345px;"/>
-					<button type="button" class="btn btn-warning">搜索</button>
+					<input type="text" placeholder="匹配编号/名称/名称简码" value="" style="height: 35px; width: 345px;" class="bhaoname"/>
+					<button type="button" class="btn btn-warning"  v-on:click="bhao()" >搜索</button>
 				</span>
 				<span class="col-lg-1 col-md-1 col-sm-1"><button type="button"class="btn btn-default">关闭</button></span>
 				
@@ -467,17 +467,22 @@
 								}
 							}
 						});
-				    }
-				},created:function(){
-						var that = this;
-						$.ajax({
+				    },bhao:function(){
+				    	var that = this;
+				    	var pname=$(".bhaoname").val()
+				    	$.ajax({
 							url: data.ip + "projectselect",	
+							data:{"pname":pname},
 							type: "post",
 							dataType: "json",
 							success: function(res) {
 								that.en=res;
 							}
 						});
+				    }
+				},created:function(){
+						var that = this;
+						that.bhao();
 				}
 	  })
 			

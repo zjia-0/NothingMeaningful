@@ -11,6 +11,8 @@ public interface CustomerMapper {
 	
 	List<Customer> query();
 	
+	List<Customer> queryLike(String mohu);
+	
     int countByExample(CustomerExample example);
 
     int deleteByExample(CustomerExample example);

@@ -17,6 +17,8 @@ public interface ProjectMapper {
     int insertSelective(Project record);
 
     List<Project> selectByExample(ProjectExample example);
+    
+    List<Project> prosel(String pname);
 
     Project selectByPrimaryKey(Integer id);
 

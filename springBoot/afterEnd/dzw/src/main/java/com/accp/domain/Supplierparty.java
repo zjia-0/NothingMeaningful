@@ -1,7 +1,5 @@
 package com.accp.domain;
 
-import java.util.Date;
-
 public class Supplierparty {
     private Integer supid;
 
@@ -35,7 +33,7 @@ public class Supplierparty {
 
     private String email;
 
-    private Date days;
+    private String days;
 
     private String remark;
 
@@ -83,11 +81,11 @@ public class Supplierparty {
         this.address = address;
     }
 
-    public String getCase() {
+    public String getScase() {
         return scase;
     }
 
-    public void setCase(String scase) {
+    public void setScase(String scase) {
         this.scase = scase;
     }
 
@@ -179,11 +177,11 @@ public class Supplierparty {
         this.email = email;
     }
 
-    public Date getDays() {
+    public String getDays() {
         return days;
     }
 
-    public void setDays(Date days) {
+    public void setDays(String days) {
         this.days = days;
     }
 

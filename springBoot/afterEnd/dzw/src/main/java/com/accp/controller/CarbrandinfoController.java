@@ -16,8 +16,8 @@ public class CarbrandinfoController {
 	CarbrandinfoService carbrandinfoService;
 	
 	@PostMapping("/sel")
-	public List<Carbrandinfo> sel(String con){
-		return carbrandinfoService.sel(con);
+	public List<Carbrandinfo> sel(String cno,String cxbh){
+		return carbrandinfoService.sel(cno, cxbh);
 	}
 	
 	@PostMapping("/carbrandinfodelet")

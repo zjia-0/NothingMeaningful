@@ -20,7 +20,7 @@ public interface CarbrandMapper {
 
     Carbrand selectByPrimaryKey(Integer brandid);
     
-    List<Carbrand> select(int brandid,String brandname,String initial);
+    List<Carbrand> select(String brandid,String brandname,String initial);
 
     int updateByExampleSelective(@Param("record") Carbrand record, @Param("example") CarbrandExample example);
 

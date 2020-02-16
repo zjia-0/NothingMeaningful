@@ -50,7 +50,7 @@ public class CarbrandController {
 	}
 	
 	@PostMapping("/carbrands")
-	public List<Carbrand> select(int brandid,String brandname,String initial){
-		return carbrandService.select(brandid, brandname, initial);
+	public List<Carbrand> select(String zhi){
+		return carbrandService.select(zhi);
 	}
 }

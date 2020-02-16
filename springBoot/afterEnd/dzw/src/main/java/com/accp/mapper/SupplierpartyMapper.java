@@ -2,10 +2,14 @@ package com.accp.mapper;
 
 import com.accp.domain.Supplierparty;
 import com.accp.domain.SupplierpartyExample;
+import com.accp.domain.Vendor;
+
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface SupplierpartyMapper {
+	List<Vendor> vensel();
+	
     int countByExample(SupplierpartyExample example);
 
     int deleteByExample(SupplierpartyExample example);
