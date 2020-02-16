@@ -14,8 +14,11 @@ public class ProjectService {
 	@Autowired
 	ProjectMapper ProjectMapper;
 	
-	public List<Project> projectselect(){
-		return ProjectMapper.selectByExample(null);
+	public List<Project> projectselect(String pname){
+		if (pname==""||pname==null) {
+			return ProjectMapper.selectByExample(null);
+		}
+		return ProjectMapper.prosel(pname);
 	}
 	
 	public int  projectdelete(int id) {

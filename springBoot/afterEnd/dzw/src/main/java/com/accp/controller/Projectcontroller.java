@@ -14,8 +14,8 @@ public class Projectcontroller {
 	ProjectService projectService;
 	
 	@PostMapping("/projectselect")
-	public List<Project> projectselect(){
-		return projectService.projectselect();
+	public List<Project> projectselect(String pname){
+		return projectService.projectselect(pname);
 	}
 	
 	@PostMapping("/projectdelete")

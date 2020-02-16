@@ -45,8 +45,12 @@ public class CarbrandService {
 		return carbrandMapper.selectByPrimaryKey(cno);
 	}
 	
-	public List<Carbrand> select(int brandid,String brandname,String initial){
-		return carbrandMapper.select(brandid, brandname, initial);
+	public List<Carbrand> select(String zhi){
+		if (zhi==""||zhi==null) {
+			zhi=null;
+			return carbrandMapper.selectByExample(null);
+		}
+			return carbrandMapper.select(zhi,zhi,zhi);
 	}
 	
 }

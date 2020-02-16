@@ -81,6 +81,10 @@
     remark2, remark3, remark4, remark5
   </sql>
   
+    <select id="selectr"  resultMap="BaseResultMap" parameterType="com.accp.domain.CarbrandinfoExample">
+	  SELECT * FROM carbrandinfo WHERE cno=cno=#{cno} AND cid=#{cid} OR cname=#{cname} 
+	</select>
+  
     <select id="select" resultMap="BaseResultMap" parameterType="com.accp.domain.CarbrandinfoExample" >
     SELECT * FROM `carbrandinfo` WHERE cno=#{cno}
   </select>

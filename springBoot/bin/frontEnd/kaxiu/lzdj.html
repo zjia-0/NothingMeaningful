@@ -349,7 +349,7 @@
 				  <li @click="dakai1"><span class="iconfont" style="vertical-align: middle">&#xe62c;</span><a href="#" style="vertical-align: middle" data-toggle="modal" data-target="#lzdkmtk">打开</a></li>
 				  <li @click="shanchu"><span class="iconfont" style="vertical-align: middle">&#xe613;</span><a href="#" style="vertical-align: middle">删除</a></li>
 				  <li @click="chaxun"><span class="iconfont" style="vertical-align: middle">&#xe78a;</span><a href="#" style="vertical-align: middle" data-toggle="modal" data-target="#lzcxmtk">查询</a></li>
-				  <li><span class="iconfont" style="vertical-align: middle">&#xe6a5;</span><a href="#" style="vertical-align: middle">导出</a></li>
+				  <li @click="daochu"><span class="iconfont" style="vertical-align: middle">&#xe6a5;</span><a href="#" style="vertical-align: middle">导出</a></li>
 				</ol>
 			</div>
 			
@@ -537,6 +537,10 @@
 													});
 										}
 									}
+						},
+						daochu:function(){
+								
+											window.location.href="http://127.0.0.1:8080/exportexcel/exportlzdj";
 							}
 					}
 				});

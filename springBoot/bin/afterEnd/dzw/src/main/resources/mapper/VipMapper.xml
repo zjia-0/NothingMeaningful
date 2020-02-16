@@ -16,6 +16,9 @@
     <result column="remark5" property="remark5" jdbcType="VARCHAR" />
     <result column="money" property="money" jdbcType="DOUBLE" />
   </resultMap>
+  <update id="upMoney" parameterType="map">
+  	UPDATE `vip` SET currentjifen=currentjifen+#{currentjifen},money=money+#{money} WHERE vno=#{vno}
+  </update>
   <update id="jifenReset" parameterType="java.lang.String">
   	UPDATE `vip` SET currentjifen=0 WHERE vno =#{vno}
   </update>
@@ -29,6 +32,7 @@
 		WHERE c.cname like #{name} OR c.cphone like #{name} OR v.vno like #{name}
 	</if>
   </select>
+  
   <select id="findMaxCno" resultMap="BaseResultMap">
   	SELECT * FROM `customer` ORDER BY cno DESC LIMIT 1
   </select>

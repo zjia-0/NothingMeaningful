@@ -19,6 +19,8 @@ public interface CarbrandinfoMapper {
     List<Carbrandinfo> selectByExample(CarbrandinfoExample example);
     
     List<Carbrandinfo> select(String con);
+    
+    List<Carbrandinfo> selectr(String cno,String cid,String cname);
 
     Carbrandinfo selectByPrimaryKey(String cid);
 

@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" href="css/bootstrap.min.css" />
+		<link rel="stylesheet" href="css/bootstrapStyle/bootstrapStyle.css" />
+		<style>
+			*{
+				margin: 0px;
+				padding: 0px;
+			}
+			.bq span{
+				margin-left:5px;
+				
+			}
+			#linkman td{
+				padding: 4px 5px;
+			}
+		#jju td{
+			padding:10px 3px ;
+		}
+			.spinner {
+		  width: 100px;
+		}
+		.spinner input {
+		  text-align: right;
+		}
+		.input-group-btn-vertical {
+		  position: relative;
+		  white-space: nowrap;
+		  width: 1%;
+		  vertical-align: middle;
+		  display: table-cell;
+		}
+		.input-group-btn-vertical > .btn {
+		  display: block;
+		  float: none;
+		  width: 100%;
+		  max-width: 100%;
+		  padding: 8px;
+		  margin-left: -1px;
+		  position: relative;
+		  border-radius: 0;
+		}
+		.input-group-btn-vertical > .btn:first-child {
+		  border-top-right-radius: 4px;
+		}
+		.input-group-btn-vertical > .btn:last-child {
+		  margin-top: -2px;
+		  border-bottom-right-radius: 4px;
+		}
+		.input-group-btn-vertical i{
+		  position: absolute;
+		  top: 0;
+		  left: 4px;
+		}
+		.pl td{
+			padding: 4px 10px;
+		}
+		.infosbb{
+			width: 1080px;
+			height: 300px;
+			overflow-x: auto;
+			overflow-y: hidden;
+		}
+		.infos{
+			width:2080px;
+			height: 300px;
+		}
+
+		</style>
+	</head>
+	<body>
+	<div id="ctx">
+		<div class="container-fluid">	
+			<div style="background: #f7ffff; height: 50px;  padding-left: 10px; line-height:50px;">
+				<span style="font-size: 25px;" class="col-sm-4 col-lg-4 col-md-4">供货单位</span>
+				<span class="col-lg-7 col-md-7 col-sm-7" style="text-align: right;">
+					<input type="text" placeholder="匹配名称/联系人/简码/手机+号双条件查询" style="height: 35px; width: 345px;"/>
+					<button type="button" class="btn btn-warning">搜索</button>
+				</span>
+				<span class="col-lg-1 col-md-1 col-sm-1"><button type="button"class="btn btn-default">关闭</button></span>
+			</div>
+			<div style="background: #f7f7f7; height: 1200px;  padding-left: 10px; line-height:50px;">
+				<div class="bq col-sm-12 col-lg-12 col-md-12" style="text-align: right;">
+					<span><input type="text" style="width: 30px; height: 35px; background: #f7f7f7; color: #f7f7f7; border: none;" class="supids"/></span>
+					<span><input type="text" style="width: 30px; height: 35px; background: #f7f7f7; color: #f7f7f7; border: none;" class="lxzhi"/></span>
+					<span>
+						<span class="glyphicon glyphicon-align-left" style="color: #fcac28;" aria-hidden="true"></span>
+						<span data-toggle="modal" data-target="#myModal" v-on:click="supinsert()">增加</span>
+					</span>
+					<span>
+						<span class="glyphicon glyphicon-edit"  style="color: #fcac28;" aria-hidden="true"></span>
+						<span data-toggle="modal" data-target="#myModals" v-on:click="supupdate()">修改</span>
+					</span>
+					<span  v-on:click="shanchus()"><span class="glyphicon glyphicon-remove-sign" style="color: #fcac28;" aria-hidden="true" ></span>删除</span>
+					<span>
+						<span class="glyphicon glyphicon-search" style="color: #fcac28;" aria-hidden="true"></span>
+						<span data-toggle="modal" data-target="#select" v-on:click="chaxu()">查询</span>						
+					</span>
+					<span><span class="glyphicon glyphicon-share" style="color: #fcac28;" aria-hidden="true"></span>导出</span>
+					<span><span class="glyphicon glyphicon-picture" style="color: #fcac28;" aria-hidden="true"></span>照片</span>
+					<span>
+						<span class="glyphicon glyphicon-user" style="color: #fcac28;" aria-hidden="true"></span>
+						<span data-toggle="modal" data-target="#linkman" v-on:click="lxr">联系人</span>						
+					</span>
+					<span>
+						<span class="glyphicon glyphicon-certificate" style="color: #fcac28;" aria-hidden="true"></span>
+						<span data-toggle="modal" data-target="#field">字段设置</span>							
+					</span>
+				</div>
+				
+				<div>
+					<div  class="col-sm-3 col-lg-3 col-md-3" style="background: white; height: 500px;">
+						<ul id="treeDemo" class="ztree"></ul>
+					</div>
+					
+					<div class="col-sm-9 col-lg-9 col-md-9">
+						<div class="infosbb">
+							<div class="infos">
+							<table class="table">
+								<tr  style="background: #39cede;color: white;">
+									<th>厂商代码</th>
+									<th>厂商名称</th>
+									<th>地址</th>
+									<th>经营情况</th>
+									<th>网址</th>
+									<th>开户行</th>
+									<th>银行账户</th>
+									<th>付款方式</th>
+									<th>厂商等级</th>
+									<th>经营品牌</th>
+									<th>厂商类别</th>
+									<th>联系人</th>
+									<th>电话</th>
+									<th>手机</th>
+									<th>Email</th>
+									<th>账期(天)</th>
+									<th>备注</th>
+								</tr>
+								<tr style="background: white;" v-for="i in enr">
+									<td><input type="text" v-model="i.supcode" style="border: none; width: 105px;" v-on:click="sup(i.supid)"/></td>
+									<td><input type="text" v-model="i.supname" style="border: none;  width: 105px;" v-on:click="sup(i.supid)"/></td>
+									<td><input type="text" v-model="i.address" style="border: none; width: 105px;" v-on:click="sup(i.supid)"/></td>
+									<td><input type="text" v-model="i.scase" style="border: none; width: 105px;" v-on:click="sup(i.supid)"/></td>
+									<td><input type="text" v-model="i.url" style="border: none; width: 105px;" v-on:click="sup(i.supid)"/></td>
+									<td><input type="text" v-model="i.bank" style="border: none;width: 105px;" v-on:click="sup(i.supid)"/></td>
+									<td><input type="text" v-model="i.banknum" style="border: none; width: 105px;" v-on:click="sup(i.supid)"/></td>
+									<td><input type="text" v-model="i.way" style="border: none;width: 105px;" v-on:click="sup(i.supid)"/></td>
+									<td><input type="text" v-model="i.grade" style="border: none;width: 105px;" v-on:click="sup(i.supid)"/></td>
+									<td><input type="text" v-model="i.brand" style="border: none; width: 105px;" v-on:click="sup(i.supid)"/></td>
+									<td><input type="text" v-model="i.unitsname" style="border: none; width: 105px;" v-on:click="sup(i.supid)"/></td>
+									<td><input type="text" v-model="i.contacts" style="border: none;  width: 105px;" v-on:click="sup(i.supid)"/></td>
+									<td><input type="text" v-model="i.phone" style="border: none; width: 105px;" v-on:click="sup(i.supid)"/></td>
+									<td><input type="text" v-model="i.mobile" style="border: none; width: 105px;" v-on:click="sup(i.supid)"/></td>
+									<td><input type="text" v-model="i.email" style="border: none; width: 105px;" v-on:click="sup(i.supid)"/></td>
+									<td><input type="text" v-model="i.days" style="border: none; width: 105px;" v-on:click="sup(i.supid)"/></td>
+									<td><input type="text" v-model="i.remark" style="border: none; width: 105px;" v-on:click="sup(i.supid)"/></td>
+								</tr>
+							</table>
+						</div>
+					</div>
+						
+						
+						<table class="table">
+							<tr  style="background: #39cede;color: white;">
+								<th>联系人</th>
+								<th>职位</th>
+								<th>手机</th>
+								<th>电话</th>
+								<th>Email</th>
+							</tr>
+							<tr style="background: white;"  v-for="i in en">
+								<td><input type="text" v-model="i.name" style="border: none; width: 105px;" v-on:click="lixi(i.id)"/></td>
+								<td><input type="text" v-model="i.post" style="border: none; width: 105px;" v-on:click="lixi(i.id)"/></td>
+								<td><input type="text" v-model="i.mobilephone" style="border: none; width: 105px;" v-on:click="lixi(i.id)"/></td>
+								<td><input type="text" v-model="i.telephone" style="border: none; width: 105px;" v-on:click="lixi(i.id)"/></td>
+								<td><input type="text" v-model="i.email" style="border: none; width: 105px;" v-on:click="lixi(i.id)"/></td>
+							</tr>
+						</table>
+					</div>				
+				</div>	
+			</div>
+		</div>
+<!--厂商新增-->		
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document" style="width: 1050px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel">
+					<span class="col-sm-4 col-lg-4 col-md-4">供货单位编辑</span>
+					<span style="text-align: right;" class="col-sm-7 col-lg-7 col-md-7" v-on:click="supin()">
+						<button type="button" class="btn btn-success" style="width: 90px;">保存</button>
+					</span>
+				</h4>
+			</div>
+					<div class="modal-body hh">
+						<table id="jju">
+							<tr>
+								<td>*</td>
+								
+								<td>厂商代码</td>
+								<td><input type="text" class="supcodes"/></td>
+								<td>*</td>
+								<td>厂商名称</td>
+								<td><input type="text" class="supnames"/></td>
+								<td>*</td>
+								<td>地址</td>
+								<td><input type="text" class="addresss"/></td>
+							</tr>
+ 
+							<tr>
+								<td>&nbsp;</td>
+								<td>经营情况</td>
+								<td><input type="text" class="scases"/></td>
+								<td>&nbsp;</td>
+								<td>网址</td>
+								<td><input type="text" class="urls"/></td>
+								<td>&nbsp;</td>
+								<td>开户行</td>
+								<td><input type="text" class="banks"/></td>
+							</tr>
+							<tr>
+								<td>&nbsp;</td>
+								<td>银行账号</td>
+								<td><input type="text" class="banknums"/></td>
+								<td>&nbsp;</td>
+								<td>付款方式</td>
+								<td>
+									<form class="form-inline">
+									  <div class="form-group">
+									    <div class="input-group">
+									       <select  style="width: 140px; height: 30px;" class="payments">
+										    	<option v-for="i in pay">{{i.way}}</option>
+										    </select>
+									      <div class="input-group-addon"  style="background: white; margin-bottom: 20px;" v-on:click="supinsert()">
+									      	<span class="glyphicon glyphicon-triangle-bottom"   data-toggle="modal" data-target="#import" ></span>
+									      </div>
+									    </div>
+									  </div>
+									</form>
+								</td>
+								<td>&nbsp;</td>
+								<td>厂商等级</td>
+								<td>
+									<form class="form-inline">
+									  <div class="form-group">
+									    <div class="input-group">
+									    <select  style="width: 140px; height: 30px;" class="levels">
+										    <option  v-for="i in man">{{i.grade}}</option>
+										</select>
+									      <div class="input-group-addon"  style="background: white; margin-bottom: 20px;">
+									      	<span  v-on:click="supinsert()" class="glyphicon glyphicon-triangle-bottom"   data-toggle="modal" data-target="#imports"></span>
+									      </div>
+									    </div>
+									  </div>
+									</form>
+								</td>
+							</tr>
+							<tr>
+								<td>&nbsp;</td>
+								<td>经营品牌</td>
+								<td><input type="text" class="brandsr"/></td>
+								<td>&nbsp;</td>
+								<td>厂商类别</td>
+								<td colspan="4">
+									<form class="form-inline">
+									  <div class="form-group">
+									    <div class="input-group">
+									      <input type="text" style="width: 140px; height: 30px;"  class="sids">
+									      <div class="input-group-addon"  style="background: white; margin-bottom: 20px;" >
+									      	<span class="glyphicon glyphicon-triangle-bottom"   data-toggle="modal" data-target="#importr"></span>
+									      </div>
+									    </div>
+									  </div>
+									</form>
+								</td>
+							</tr>
+							<tr>
+								<td>&nbsp;</td>
+								<td>联系人</td>
+								<td><input type="text" class="contactss"/></td>
+								<td>&nbsp;</td>
+								<td>电话</td>
+								<td colspan="4">
+									<span><input type="text" class="phones"/></span>
+									<span>手机</span>
+									<span><input type="text" class="mobiles"/></span>
+									<span>Email1</span>
+									<span><input type="text" class="emails"/></span>
+								</td>
+							</tr>
+							<tr>
+								<td>&nbsp;</td>
+								<td>账期(天)</td>
+								<td>
+									<span class="col-sm-7 col-lg-7 col-md-7">
+										<div class="input-group spinner">
+											<input type="text" class="form-control days" value="0">
+											<div class="input-group-btn-vertical" style="width: 30px;">
+											    <button class="btn btn-default" type="button" v-on:click="shan()"><i class="fa fa-caret-up glyphicon glyphicon-triangle-top"></i></button>
+											    <button class="btn btn-default" type="button"  v-on:click="xia()"><i class="fa fa-caret-down glyphicon glyphicon-triangle-bottom"></i></button>
+											</div>
+									  	</div>
+									</span>
+									<span class="col-sm-5 col-lg-5 col-md-5" style="height: 40px; line-height: 40px;">备注</span>
+								</td>
+								<td colspan="6">
+									<input type="text" style="width: 700px;" class="remarks"/>
+								</td>
+							</tr>
+						</table>					
+					</div>
+		</div>
+	</div>
+</div>				
+<!--厂商新增付款方式-->	
+<div class="modal fade" id="import" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document" style="width: 400px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel">选择内容设置</h4>
+			</div>
+					<div class="modal-body">
+							<div class="col-sm-7 col-lg-7 col-md-7 " style="height:30px;">&nbsp;</div>
+							<div class="col-sm-5 col-lg-5 col-md-5 " style="height:30px; line-height: 30px;">
+								<span style="padding-right: 10px;"><span class="glyphicon glyphicon-edit" style="color: #fcac28;" aria-hidden="true"></span>修改</span>
+								<span><span class="glyphicon glyphicon-floppy-disk" style="color: #fcac28;" aria-hidden="true"></span>保存</span>
+							</div>
+						
+						<table class="table">
+							<tr  style="background: #39cede;color: white;">
+								<th>序号</th>
+								<th>订购单付款方式</th>
+							</tr>
+							<tr  style="background: white;"  v-for="i in pay">
+								<td><input type="text" v-model="i.payid" style="border: none; width: 105px;"/></td>
+								<td><input type="text" v-model="i.way" style="border: none; width: 105px;"/></td>
+							</tr>
+						</table>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-success">选择</button>
+					</div>
+		</div>
+	</div>
+</div>			
+<!--厂商新增厂商等级-->	
+<div class="modal fade" id="imports" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document" style="width: 400px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel">选择内容设置</h4>
+			</div>
+					<div class="modal-body">
+							<div class="col-sm-7 col-lg-7 col-md-7 " style="height:30px;">&nbsp;</div>
+							<div class="col-sm-5 col-lg-5 col-md-5 " style="height:30px; line-height: 30px;">
+								<span style="padding-right: 10px;"><span class="glyphicon glyphicon-edit" style="color: #fcac28;" aria-hidden="true"></span>修改</span>
+								<span><span class="glyphicon glyphicon-floppy-disk" style="color: #fcac28;" aria-hidden="true"></span>保存</span>
+							</div>
+						
+						<table class="table">
+							<tr  style="background: #39cede;color: white;">
+								<th>序号</th>
+								<th>厂商等级</th>
+							</tr>
+							<tr  style="background: white;" v-for="i in man">
+								<td><input type="text" v-model="i.manid" style="border: none; width: 105px;"/></td>
+								<td><input type="text" v-model="i.grade" style="border: none; width: 105px;"/></td>
+							</tr>
+						</table>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-success">选择</button>
+					</div>
+		</div>
+	</div>
+</div>			
+<!--厂商类别-->
+<div class="modal fade" id="importr" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document" style="width: 600px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h3 class="modal-title" id="myModalLabel">				
+					<span class="col-sm-4 col-lg-4 col-md-4">厂商分类选择</span>
+					<span style="text-align: right;" class="col-sm-7 col-lg-7 col-md-7">
+						<button type="button" class="btn btn-success" style="width: 90px;">选择</button>
+					</span>
+				</h3>
+			</div>
+					<div class="modal-body">
+							
+					</div>
+		</div>
+	</div>
+</div>		
+<!--厂商供货单位查询-->
+<div class="modal fade" id="select" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document" style="width: 600px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h3 class="modal-title" id="myModalLabel">				
+					<span class="col-sm-4 col-lg-4 col-md-4">供货单位查询</span>
+					<span class="col-sm-5 col-lg-5 col-md-5" style="text-align: right; font-size:20px;"><input type="checkbox"/>停用</span>
+					<span style="text-align: right;" class="col-sm-2 col-lg-2 col-md-2">
+						<button type="button" class="btn btn-success" style="width: 90px;"  v-on:click="cha()">查询</button>
+					</span>
+				</h3>
+			</div>
+					<div class="modal-body">
+							<table class="pl">
+								<tr>
+									<td>厂商代码</td>
+									<td><input type="text" class="supcode"/></td>
+									<td>厂商名称</td>
+									<td><input type="text" class="supname"/></td>
+								</tr>
+								<tr>
+									<td>地址</td>
+									<td><input type="text" class="address"/></td>
+									<td>付款方式</td>
+									<td>
+										<select  style="width: 180px; height: 25px;" class="payments">
+									       	<option  v-for="i in man">1</option>
+										    <option v-for="i in pay">{{i.way}}</option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td>厂商等级</td>
+									<td>
+										<select  style="width: 180px; height:25px;" class="levels">
+									    	<option  v-for="i in man">1</option>
+										    <option  v-for="i in man">{{i.grade}}</option>
+										</select>
+									</td>
+									<td>经营品牌</td>
+									<td><input type="text"/></td>
+								</tr>
+								<tr>
+									<td>厂商类别</td>
+									<td>
+										<form class="form-inline">
+									  <div class="form-group">
+									    <div class="input-group">
+									      <input type="text" style="width: 140px; height: 30px;">
+									      <div class="input-group-addon"  style="background: white; margin-bottom: 20px;" >
+									      	<span class="glyphicon glyphicon-triangle-bottom"   data-toggle="modal" data-target="#category"></span>
+									      </div>
+									    </div>
+									  </div>
+									</form>
+									</td>
+									<td>联系人</td>
+									<td><input type="text"/></td>
+								</tr>
+								<tr>
+									<td>电话</td>
+									<td><input type="text"/></td>
+									<td>手机</td>
+									<td><input type="text"/></td>
+								</tr>
+								<tr>
+									<td>经营情况</td>
+									<td><input type="text"/></td>
+									<td>备注</td>
+									<td><input type="text"/></td>
+								</tr>
+							</table>
+					</div>
+		</div>
+	</div>
+</div>	
+<!--厂商供货单位查询厂商分类选择-->		
+<div class="modal fade" id="category" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document" style="width: 600px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h3 class="modal-title" id="myModalLabel">				
+					<span class="col-sm-4 col-lg-4 col-md-4">厂商分类选择</span>
+					<span style="text-align: right;" class="col-sm-7 col-lg-7 col-md-7">
+						<button type="button" class="btn btn-success" style="width: 90px;">选择</button>
+					</span>
+				</h3>
+			</div>
+					<div class="modal-body">
+							
+					</div>
+		</div>
+	</div>
+</div>			
+<!--厂商修改-->		
+<div class="modal fade" id="myModals" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document" style="width: 1050px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel">
+					<span class="col-sm-4 col-lg-4 col-md-4">供货单位编辑</span>
+					<span style="text-align: right;" class="col-sm-7 col-lg-7 col-md-7" v-on:click="bao()">
+						<button type="button" class="btn btn-success" style="width: 90px;">保存</button>
+					</span>
+				</h4>
+			</div>
+					<div class="modal-body hh">
+						<table id="jju">
+							<tr>
+								<td>*</td>
+								<td>厂商代码</td>
+								<td><input type="text" class="supcoder" v-model="upd.supcode" /></td>
+								<td>*</td>
+								<td>厂商名称</td>
+								<td><input type="text" class="supnamer"  v-model="upd.supname" /></td>
+								<td>*</td>
+								<td>地址</td>
+								<td><input type="text" class="addressr" v-model="upd.address"/></td>
+							</tr>
+ 
+							<tr>
+								<td>&nbsp;</td>
+								<td>经营情况</td>
+								<td><input type="text" class="scaser" v-model="upd.scase"/></td>
+								<td>&nbsp;</td>
+								<td>网址</td>
+								<td><input type="text" class="url"  v-model="upd.url"/></td>
+								<td>&nbsp;</td>
+								<td>开户行</td>
+								<td><input type="text" class="bank"  v-model="upd.bank"/></td>
+							</tr>
+							<tr>
+								<td>&nbsp;</td>
+								<td>银行账号</td>
+								<td><input type="text" class="banknum"  v-model="upd.banknum"/></td>
+								<td>&nbsp;</td>
+								<td>付款方式</td>
+								<td>
+									<form class="form-inline">
+									  <div class="form-group">
+									    <div class="input-group">
+									       <select  style="width: 140px; height: 30px;" class="payment" v-model="upd.payment">
+									       	<option  v-for="i in man">1</option>
+										    	<option v-for="i in pay">{{i.way}}</option>
+										    </select>
+									      <div class="input-group-addon"  style="background: white; margin-bottom: 20px;" v-on:click="supinsert()">
+									      	<span class="glyphicon glyphicon-triangle-bottom"   data-toggle="modal" data-target="#importup" ></span>
+									      </div>
+									    </div>
+									  </div>
+									</form>
+								</td>
+								<td>&nbsp;</td>
+								<td>厂商等级</td>
+								<td>
+									<form class="form-inline">
+									  <div class="form-group">
+									    <div class="input-group">
+									    <select  style="width: 140px; height: 30px;" class="level" v-model="upd.level">
+									    	<option  v-for="i in man">1</option>
+										    <option  v-for="i in man">{{i.grade}}</option>
+										</select>
+									      <div class="input-group-addon"  style="background: white; margin-bottom: 20px;">
+									      	<span  v-on:click="supinsert()" class="glyphicon glyphicon-triangle-bottom"   data-toggle="modal" data-target="#importsup"></span>
+									      </div>
+									    </div>
+									  </div>
+									</form>
+								</td>
+							</tr>
+							<tr>
+								<td>&nbsp;</td>
+								<td>经营品牌</td>
+								<td><input type="text" class="brand" v-model="upd.brand"/></td>
+								<td>&nbsp;</td>
+								<td>厂商类别</td>
+								<td colspan="4">
+									<form class="form-inline">
+									  <div class="form-group">
+									    <div class="input-group">
+									      <input type="text" style="width: 140px; height: 30px;"  class="sid" v-model="upd.sid">
+									      <div class="input-group-addon"  style="background: white; margin-bottom: 20px;" >
+									      	<span class="glyphicon glyphicon-triangle-bottom"   data-toggle="modal" data-target="#importrup"></span>
+									      </div>
+									    </div>
+									  </div>
+									</form>
+								</td>
+							</tr>
+							<tr>
+								<td>&nbsp;</td>
+								<td>联系人</td>
+								<td><input type="text" class="contacts" v-model="upd.contacts"/></td>
+								<td>&nbsp;</td>
+								<td>电话</td>
+								<td colspan="4">
+									<span><input type="text" class="phone" v-model="upd.phone"/></span>
+									<span>手机</span>
+									<span><input type="text" class="mobile" v-model="upd.mobile"/></span>
+									<span>Email1</span>
+									<span><input type="text" class="email" v-model="upd.email"/></span>
+								</td>
+							</tr>
+							<tr>
+								<td>&nbsp;</td>
+								<td>账期(天)</td>
+								<td>
+									<span class="col-sm-7 col-lg-7 col-md-7">
+										<div class="input-group spinner">
+											<input type="text" class="form-control day" value="0" v-model="upd.day">
+											<div class="input-group-btn-vertical" style="width: 30px;">
+											    <button class="btn btn-default" type="button" v-on:click="shan()"><i class="fa fa-caret-up glyphicon glyphicon-triangle-top"></i></button>
+											    <button class="btn btn-default" type="button"  v-on:click="xia()"><i class="fa fa-caret-down glyphicon glyphicon-triangle-bottom"></i></button>
+											</div>
+									  	</div>
+									</span>
+									<span class="col-sm-5 col-lg-5 col-md-5" style="height: 40px; line-height: 40px;">备注</span>
+								</td>
+								<td colspan="6">
+									<input type="text" style="width: 700px;" class="remarkr" v-model="upd.remark"/>
+								</td>
+							</tr>
+						</table>					
+					</div>
+		</div>
+	</div>
+</div>	
+<!--厂商修改付款方式-->	
+<div class="modal fade" id="importup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document" style="width: 400px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel">选择内容设置</h4>
+			</div>
+					<div class="modal-body">
+							<div class="col-sm-7 col-lg-7 col-md-7 " style="height:30px;">&nbsp;</div>
+							<div class="col-sm-5 col-lg-5 col-md-5 " style="height:30px; line-height: 30px;">
+								<span style="padding-right: 10px;"><span class="glyphicon glyphicon-edit" style="color: #fcac28;" aria-hidden="true"></span>修改</span>
+								<span><span class="glyphicon glyphicon-floppy-disk" style="color: #fcac28;" aria-hidden="true"></span>保存</span>
+							</div>
+						
+						<table class="table">
+							<tr  style="background: #39cede;color: white;">
+								<th>序号</th>
+								<th>订购单付款方式</th>
+							</tr>
+							<tr  style="background: white;"  v-for="i in pay">
+								<td><input type="text" v-model="i.payid" style="border: none; width: 105px;"/></td>
+								<td><input type="text" v-model="i.way" style="border: none; width: 105px;"/></td>
+							</tr>
+						</table>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-success">选择</button>
+					</div>
+		</div>
+	</div>
+</div>			
+<!--厂商修改厂商等级-->	
+<div class="modal fade" id="importsup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document" style="width: 400px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel">选择内容设置</h4>
+			</div>
+					<div class="modal-body">
+							<div class="col-sm-7 col-lg-7 col-md-7 " style="height:30px;">&nbsp;</div>
+							<div class="col-sm-5 col-lg-5 col-md-5 " style="height:30px; line-height: 30px;">
+								<span style="padding-right: 10px;"><span class="glyphicon glyphicon-edit" style="color: #fcac28;" aria-hidden="true"></span>修改</span>
+								<span><span class="glyphicon glyphicon-floppy-disk" style="color: #fcac28;" aria-hidden="true"></span>保存</span>
+							</div>
+						
+						<table class="table">
+							<tr  style="background: #39cede;color: white;">
+								<th>序号</th>
+								<th>厂商等级</th>
+							</tr>
+							<tr  style="background: white;" v-for="i in man">
+								<td><input type="text" v-model="i.manid" style="border: none; width: 105px;"/></td>
+								<td><input type="text" v-model="i.grade" style="border: none; width: 105px;"/></td>
+							</tr>
+						</table>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-success">选择</button>
+					</div>
+		</div>
+	</div>
+</div>			
+<!--厂商类别-->
+<div class="modal fade" id="importrup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document" style="width: 600px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h3 class="modal-title" id="myModalLabel">				
+					<span class="col-sm-4 col-lg-4 col-md-4">厂商分类选择</span>
+					<span style="text-align: right;" class="col-sm-7 col-lg-7 col-md-7">
+						<button type="button" class="btn btn-success" style="width: 90px;">选择</button>
+					</span>
+				</h3>
+			</div>
+					<div class="modal-body">
+							
+					</div>
+		</div>
+	</div>
+</div>		
+<!--厂商联系人增删改查-->		
+<div class="modal fade" id="linkman" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document" style="width: 800px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h5 class="modal-title" id="myModalLabel">				
+					<span class="col-sm-6 col-lg-6 col-md-6">河南众鑫汽车服务有限公司的联系人</span>
+					<span style="text-align: right;" class="col-sm-5 col-lg-5 col-md-5">
+						<button type="button"class="btn btn-default">关闭</button>
+					</span>
+				</h5>
+			</div>
+					<div class="modal-body" style="background:#F7F7F7;">
+							<div class="col-sm-12 col-lg-12 col-md-12" style="text-align: right;">
+								<span v-on:click="tjia()"><span class="glyphicon glyphicon-align-left" style="color: #fcac28;" aria-hidden="true"></span>添加</span>&nbsp;
+								<span v-on:click="baochu()"><span class="glyphicon glyphicon-floppy-disk" style="color: #fcac28;" aria-hidden="true"></span>保存</span>&nbsp;
+								<span v-on:click="shanchu()"><span class="glyphicon glyphicon-remove-circle" style="color: #fcac28;" aria-hidden="true"></span>删除</span>
+							</div>
+							<div>
+								<table>
+									<tr>
+										<td>*</td>
+										<td>联系人</td>
+										<td><input type="text" v-model="ens.name" class="name"/></td>
+										<td>手机</td>
+										<td><input type="text"  v-model="ens.mobilephone" class="mobilephone"/></td>
+										<td>职位</td>
+										<td><input type="text"  v-model="ens.post" class="post"/></td>
+									</tr>
+									<tr>
+										<td>&nbsp;</td>
+										<td>电话</td>
+										<td><input type="text"  v-model="ens.telephone" class="telephone"/></td>
+										<td>Email</td>
+										<td><input type="text"  v-model="ens.email" class="emailr"/></td>
+									</tr>
+								</table>
+							</div>
+							<table class="table" style="background: white;">
+								<tr style="background: #39cede;color: white;">
+									<th>联系人</th>
+									<th>职位</th>
+									<th>手机</th>
+									<th>电话</th>
+									<th>Email</th>
+								</tr>
+								<tr style="background: white;"  v-for="i in en">
+									<td><input type="text" v-model="i.name" style="border: none; width: 105px;" v-on:click="dj(i.name,i.post,i.mobilephone,i.telephone,i.email)"/></td>
+									<td><input type="text" v-model="i.post" style="border: none; width: 105px;" v-on:click="dj(i.name,i.post,i.mobilephone,i.telephone,i.email)"/></td>
+									<td><input type="text" v-model="i.mobilephone" style="border: none; width: 105px;" v-on:click="dj(i.name,i.post,i.mobilephone,i.telephone,i.email)"/></td>
+									<td><input type="text" v-model="i.telephone" style="border: none; width: 105px;" v-on:click="dj(i.name,i.post,i.mobilephone,i.telephone,i.email)"/></td>
+									<td><input type="text" v-model="i.email" style="border: none; width: 105px;" v-on:click="dj(i.name,i.post,i.mobilephone,i.telephone,i.email)"/></td>
+								</tr>
+							</table>
+					</div>
+		</div>
+	</div>
+</div>				
+<!--厂商字段设置-->
+<div class="modal fade" id="field" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document" style="width: 600px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h3 class="modal-title" id="myModalLabel">字段设置</h3>
+			</div>
+					<div class="modal-body">
+							<div>
+								<span class="col-sm-7 col-lg-7 col-md-7">
+									<button type="button" class="btn btn-success">确定</button>
+								</span>
+								<span class="col-sm-5 col-lg-5 col-md-5" style="text-align: right;">
+									<span style="padding-right: 10px;"><span class="glyphicon glyphicon-floppy-saved" style="height: 60px; color: #fcac28;" aria-hidden="true"></span>全部选择</span>
+									<span style="padding-right: 10px;"><span class="glyphicon glyphicon-floppy-remove" style="color: #fcac28;" aria-hidden="true"></span>全部取消</span>								
+								</span>
+							</div>
+							<table class="table">  
+								<tr> 
+									<td> 
+										<iframe width="100%" height="150px" src="untimodal.html" class="t-iframe" scrolling="no" security="restricted" sandbox="" frameborder="no" border="0" marginwidth="0" marginheight="0" ></iframe> 
+									</td> 
+								</tr> 
+							</table>
+					</div>
+		</div>
+	</div>
+</div>		
+</div>	
+		<script type="text/javascript" src="js/jquery-1.12.4.js" ></script>
+		<script type="text/javascript" src="js/bootstrap.min.js" ></script>
+		<script type="text/javascript" src="js/vue.js" ></script>
+		<script type="text/javascript" src="js/my.js" ></script>
+		<script type="text/javascript" src="js/jquery.min.js" ></script>
+		<script type="text/javascript" src="js/jquery.ztree.core.js" ></script>
+		<script>
+			(jQuery);
+			var setting = {
+				check: {
+					
+					enable: true
+				},
+				data: {
+					simpleData: {
+						enable: true
+					}
+				},
+				edit: {
+					enable: true
+				}
+			};
+			//数据结构，从后台查询数据进行赋值就可使用
+			var zNodes =[
+			{id:1, pId:0, name:"10北京", open:true},
+			{id:101, pId:1, name:"10001-sss"},
+			
+			{id:2, pId:0, name:"上海", open:false},
+			{id:201, pId:2, name:"10002-sss"}
+			];
+			$(document).ready(function(){
+				$.fn.zTree.init($("#treeDemo"), setting, zNodes);
+			});
+			
+	var vm=new Vue({
+		 el: "#ctx",
+				data() {
+					return {
+						en:{},
+						ens:[],
+						enr:[],
+						man:[],
+						pay:[],
+						upd:[]
+					};
+				},
+				methods: {
+					xia:function(){
+						if($('.spinner input').val()==0){
+					    	$('.spinner input').val(0)
+					    }else{
+					    	$('.spinner input').val( parseInt($('.spinner input').val(), 10) - 1);
+					    }
+					},shan:function(){
+						$('.spinner input').val( parseInt($('.spinner input').val(), 10) + 1);	
+					},lixi:function(id){			   	
+						$(".lxzhi").val(id);
+					},lxr:function(){
+						var id=$(".lxzhi").val();
+						var that = this;
+						$.ajax({
+							url: data.ip + "contactsselect",	
+							data:{"id":id},
+							type: "post",
+							dataType: "json",
+							success: function(res) {
+								that.ens=res;
+							}
+						});
+					},dj:function(name,post,mobilephone,telephone,email){
+						$(".name").val(name)
+						$(".post").val(post)
+						$(".mobilephone").val(mobilephone)
+						$(".telephone").val(telephone)
+						$(".email").val(email)
+					},tjia:function(){
+						$(".name").val("")
+						$(".post").val("")
+						$(".mobilephone").val("")
+						$(".telephone").val("")
+						$(".email").val("")
+					},baochu:function(){
+						var name=$(".name").val()
+						var post=$(".post").val()
+						var mobilephone=$(".mobilephone").val()
+						var  telephone=$(".telephone").val()
+						var email=$(".emailr").val()
+						$.ajax({
+							url: data.ip + "contactsinsert",
+							data:{"name":name,"post":post,"mobilephone":mobilephone,"telephone":telephone,"email":email},
+							type: "post",
+							dataType: "json",
+							success: function(res) {
+								if (res>0) {
+									alert("新增成功")
+								} else{
+									alert("新增失败")
+								}
+							}
+						});
+					},chaxu:function(){
+						var that=this;
+						that.supinsert()
+					},supse:function(){	
+						var that = this;
+						$.ajax({
+							url: data.ip + "vensel",	
+							type: "post",
+							dataType: "json",
+							success: function(res) {
+								that.enr=res;
+							}
+						});
+					},sup:function(supid){
+						$(".supids").val(supid);
+					},supinsert:function(){
+						var that = this;
+						$.ajax({
+							url: data.ip + "manufacturersel",	
+							type: "post",
+							dataType: "json",
+							success: function(res) {
+								that.man=res;
+							}
+						});
+						
+						$.ajax({
+							url: data.ip + "paymentsel",	
+							type: "post",
+							dataType: "json",
+							success: function(res) {
+								that.pay=res;
+							}
+						});
+					},supin:function(){				
+						var supcode=$(".supcodes").val()
+						var supname=$(".supnames").val()
+						var address=$(".addresss").val()
+						var  scase=$(".scases").val()
+						var url=$(".urls").val()
+						var bank=$(".banks").val()
+						var banknum=$(".banknums").val()
+						var payments=$(".payments").val()//付款方式
+						var  levels=$(".levels").val() //等级
+						var brand=$(".brandsr").val()
+						var sid=$(".sids").val()
+						var contacts=$(".contactss").val()
+						var phone=$(".phones").val()
+						var mobile=$(".mobiles").val()
+						var email=$(".emails").val()
+						var  days=$(".days").val()
+						var remark=$(".remarks").val()
+						var payment;
+						var level;
+						
+						if (payments=="按月结算d") {
+							payment="1"
+						} else if(payments=="货到付款"){
+							payment="2"
+						}
+						
+						if (level=="A") {
+							payment="1"
+						} else if(payments=="B"){
+							level="2"
+						} else if(payments=="C"){
+							level="3"
+						}
+						
+						$.ajax({
+							url: data.ip + "supplierpartyinsert",
+								data:{
+									"supcode":supcode,"supname":supname,"address":address,"scase":scase,"url":url,
+									"bank":bank,"banknum":banknum,"payment":payment,"level":level,"brand":brand,
+									"sid":sid,"contacts":contacts,"phone":phone,"mobile":mobile,"email":email,
+									"days":days,"remark":remark},
+								type: "post",
+								dataType: "json",
+								success: function(res) {
+									if (res>0) {
+										alert("新增成功")
+									} else{
+										alert("新增失败")
+									}
+								}
+							});						
+					},shanchus:function(){
+						var supid=$(".supids").val();
+						var that = this;
+						$.ajax({
+							url: data.ip + "supplierpartydelete",	
+							data:{"supid":supid},
+							type: "post",
+							dataType: "json",
+							success: function(res) {
+								if (res>0) {
+									alert("删除成功")
+								} else{
+									alert("删除失败")
+								}
+							}
+						});
+					},shanchu:function(){
+						var id=$(".lxzhi").val();
+						var that = this;
+						$.ajax({
+							url: data.ip + "contactsdelete",	
+							data:{"id":id},
+							type: "post",
+							dataType: "json",
+							success: function(res) {
+								if (res>0) {
+									alert("删除成功")
+								} else{
+									alert("删除失败")
+								}
+							}
+						});
+					},supupdate:function(){
+						var supid=$(".supids").val();
+						var that = this;
+						$.ajax({
+							url: data.ip + "supplierpartyupdatesel",	
+							data:{"supid":supid},
+							type: "post",
+							dataType: "json",
+							success: function(res) {
+								that.upd=res;
+							}
+						});
+						
+						that.supinsert();
+						
+					},bao:function(){
+						var supid=$(".supids").val();
+						var supcode=$(".supcoder").val()
+						var supname=$(".supnamer").val()
+						var address=$(".addressr").val()
+						var  scase=$(".scaser").val()
+						var url=$(".url").val()
+						var bank=$(".bank").val()
+						var banknum=$(".banknum").val()
+						var payments=$(".payment").val()
+						var  levels=$(".level").val()
+						var brand=$(".brand").val()
+						var sid=$(".sid").val()
+						var contacts=$(".contacts").val()
+						var phone=$(".phone").val()
+						var mobile=$(".mobile").val()
+						var email=$(".email").val()
+						var  days=$(".day").val()
+						var remark=$(".remarkr").val()
+						var payment;
+						var level;
+						
+						if (payments=="按月结算d") {
+							payment="1"
+						} else if(payments=="货到付款"){
+							payment="2"
+						}
+						
+						if (level=="A") {
+							payment="1"
+						} else if(payments=="B"){
+							level="2"
+						} else if(payments=="C"){
+							level="3"
+						}
+						
+						
+						
+						$.ajax({
+							url: data.ip + "supplierpartyupdate",
+							data:{
+								"supcode":supcode,"supname":supname,"address":address,"scase":scase,"url":url,
+								"bank":bank,"banknum":banknum,"payment":payment,"level":level,"brand":brand,
+								"sid":sid,"contacts":contacts,"phone":phone,"mobile":mobile,"email":email,
+								"days":days,"remark":remark,"supid":supid},
+							type: "post",
+							dataType: "json",
+							success: function(res) {
+								if (res>0) {
+									alert("修改成功")
+								} else{
+									alert("修改失败")
+								}
+							}
+						});									
+					}
+				},created:function(){
+					var that = this;
+					$.ajax({
+						url: data.ip + "contactssel",	
+						type: "post",
+						dataType: "json",
+						success: function(res) {
+							that.en=res;
+						}
+					});
+					that.supse();
+				}
+	  })
+			
+			
+			
+			
+		</script>
+	</body>
+</html>
