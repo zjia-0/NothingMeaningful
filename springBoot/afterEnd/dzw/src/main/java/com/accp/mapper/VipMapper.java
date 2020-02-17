@@ -6,31 +6,39 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface VipMapper {
+	List<Vip> findVipsisok(String cno);
+
 	int upMoney(Vip vip);
+
 	int jifenReset(String vno);
+
 	int upZt(String vno);
+
 	List<Vip> findMaxCno();
+
 	List<Vip> findVipByname(String name);
+
 	int findstarjifen(int levelid);
-    int countByExample(VipExample example);
 
-    int deleteByExample(VipExample example);
+	int countByExample(VipExample example);
 
-    int deleteByPrimaryKey(String vno);
+	int deleteByExample(VipExample example);
 
-    int insert(Vip record);
+	int deleteByPrimaryKey(String vno);
 
-    int insertSelective(Vip record);
+	int insert(Vip record);
 
-    List<Vip> selectByExample(VipExample example);
+	int insertSelective(Vip record);
 
-    Vip selectByPrimaryKey(String vno);
+	List<Vip> selectByExample(VipExample example);
 
-    int updateByExampleSelective(@Param("record") Vip record, @Param("example") VipExample example);
+	Vip selectByPrimaryKey(String vno);
 
-    int updateByExample(@Param("record") Vip record, @Param("example") VipExample example);
+	int updateByExampleSelective(@Param("record") Vip record, @Param("example") VipExample example);
 
-    int updateByPrimaryKeySelective(Vip record);
+	int updateByExample(@Param("record") Vip record, @Param("example") VipExample example);
 
-    int updateByPrimaryKey(Vip record);
+	int updateByPrimaryKeySelective(Vip record);
+
+	int updateByPrimaryKey(Vip record);
 }

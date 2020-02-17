@@ -68,4 +68,12 @@ public class VipController {
 		vip.setCurrentjifen((int)(price*0.1));
 		return Vservice.upMoney(vip);
 	}
+	@GetMapping("/queryAllcust")
+	public List<Customer> queryAllcust(){
+		return Vservice.queryAllcust();
+	}
+	@GetMapping("/findisok")
+	public boolean isok(String cno) {
+		return Vservice.queryIsok(cno);
+	}
 } 
