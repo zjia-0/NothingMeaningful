@@ -16,7 +16,11 @@ public class Bills {
 	private String cphone;
 	private int astate;
 	private String bid;
-
+	private String aname;
+	@JsonFormat(pattern = "yyyy-MM-dd")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date atime;
+ 
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date starttime;
@@ -82,6 +86,23 @@ public class Bills {
 	private String remark4;
 
 	private String remark5;
+
+	
+	public Date getAtime() {
+		return atime;
+	}
+
+	public void setAtime(Date atime) {
+		this.atime = atime;
+	}
+
+	public String getAname() {
+		return aname;
+	}
+
+	public void setAname(String aname) {
+		this.aname = aname;
+	}
 
 	public Integer getCno() {
 		return cno;

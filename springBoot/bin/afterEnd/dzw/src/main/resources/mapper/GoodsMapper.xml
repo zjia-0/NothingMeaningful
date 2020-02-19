@@ -29,6 +29,10 @@
     <result column="remark3" property="remark3" jdbcType="VARCHAR" />
     <result column="remark4" property="remark4" jdbcType="VARCHAR" />
     <result column="remark5" property="remark5" jdbcType="VARCHAR" />
+    <result column="remark6" property="remark6" jdbcType="VARCHAR" />
+    <result column="remark7" property="remark7" jdbcType="VARCHAR" />
+    <result column="remark8" property="remark8" jdbcType="VARCHAR" />
+    <result column="remark9" property="remark9" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -91,8 +95,16 @@
   <sql id="Base_Column_List" >
     gid, gname, storeid, applycar, unit, bigclassify, centreclassify, smallclassify, 
     incomeid, vender, level, yieldiy, factoryname, coding, barcodes, specs, volume, netweight, 
-    suttle, hike, exchange, pricean, remark1, remark2, remark3, remark4, remark5
+    suttle, hike, exchange, pricean, remark1, remark2, remark3, remark4, remark5, remark6, 
+    remark7, remark8, remark9
   </sql>
+  
+  <select id="goodsel" resultType="com.accp.domain.goodsdata">
+  	SELECT storename,g.remark1,gid,gname,brandname,applycar,numbename,bigclassify,centreclassify,smallclassify,incomename,Originalname,placename,sitename,yieldiy,coding,barcodes,specs,volume,netweight,suttle,hike,exchange,pricename
+	FROM goods AS g,store AS s,brand AS b,numbe AS n,price AS p,original AS o,incometype AS i,place AS pl,site AS si
+	WHERE g.storeid=s.storeid AND g.unit=n.numbeid AND g.remark2=b.brandid AND g.pricean=p.priceid AND g.vender=o.Originalid AND g.incomeid=i.incomeid AND g.level=pl.placeid AND g.yieldiy=si.siteid	  	
+  </select>
+  
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.accp.domain.GoodsExample" >
     select
     <if test="distinct" >
@@ -132,8 +144,9 @@
       specs, volume, netweight, 
       suttle, hike, exchange, 
       pricean, remark1, remark2, 
-      remark3, remark4, remark5
-      )
+      remark3, remark4, remark5, 
+      remark6, remark7, remark8, 
+      remark9)
     values (#{gid,jdbcType=INTEGER}, #{gname,jdbcType=VARCHAR}, #{storeid,jdbcType=INTEGER}, 
       #{applycar,jdbcType=VARCHAR}, #{unit,jdbcType=VARCHAR}, #{bigclassify,jdbcType=VARCHAR}, 
       #{centreclassify,jdbcType=VARCHAR}, #{smallclassify,jdbcType=VARCHAR}, #{incomeid,jdbcType=INTEGER}, 
@@ -142,8 +155,9 @@
       #{specs,jdbcType=VARCHAR}, #{volume,jdbcType=VARCHAR}, #{netweight,jdbcType=INTEGER}, 
       #{suttle,jdbcType=INTEGER}, #{hike,jdbcType=REAL}, #{exchange,jdbcType=VARCHAR}, 
       #{pricean,jdbcType=VARCHAR}, #{remark1,jdbcType=VARCHAR}, #{remark2,jdbcType=VARCHAR}, 
-      #{remark3,jdbcType=VARCHAR}, #{remark4,jdbcType=VARCHAR}, #{remark5,jdbcType=VARCHAR}
-      )
+      #{remark3,jdbcType=VARCHAR}, #{remark4,jdbcType=VARCHAR}, #{remark5,jdbcType=VARCHAR}, 
+      #{remark6,jdbcType=VARCHAR}, #{remark7,jdbcType=VARCHAR}, #{remark8,jdbcType=VARCHAR}, 
+      #{remark9,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.accp.domain.Goods" >
     insert into goods
@@ -229,6 +243,18 @@
       <if test="remark5 != null" >
         remark5,
       </if>
+      <if test="remark6 != null" >
+        remark6,
+      </if>
+      <if test="remark7 != null" >
+        remark7,
+      </if>
+      <if test="remark8 != null" >
+        remark8,
+      </if>
+      <if test="remark9 != null" >
+        remark9,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="gid != null" >
@@ -311,6 +337,18 @@
       </if>
       <if test="remark5 != null" >
         #{remark5,jdbcType=VARCHAR},
+      </if>
+      <if test="remark6 != null" >
+        #{remark6,jdbcType=VARCHAR},
+      </if>
+      <if test="remark7 != null" >
+        #{remark7,jdbcType=VARCHAR},
+      </if>
+      <if test="remark8 != null" >
+        #{remark8,jdbcType=VARCHAR},
+      </if>
+      <if test="remark9 != null" >
+        #{remark9,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -404,6 +442,18 @@
       <if test="record.remark5 != null" >
         remark5 = #{record.remark5,jdbcType=VARCHAR},
       </if>
+      <if test="record.remark6 != null" >
+        remark6 = #{record.remark6,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark7 != null" >
+        remark7 = #{record.remark7,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark8 != null" >
+        remark8 = #{record.remark8,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark9 != null" >
+        remark9 = #{record.remark9,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -437,7 +487,11 @@
       remark2 = #{record.remark2,jdbcType=VARCHAR},
       remark3 = #{record.remark3,jdbcType=VARCHAR},
       remark4 = #{record.remark4,jdbcType=VARCHAR},
-      remark5 = #{record.remark5,jdbcType=VARCHAR}
+      remark5 = #{record.remark5,jdbcType=VARCHAR},
+      remark6 = #{record.remark6,jdbcType=VARCHAR},
+      remark7 = #{record.remark7,jdbcType=VARCHAR},
+      remark8 = #{record.remark8,jdbcType=VARCHAR},
+      remark9 = #{record.remark9,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -523,6 +577,18 @@
       <if test="remark5 != null" >
         remark5 = #{remark5,jdbcType=VARCHAR},
       </if>
+      <if test="remark6 != null" >
+        remark6 = #{remark6,jdbcType=VARCHAR},
+      </if>
+      <if test="remark7 != null" >
+        remark7 = #{remark7,jdbcType=VARCHAR},
+      </if>
+      <if test="remark8 != null" >
+        remark8 = #{remark8,jdbcType=VARCHAR},
+      </if>
+      <if test="remark9 != null" >
+        remark9 = #{remark9,jdbcType=VARCHAR},
+      </if>
     </set>
     where gid = #{gid,jdbcType=INTEGER}
   </update>
@@ -553,7 +619,11 @@
       remark2 = #{remark2,jdbcType=VARCHAR},
       remark3 = #{remark3,jdbcType=VARCHAR},
       remark4 = #{remark4,jdbcType=VARCHAR},
-      remark5 = #{remark5,jdbcType=VARCHAR}
+      remark5 = #{remark5,jdbcType=VARCHAR},
+      remark6 = #{remark6,jdbcType=VARCHAR},
+      remark7 = #{remark7,jdbcType=VARCHAR},
+      remark8 = #{remark8,jdbcType=VARCHAR},
+      remark9 = #{remark9,jdbcType=VARCHAR}
     where gid = #{gid,jdbcType=INTEGER}
   </update>
 </mapper>

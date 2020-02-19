@@ -6,7 +6,7 @@
     <result column="supcode" property="supcode" jdbcType="VARCHAR" />
     <result column="supname" property="supname" jdbcType="VARCHAR" />
     <result column="address" property="address" jdbcType="VARCHAR" />
-    <result column="case" property="case" jdbcType="VARCHAR" />
+    <result column="scase" property="scase" jdbcType="VARCHAR" />
     <result column="url" property="url" jdbcType="VARCHAR" />
     <result column="bank" property="bank" jdbcType="VARCHAR" />
     <result column="banknum" property="banknum" jdbcType="VARCHAR" />
@@ -18,7 +18,7 @@
     <result column="phone" property="phone" jdbcType="VARCHAR" />
     <result column="mobile" property="mobile" jdbcType="VARCHAR" />
     <result column="email" property="email" jdbcType="VARCHAR" />
-    <result column="days" property="days" jdbcType="TIMESTAMP" />
+    <result column="days" property="days" jdbcType="VARCHAR" />
     <result column="remark" property="remark" jdbcType="VARCHAR" />
     <result column="picture" property="picture" jdbcType="VARCHAR" />
     <result column="remark1" property="remark1" jdbcType="VARCHAR" />
@@ -86,10 +86,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    supid, supcode, supname, address, case, url, bank, banknum, payment, level, brand, 
+    supid, supcode, supname, address, scase, url, bank, banknum, payment, level, brand, 
     sid, contacts, phone, mobile, email, days, remark, picture, remark1, remark2, remark3, 
     remark4, remark5
   </sql>
+  
+  <select id="vensel" resultType="com.accp.domain.Vendor">
+  	SELECT s.`supcode`,s.supname,s.address,s.scase,s.url,s.bank,s.banknum,p.way,m.`grade`,s.brand,u.unitsname,s.contacts,s.phone,s.mobile,s.email,s.days,s.remark FROM `units` AS u,`manufacturer` AS m,`payment` AS p,`supplierparty` AS s WHERE u.`id`=s.`sid` AND m.`manid`=s.`level` AND p.`payid`=s.`payment`
+  </select>
+  
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.accp.domain.SupplierpartyExample" >
     select
     <if test="distinct" >
@@ -122,7 +127,7 @@
   </delete>
   <insert id="insert" parameterType="com.accp.domain.Supplierparty" >
     insert into supplierparty (supid, supcode, supname, 
-      address, case, url, 
+      address, scase, url, 
       bank, banknum, payment, 
       level, brand, sid, 
       contacts, phone, mobile, 
@@ -131,11 +136,11 @@
       remark3, remark4, remark5
       )
     values (#{supid,jdbcType=INTEGER}, #{supcode,jdbcType=VARCHAR}, #{supname,jdbcType=VARCHAR}, 
-      #{address,jdbcType=VARCHAR}, #{case,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{scase,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, 
       #{bank,jdbcType=VARCHAR}, #{banknum,jdbcType=VARCHAR}, #{payment,jdbcType=VARCHAR}, 
       #{level,jdbcType=VARCHAR}, #{brand,jdbcType=VARCHAR}, #{sid,jdbcType=INTEGER}, 
       #{contacts,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, 
-      #{email,jdbcType=VARCHAR}, #{days,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{days,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
       #{picture,jdbcType=VARCHAR}, #{remark1,jdbcType=VARCHAR}, #{remark2,jdbcType=VARCHAR}, 
       #{remark3,jdbcType=VARCHAR}, #{remark4,jdbcType=VARCHAR}, #{remark5,jdbcType=VARCHAR}
       )
@@ -155,8 +160,8 @@
       <if test="address != null" >
         address,
       </if>
-      <if test="case != null" >
-        case,
+      <if test="scase != null" >
+        scase,
       </if>
       <if test="url != null" >
         url,
@@ -229,8 +234,8 @@
       <if test="address != null" >
         #{address,jdbcType=VARCHAR},
       </if>
-      <if test="case != null" >
-        #{case,jdbcType=VARCHAR},
+      <if test="scase != null" >
+        #{scase,jdbcType=VARCHAR},
       </if>
       <if test="url != null" >
         #{url,jdbcType=VARCHAR},
@@ -266,7 +271,7 @@
         #{email,jdbcType=VARCHAR},
       </if>
       <if test="days != null" >
-        #{days,jdbcType=TIMESTAMP},
+        #{days,jdbcType=VARCHAR},
       </if>
       <if test="remark != null" >
         #{remark,jdbcType=VARCHAR},
@@ -312,8 +317,8 @@
       <if test="record.address != null" >
         address = #{record.address,jdbcType=VARCHAR},
       </if>
-      <if test="record.case != null" >
-        case = #{record.case,jdbcType=VARCHAR},
+      <if test="record.scase != null" >
+        scase = #{record.scase,jdbcType=VARCHAR},
       </if>
       <if test="record.url != null" >
         url = #{record.url,jdbcType=VARCHAR},
@@ -349,7 +354,7 @@
         email = #{record.email,jdbcType=VARCHAR},
       </if>
       <if test="record.days != null" >
-        days = #{record.days,jdbcType=TIMESTAMP},
+        days = #{record.days,jdbcType=VARCHAR},
       </if>
       <if test="record.remark != null" >
         remark = #{record.remark,jdbcType=VARCHAR},
@@ -383,7 +388,7 @@
       supcode = #{record.supcode,jdbcType=VARCHAR},
       supname = #{record.supname,jdbcType=VARCHAR},
       address = #{record.address,jdbcType=VARCHAR},
-      case = #{record.case,jdbcType=VARCHAR},
+      scase = #{record.scase,jdbcType=VARCHAR},
       url = #{record.url,jdbcType=VARCHAR},
       bank = #{record.bank,jdbcType=VARCHAR},
       banknum = #{record.banknum,jdbcType=VARCHAR},
@@ -395,7 +400,7 @@
       phone = #{record.phone,jdbcType=VARCHAR},
       mobile = #{record.mobile,jdbcType=VARCHAR},
       email = #{record.email,jdbcType=VARCHAR},
-      days = #{record.days,jdbcType=TIMESTAMP},
+      days = #{record.days,jdbcType=VARCHAR},
       remark = #{record.remark,jdbcType=VARCHAR},
       picture = #{record.picture,jdbcType=VARCHAR},
       remark1 = #{record.remark1,jdbcType=VARCHAR},
@@ -419,8 +424,8 @@
       <if test="address != null" >
         address = #{address,jdbcType=VARCHAR},
       </if>
-      <if test="case != null" >
-        case = #{case,jdbcType=VARCHAR},
+      <if test="scase != null" >
+        scase = #{scase,jdbcType=VARCHAR},
       </if>
       <if test="url != null" >
         url = #{url,jdbcType=VARCHAR},
@@ -456,7 +461,7 @@
         email = #{email,jdbcType=VARCHAR},
       </if>
       <if test="days != null" >
-        days = #{days,jdbcType=TIMESTAMP},
+        days = #{days,jdbcType=VARCHAR},
       </if>
       <if test="remark != null" >
         remark = #{remark,jdbcType=VARCHAR},
@@ -487,7 +492,7 @@
     set supcode = #{supcode,jdbcType=VARCHAR},
       supname = #{supname,jdbcType=VARCHAR},
       address = #{address,jdbcType=VARCHAR},
-      case = #{case,jdbcType=VARCHAR},
+      scase = #{scase,jdbcType=VARCHAR},
       url = #{url,jdbcType=VARCHAR},
       bank = #{bank,jdbcType=VARCHAR},
       banknum = #{banknum,jdbcType=VARCHAR},
@@ -499,7 +504,7 @@
       phone = #{phone,jdbcType=VARCHAR},
       mobile = #{mobile,jdbcType=VARCHAR},
       email = #{email,jdbcType=VARCHAR},
-      days = #{days,jdbcType=TIMESTAMP},
+      days = #{days,jdbcType=VARCHAR},
       remark = #{remark,jdbcType=VARCHAR},
       picture = #{picture,jdbcType=VARCHAR},
       remark1 = #{remark1,jdbcType=VARCHAR},

@@ -33,6 +33,35 @@
 	</head>
 	<body>
 		<div class="container-fluid" id="ctx">
+			
+		<!--员工角色模态框-->
+		<div class="modal fade" tabindex="-1" role="dialog" id="ygjssmtk">
+			<div class="modal-dialog" role="document" style="width:400px;">
+				<div class="modal-content" id="dhl">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							<div class="col-md-5">
+								<h4>员工角色</h4>
+							</div>
+							<div>
+								<button type="button" @click="bumen1" class="btn btn-success" style="vertical-align: middle; width: 150px;">保存</button>&nbsp;&nbsp;&nbsp;
+							</div>
+							
+								<div id="mydiv_2" >
+									<ul v-for="item in listss" >
+										<li  style="font-size:17px" @click="chabanzu(item.id)" v-bind:sid="item.id" name="ck">{{item.id}}--{{item.name}}</li>									
+													<ul v-for="it in lists" >
+														<li v-if="item.id==it.banzuid"><input type="radio" name="cks" v-bind:sid="it.id" @click="bumen1()"/>{{it.id}}--{{it.name}}</li>
+													</ul>
+									</ul>
+									
+								</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+			
 			<div id="gwdiv1">
 				<ul>
 					<li><h3>外勤车辆</h3></li>
@@ -53,11 +82,11 @@
 					<li>品牌<input type="text" v-model="list2.brand" class="brand"></li>
 					<li>车型<input type="text" v-model="list2.models" class="models"></li>
 					<li>当前里程<input type="text" v-model="list2.mileage" class="mileage"></li>
-					<li>班组<input type="text" v-model="list2.departid"disabled="true" style="width: 50px;" class="departid"></li>
+					<li data-toggle="modal" data-target="#ygjssmtk" @click="banzu">班组<input type="text" v-model="list2.name"disabled="true" name="ck1" v-bind:idss="list2.id" style="width: 70px;" > <input type="text" v-model="list2.id" disabled="true"  style="width: 40px;" class="departid"/> </li>
 				</ul>
 			</div>
 			<div>
-				<table class="table table-bordered" style="width: 800px;">
+				<table class="table table-bordered" style="width: 800px;"> 	
 					<thead>
 						<tr>
 							<th>车牌号</th>
@@ -94,7 +123,10 @@
 			data(){
 				return {
 					list:[],
-					list2:{}
+					list2:{},
+					lists:[],
+					listss:[],
+					bz:[]
 				}
 			},created:function(){
 				$.ajax({
@@ -107,6 +139,7 @@
 						console.log(re);
 					}
 				});
+				
 			},methods:{
 				danji:function(carid){
 					
@@ -125,8 +158,10 @@
 				    var brand=$(".brand").val()
 				    var models=$(".models").val()
 				    var mileage=$(".mileage").val()
+				    
 				    var departid=$(".departid").val()
 				    
+				    alert(departid)
 					$.ajax({
 						url:data.ip + "carsadd",
 						data:{"platenumber":platenumber,"brand":brand,"models":models,"mileage":mileage,"departid":departid},
@@ -141,15 +176,12 @@
 						"success":function(re){
 						vm.list=re;
 						console.log(re);
-						},"error":function(re){
-						console.log(re);
 						}
 					});
 				
-						},"error":function(re){
-							console.log(re);
 						}
 					});
+
 				},update:function(){
 					var carid=$(".carid").val()
 					var platenumber=$(".platenumber").val()
@@ -180,7 +212,45 @@
 							console.log(re);
 						}
 					});
-				}
+				},
+				chabanzu:function(id){
+											
+											$.ajax({
+												url:data.ip + "xiaozu",
+												data:{"banzuid":id},
+												type:"post",
+												dataType:"json",
+												success:function(result){
+													vm.lists = result;
+													console.log(result)
+												}
+											});
+							},
+							banzu:function(){
+								findPage();
+							},
+							bumen1:function(){
+							
+					
+								var ck = $("[name=cks]");
+								
+									for(var i =0;i<ck.length;i++){
+										if(ck[i].checked){
+											var id = $(ck[i]).attr("sid");
+											
+											$.ajax({
+												url:data.ip + "selectbz",
+												data:{"id":id},
+												type:"post",
+												dataType:"json",
+												success:function(result){
+													vm.list2 = result;
+													console.log(result)
+												}
+											});
+										}
+									}
+							}
 			}
 		});
 		
@@ -213,6 +283,18 @@
 				});
 			});
 		});
+		
+		function findPage(){
+							
+							$.ajax({
+								url:data.ip + "bzszt",
+								type:"post",
+								"success":function(re){
+									vm.listss=re;
+									console.log(re);
+								}
+							});
+						}
 		</script>
 	</body>
 </html>
