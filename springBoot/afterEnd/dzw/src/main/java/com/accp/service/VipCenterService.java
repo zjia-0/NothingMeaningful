@@ -76,4 +76,21 @@ public class VipCenterService {
 	public int upMoney(Vip vip) {
 		return vMapper.upMoney(vip);
 	}
+	/**
+	 * 查询所有用户
+	 */
+	public List<Customer> queryAllcust(){
+		return custMapper.selectByExample(null);
+	}
+	/**
+	 * 根据用户id查询是否为会员
+	 */
+	public boolean queryIsok(String cno) {
+		List<Vip> list=vMapper.findVipsisok(cno);
+		if(list.size()>0) {
+			return false;
+		}else {
+			return true;
+		}
+	}
 }

@@ -98,9 +98,8 @@
 						<td v-if="item.bstate==1">已完工</td>
 						<td v-if="item.astate==1">未结算</td>
 						<td v-if="item.astate==2">已结算</td>
-						<td>{{item.Clearingtime}}</td>
-						<td v-if="item.Clearingtime!=null">{{item.personnelname}}</td>
-						<td v-else></td>
+						<td>{{item.atime}}</td>
+						<td>{{item.aname}}</td>
 						<td>{{item.forecastmoney}}</td>
 						<td>{{item.billname}}</td>
 						<td>{{item.cname}}</td>
@@ -145,8 +144,25 @@
 							</tr>
 						</table>
 						</div>
+						
 						<div class="row">
-							<h4><span style="color: red;">应收金额</span>&nbsp;<span >300</span></h4>
+							<div class="col-xs-6">
+								<h4><span style="color: red;">应收金额</span>&nbsp;<span >300</span></h4>
+								<div class="col-xs-6 row">
+									<span>结算状态</span>
+									<select name="" class="form-control" >
+										<option value="" class="form-control">正常结算</option>
+									</select>
+								</div>
+							</div>
+							<div class="col-xs-6">
+								<p>积分最大抵用金额：</p>
+								<p>积分最大抵用金额：</p>
+								<p>积分最大抵用金额：</p>
+							</div>
+						</div>
+						<div class="row">
+							
 						</div>
 			        </div>
 			      </div>

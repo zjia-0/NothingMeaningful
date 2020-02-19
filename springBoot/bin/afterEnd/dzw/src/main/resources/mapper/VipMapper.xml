@@ -32,7 +32,9 @@
 		WHERE c.cname like #{name} OR c.cphone like #{name} OR v.vno like #{name}
 	</if>
   </select>
-  
+  <select id="findVipsisok" resultMap="BaseResultMap">
+  	SELECT * FROM `vip` JOIN `customer` ON `vip`.`cno`=`customer`.`cno` WHERE vip.`cno`=#{cno}
+  </select>
   <select id="findMaxCno" resultMap="BaseResultMap">
   	SELECT * FROM `customer` ORDER BY cno DESC LIMIT 1
   </select>

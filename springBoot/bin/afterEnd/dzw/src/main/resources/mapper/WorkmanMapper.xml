@@ -287,4 +287,25 @@
       remark5 = #{remark5,jdbcType=VARCHAR}
     where workid = #{workid,jdbcType=VARCHAR}
   </update>
+  
+  <select id="bzjgselect"  resultType="com.accp.domain.bzjg">
+  SELECT w.workid,w.`stars`,w.`craft`,w.`brand`,w.`remark1`,w.remark2,p.`personnelid`,p.`personnelname`,p.`enterid`,
+p.`sex`,p.`phone`,p.`card`,p.`address`,p.`borndate`,b.id,b.name,p.`bankcode`,b.banzuid
+ FROM `workman` w INNER JOIN `personnel` p ON w.personnelid=p.personnelid
+INNER JOIN banzu b ON w.remark2 =b.id
+      <if test=" remark2 !=0 " >
+       WHERE  w.remark2=#{remark2}
+      </if>
+        <if test=" banzuid !=0 " >
+       WHERE  b.banzuid=#{banzuid}
+      </if>
+  </select>
+  
+  <select id="jgxiugai" resultType="com.accp.domain.bzjg">
+    SELECT w.workid,w.`stars`,w.`craft`,w.`brand`,w.`remark1`,w.remark2,p.`personnelid`,p.`personnelname`,p.`enterid`,
+p.`sex`,p.`phone`,p.`card`,p.`address`,p.`borndate`,b.id,b.name,p.`bankcode`,b.banzuid
+ FROM `workman` w INNER JOIN `personnel` p ON w.personnelid=p.personnelid
+INNER JOIN banzu b ON w.remark2 =b.id
+WHERE w.workid=#{workid}
+  </select>
 </mapper>

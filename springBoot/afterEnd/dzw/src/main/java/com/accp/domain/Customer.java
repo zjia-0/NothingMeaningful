@@ -30,8 +30,6 @@ public class Customer {
 
     private String cadviserphone;
 
-    private String cprovince;
-
     private String cremark;
 
     private String ctaxes;
@@ -42,15 +40,7 @@ public class Customer {
 
     private String cbanknumber;
 
-    private String cdlicense;
-
     private String cregistaddress;
-
-    private String remark1;
-
-    private String remark2;
-
-    private String remark3;
 
     private String remark4;
 
@@ -63,6 +53,9 @@ public class Customer {
     private String vno;
     
     @JsonFormat(pattern = "yyyy-MM-dd")
+    private Date createdate;
+
+	@JsonFormat(pattern = "yyyy-MM-dd")
     private Date vjoindate;
     
     @JsonFormat(pattern = "yyyy-MM-dd")
@@ -70,9 +63,37 @@ public class Customer {
     
     private Integer currentjifen;
     
-    private Double money;
+    public String getProvince() {
+		return province;
+	}
+
+	public void setProvince(String province) {
+		this.province = province;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getDistrict() {
+		return district;
+	}
+
+	public void setDistrict(String district) {
+		this.district = district;
+	}
+
+	private Double money;
     
+    private String province;
     
+    private String city;
+    
+    private String district;
 
     public String getCtname() {
 		return ctname;
@@ -218,14 +239,6 @@ public class Customer {
         this.cadviserphone = cadviserphone;
     }
 
-    public String getCprovince() {
-        return cprovince;
-    }
-
-    public void setCprovince(String cprovince) {
-        this.cprovince = cprovince;
-    }
-
     public String getCremark() {
         return cremark;
     }
@@ -266,44 +279,12 @@ public class Customer {
         this.cbanknumber = cbanknumber;
     }
 
-    public String getCdlicense() {
-        return cdlicense;
-    }
-
-    public void setCdlicense(String cdlicense) {
-        this.cdlicense = cdlicense;
-    }
-
     public String getCregistaddress() {
         return cregistaddress;
     }
 
     public void setCregistaddress(String cregistaddress) {
         this.cregistaddress = cregistaddress;
-    }
-
-    public String getRemark1() {
-        return remark1;
-    }
-
-    public void setRemark1(String remark1) {
-        this.remark1 = remark1;
-    }
-
-    public String getRemark2() {
-        return remark2;
-    }
-
-    public void setRemark2(String remark2) {
-        this.remark2 = remark2;
-    }
-
-    public String getRemark3() {
-        return remark3;
-    }
-
-    public void setRemark3(String remark3) {
-        this.remark3 = remark3;
     }
 
     public String getRemark4() {
@@ -321,4 +302,12 @@ public class Customer {
     public void setRemark5(String remark5) {
         this.remark5 = remark5;
     }
+    
+    public Date getCreatedate() {
+		return createdate;
+	}
+
+	public void setCreatedate(Date createdate) {
+		this.createdate = createdate;
+	}
 }

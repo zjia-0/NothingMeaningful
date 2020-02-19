@@ -26,14 +26,14 @@
 		<!-- 实体生成位置 -->
 		<javaModelGenerator targetPackage="com.accp.domain"
 			targetProject="src/main/java" />
-		<!-- mapper配置文件生成 -->
+		<!-- mapper配置文件生成 --> 
 		<sqlMapGenerator targetPackage="mapper"
 			targetProject="src/main/resources" />
 		<!-- mapper接口生成 -->
 		<javaClientGenerator targetPackage="com.accp.mapper"
 			targetProject="src/main/java" type="XMLMAPPER" />
-			
-			<table schema="Permissions" tableName="permissions"></table>
+			<table schema="Customer" tableName="customer"></table>
+		<!-- 	<table schema="Permissions" tableName="permissions"></table>
 			<table schema="Roles" tableName="roles"></table>
 			<table schema="Roles_perms" tableName="roles_perms"></table>
 			<table schema="Users" tableName="users"></table>
@@ -74,12 +74,16 @@
 			<table schema="Vehicletype" tableName="vehicletype"></table>
 			<table schema="Vip" tableName="vip"></table>			        
 			<table schema="Viplevel" tableName="viplevel"></table>
-			<table schema="Workman" tableName="workman"></table>						
+			<table schema="Workman" tableName="workman"></table>	
+			 -->					
+			 <table schema="maintain_bill" tableName="maintain_bill"></table>
+			<table schema="rescue_bill" tableName="rescue_bill"></table>
+				<table schema="bills" tableName="bills"></table>
 	</context>
 </generatorConfiguration>
 
 
-
+ 
 
 <!-- <build>
 		<plugins>

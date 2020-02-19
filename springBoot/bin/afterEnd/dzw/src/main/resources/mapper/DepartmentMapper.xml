@@ -95,6 +95,9 @@
     from department
     where departid = #{departid,jdbcType=VARCHAR}
   </select>
+  
+
+  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from department
     where departid = #{departid,jdbcType=VARCHAR}
@@ -288,4 +291,51 @@
       remark5 = #{remark5,jdbcType=VARCHAR}
     where departid = #{departid,jdbcType=VARCHAR}
   </update>
+  
+<select id="selectids" resultMap="BaseResultMap">
+  SELECT * FROM `department` 
+	WHERE storeid=#{storeid}
+  </select> 
+  
+  
+  <select id="chaxun" resultType="com.accp.domain.txml">
+  SELECT p.`personnelid`,p.`personnelname`,p.`phone`,p.`email`,s.`staffid`,d.departname,p.`sex`,p.`post`,p.`physicalstate`,p.`height`,p.`card`,p.`address`
+,p.`degree`,p.`birthplace`,p.`nation`,p.`schooltag`,p.`martial`,p.`compile`,p.`hiredate`,p.`applicable`,p.`borndate`,p.`startdate`,p.`enddate`,p.storeid,d.departid,
+p.enterid,p.bankcode,p.emergencyname,p.emergencyphone,p.referrer,st.storename
+FROM `personnel` p 
+INNER JOIN staff s ON p.personnelid=s.personnelid 
+INNER JOIN `department` d  ON p.remark1=d.departid
+INNER JOIN `store` st ON p.storeid=st.storeid
+<if test="departid != 0" >
+WHERE d.departid=#{departid}
+</if>
+<if test="storeid != 0" >
+WHERE st.storeid=#{storeid}
+</if>
+
+  </select>
+  
+  <select id="add"  resultType="com.accp.domain.txml">
+  SELECT d.departid,d.departname,s.storename,s.storeid,s.remark1 FROM `department` d INNER JOIN `store`s
+	ON d.storeid=s.storeid
+	WHERE d.departid=#{departid}
+  </select>
+  
+  
+    <select id="selectupdate" resultType="com.accp.domain.txml">
+  SELECT p.`personnelid`,p.`personnelname`,p.`phone`,p.`email`,s.`staffid`,d.departname,p.`sex`,p.`post`,p.`physicalstate`,p.`height`,p.`card`,p.`address`
+,p.`degree`,p.`birthplace`,p.`nation`,p.`schooltag`,p.`martial`,p.`compile`,p.`hiredate`,p.`applicable`,p.`borndate`,p.`startdate`,p.`enddate`,p.storeid,d.departid,
+p.enterid,p.bankcode,p.emergencyname,p.emergencyphone,p.referrer,st.storename
+FROM `personnel` p 
+INNER JOIN staff s ON p.personnelid=s.personnelid 
+INNER JOIN `department` d  ON p.remark1=d.departid
+INNER JOIN `store` st ON p.storeid=st.storeid
+WHERE p.personnelid=#{personnelid}
+  </select>
+  
+  <select id="xzbumen" resultType="com.accp.domain.txml">
+  SELECT s.storeid,s.storename,d.departname,d.departid FROM `department` d INNER JOIN store s 
+ON d.storeid=s.storeid
+WHERE d.`departid`=#{departid}
+  </select>
 </mapper>

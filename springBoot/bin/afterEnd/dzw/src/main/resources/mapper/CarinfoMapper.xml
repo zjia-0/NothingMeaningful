@@ -72,6 +72,16 @@
     <result column="motorname" property="motorname" jdbcType="VARCHAR" />
     <result column="fuelname" property="fuelname" jdbcType="VARCHAR" />
   </resultMap>
+  <select id="queryCarinfoKey" resultMap="BaseResultMapTwo">
+  		SELECT cinfo.*,cbrand.`brandname`,cbrandinfo.`cname`,cbl.`carname`,en.`motorname`,fu.`fuelname`
+		FROM carinfo cinfo
+		LEFT JOIN carbrand cbrand ON cbrand.`brandid`=cinfo.`cdno`
+		LEFT JOIN carbrandinfo cbrandinfo ON cbrand.`brandid`=cbrandinfo.`cno`
+		LEFT JOIN carbelong cbl ON cinfo.`clid`=cbl.`carid`
+		LEFT JOIN `engine` en ON en.`motorid`=cinfo.`cdenginebrandid`
+		LEFT JOIN fuel fu ON cinfo.`fuelid`=fu.`fuelid`
+		WHERE cinfo.`cno`=#{cno}
+  </select>
   <select id="queryCarinfo" resultMap="BaseResultMapTwo">
   		SELECT cinfo.*,cbrand.`brandname`,cbrandinfo.`cname`,cbl.`carname`,en.`motorname`,fu.`fuelname`
 		FROM carinfo cinfo

@@ -52,7 +52,7 @@
 							<span  v-on:click="del()"><span class="glyphicon glyphicon-remove-circle" style="color: #fcac28;" aria-hidden="true" ></span>删除</span>
 						</div>
 						<div>
-							<span><input type="text" style="height: 35px;" placeholder="匹配  品牌编号/品牌名称/首字母"/ class="ppbh"></span>
+							<span><input type="text" style="height: 35px;" value=""  placeholder="匹配  品牌编号/品牌名称/首字母"/ class="ppbh"></span>
 							<span><button type="button" class="btn btn-warning" v-on:click="ss()">搜索</button></span>
 							<span><input type="text" style="width: 30px; height: 35px; background: #f7f7f7; color: #f7f7f7; border: none;" class="zhi"/></span>
 						</div>
@@ -64,9 +64,9 @@
 									<th>首字母</th>
 								</tr>
 								<tr style="background: white;"  v-for="i in car">
-									<td><input type="text" v-model="i.brandid" style="border: none; text-align: center; width: 100px;" v-on:click="dj(i.brandid,i.brandname,i.initial)"/></td>
-									<td><input type="text" v-model="i.brandname" style="border: none; text-align: center; width:100px;" v-on:click="dj(i.brandid,i.brandname,i.initial)"/></td>
-									<td><input type="text" v-model="i.initial" style="border: none; text-align: center; width: 100px;" v-on:click="dj(i.brandid,i.brandname,i.initial)"/></td>
+									<td><input type="text" v-model="i.brandid" style="border: none;  width: 100px;" v-on:click="dj(i.brandid,i.brandname,i.initial)"/></td>
+									<td><input type="text" v-model="i.brandname" style="border: none;  width:100px;" v-on:click="dj(i.brandid,i.brandname,i.initial)"/></td>
+									<td><input type="text" v-model="i.initial" style="border: none;  width: 100px;" v-on:click="dj(i.brandid,i.brandname,i.initial)"/></td>
 								</tr>
 							</table>
 						</div>
@@ -88,7 +88,7 @@
 						</div>
 						<div>
 							<span><input type="text" style="height: 35px;" placeholder="匹配  车型编号/车型名称" class="cxbh"/></span>
-							<span><button type="button" class="btn btn-warning">搜索</button></span>
+							<span><button type="button" class="btn btn-warning"  v-on:click="soso()">搜索</button></span>
 							<span><input type="text" style="width: 30px; height: 35px; background: #f7f7f7; color: #f7f7f7; border: none;" class="zs"/></span>
 							<span><input type="text" style="width: 30px; height: 35px; background: #f7f7f7; color: #f7f7f7; border: none;" class="zhs"/></span>
 						</div>
@@ -108,15 +108,15 @@
 								</tr>
 								<tr style="background: white;" v-for="i in sel">
 									<td><input type="checkbox"/></td>
-									<td><input type="text" v-model="i.cid" style="border: none; text-align: center; width: 100px;" v-on:click="sc(i.cid,i.cno)"/></td>									
-									<td><input type="text" v-model="i.cname" style="border: none; text-align: center; width: 100px;" v-on:click="sc(i.cid,i.cno)"/></td>
-									<td><input type="text" v-model="i.remark1" style="border: none; text-align: center; width: 100px;" v-on:click="sc(i.cid,i.cno)"/></td>
-									<td><input type="text" v-model="i.cfour" style="border: none; text-align: center; width: 100px;" v-on:click="sc(i.cid,i.cno)"/></td>
-									<td><input type="text" v-model="i.cprice" style="border: none; text-align: center; width: 100px;" v-on:click="sc(i.cid,i.cno)"/></td>
-									<td><input type="text" v-model="i.cyear" style="border: none; text-align: center; width: 100px;" v-on:click="sc(i.cid,i.cno)"/></td>
-									<td><input type="text" v-model="i.cdischarge" style="border: none; text-align: center; width: 100px;" v-on:click="sc(i.cid,i.cno)"/></td>
-									<td><input type="text" v-model="i.cdomestic" style="border: none; text-align: center; width: 100px;" v-on:click="sc(i.cid,i.cno)"/></td>
-									<td><input type="text" v-model="i.cfuel" style="border: none; text-align: center; width: 100px;" v-on:click="sc(i.cid,i.cno)"/></td>
+									<td><input type="text" v-model="i.cid" style="border: none;  width: 100px;" v-on:click="sc(i.cid,i.cno)"/></td>									
+									<td><input type="text" v-model="i.cname" style="border: none;  width: 100px;" v-on:click="sc(i.cid,i.cno)"/></td>
+									<td><input type="text" v-model="i.remark1" style="border: none;  width: 100px;" v-on:click="sc(i.cid,i.cno)"/></td>
+									<td><input type="text" v-model="i.cfour" style="border: none;  width: 100px;" v-on:click="sc(i.cid,i.cno)"/></td>
+									<td><input type="text" v-model="i.cprice" style="border: none;  width: 100px;" v-on:click="sc(i.cid,i.cno)"/></td>
+									<td><input type="text" v-model="i.cyear" style="border: none;  width: 100px;" v-on:click="sc(i.cid,i.cno)"/></td>
+									<td><input type="text" v-model="i.cdischarge" style="border: none;  width: 100px;" v-on:click="sc(i.cid,i.cno)"/></td>
+									<td><input type="text" v-model="i.cdomestic" style="border: none;  width: 100px;" v-on:click="sc(i.cid,i.cno)"/></td>
+									<td><input type="text" v-model="i.cfuel" style="border: none;  width: 100px;" v-on:click="sc(i.cid,i.cno)"/></td>
 								</tr>
 							</table>
 						</div>
@@ -290,8 +290,8 @@
 								<th>进口国产</th>
 							</tr>
 							<tr  style="background: white;"  v-for="i in chaj">
-								<td><input type="text" v-model="i.disid" style="border: none; text-align: center; width: 100px;" class="disid" v-on:click="ji(i.disid,i.imp)"/></td>
-								<td><input type="text" v-model="i.imp" style="border: none; text-align: center; width: 100px;" class="imp" v-on:click="ji(i.disid,i.imp)"/></td>
+								<td><input type="text" v-model="i.disid" style="border: none;  width: 100px;" class="disid" v-on:click="ji(i.disid,i.imp)"/></td>
+								<td><input type="text" v-model="i.imp" style="border: none;  width: 100px;" class="imp" v-on:click="ji(i.disid,i.imp)"/></td>
 							</tr>
 						</table>
 					</div>
@@ -400,8 +400,8 @@
 								<th>进口国产</th>
 							</tr>
 							<tr  style="background: white;"  v-for="i in chaj">
-								<td><input type="text" v-model="i.disid" style="border: none; text-align: center; width: 100px;" class="disid" v-on:click="ji(i.disid,i.imp)"/></td>
-								<td><input type="text" v-model="i.imp" style="border: none; text-align: center; width: 100px;" class="imp" v-on:click="ji(i.disid,i.imp)"/></td>
+								<td><input type="text" v-model="i.disid" style="border: none;  width: 100px;" class="disid" v-on:click="ji(i.disid,i.imp)"/></td>
+								<td><input type="text" v-model="i.imp" style="border: none;  width: 100px;" class="imp" v-on:click="ji(i.disid,i.imp)"/></td>
 							</tr>
 						</table>
 					</div>
@@ -564,19 +564,6 @@
 								}
 							}
 						});
-				   },dj:function(brandid,brandname,initial){
-				   		$(".zhi").val(brandid);
-				   		var con=$(".zhi").val();
-				   		var that = this;
-				   		$.ajax({
-							url: data.ip + "sel",	
-							data:{"con":con},
-							type: "post",
-							dataType: "json",
-							success: function(res) {
-								that.sel=res
-							}
-						});
 				   },updates:function(){
 				   		var brandid=$(".zhi").val();
 				   		var that = this;
@@ -718,24 +705,32 @@
 				   		var that = this;
 						$.ajax({
 							url: data.ip + "carbrands",	
-							data:{"brandname":zhis,"initial":zhis},
-							type: "post",
-							dataType: "json",
-							success: function(res) {
-								console.log(res);
-							}
-						});
-				   }
-				},created:function(){
-						var that = this;
-						$.ajax({
-							url: data.ip + "carbrand",	
+							data:{"zhi":zhis},
 							type: "post",
 							dataType: "json",
 							success: function(res) {
 								that.car=res;
 							}
 						});
+				   },soso:function(){
+				   		var cxbh=$(".cxbh").val();
+				   		var cno=$(".zhi").val();
+				   		var that = this;
+				   		$.ajax({
+							url: data.ip + "sel",	
+							data:{"cno":cno,"cxbh":cxbh},
+							type: "post",
+							dataType: "json",
+							success: function(res) {
+								that.sel=res
+							}
+						});
+				   },dj:function(brandid){
+				   		$(".zhi").val(brandid);
+				   		this.soso();
+				   }
+				},created:function(){
+						this.ss();
 				}
 	  })
 		</script>

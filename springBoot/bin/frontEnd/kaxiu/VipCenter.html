@@ -77,7 +77,11 @@
 			      	<form class="form-inline">
 			      		<div class="form-group">
 			      			<div class="row col-xs-10 col-xs-push-1">
-								<h4>客户信息</h4>
+								<span>客户信息</span>
+								选择已有客户
+								<select  class="form-control" v-model="cust2" @change="selectCust()">
+									<option v-for="item,index in custs"  :value="item" class="form-control">{{item.cname}}</option>
+								</select>
 							</div>
 			      			<div class="text-center row" style="margin-bottom: 10px;">
 			      				<div class="input-group col-xs-3">
@@ -253,7 +257,9 @@
 						updatevip:{},
 						scores:0,
 						moneys:0,
-						upvipmoney:{}
+						upvipmoney:{},
+						custs:[],
+						cust2:{}
 					}
 				},methods:{
 					queryName(){
@@ -265,8 +271,19 @@
 							alert("请选择会员类型");
 							return false;
 						}
+						if(this.cust.cname==undefined){
+							alert("请输入客户姓名！");
+							return false;
+						}
+						if(this.cust.cphone==undefined){
+							alert("请输入电话！");
+							return false;
+						}
+						if(this.cust.cbirthday==undefined){
+							alert("请确定客户生日！");
+							return false;
+						}
 						console.log(this.cust);
-						console.log(this.vipadd);
 						$.ajax({
 							type:"post",
 							url:data.ip+"vip/addVip",
@@ -286,6 +303,7 @@
 								location.reload();
 							}
 						})
+						
 					},
 					findjifen(){
 						var that=this;
@@ -309,7 +327,7 @@
 								url:data.ip+"vip/upzt?vno="+item.vno,
 								dataType:"json",
 								xhrFields: {
-									withCredentials: true
+									withCredentials: true	
 								},
 								success:function(result){
 									if(result>0){
@@ -362,6 +380,37 @@
 								location.reload();
 							}
 						});
+					},selectCust(){
+						var that=this;
+						$.ajax({
+							type:"get",
+							url:data.ip+"vip/findisok?cno="+this.cust2.cno,
+							dataType:"json",
+							xhrFields: {
+								withCredentials: true
+							},
+							success:function(result){
+								if(result==false){
+									alert("该用户已经是会员");
+									return false;
+								}else{
+								var date = new Date();
+								var nowYear=date.getFullYear();
+								var nowMonth=date.getMonth()+1;
+								if (nowMonth >= 1 && nowMonth <= 9) {
+								   nowMonth = "0" + nowMonth;
+								}
+								var strDate = date.getDate();
+								if (strDate >= 0 && strDate <= 9) {
+								   strDate = "0" + strDate;
+								}
+								that.vipadd.vno=nowYear+nowMonth+strDate+that.cust2.cno;
+								that.vipadd.cno=that.cust2.cno;
+								that.cust=that.cust2;
+								}
+							}
+						});
+						console.log(this.cust)
 					}
 				},created:function(){
 					var that=this;
@@ -398,6 +447,17 @@
 							   strDate = "0" + strDate;
 							}
 							that.vipadd.vno=nowYear+nowMonth+strDate+that.cust.cno;
+						}
+					});
+					$.ajax({
+						type:"get",
+						url:data.ip+"vip/queryAllcust",
+						dataType:"json",
+						xhrFields: {
+							withCredentials: true
+						},
+						success:function(result){
+							that.custs=result;
 						}
 					});
 				}
