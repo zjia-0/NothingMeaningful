@@ -10,6 +10,12 @@ import org.apache.ibatis.annotations.Param;
 public interface SupplierpartyMapper {
 	List<Vendor> vensel();
 	
+	List<Vendor> venselshux(String sid);
+
+	List<Vendor> venselxia(String contacts,String mobile);
+	
+	List<Vendor> venselbiao(String supcode,String supname,String address,String way,String grade,String brand,String unitsname,String contacts,String phone,String mobile,String scase,String remark);
+	
     int countByExample(SupplierpartyExample example);
 
     int deleteByExample(SupplierpartyExample example);

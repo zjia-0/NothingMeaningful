@@ -2,6 +2,8 @@ package com.accp.mapper;
 
 import com.accp.domain.Project;
 import com.accp.domain.ProjectExample;
+import com.accp.domain.projectwang;
+
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
@@ -18,7 +20,11 @@ public interface ProjectMapper {
 
     List<Project> selectByExample(ProjectExample example);
     
-    List<Project> prosel(String pname);
+    List<projectwang> proselsel();
+    
+    List<projectwang> prosel(String pname);
+    
+    List<projectwang> proselname(String typename);
 
     Project selectByPrimaryKey(Integer id);
 

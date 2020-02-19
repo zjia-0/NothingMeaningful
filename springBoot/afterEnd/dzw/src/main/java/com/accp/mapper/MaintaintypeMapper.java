@@ -6,6 +6,9 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface MaintaintypeMapper {
+	
+	List<Maintaintype> selectByparentid(Integer parentid);
+	
     int countByExample(MaintaintypeExample example);
 
     int deleteByExample(MaintaintypeExample example);

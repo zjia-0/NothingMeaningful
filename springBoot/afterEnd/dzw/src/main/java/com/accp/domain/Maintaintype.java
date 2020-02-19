@@ -1,5 +1,7 @@
 package com.accp.domain;
 
+import java.util.List;
+
 public class Maintaintype {
     private Integer maintainid;
 
@@ -18,6 +20,16 @@ public class Maintaintype {
     private String remark4;
 
     private String remark5;
+
+	private List<Maintaintype> maintaintypes;
+    
+    public List<Maintaintype> getMaintaintypes() {
+		return maintaintypes;
+	}
+
+	public void setMaintaintypes(List<Maintaintype> maintaintypes) {
+		this.maintaintypes = maintaintypes;
+	}
 
     public Integer getMaintainid() {
         return maintainid;

@@ -1,5 +1,7 @@
 package com.accp.domain;
 
+import java.util.List;
+
 public class Supplier {
     private Integer sid;
 
@@ -18,8 +20,19 @@ public class Supplier {
     private String remark4;
 
     private String remark5;
+    
+    private List<Supplier> suppliers;
 
-    public Integer getSid() {
+
+	public List<Supplier> getSuppliers() {
+		return suppliers;
+	}
+
+	public void setSuppliers(List<Supplier> suppliers) {
+		this.suppliers = suppliers;
+	}
+
+	public Integer getSid() {
         return sid;
     }
 

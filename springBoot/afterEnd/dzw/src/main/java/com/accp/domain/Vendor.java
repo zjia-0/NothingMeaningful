@@ -1,7 +1,7 @@
 package com.accp.domain;
 
 public class Vendor {
-	
+	private String supid;
 	private String supcode;
 	private String supname;
 	private String address;
@@ -20,30 +20,11 @@ public class Vendor {
 	private String days;
 	private String remark;
 	
-	public Vendor(String supcode, String supname, String address, String scase, String url, String bank, String banknum,
-			String way, String grade, String brand, String unitsname, String contacts, String phone, String mobile,
-			String email, String days, String remark) {
-		super();
-		this.supcode = supcode;
-		this.supname = supname;
-		this.address = address;
-		this.scase = scase;
-		this.url = url;
-		this.bank = bank;
-		this.banknum = banknum;
-		this.way = way;
-		this.grade = grade;
-		this.brand = brand;
-		this.unitsname = unitsname;
-		this.contacts = contacts;
-		this.phone = phone;
-		this.mobile = mobile;
-		this.email = email;
-		this.days = days;
-		this.remark = remark;
+	public String getSupid() {
+		return supid;
 	}
-	public Vendor() {
-		super();
+	public void setSupid(String supid) {
+		this.supid = supid;
 	}
 	public String getSupcode() {
 		return supcode;

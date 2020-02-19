@@ -12,6 +12,18 @@
     <result column="remark4" property="remark4" jdbcType="VARCHAR" />
     <result column="remark5" property="remark5" jdbcType="VARCHAR" />
   </resultMap>
+  
+  
+  <resultMap id="BaseResultMapall" type="com.accp.domain.Supplier"  extends="BaseResultMap">
+   <collection property="suppliers" column="sid" select="com.accp.mapper.SupplierMapper.selectByparentid"></collection>
+  </resultMap>
+  
+  
+  <select id="selectByparentid" resultMap="BaseResultMapall" parameterType="java.lang.Integer"  >
+    select * from supplier where parentid=#{parentid}
+  </select>
+  
+  
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >

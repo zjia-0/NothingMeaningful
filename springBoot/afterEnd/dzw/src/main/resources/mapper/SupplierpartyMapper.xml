@@ -92,7 +92,26 @@
   </sql>
   
   <select id="vensel" resultType="com.accp.domain.Vendor">
-  	SELECT s.`supcode`,s.supname,s.address,s.scase,s.url,s.bank,s.banknum,p.way,m.`grade`,s.brand,u.unitsname,s.contacts,s.phone,s.mobile,s.email,s.days,s.remark FROM `units` AS u,`manufacturer` AS m,`payment` AS p,`supplierparty` AS s WHERE u.`id`=s.`sid` AND m.`manid`=s.`level` AND p.`payid`=s.`payment`
+  	SELECT s.supid,s.`supcode`,s.supname,s.address,s.scase,s.url,s.bank,s.banknum,p.way,m.`grade`,s.brand,u.unitsname,s.contacts,s.phone,s.mobile,s.email,s.days,s.remark 
+  	FROM `units` AS u,`manufacturer` AS m,`payment` AS p,`supplierparty` AS s WHERE u.`id`=s.`sid` AND m.`manid`=s.`level` AND p.`payid`=s.`payment`
+  </select>
+  
+  <select id="venselshux" resultType="com.accp.domain.Vendor">
+  	SELECT s.supid,s.`supcode`,s.supname,s.address,s.scase,s.url,s.bank,s.banknum,p.way,m.`grade`,s.brand,u.unitsname,s.contacts,s.phone,s.mobile,s.email,s.days,s.remark 
+  	FROM `units` AS u,`manufacturer` AS m,`payment` AS p,`supplierparty` AS s WHERE u.`id`=s.`sid` AND m.`manid`=s.`level` AND p.`payid`=s.`payment` AND unitsname=#{unitsname}
+  </select>
+  
+  <select id="venselxia" resultType="com.accp.domain.Vendor">
+ 	SELECT s.supid,s.`supcode`,s.supname,s.address,s.scase,s.url,s.bank,s.banknum,p.way,m.`grade`,s.brand,u.unitsname,s.contacts,s.phone,s.mobile,s.email,s.days,s.remark 
+	FROM `supplierparty` AS s LEFT JOIN `units` AS u ON  u.`id`=s.`sid` LEFT JOIN `manufacturer` AS m ON m.`manid`=s.`level` LEFT JOIN `payment` AS p ON p.`payid`=s.`payment`
+	WHERE contacts LIKE #{contacts} OR mobile LIKE #{mobile}
+  </select>
+  
+  <select id="venselbiao" resultType="com.accp.domain.Vendor">
+  	SELECT s.supid,s.`supcode`,s.supname,s.address,s.scase,s.url,s.bank,s.banknum,p.way,m.`grade`,s.brand,u.unitsname,s.contacts,s.phone,s.mobile,s.email,s.days,s.remark 
+	FROM `supplierparty` AS s LEFT JOIN `units` AS u ON  u.`id`=s.`sid` LEFT JOIN `manufacturer` AS m ON m.`manid`=s.`level` LEFT JOIN `payment` AS p ON p.`payid`=s.`payment`
+	WHERE supcode=#{supcode} OR supname=#{supname} OR address=#{address} OR payment=#{payment} OR `level`=#{level} OR brand=#{brand}
+	 OR unitsname=#{unitsname} OR contacts=#{contacts} OR phone=#{phone} OR mobile=#{mobile} OR scase=#{scase} OR remark=#{remark}
   </select>
   
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.accp.domain.SupplierpartyExample" >

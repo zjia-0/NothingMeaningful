@@ -1,5 +1,7 @@
 package com.accp.domain;
 
+import java.util.List;
+
 public class Project {
     private Integer id;
 
@@ -32,8 +34,29 @@ public class Project {
     private String remark4;
 
     private String remark5;
+    
+    private List<Incometype> incometype;
+    
+    private List<Maintaintype> maintaintype;
 
-    public Integer getId() {
+    
+    public List<Incometype> getIncometype() {
+		return incometype;
+	}
+
+	public void setIncometype(List<Incometype> incometype) {
+		this.incometype = incometype;
+	}
+
+	public List<Maintaintype> getMaintaintype() {
+		return maintaintype;
+	}
+
+	public void setMaintaintype(List<Maintaintype> maintaintype) {
+		this.maintaintype = maintaintype;
+	}
+
+	public Integer getId() {
         return id;
     }
 
