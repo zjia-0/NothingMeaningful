@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.accp.domain.Project;
+import com.accp.domain.projectwang;
 import com.accp.service.ProjectService;
 
 @RestController
@@ -14,8 +15,8 @@ public class Projectcontroller {
 	ProjectService projectService;
 	
 	@PostMapping("/projectselect")
-	public List<Project> projectselect(String pname){
-		return projectService.projectselect(pname);
+	public List<projectwang> projectselect(String pname,String typename){
+		return projectService.projectselect(pname, typename);
 	}
 	
 	@PostMapping("/projectdelete")

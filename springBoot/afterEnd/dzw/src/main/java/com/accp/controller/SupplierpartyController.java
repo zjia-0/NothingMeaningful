@@ -21,8 +21,9 @@ public class SupplierpartyController {
 	}
 	
 	@PostMapping("/vensel")
-	public List<Vendor> vensel(){
-		return supplierpartyService.vensel();
+	public List<Vendor> vensel(String supcode,String supname,String address,String way,String grade,String brand,String unitsname,String contacts,
+			   String phone,String mobile,String scase,String remark,String chazhi){
+		return supplierpartyService.vensel(supcode, supname, address, way, grade, brand, unitsname, contacts, phone, mobile, scase, remark, chazhi);
 	}
 	
 	@PostMapping("/supplierpartyinsert")

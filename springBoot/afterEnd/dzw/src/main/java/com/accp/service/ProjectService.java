@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.accp.domain.Project;
+import com.accp.domain.projectwang;
 import com.accp.mapper.ProjectMapper;
 
 @Service
@@ -14,11 +15,18 @@ public class ProjectService {
 	@Autowired
 	ProjectMapper ProjectMapper;
 	
-	public List<Project> projectselect(String pname){
-		if (pname==""||pname==null) {
-			return ProjectMapper.selectByExample(null);
+	public List<projectwang> projectselect(String pname,String typename){
+		
+		if (typename=="" || typename==null && pname==""||pname==null) {
+			return ProjectMapper.proselsel();
 		}
-		return ProjectMapper.prosel(pname);
+		else if (pname.equals(null)|| pname.equals("")&& typename!="" || typename!=null ) {
+			return ProjectMapper.proselname(typename);
+		}else if (typename=="" || typename==null&&pname!=""||pname!=null ) {
+			return ProjectMapper.prosel(pname);
+		}
+			
+		return ProjectMapper.proselsel();
 	}
 	
 	public int  projectdelete(int id) {
