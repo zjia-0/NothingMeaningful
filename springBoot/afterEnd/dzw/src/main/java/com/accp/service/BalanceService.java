@@ -6,13 +6,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.accp.domain.Account;
+import com.accp.domain.AccountExample;
 import com.accp.domain.Bills;
 import com.accp.domain.Billstype;
 import com.accp.domain.Customer;
+import com.accp.domain.Invoice;
+import com.accp.domain.InvoiceType;
 import com.accp.domain.Personnel;
+import com.accp.mapper.AccountMapper;
 import com.accp.mapper.BillsMapper;
 import com.accp.mapper.BillstypeMapper;
 import com.accp.mapper.CustomerMapper;
+import com.accp.mapper.InvoiceMapper;
+import com.accp.mapper.InvoiceTypeMapper;
 import com.accp.mapper.PersonnelMapper;
 
 @Service
@@ -27,6 +34,10 @@ public class BalanceService {
 	BillstypeMapper bMapper;
 	@Autowired
 	BillsMapper billMapper;
+	@Autowired
+	InvoiceTypeMapper itMapper;
+	@Autowired
+	AccountMapper aMapper;
 
 	public List<Customer> queryAllcust() {
 		return custMapper.selectByExample(null);
@@ -45,6 +56,14 @@ public class BalanceService {
 	}
 	public List<Bills> findbytj(Bills bill){
 		return billMapper.findbytj(bill);
+	}
+	public List<InvoiceType> findAllInvoice(){
+		return itMapper.selectByExample(null);
+	}
+	public List<Account> findByBid(String bid){
+		AccountExample example=new AccountExample();
+		example.createCriteria().andBidEqualTo(bid);
+		return aMapper.selectByExample(example);
 	}
  
 }
