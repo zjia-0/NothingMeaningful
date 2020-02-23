@@ -76,14 +76,18 @@
 			      <div class="modal-body">
 			      	<form class="form-inline">
 			      		<div class="form-group">
-			      			<div class="row col-xs-10 col-xs-push-1">
-								<span>客户信息</span>
-								选择已有客户
+			      			<div class="row col-xs-10 col-xs-push-1" style="margin-bottom: 10px;">
+								<div class="col-xs-6">
+									<span style="font-size: 18px;">客户信息</span>
+								</div>
+								<div class="col-xs-6">
+									选择已有客户
 								<select  class="form-control" v-model="cust2" @change="selectCust()">
 									<option v-for="item,index in custs"  :value="item" class="form-control">{{item.cname}}</option>
 								</select>
+								</div>
 							</div>
-			      			<div class="text-center row" style="margin-bottom: 10px;">
+			      			<div class="text-left row" style="margin-bottom: 10px;margin-left: 40px;">
 			      				<div class="input-group col-xs-3">
 								  <span class="input-group-addon" id="sizing-addon1">客户编号</span>
 								  <input type="text" readonly="readonly" v-model="cust.cno" class="form-control" placeholder="" aria-describedby="sizing-addon1">
@@ -99,7 +103,7 @@
 								  <input type="text" v-model="cust.cpeople" class="form-control" placeholder="" aria-describedby="sizing-addon3">
 								</div>
 			      			</div>
-			      			<div class="text-center row" style="margin-bottom: 10px;">
+			      			<div class="text-left row" style="margin-bottom: 10px;margin-left: 40px;">
 			      				<div class="input-group col-xs-3">
 								  <span class="input-group-addon" id="sizing-addon1">客户电话</span>
 								  <input type="text" v-model="cust.cphone" class="form-control" placeholder="" aria-describedby="sizing-addon1">
@@ -115,7 +119,7 @@
 								  <input type="date" v-model="cust.cbirthday" class="form-control" placeholder="" aria-describedby="sizing-addon3">
 								</div>
 			      			</div>
-			      			<div class="text-center row" style="margin-bottom: 10px;">
+			      			<div class="text-left row" style="margin-bottom: 10px;margin-left: 40px;">
 			      				<div class="input-group col-xs-3">
 								  <span class="input-group-addon" id="sizing-addon1">客户姓名</span>
 								  <input type="text" class="form-control" placeholder="" aria-describedby="sizing-addon1">
@@ -127,7 +131,7 @@
 								  <input type="text" v-model="cust.climit" class="form-control" placeholder="" aria-describedby="sizing-addon3">
 								</div>
 			      			</div>
-			      			<div class="text-center row" style="margin-bottom: 10px;">
+			      			<div class="text-left row" style="margin-bottom: 10px;margin-left: 40px;">
 			      				<div class="input-group col-xs-3">
 								  <span class="input-group-addon" id="sizing-addon1">顾问电话</span>
 								  <input type="text" v-model="cust.cadviserphone" class="form-control" placeholder="" aria-describedby="sizing-addon1">
@@ -143,7 +147,7 @@
 								  <input type="text" v-model="cust.cremark" class="form-control" placeholder="" aria-describedby="sizing-addon3">
 								</div>
 			      			</div>
-			      			<div class="text-center row" style="margin-bottom: 10px;">
+			      			<div class="text-left row" style="margin-bottom: 10px;margin-left: 40px;">
 			      				<div class="input-group col-xs-3">
 								  <span class="input-group-addon" id="sizing-addon1">注册电话</span>
 								  <input type="text" v-model="cust.cregistphone" class="form-control" placeholder="" aria-describedby="sizing-addon1">
@@ -163,7 +167,7 @@
 									<h4>会员信息</h4>
 							</div>
 								
-			      			<div class="text-center row" style="margin-bottom: 10px;">
+			      			<div class="text-left row" style="margin-bottom: 10px;margin-left: 40px;">
 			      				<div class="input-group col-xs-3">
 								  <span class="input-group-addon" id="sizing-addon1">会员卡号</span>
 								  <input type="text" v-model="vipadd.vno" class="form-control" placeholder="" aria-describedby="sizing-addon1">
@@ -177,7 +181,7 @@
 								  <input type="date" v-model="vipadd.venddate" class="form-control" placeholder="" aria-describedby="sizing-addon3">
 								</div>
 			      			</div>
-			      			<div class="text-center row" style="margin-bottom: 10px;">
+			      			<div class="text-left row" style="margin-bottom: 10px;margin-left: 40px;">
 			      				<div class="input-group col-xs-3">
 								  <span class="input-group-addon" id="sizing-addon1">客户编号</span>
 								  <input type="text" readonly="readonly" v-model="vipadd.cno" class="form-control" placeholder="" aria-describedby="sizing-addon1">
@@ -186,8 +190,8 @@
 								  <span class="input-group-addon" id="sizing-addon2">账户余额</span>
 								  <input type="text" v-model="vipadd.money" class="form-control" placeholder="" aria-describedby="sizing-addon2">
 								</div>
-						会员类型：<select id="vipType" @change="findjifen" v-model="vipadd.levelid">
-					      		<option :value="item.levelid" v-for="item in vipType">{{item.viplevel}}</option>
+						会员类型：<select id="vipType" @change="findjifen" class="form-control" v-model="vipadd.levelid">
+					      		<option :value="item.levelid" class="form-control" v-for="item in vipType">{{item.viplevel}}</option>
 					      	</select>
 					      	<div class="input-group col-xs-3">
 								  <span class="input-group-addon" id="sizing-addon3">会员积分</span>
