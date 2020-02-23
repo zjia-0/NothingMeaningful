@@ -46,6 +46,7 @@ public class CarbrandService {
 	}
 	
 	public List<Carbrand> select(String zhi){
+		System.out.println(zhi);
 		if (zhi==""||zhi==null) {
 			zhi=null;
 			return carbrandMapper.selectByExample(null);

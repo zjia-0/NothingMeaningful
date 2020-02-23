@@ -11,6 +11,16 @@
     <result column="remark4" property="remark4" jdbcType="VARCHAR" />
     <result column="remark5" property="remark5" jdbcType="VARCHAR" />
   </resultMap>
+  
+  
+   <resultMap id="BaseResultMapall" type="com.accp.domain.Goodstype"  extends="BaseResultMap">
+    <collection property="goodstypes" column="typeid" select="com.accp.mapper.GoodstypeMapper.select"></collection>
+  </resultMap>
+  
+   <select id="select" resultMap="BaseResultMapall" parameterType="java.lang.Integer"  >
+    select * from goodstype where parentid=#{parentid}
+  </select>
+  
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >

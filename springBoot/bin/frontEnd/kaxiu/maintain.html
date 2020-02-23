@@ -10,6 +10,7 @@
 			*{
 				margin: 0px;
 				padding: 0px;
+				list-style-type: none;
 			}
 			.bq span{
 				margin-left:5px;				
@@ -48,12 +49,21 @@
 						<span data-toggle="modal" data-target="#price">调价</span>							
 					</span>
 					<span><span class="glyphicon glyphicon-floppy-disk" style="color: #fcac28;" aria-hidden="true"></span>导出</span>
-					<span><span class="glyphicon glyphicon-log-in" style="color: #fcac28;" aria-hidden="true"></span>保存</span>
 				</div>
 				
 				<div>
 					<div  class="col-sm-2 col-lg-2 col-md-2" style="background: white; height: 500px;">
-						<ul id="treeDemo" class="ztree"></ul>
+						<ul>
+							<li v-for="item in shuzhi">
+								<span class="glyphicon glyphicon-cloud-upload" style="font-size: 12px; color: #fcac28;" ></span>
+								<span class="abq" panduan="true" onclick="xsyc(this)" >{{item.typename}}</span>
+								<ul style="display:none;margin:0 25px;">
+									<li v-for="item2 in item.maintaintypes">
+										<span  v-on:click="bhao(item2.typename)">{{item2.typename}}</span>
+									</li>
+								</ul>
+							</li>
+					</ul>
 					</div>
 					
 					<div class="col-sm-10 col-lg-10 col-md-10">
@@ -62,7 +72,6 @@
 								<th>项目类别</th>
 								<th>项目编码</th>
 								<th>项目名称</th>
-								<th>售价按</th>
 								<th>收入种类</th>
 								<th>标准价</th>
 								<th>会员价</th>
@@ -72,11 +81,10 @@
 								<th>保险价</th>
 							</tr>
 							<tr style="background: white;" v-for="i in en">
-								<td><input type="text" v-model="i.maintainid" style="border: none; text-align: center; width: 80px;" v-on:click="daozhi(i.id)"/></td>
+								<td><input type="text" v-model="i.typename" style="border: none; text-align: center; width: 80px;" v-on:click="daozhi(i.id)"/></td>
 								<td><input type="text" v-model="i.pnum" style="border: none; text-align: center; width: 80px;"  v-on:click="daozhi(i.id)"/></td>
 								<td><input type="text" v-model="i.pname" style="border: none; text-align: center; width: 80px;"  v-on:click="daozhi(i.id)"/></td>
-								<td><input type="text" v-model="i.incomeid" style="border: none; text-align: center; width: 80px;"  v-on:click="daozhi(i.id)"/></td>
-								<td><input type="text" v-model="i.incomeid" style="border: none; text-align: center; width: 80px;"  v-on:click="daozhi(i.id)"/></td>
+								<td><input type="text" v-model="i.incomename" style="border: none; text-align: center; width: 80px;"  v-on:click="daozhi(i.id)"/></td>
 								<td><input type="text" v-model="i.standardprice" style="border: none; text-align: center; width: 80px;"  v-on:click="daozhi(i.id)"/></td>
 								<td><input type="text" v-model="i.memberprice" style="border: none; text-align: center; width: 80px;"  v-on:click="daozhi(i.id)"/></td>
 								<td><input type="text" v-model="i.vipprice" style="border: none; text-align: center; width: 80px;"  v-on:click="daozhi(i.id)"/></td>
@@ -118,8 +126,7 @@
 									<form class="form-inline">
 									  <div class="form-group">
 									    <div class="input-group">
-									     <select  style="width: 140px; height: 30px;" class="xmzl">
-									     	<option>1</option>
+									     <select  style="width: 140px; height: 30px;" class="xmzl" >
 										    <option v-for="i in mains">{{i.incomename}}</option>
 										</select>
 									      <div class="input-group-addon"  style="background: white; margin-bottom: 20px;" >
@@ -132,8 +139,7 @@
 								<td style="color: red;">*</td>
 								<td>项目类别</td>
 								<td>
-									<select style="width: 180px; height: 25px;" class="xmlb" value="">
-										<option>1</option>
+									<select style="width: 180px; height: 25px;" class="xmlb">
 										<option v-for="i in main">{{i.typename}}</option>
 									</select>
 								</td>
@@ -175,8 +181,9 @@
 				<h4 class="modal-title" id="myModalLabel">选择内容设置</h4>
 			</div>
 					<div class="modal-body">
-							<div class="col-sm-7 col-lg-7 col-md-7 " style="height:30px;">&nbsp;</div>
-							<div class="col-sm-5 col-lg-5 col-md-5 " style="height:30px; line-height: 30px;">
+							<div class="col-sm-6 col-lg-6 col-md-6 " style="height:30px;">&nbsp;</div>
+							<div class="col-sm-6 col-lg-6 col-md-6 " style="height:40px; line-height: 40px;">
+								<span><input type="text" class="zhis" style="width: 30px; height: 35px; background: white; color: white; border: none;"/></span>
 								<span style="padding-right: 10px;"><span class="glyphicon glyphicon-edit" style="color: #fcac28;" aria-hidden="true"></span>修改</span>
 								<span><span class="glyphicon glyphicon-floppy-disk" style="color: #fcac28;" aria-hidden="true"></span>保存</span>
 							</div>
@@ -187,13 +194,13 @@
 								<th>收入分类</th>
 							</tr>
 							<tr  style="background: white;" v-for="i in mains">
-								<td><input type="text" v-model="i.incomeid" style="border: none; text-align: center; width: 100px;" class="disid"/></td>
-								<td><input type="text" v-model="i.incomename" style="border: none; text-align: center; width: 100px;" class="disid"/></td>
+								<td><input type="text" v-model="i.incomeid" style="border: none; text-align: center; width: 100px;" class="disid" v-on:click="djs(i.incomename)"/></td>
+								<td><input type="text" v-model="i.incomename" style="border: none; text-align: center; width: 100px;" class="disid" v-on:click="djs(i.incomename)"/></td>
 							</tr>
 						</table>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-success">选择</button>
+						<button type="button" class="btn btn-success" v-on:click="zholei()" data-dismiss="modal" aria-label="Close">选择</button>
 					</div>
 		</div>
 	</div>
@@ -228,12 +235,11 @@
 									<form class="form-inline">
 									  <div class="form-group">
 									    <div class="input-group">
-									     <select  style="width: 140px; height: 30px;" class="xmzls" v-model="xgs.incomeid">
-									     	<option>1</option>
+									     <select  style="width: 140px; height: 30px;" class="xmzls">
 										    <option v-for="i in mains">{{i.incomename}}</option>
 										</select>
 									      <div class="input-group-addon"  style="background: white; margin-bottom: 20px;" >
-									      	<span class="glyphicon glyphicon-triangle-bottom"   data-toggle="modal" data-target="#import"></span>
+									      	<span class="glyphicon glyphicon-triangle-bottom"   data-toggle="modal" data-target="#imports"></span>
 									      </div>
 									    </div>
 									  </div>
@@ -242,8 +248,7 @@
 								<td style="color: red;">*</td>
 								<td>项目类别</td>
 								<td>
-									<select style="width: 180px; height: 25px;" class="xmlbs" v-model="xgs.maintainid">
-										<option>1</option>
+									<select style="width: 180px; height: 25px;" class="xmlbs">
 										<option v-for="i in main">{{i.typename}}</option>
 									</select>
 								</td>
@@ -276,7 +281,39 @@
 		</div>
 	</div>
 </div>	
-
+<!--修改里面的项目种类收入-->
+<div class="modal fade" id="imports" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document" style="width: 400px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel">选择内容设置</h4>
+			</div>
+					<div class="modal-body">
+							<div class="col-sm-6 col-lg-6 col-md-6 " style="height:30px;">&nbsp;</div>
+							<div class="col-sm-6 col-lg-6 col-md-6 " style="height:40px; line-height: 40px;">
+								<span><input type="text" class="zhis" style="width: 30px; height: 35px; background: white; color: white; border: none;"/></span>
+								<span style="padding-right: 10px;"><span class="glyphicon glyphicon-edit" style="color: #fcac28;" aria-hidden="true"></span>修改</span>
+								<span><span class="glyphicon glyphicon-floppy-disk" style="color: #fcac28;" aria-hidden="true"></span>保存</span>
+							</div>
+						
+						<table class="table">
+							<tr  style="background: #39cede;color: white;">
+								<th>序号</th>
+								<th>收入分类</th>
+							</tr>
+							<tr  style="background: white;" v-for="i in mains">
+								<td><input type="text" v-model="i.incomeid" style="border: none; text-align: center; width: 100px;" class="disid" v-on:click="djs(i.incomename)"/></td>
+								<td><input type="text" v-model="i.incomename" style="border: none; text-align: center; width: 100px;" class="disid" v-on:click="djs(i.incomename)"/></td>
+							</tr>
+						</table>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-success" v-on:click="zholeis()" data-dismiss="modal" aria-label="Close">选择</button>
+					</div>
+		</div>
+	</div>
+</div>		
 <div class="modal fade" id="price" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	<div class="modal-dialog" role="document" style="width: 470px;">
 		<div class="modal-content">
@@ -309,36 +346,23 @@
 		<script type="text/javascript" src="js/bootstrap.min.js" ></script>
 		<script type="text/javascript" src="js/vue.js" ></script>
 		<script type="text/javascript" src="js/my.js" ></script>
-		<script type="text/javascript" src="js/jquery.min.js" ></script>
-		<script type="text/javascript" src="js/jquery.ztree.core.js" ></script>
 		<script>
-			var setting = {
-				check: {
-					enable: true
-				},
-				data: {
-					simpleData: {
-						enable: true
-					}
-				},
-				edit: {
-					enable: true
+			var xsyc=function(kj){ 
+				var pd=$(kj).attr("panduan");
+				if(pd=="true"){
+					$(kj).attr("panduan",false);
+					$(kj).siblings("span[class='glyphicon glyphicon-cloud-upload']").attr("class","glyphicon glyphicon-cloud-download");
+					$(kj).siblings("ul").show();
+				}else{
+					$(kj).attr("panduan",true);
+					$(kj).siblings("span[class='glyphicon glyphicon-cloud-download']").attr("class","glyphicon glyphicon-cloud-upload");
+					$(kj).siblings("ul").hide();
 				}
-			};
-			//数据结构，从后台查询数据进行赋值就可使用
-			var zNodes =[
-			{id:1, pId:0, name:"车型", open:true},
-			{id:101, pId:1, name:"0001-1111"},
-			{id:102, pId:1, name:"500-中国重汽"},
+			}
 			
-			{id:2, pId:0, name:"发动机", open:false},
-			{id:201, pId:2, name:"10002-sss"},
-			{id:202, pId:2, name:"0001-1111"},
-			];
-		
-			$(document).ready(function(){
-				$.fn.zTree.init($("#treeDemo"), setting, zNodes);
-			});
+			$(function(){
+				$("ul li span").siblings("ul").css("display","none");
+			})
 			
 			var vm=new Vue({
 		 	el: "#ctx",
@@ -347,7 +371,8 @@
 						en:{},
 						main:{},
 						mains:{},
-						xgs:{}
+						xgs:{},
+						shuzhi:[]
 					};
 				},
 				methods:{
@@ -389,16 +414,49 @@
 							}
 						});
 				    },bc:function(){
-				    	var maintainid=$(".xmlb").val()
+				    	var maintainids=$(".xmlb").val()
+				    	var maintainid
 				    	var pnum=$(".xmbm").val()
 				    	var pname=$(".xmmc").val()
-				    	var incomeid=$(".xmzl").val()
+				    	var incomeids=$(".xmzl").val()
+				    	var incomeid
 				    	var standardprice=$(".bzj").val()
 				    	var memberprice=$(".hyj").val()
 				    	var vipprice=$(".vipj").val()
 				    	var dealprice=$(".xyj").val()
 				    	var claimprice=$(".spj").val()
 				    	var insuranceprice=$(".bxj").val()
+				    	
+				    	if (maintainids=="车型") {
+				    		maintainid="1"
+				    	} else if(maintainids=="中国重汽"){
+				    		maintainid="2"
+				    	} else if(maintainids=="中国一汽"){
+				    		maintainid="3"
+				    	}else if(maintainids=="上汽红岩"){
+				    		maintainid="4"
+				    	} else if(maintainids=="发动机"){
+				    		maintainid="5"
+				    	}else if(maintainids=="英子"){
+				    		maintainid="6"
+				    	} else if(maintainids=="呆子"){
+				    		maintainid="7"
+				    	}else if(maintainids=="钣喷"){
+				    		maintainid="8"
+				    	} else if(maintainids=="保养"){
+				    		maintainid="9"
+				    	}else if(maintainids=="小修"){
+				    		maintainid="10"
+				    	}
+				    	
+				    	if (incomeids=="机修") {
+				    		incomeid="1"
+				    	} else if(incomeids=="发动机"){
+				    		incomeid="2"
+				    	} else if(incomeids=="钣喷"){
+				    		incomeid="3"
+				    	}
+				    	
 				    	$.ajax({
 							url: data.ip + "projectinsert",	
 							data:{"maintainid":maintainid,"pnum":pnum,"pname":pname,"incomeid":incomeid,"standardprice":standardprice,"memberprice":memberprice,"vipprice":vipprice,"dealprice":dealprice,"claimprice":claimprice,"insuranceprice":insuranceprice},
@@ -444,16 +502,49 @@
 						});
 				    },bcs:function(){
 				    	var id=$(".zhi").val();
-				    	var maintainid=$(".xmlbs").val()
+				    	var maintainids=$(".xmlbs").val()
+				    	var maintainid
 				    	var pnum=$(".xmbms").val()
 				    	var pname=$(".xmmcs").val()
-				    	var incomeid=$(".xmzls").val()
+				    	var incomeids=$(".xmzls").val()
+				    	var incomeid
 				    	var standardprice=$(".bzjs").val()
 				    	var memberprice=$(".hyjs").val()
-				    	var vipprice=$(".vips").val()
+				    	var vipprice=$(".vipjs").val()
 				    	var dealprice=$(".xyjs").val()
 				    	var claimprice=$(".spjs").val()
 				    	var insuranceprice=$(".bxjs").val()
+				    	
+				    	if (maintainids=="车型") {
+				    		maintainid="1"
+				    	} else if(maintainids=="中国重汽"){
+				    		maintainid="2"
+				    	} else if(maintainids=="中国一汽"){
+				    		maintainid="3"
+				    	}else if(maintainids=="上汽红岩"){
+				    		maintainid="4"
+				    	} else if(maintainids=="发动机"){
+				    		maintainid="5"
+				    	}else if(maintainids=="英子"){
+				    		maintainid="6"
+				    	} else if(maintainids=="呆子"){
+				    		maintainid="7"
+				    	}else if(maintainids=="钣喷"){
+				    		maintainid="8"
+				    	} else if(maintainids=="保养"){
+				    		maintainid="9"
+				    	}else if(maintainids=="小修"){
+				    		maintainid="10"
+				    	}
+				    	
+				    	if (incomeids=="机修") {
+				    		incomeid="1"
+				    	} else if(incomeids=="发动机"){
+				    		incomeid="2"
+				    	} else if(incomeids=="钣喷"){
+				    		incomeid="3"
+				    	}
+				    	
 				    	$.ajax({
 							url: data.ip + "projectupdate",	
 							data:{"id":id,"maintainid":maintainid,"pnum":pnum,"pname":pname,"incomeid":incomeid,"standardprice":standardprice,"memberprice":memberprice,"vipprice":vipprice,"dealprice":dealprice,"claimprice":claimprice,"insuranceprice":insuranceprice},
@@ -467,22 +558,42 @@
 								}
 							}
 						});
-				    },bhao:function(){
+				    },bhao:function(typename){
 				    	var that = this;
 				    	var pname=$(".bhaoname").val()
 				    	$.ajax({
 							url: data.ip + "projectselect",	
-							data:{"pname":pname},
+							data:{"pname":pname,"typename":typename},
 							type: "post",
 							dataType: "json",
 							success: function(res) {
 								that.en=res;
 							}
 						});
+				    },shuxin:function(){
+				    	var that = this;
+				    	$.ajax({
+							url: data.ip + "selectMaintaintypewangmali",	
+							type: "post",
+							dataType: "json",
+							success: function(res) {
+								console.log(res);
+								that.shuzhi=res;
+							}
+						});
+				    },djs:function(incomename){
+				    	$(".zhis").val(incomename)
+				    },zholei:function(){
+				    	var zhi=$(".zhis").val()
+				    	$(".xmzl").val(zhi)
+				    },zholeis:function(){
+				    	var zhis=$(".zhis").val()
+				    	$(".xmzls").val(zhis)
 				    }
 				},created:function(){
 						var that = this;
 						that.bhao();
+						that.shuxin();
 				}
 	  })
 			

@@ -12,6 +12,16 @@
     <result column="remark4" property="remark4" jdbcType="VARCHAR" />
     <result column="remark5" property="remark5" jdbcType="VARCHAR" />
   </resultMap>
+  
+  <resultMap id="BaseResultMapall" type="com.accp.domain.Maintaintype" extends="BaseResultMap">
+    <collection property="maintaintypes" column="maintainid" select="com.accp.mapper.MaintaintypeMapper.selectByparentid"></collection>
+  </resultMap>
+  
+    
+  <select id="selectByparentid" resultMap="BaseResultMapall" parameterType="java.lang.Integer"  >
+    select * from maintaintype where parentid=#{parentid}
+  </select>
+  
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
@@ -73,6 +83,10 @@
   <sql id="Base_Column_List" >
     maintainid, typename, parentid, catlog, remark1, remark2, remark3, remark4, remark5
   </sql>
+  
+
+  
+  
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.accp.domain.MaintaintypeExample" >
     select
     <if test="distinct" >
