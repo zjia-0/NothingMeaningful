@@ -17,12 +17,12 @@ public class Carinfo {
 
     private String cddriverphone;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date cddriverbirth;
 
     private Integer clid;
     
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date cdlicenseend;
 
     private String cdframe;
@@ -75,11 +75,37 @@ public class Carinfo {
     
     private String motorname;
     
-    private String fuelname;
+    private Integer cdenginebrandid;//发动机品牌ID
+    
+    public Integer getCdenginebrandid() {
+		return cdenginebrandid;
+	}
 
-    private String remark1;
+	public void setCdenginebrandid(Integer cdenginebrandid) {
+		this.cdenginebrandid = cdenginebrandid;
+	}
 
-    private String remark2;
+	public String getCdcommerceinsurancename() {
+		return cdcommerceinsurancename;
+	}
+
+	public void setCdcommerceinsurancename(String cdcommerceinsurancename) {
+		this.cdcommerceinsurancename = cdcommerceinsurancename;
+	}
+
+	public String getCdcompulsoryinsurancename() {
+		return cdcompulsoryinsurancename;
+	}
+
+	public void setCdcompulsoryinsurancename(String cdcompulsoryinsurancename) {
+		this.cdcompulsoryinsurancename = cdcompulsoryinsurancename;
+	}
+
+	private String fuelname;
+
+    private String cdcommerceinsurancename;
+
+    private String cdcompulsoryinsurancename;
 
     private String remark3;
 
@@ -287,53 +313,6 @@ public class Carinfo {
         this.cdnextkeep = cdnextkeep;
     }
 
-    public Carinfo(String cdlicense, String cdno, String cbiid, String cddricer, String cddriverphone,
-			Date cddriverbirth, Integer clid, Date cdlicenseend, String cdframe, String cdengine, Float cdyearprice,
-			Float cdmileage, String cdload, Date cdbuydate, Date cdgolicense, Date cdcarcheckdate, Integer fuelid,
-			String cdsystem, Integer cdcompulsoryinsuranceid, Date cdcompulsoryinsurancedate,
-			Integer cdcommerceinsuranceid, Date cdcommerceinsurancedate, Integer cdisinsure, Float cdnextmileage,
-			Date cdnextkeep, String cno, String brandname, String cname, String carname, String motorname,
-			String fuelname, String remark1, String remark2, String remark3, String remark4, String remark5) {
-		super();
-		this.cdlicense = cdlicense;
-		this.cdno = cdno;
-		this.cbiid = cbiid;
-		this.cddricer = cddricer;
-		this.cddriverphone = cddriverphone;
-		this.cddriverbirth = cddriverbirth;
-		this.clid = clid;
-		this.cdlicenseend = cdlicenseend;
-		this.cdframe = cdframe;
-		this.cdengine = cdengine;
-		this.cdyearprice = cdyearprice;
-		this.cdmileage = cdmileage;
-		this.cdload = cdload;
-		this.cdbuydate = cdbuydate;
-		this.cdgolicense = cdgolicense;
-		this.cdcarcheckdate = cdcarcheckdate;
-		this.fuelid = fuelid;
-		this.cdsystem = cdsystem;
-		this.cdcompulsoryinsuranceid = cdcompulsoryinsuranceid;
-		this.cdcompulsoryinsurancedate = cdcompulsoryinsurancedate;
-		this.cdcommerceinsuranceid = cdcommerceinsuranceid;
-		this.cdcommerceinsurancedate = cdcommerceinsurancedate;
-		this.cdisinsure = cdisinsure;
-		this.cdnextmileage = cdnextmileage;
-		this.cdnextkeep = cdnextkeep;
-		this.cno = cno;
-		this.brandname = brandname;
-		this.cname = cname;
-		this.carname = carname;
-		this.motorname = motorname;
-		this.fuelname = fuelname;
-		this.remark1 = remark1;
-		this.remark2 = remark2;
-		this.remark3 = remark3;
-		this.remark4 = remark4;
-		this.remark5 = remark5;
-	}
-    public Carinfo() { }
-
 	public String getBrandname() {
 		return brandname;
 	}
@@ -380,22 +359,6 @@ public class Carinfo {
 
     public void setCno(String cno) {
         this.cno = cno;
-    }
-
-    public String getRemark1() {
-        return remark1;
-    }
-
-    public void setRemark1(String remark1) {
-        this.remark1 = remark1;
-    }
-
-    public String getRemark2() {
-        return remark2;
-    }
-
-    public void setRemark2(String remark2) {
-        this.remark2 = remark2;
     }
 
     public String getRemark3() {
