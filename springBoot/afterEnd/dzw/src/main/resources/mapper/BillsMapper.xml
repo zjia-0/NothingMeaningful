@@ -43,7 +43,7 @@
 	</resultMap>
 	<!-- 不带条件查询所有 -->
 	<select id="findAllBills" resultMap="BaseResultMap">
-		SELECT
+		SELECT c.`cno`,a.buying,
 		b.bstate,bt.billname,cd.cdframe,a.aname,a.atime,c.cname,cd.cdlicense,c.cphone,v.vno,b.bid,mb.mbname,rb.rbname,b.Clearingtime,b.Completiontime,b.`Ordertime`,
 		a.atime,b.forecastmoney,p.personnelname,pp.personnelname AS
 		pnames,bt.billname ,b.forecastmoney,cd.cdframe,c.cphone AS
@@ -74,7 +74,7 @@
 
 	<select id="findbytj" resultMap="BaseResultMap"
 		parameterType="map">
-		SELECT
+		SELECT c.`cno`,a.buying,
 		b.bstate,bt.billname,cd.cdframe,a.aname,a.atime,c.cname,cd.cdlicense,c.cphone,v.vno,b.bid,mb.mbname,rb.rbname,b.Clearingtime,b.Completiontime,b.`Ordertime`,
 		a.atime,b.forecastmoney,p.personnelname,pp.personnelname AS
 		pnames,bt.billname ,b.forecastmoney,cd.cdframe,c.cphone AS

@@ -7,7 +7,7 @@
 	</head>
 	<body>
 		<div class="container-fluid" id="ctx">
-			<div class="row" style="background-color: #DFF0D8;">
+			<div class="row" style="background-color: #f7ffff;">
 				<div class="col-xs-4">
 					<h2>会员中心</h2>
 				</div>
@@ -17,34 +17,34 @@
 					</div>
 				</div>
 			</div>
-			<div class="row" style="padding: 20px 10px; background-color: beige;">
+			<div class="row" style="padding: 20px 10px; background-color: #f7ffff;">
 				<form class="form-inline">
 					<div class="form-group">
 						<div>
 						    <div class="input-group">
 						      <input type="text" class="form-control" v-model="name" placeholder="输入姓名/会员卡号/手机号">
 						      <span class="input-group-btn">
-						        <button @click="queryName" class="btn btn-success" type="button"><span class="glyphicon glyphicon-search"></span>&nbsp;查询</button>
+						        <button @click="queryName" class="btn btn-default" type="button"><span class="glyphicon glyphicon-search" style="color:#fcac28;"></span>&nbsp;查询</button>
 						      </span>
 						    </div><!-- /input-group -->
-						    <button class="btn btn-success" type="button" data-toggle="modal" data-target="#AddVipModal"><span class="glyphicon glyphicon-plus"></span>&nbsp;添加</button>
+						    <button class="btn btn-default" type="button" data-toggle="modal" data-target="#AddVipModal"><span class="glyphicon glyphicon-plus" style="color:#fcac28;"></span>&nbsp;添加</button>
 						</div><!-- /.col-lg-6 -->
 					</div>
 				</form>
 			</div>
 			<div class="row" >
 				<table class="table table-bordered">
-					<tr style="background-color: #DFF0D8;">
-						<td>序号</td>
-						<td>会员卡号</td>
-						<td>会员等级</td>
-						<td>会员姓名</td>
-						<td>手机</td>
-						<td>余额</td>
-						<td>积分</td>
-						<td>累计消费</td>
-						<td>会员期限</td>
-						<td>操作</td>
+					<tr style="background-color: deepskyblue;" >
+						<td style="color: white;">序号</td>
+						<td style="color: white;">会员卡号</td>
+						<td style="color: white;">会员等级</td>
+						<td style="color: white;">会员姓名</td>
+						<td style="color: white;">手机</td>
+						<td style="color: white;">余额</td>
+						<td style="color: white;"> 积分</td>
+						<td style="color: white;">累计消费</td>
+						<td style="color: white;">会员期限</td>
+						<td style="color: white;">操作</td>
 					</tr>
 					<tr v-for="item,index in vip">
 						<td>{{index+1}}</td>
@@ -57,9 +57,9 @@
 						<td>{{item.summoney}}</td>
 						<td>{{item.venddate}}</td>
 						<td>
-							<button class="btn btn-danger" @click="deletevip(item)" type="button">注销</button>
-							<button class="btn btn-danger" @click="upJifen(item)" type="button">积分清空</button>
-							<button class="btn btn-success" @click="opendeposit(item)" type="button" data-toggle="modal" data-target="#PayModal"><span class="glyphicon glyphicon-zoom-in"></span>&nbsp;会员充值</button>
+							<button class="btn btn-default" @click="deletevip(item)" type="button">注销</button>
+							<button class="btn btn-default" @click="upJifen(item)" type="button">积分清空</button>
+							<button class="btn btn-default" @click="opendeposit(item)" type="button" data-toggle="modal" data-target="#PayModal"><span class="glyphicon glyphicon-zoom-in" style="color:#fcac28;"></span>&nbsp;会员充值</button>
 						</td>
 					</tr>
 				</table>
@@ -222,7 +222,7 @@
 								<div class="text-center row" style="margin-bottom: 10px;">
 					      			<div class="input-group col-xs-3">
 									  <span class="input-group-addon" id="sizing-addon1">当前余额</span>
-									  <input type="text" name="money" v-model="moneys" class="form-control" placeholder="" aria-describedby="sizing-addon1">
+									  <input type="text" disabled="disabled" name="money" v-model="moneys" class="form-control" placeholder="" aria-describedby="sizing-addon1">
 									</div>
 									<div class="input-group col-xs-3">
 									  <span class="input-group-addon" id="sizing-addon2">奖励积分</span>

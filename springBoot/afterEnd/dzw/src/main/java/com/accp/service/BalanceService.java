@@ -14,6 +14,8 @@ import com.accp.domain.Customer;
 import com.accp.domain.Invoice;
 import com.accp.domain.InvoiceType;
 import com.accp.domain.Personnel;
+import com.accp.domain.Vip;
+import com.accp.domain.VipExample;
 import com.accp.mapper.AccountMapper;
 import com.accp.mapper.BillsMapper;
 import com.accp.mapper.BillstypeMapper;
@@ -21,6 +23,7 @@ import com.accp.mapper.CustomerMapper;
 import com.accp.mapper.InvoiceMapper;
 import com.accp.mapper.InvoiceTypeMapper;
 import com.accp.mapper.PersonnelMapper;
+import com.accp.mapper.VipMapper;
 
 @Service
 @Transactional
@@ -38,6 +41,8 @@ public class BalanceService {
 	InvoiceTypeMapper itMapper;
 	@Autowired
 	AccountMapper aMapper;
+	@Autowired
+	VipMapper vipMapper;
 
 	public List<Customer> queryAllcust() {
 		return custMapper.selectByExample(null);
@@ -64,6 +69,11 @@ public class BalanceService {
 		AccountExample example=new AccountExample();
 		example.createCriteria().andBidEqualTo(bid);
 		return aMapper.selectByExample(example);
+	}
+	public List<Vip> findByCno(String cno){
+		VipExample example=new VipExample();
+		example.createCriteria().andCnoEqualTo(cno);
+		return vipMapper.selectByExample(example);
 	}
  
 }

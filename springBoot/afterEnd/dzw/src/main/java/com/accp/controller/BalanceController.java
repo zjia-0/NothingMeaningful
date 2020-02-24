@@ -14,6 +14,7 @@ import com.accp.domain.Billstype;
 import com.accp.domain.Customer;
 import com.accp.domain.InvoiceType;
 import com.accp.domain.Personnel;
+import com.accp.domain.Vip;
 import com.accp.service.BalanceService;
 
 @RestController
@@ -54,6 +55,14 @@ public class BalanceController {
 	@GetMapping("/findByBid")
 	public Account findByBid(String bid){
 		List<Account> list=bservice.findByBid(bid);
+		if(list.size()>0) {
+			return list.get(0);
+		}  
+		return null;
+	}
+	@GetMapping("/findByCno")
+	public Vip findByCno(String cno) {
+		List<Vip> list=bservice.findByCno(cno);
 		if(list.size()>0) {
 			return list.get(0);
 		}  
