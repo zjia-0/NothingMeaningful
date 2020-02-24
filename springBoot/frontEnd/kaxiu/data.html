@@ -202,17 +202,9 @@
 									</td>
 									<td>商品大类</td>
 									<td colspan="3">
-										<form class="form-inline">
-										  <div class="form-group">
-										    <div class="input-group">
-										    	<input  type="text"  style="width: 100px; height: 30px;" class="storeid"/>
-										    	<input type="text"  style="width: 300px; height: 30px;" class="bigclassify"/>
-										      <div class="input-group-addon"  style="background: white; margin-bottom: 20px;" >
-										      	<span class="glyphicon glyphicon-triangle-bottom"   data-toggle="modal" data-target="#heading"></span>
-										      </div>
-										    </div>
-										  </div>
-										</form>
+										<select  style="width: 440px; height: 30px;" class="bigclassifyr">
+										    <option v-for="item in da">{{item.typename}}</option>
+										</select>
 									</td>
 								</tr>
 								<tr>
@@ -283,16 +275,9 @@
 									<td>&nbsp;</td>
 									<td>厂商名称</td>
 									<td colspan="4">
-										<form class="form-inline">
-										  <div class="form-group">
-										    <div class="input-group">
-										    	<input type="text"  style="width: 410px; height: 30px;" class="factoryname"/>
-										      <div class="input-group-addon"  style="background: white; margin-bottom: 20px;" >
-										      	<span class="glyphicon glyphicon-triangle-bottom"   data-toggle="modal" data-target="#name"></span>
-										      </div>
-										    </div>
-										  </div>
-										</form>
+										<select  style="width: 450px; height: 30px;" class="storeid">
+										    <option v-for="i in chan">{{i.storename}}</option>
+										</select>
 									</td>
 									<td>原厂编码</td>
 									<td><input type="text" class="coding"/></td>
@@ -420,17 +405,9 @@
 									</td>
 									<td>商品大类</td>
 									<td colspan="3">
-										<form class="form-inline">
-										  <div class="form-group">
-										    <div class="input-group">
-										    	<input  type="text"  style="width: 100px; height: 30px;" class="storeidsr"  v-model="goupse.storeids"/>
-										    	<input type="text"  style="width: 300px; height: 30px;" class="bigclassifysr"  v-model="goupse.bigclassifys"/>
-										      <div class="input-group-addon"  style="background: white; margin-bottom: 20px;" >
-										      	<span class="glyphicon glyphicon-triangle-bottom"   data-toggle="modal" data-target="#heading"></span>
-										      </div>
-										    </div>
-										  </div>
-										</form>
+										<select  style="width: 440px; height: 30px;" class="bigclassify">
+										    <option v-for="item in da">{{item.typename}}</option>
+										</select>
 									</td>
 								</tr>
 								<tr>
@@ -501,16 +478,9 @@
 									<td>&nbsp;</td>
 									<td>厂商名称</td>
 									<td colspan="4">
-										<form class="form-inline">
-										  <div class="form-group">
-										    <div class="input-group">
-										    	<input type="text"  style="width: 410px; height: 30px;" class="factorynamer"  v-model="goupse.factoryname"/>
-										      <div class="input-group-addon"  style="background: white; margin-bottom: 20px;" >
-										      	<span class="glyphicon glyphicon-triangle-bottom"   data-toggle="modal" data-target="#name"></span>
-										      </div>
-										    </div>
-										  </div>
-										</form>
+										<select  style="width: 450px; height: 30px;" class="storeidsr">
+										    <option v-for="i in chan">{{i.storename}}</option>
+										</select>
 									</td>
 									<td>原厂编码</td>
 									<td><input type="text" class="codingr" v-model="goupse.coding"/></td>
@@ -730,13 +700,13 @@
 									<th>商品品牌</th>
 								</tr>
 								<tr  style="background: white;" v-for="i in sp">
-									<td><input type="text" v-model="i.brandid" style="border: none; text-align: center; width: 100px;"/></td>
-									<td><input type="text" v-model="i.brandname" style="border: none; text-align: center; width: 100px;"/></td>
+									<td><input type="text" v-model="i.brandid" v-on:click="shanpin(i.brandname)" style="border: none; text-align: center; width: 100px;"/></td>
+									<td><input type="text" v-model="i.brandname" v-on:click="shanpin(i.brandname)" style="border: none; text-align: center; width: 100px;"/></td>
 								</tr>
 							</table>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-success">选择</button>
+						<button type="button" class="btn btn-success"  data-dismiss="modal" aria-label="Close">选择</button>
 					</div>
 		</div>
 	</div>
@@ -762,13 +732,13 @@
 									<th>数量单位</th>
 								</tr>
 								<tr  style="background: white;" v-for="i in dw">
-									<td><input type="text" v-model="i.numbeid" style="border: none; text-align: center; width: 100px;"/></td>
-									<td><input type="text" v-model="i.numbename" style="border: none; text-align: center; width: 100px;"/></td>
+									<td><input type="text" v-model="i.numbeid" v-on:click="shudan(i.numbename)" style="border: none; text-align: center; width: 100px;"/></td>
+									<td><input type="text" v-model="i.numbename" v-on:click="shudan(i.numbename)" style="border: none; text-align: center; width: 100px;"/></td>
 								</tr>
 							</table>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-success">选择</button>
+						<button type="button" class="btn btn-success"  data-dismiss="modal" aria-label="Close">选择</button>
 					</div>
 		</div>
 	</div>
@@ -817,13 +787,13 @@
 									<th>收入分类</th>
 								</tr>
 								<tr  style="background: white;" v-for="i in lb">
-									<td><input type="text" v-model="i.incomeid" style="border: none; text-align: center; width: 100px;"/></td>
-									<td><input type="text" v-model="i.incomename" style="border: none; text-align: center; width: 100px;"/></td>
+									<td><input type="text" v-model="i.incomeid" v-on:click="shofen(i.incomename)" style="border: none; text-align: center; width: 100px;"/></td>
+									<td><input type="text" v-model="i.incomename" v-on:click="shofen(i.incomename)" style="border: none; text-align: center; width: 100px;"/></td>
 								</tr>
 							</table>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-success">选择</button>
+						<button type="button" class="btn btn-success"  data-dismiss="modal" aria-label="Close">选择</button>
 					</div>
 		</div>
 	</div>
@@ -849,13 +819,13 @@
 									<th>旧件状态</th>
 								</tr>
 								<tr  style="background: white;" v-for="i in fc">
-									<td><input type="text" v-model="i.originalid" style="border: none; text-align: center; width: 100px;"/></td>
-									<td><input type="text" v-model="i.originalname" style="border: none; text-align: center; width: 100px;"/></td>
+									<td><input type="text" v-model="i.originalid" v-on:click="yuanfu(i.originalname)" style="border: none; text-align: center; width: 100px;"/></td>
+									<td><input type="text" v-model="i.originalname" v-on:click="yuanfu(i.originalname)"  style="border: none; text-align: center; width: 100px;"/></td>
 								</tr>
 							</table>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-success">选择</button>
+						<button type="button" class="btn btn-success" data-dismiss="modal" aria-label="Close">选择</button>
 					</div>
 		</div>
 	</div>
@@ -881,13 +851,13 @@
 									<th>商品等级</th>
 								</tr>
 								<tr  style="background: white;" v-for="i in dj">
-									<td><input type="text" v-model="i.placeid" style="border: none; text-align: center; width: 100px;"/></td>
-									<td><input type="text" v-model="i.placename" style="border: none; text-align: center; width: 100px;"/></td>
+									<td><input type="text" v-model="i.placeid" v-on:click="dengji(i.placename)" style="border: none; text-align: center; width: 100px;"/></td>
+									<td><input type="text" v-model="i.placename" v-on:click="dengji(i.placename)" style="border: none; text-align: center; width: 100px;"/></td>
 								</tr>
 							</table>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-success">选择</button>
+						<button type="button" class="btn btn-success"  data-dismiss="modal" aria-label="Close">选择</button>
 					</div>
 		</div>
 	</div>
@@ -913,13 +883,13 @@
 									<th>商品厂地</th>
 								</tr>
 								<tr  style="background: white;" v-for="i in cd">
-									<td><input type="text" v-model="i.siteid" style="border: none; text-align: center; width: 100px;"/></td>
-									<td><input type="text" v-model="i.sitename" style="border: none; text-align: center; width: 100px;"/></td>
+									<td><input type="text" v-model="i.siteid" v-on:click="chandi(i.sitename)" style="border: none; text-align: center; width: 100px;"/></td>
+									<td><input type="text" v-model="i.sitename" v-on:click="chandi(i.sitename)" style="border: none; text-align: center; width: 100px;"/></td>
 								</tr>
 							</table>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-success">选择</button>
+						<button type="button" class="btn btn-success"  data-dismiss="modal" aria-label="Close">选择</button>
 					</div>
 		</div>
 	</div>
@@ -999,7 +969,9 @@
 						cd:{},
 						sj:{},
 						goupse:{},
-						shuzhi:[]
+						shuzhi:[],
+						da:[],
+						chan:[]
 					};
 				},
 				methods: {
@@ -1079,6 +1051,28 @@
 						});
 						
 						$.ajax({
+							url: data.ip + "selectgood",	
+							type: "post",
+							dataType: "json",
+							success: function(res) {
+								console.log(res);
+								that.da=res;
+							}
+						});
+						
+
+						
+						$.ajax({
+							url: data.ip + "chanshan",	
+							type: "post",
+							dataType: "json",
+							success: function(res) {
+								console.log(res);
+								that.chan=res;
+							}
+						});
+						
+						$.ajax({
 							url: data.ip + "pricesel",	
 							type: "post",
 							dataType: "json",
@@ -1116,7 +1110,22 @@
 				    	}else if (units=="台") {
 				    		unit="8"
 				    	}
-				    	var bigclassify=$(".bigclassify").val()
+				    	var bigclassifys=$(".bigclassify").val()
+				    	var bigclassify
+				    	if(bigclassifys=="发动机"){
+				    		bigclassify="1"
+				    	}else if (bigclassifys=="柴油发动机") {
+				    		bigclassify="2"
+				    	}else if (bigclassifys=="汽油发动机") {
+				    		bigclassify="3"
+				    	}else if (bigclassifys=="机体组") {
+				    		bigclassify="4"
+				    	}else if (bigclassifys=="气缸体") {
+				    		bigclassify="5"
+				    	}else if (bigclassifys=="缸套") {
+				    		bigclassify="6"
+				    	}
+				    	
 				    	var incomeids=$(".incomeid").val()
 				    	var incomeid
 				    	if(incomeids=="机修"){
@@ -1174,7 +1183,14 @@
 				    	var remark6=$(".remark6").val()
 				    	var remark7=$(".remark7").val()
 				    	var remark8=$(".remark8").val()
-				    	var storeid=$(".storeid").val()			    	
+				    	var storeids=$(".storeid").val()		
+				    	var storeid;
+				    	if(storeids=="成高"){
+				    		storeid="1"
+				    	}else if (storeids=="晨光") {
+				    		storeid="2"
+				    	}
+
 				    	$.ajax({
 							url: data.ip + "goodsins",
 							data:{
@@ -1240,7 +1256,21 @@
 				    	}else if (units=="台") {
 				    		unit="8"
 				    	}
-				    	var bigclassify=$(".bigclassifyr").val()
+				    	var bigclassifys=$(".bigclassifyr").val()
+				    	var bigclassify
+				    	if(bigclassifys=="发动机"){
+				    		bigclassify="1"
+				    	}else if (bigclassifys=="柴油发动机") {
+				    		bigclassify="2"
+				    	}else if (bigclassifys=="汽油发动机") {
+				    		bigclassify="3"
+				    	}else if (bigclassifys=="机体组") {
+				    		bigclassify="4"
+				    	}else if (bigclassifys=="气缸体") {
+				    		bigclassify="5"
+				    	}else if (bigclassifys=="缸套") {
+				    		bigclassify="6"
+				    	}
 				    	var incomeids=$(".incomeidr").val()
 				    	var incomeid
 				    	if(incomeids=="机修"){
@@ -1298,7 +1328,13 @@
 				    	var remark6=$(".remark6r").val()
 				    	var remark7=$(".remark7r").val()
 				    	var remark8=$(".remark8r").val()
-				    	var storeid=$(".storeidsr").val()			    	
+				    	var storeids=$(".storeidsr").val()	
+				    	var storeid;
+				    	if(storeids=="成高"){
+				    		storeid="1"
+				    	}else if (storeids=="晨光") {
+				    		storeid="2"
+				    	}
 				    	$.ajax({
 							url: data.ip + "goodupd",
 							data:{
@@ -1349,8 +1385,25 @@
 								that.go=res;
 							}
 						});
+				   },shanpin:function(brandname){
+				   		$(".remark2").val(brandname)
+				   		$(".remark2r").val(brandname)
+				   },shudan:function(numbename){
+				   		$(".unit").val(numbename)
+				   		$(".unitr").val(numbename)
+				   },shofen:function(incomename){
+				   		$(".incomeid").val(incomename)
+				   		$(".incomeidr").val(incomename)
+				   },yuanfu:function(originalname){
+				   		$(".vender").val(originalname)
+				   		$(".venderr").val(originalname)
+				   },dengji:function(placename){
+				   		$(".level").val(placename)
+				   		$(".levelr").val(placename)
+				   },chandi:function(sitename){
+				   		$(".yieldiy").val(sitename)
+				   		$(".yieldiyr").val(sitename)
 				   }
-				    
 				},created:function(){
 						var that = this;
 						that.supse("");

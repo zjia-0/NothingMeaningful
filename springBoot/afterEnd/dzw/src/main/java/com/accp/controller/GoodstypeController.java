@@ -21,4 +21,9 @@ public class GoodstypeController {
 	public List<Goodstype> select(){
 		return goodstypeMapper.select(0);
 	}
+	
+	@RequestMapping("/selectgood")
+	public List<Goodstype> selec(){
+		return goodstypeMapper.selectByExample(null);
+	}
 }

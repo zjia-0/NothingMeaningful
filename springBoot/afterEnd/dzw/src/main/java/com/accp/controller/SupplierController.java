@@ -21,4 +21,5 @@ public class SupplierController {
 	public List<Supplier> selectSupplierMapperwangmali(){
 		return supplierMapper.selectByparentid(0);
 	}
+	
 }

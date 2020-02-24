@@ -394,7 +394,7 @@
 				<h3 class="modal-title" id="myModalLabel">				
 					<span class="col-sm-4 col-lg-4 col-md-4">厂商分类选择</span>
 					<span style="text-align: right;" class="col-sm-7 col-lg-7 col-md-7">
-						<button type="button" class="btn btn-success" style="width: 90px;">选择</button>
+						<button type="button" class="btn btn-success" data-dismiss="modal" aria-label="Close"  style="width: 90px;">选择</button>
 					</span>
 				</h3>
 			</div>
@@ -402,10 +402,10 @@
 							<ul>
 								<li v-for="item in shuzhi">
 									<span class="glyphicon glyphicon-cloud-upload" style="font-size: 12px; color: #fcac28;" ></span>
-									<span class="abq" panduan="true" onclick="xsyc(this)" v-on:click="supse(item.sname)">{{item.sname}}</span>
+									<span class="abq" panduan="true" onclick="xsyc(this)" v-on:click="tchuo(item.sname)">{{item.sname}}</span>
 									<ul style="display:none;margin:0 25px;">
 										<li v-for="item2 in item.suppliers">
-											<span  v-on:click="supse(item2.sname)">{{item2.sname}}</span>
+											<span  v-on:click="tchuo(item2.sname)">{{item2.sname}}</span>
 										</li>
 									</ul>
 								</li>
@@ -557,7 +557,7 @@
 									<form class="form-inline">
 									  <div class="form-group">
 									    <div class="input-group">
-									       <select  style="width: 140px; height: 30px;" class="payment" v-model="upd.payment">
+									       <select  style="width: 140px; height: 30px;" class="payment">
 										    	<option v-for="i in pay">{{i.way}}</option>
 										    </select>
 									      <div class="input-group-addon"  style="background: white; margin-bottom: 20px;" v-on:click="supinsert()">
@@ -573,7 +573,7 @@
 									<form class="form-inline">
 									  <div class="form-group">
 									    <div class="input-group">
-									    <select  style="width: 140px; height: 30px;" class="level" v-model="upd.level">
+									    <select  style="width: 140px; height: 30px;" class="level">
 										    <option  v-for="i in man">{{i.grade}}</option>
 										</select>
 									      <div class="input-group-addon"  style="background: white; margin-bottom: 20px;">
@@ -594,7 +594,7 @@
 									<form class="form-inline">
 									  <div class="form-group">
 									    <div class="input-group">
-									      <input type="text" style="width: 140px; height: 30px;"  class="sid" v-model="upd.sid">
+									      <input type="text" style="width: 140px; height: 30px;"  class="sid">
 									      <div class="input-group-addon"  style="background: white; margin-bottom: 20px;" >
 									      	<span class="glyphicon glyphicon-triangle-bottom"   data-toggle="modal" data-target="#importrup"></span>
 									      </div>
@@ -707,14 +707,14 @@
 </div>			
 <!--厂商类别-->
 <div class="modal fade" id="importrup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-	<div class="modal-dialog" role="document" style="width: 600px;">
+	<div class="modal-dialog" role="document" style="width: 600px; height: 500px;">
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 				<h3 class="modal-title" id="myModalLabel">				
 					<span class="col-sm-4 col-lg-4 col-md-4">厂商分类选择</span>
 					<span style="text-align: right;" class="col-sm-7 col-lg-7 col-md-7">
-						<button type="button" class="btn btn-success" style="width: 90px;">选择</button>
+						<button type="button" class="btn btn-success" data-dismiss="modal" aria-label="Close"  style="width: 90px;">选择</button>
 					</span>
 				</h3>
 			</div>
@@ -722,10 +722,10 @@
 							<ul>
 								<li v-for="item in shuzhi">
 									<span class="glyphicon glyphicon-cloud-upload" style="font-size: 12px; color: #fcac28;" ></span>
-									<span class="abq" panduan="true" onclick="xsyc(this)" v-on:click="supse(item.sname)">{{item.sname}}</span>
+									<span class="abq" panduan="true" onclick="xsyc(this)" v-on:click="tc(item.sname)">{{item.sname}}</span>
 									<ul style="display:none;margin:0 25px;">
 										<li v-for="item2 in item.suppliers">
-											<span  v-on:click="supse(item2.sname)">{{item2.sname}}</span>
+											<span  v-on:click="tc(item2.sname)">{{item2.sname}}</span>
 										</li>
 									</ul>
 								</li>
@@ -977,7 +977,7 @@
 						var payments=$(".payments").val()//付款方式
 						var  levels=$(".levels").val() //等级
 						var brand=$(".brandsr").val()
-						var sid=$(".sids").val()
+						var sids=$(".sids").val()
 						var contacts=$(".contactss").val()
 						var phone=$(".phones").val()
 						var mobile=$(".mobiles").val()
@@ -986,6 +986,17 @@
 						var remark=$(".remarks").val()
 						var payment;
 						var level;
+						var sid;
+						if (sids=="北京") {
+							sid="1"
+						} else if(sids=="sss"){
+							sid="2"
+						} else if(sids=="上海"){
+							sid="3"
+						} else if(sids=="测试"){
+							sid="4"
+						}
+						
 						
 						if (payments=="按月结算d") {
 							payment="1"
@@ -1077,7 +1088,7 @@
 						var payments=$(".payment").val()
 						var  levels=$(".level").val()
 						var brand=$(".brand").val()
-						var sid=$(".sid").val()
+						var sids=$(".sid").val()
 						var contacts=$(".contacts").val()
 						var phone=$(".phone").val()
 						var mobile=$(".mobile").val()
@@ -1086,6 +1097,17 @@
 						var remark=$(".remarkr").val()
 						var payment;
 						var level;
+						var sid;
+						
+						if (sids=="北京") {
+							sid="1"
+						} else if(sids=="sss"){
+							sid="2"
+						} else if(sids=="上海"){
+							sid="3"
+						} else if(sids=="测试"){
+							sid="4"
+						}
 						
 						if (payments=="按月结算d") {
 							payment="1"
@@ -1141,6 +1163,10 @@
 				   },zh:function(){
 				   		var z=$(".z").val()
 				   		$(".payments").val(z)
+				   },tchuo:function(sname){
+				   		$(".sids").val(sname);
+				   },tc:function(sname){
+				   		$(".sid").val(sname)
 				   }
 				},created:function(){
 					var that = this;
