@@ -100,9 +100,63 @@
   </sql>
   
   <select id="goodsel" resultType="com.accp.domain.goodsdata">
-  	SELECT storename,g.remark1,gid,gname,brandname,applycar,numbename,bigclassify,centreclassify,smallclassify,incomename,Originalname,placename,sitename,yieldiy,coding,barcodes,specs,volume,netweight,suttle,hike,exchange,pricename
-	FROM goods AS g,store AS s,brand AS b,numbe AS n,price AS p,original AS o,incometype AS i,place AS pl,site AS si
-	WHERE g.storeid=s.storeid AND g.unit=n.numbeid AND g.remark2=b.brandid AND g.pricean=p.priceid AND g.vender=o.Originalid AND g.incomeid=i.incomeid AND g.level=pl.placeid AND g.yieldiy=si.siteid	  	
+  	SELECT storename,g.remark1,gid,gname,brandname,applycar,numbename,typename,centreclassify,smallclassify,incomename,Originalname,placename,sitename,yieldiy,coding,barcodes,specs,volume,netweight,suttle,hike,exchange,pricename
+	FROM goods AS g 
+	LEFT JOIN `store` AS s ON g.storeid=s.storeid 
+	LEFT JOIN brand AS b ON g.remark2=b.brandid
+	LEFT JOIN numbe AS n ON g.unit=n.numbeid
+	LEFT JOIN price AS p ON g.pricean=p.priceid
+	LEFT JOIN original AS o ON g.vender=o.Originalid
+	LEFT JOIN incometype AS i ON g.incomeid=i.incomeid 
+	LEFT JOIN place AS pl ON g.level=pl.placeid 
+	LEFT JOIN site AS si ON g.yieldiy=si.siteid
+	LEFT JOIN `goodstype` AS go ON g.bigclassify=go.typeid
+  </select>
+  
+  <select id="goodselmc" resultType="com.accp.domain.goodsdata">
+  	SELECT storename,g.remark1,gid,gname,brandname,applycar,numbename,typename,centreclassify,smallclassify,incomename,Originalname,placename,sitename,yieldiy,coding,barcodes,specs,volume,netweight,suttle,hike,exchange,pricename
+	FROM goods AS g 
+	LEFT JOIN `store` AS s ON g.storeid=s.storeid 
+	LEFT JOIN brand AS b ON g.remark2=b.brandid
+	LEFT JOIN numbe AS n ON g.unit=n.numbeid
+	LEFT JOIN price AS p ON g.pricean=p.priceid
+	LEFT JOIN original AS o ON g.vender=o.Originalid
+	LEFT JOIN incometype AS i ON g.incomeid=i.incomeid 
+	LEFT JOIN place AS pl ON g.level=pl.placeid 
+	LEFT JOIN site AS si ON g.yieldiy=si.siteid
+	LEFT JOIN `goodstype` AS go ON g.bigclassify=go.typeid
+	WHERE typename= #{typename}
+  </select>
+  
+  <select id="goodselwb" resultType="com.accp.domain.goodsdata">
+  	SELECT storename,g.remark1,gid,gname,brandname,applycar,numbename,typename,centreclassify,smallclassify,incomename,Originalname,placename,sitename,yieldiy,coding,barcodes,specs,volume,netweight,suttle,hike,exchange,pricename
+	FROM goods AS g 
+	LEFT JOIN `store` AS s ON g.storeid=s.storeid 
+	LEFT JOIN brand AS b ON g.remark2=b.brandid
+	LEFT JOIN numbe AS n ON g.unit=n.numbeid
+	LEFT JOIN price AS p ON g.pricean=p.priceid
+	LEFT JOIN original AS o ON g.vender=o.Originalid
+	LEFT JOIN incometype AS i ON g.incomeid=i.incomeid 
+	LEFT JOIN place AS pl ON g.level=pl.placeid 
+	LEFT JOIN site AS si ON g.yieldiy=si.siteid
+	LEFT JOIN `goodstype` AS go ON g.bigclassify=go.typeid
+	WHERE gid LIKE #{gid} OR gname LIKE #{gname} OR brandname LIKE #{brandname} OR typename LIKE #{typename}
+  </select>
+  
+  
+  <select id="goodseltc" resultType="com.accp.domain.goodsdata">
+  	SELECT storename,g.remark1,gid,gname,brandname,applycar,numbename,typename,centreclassify,smallclassify,incomename,Originalname,placename,sitename,yieldiy,coding,barcodes,specs,volume,netweight,suttle,hike,exchange,pricename
+	FROM goods AS g 
+	LEFT JOIN `store` AS s ON g.storeid=s.storeid 
+	LEFT JOIN brand AS b ON g.remark2=b.brandid
+	LEFT JOIN numbe AS n ON g.unit=n.numbeid
+	LEFT JOIN price AS p ON g.pricean=p.priceid
+	LEFT JOIN original AS o ON g.vender=o.Originalid
+	LEFT JOIN incometype AS i ON g.incomeid=i.incomeid 
+	LEFT JOIN place AS pl ON g.level=pl.placeid 
+	LEFT JOIN site AS si ON g.yieldiy=si.siteid
+	LEFT JOIN `goodstype` AS go ON g.bigclassify=go.typeid
+	WHERE  gid=#{gid} OR gname=#{gname} OR brandname=#{brandname} OR applycar=#{applycar}
   </select>
   
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.accp.domain.GoodsExample" >

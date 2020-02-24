@@ -1,5 +1,7 @@
 package com.accp.domain;
 
+import java.util.List;
+
 public class Goodstype {
     private Integer typeid;
 
@@ -16,8 +18,19 @@ public class Goodstype {
     private String remark4;
 
     private String remark5;
+    
+    List<Goodstype> goodstypes;
+    
 
-    public Integer getTypeid() {
+    public List<Goodstype> getGoodstypes() {
+		return goodstypes;
+	}
+
+	public void setGoodstypes(List<Goodstype> goodstypes) {
+		this.goodstypes = goodstypes;
+	}
+
+	public Integer getTypeid() {
         return typeid;
     }
 

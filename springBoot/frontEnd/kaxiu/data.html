@@ -10,6 +10,7 @@
 			*{
 				margin: 0px;
 				padding: 0px;
+				list-style-type: none;
 			}
 			.bq span{
 				margin:0px 5px;
@@ -38,8 +39,8 @@
 			<div style="background: #f7ffff; height: 50px;  padding-left: 10px; line-height:50px;">
 				<span style="font-size: 25px;" class="col-sm-8 col-lg-7 col-md-7">商品资料</span>
 				<span class="col-lg-4 col-md-4 col-sm-4">
-					<input type="text" placeholder="匹配编码/名称/简码/品牌/型号/大类+号双条件查询" style="height: 35px; width: 345px;"/>
-					<button type="button" class="btn btn-warning">搜索</button>
+					<input type="text" class="mcs" placeholder="匹配编码/名称/简码/品牌/型号/大类+号双条件查询" style="height: 35px; width: 345px;"/>
+					<button type="button" class="btn btn-warning" v-on:click="supse()">搜索</button>
 				</span>
 				<span class="col-lg-1 col-md-1 col-sm-1"><button type="button"class="btn btn-default">关闭</button></span>
 			</div>
@@ -53,45 +54,26 @@
 						<span class="glyphicon glyphicon-align-left" style="color: #fcac28;" aria-hidden="true"></span>
 						<span data-toggle="modal" data-target="#myModals">修改</span>
 					</span>
-					<span  v-on:click="shan()"><span class="glyphicon glyphicon-remove-circle" style="color: #fcac28;" aria-hidden="true"></span>删除</span>
-					<span>
-						<span class="glyphicon glyphicon-search" style="color: #fcac28;" aria-hidden="true"></span>
-						<span data-toggle="modal" data-target="#selects">查询</span>
-					</span>					
+					<span  v-on:click="shan()"><span class="glyphicon glyphicon-remove-circle" style="color: #fcac28;" aria-hidden="true"></span>删除</span>			
+					<span><span class="glyphicon glyphicon-share" style="color: #fcac28;" aria-hidden="true"></span>导出</span>
 				</div>
 				<div class="bq col-lg-9 col-md-9 col-sm-9">
-					<span><span class="glyphicon glyphicon-arrow-down" style="color: #fcac28;" aria-hidden="true"></span>下页</span>
-					<span><span class="glyphicon glyphicon-share" style="color: #fcac28;" aria-hidden="true"></span>导出</span>
-					<span><span class="glyphicon glyphicon-picture" style="color: #fcac28;" aria-hidden="true"></span>照片</span>
-					<span>
-						<span class="glyphicon glyphicon-barcode" style="color: #fcac28;" aria-hidden="true"></span>
-						<span data-toggle="modal" data-target="#code">条码</span>
-					</span>
-					<span>
-						<span class="glyphicon glyphicon-folder-close" style="color: #fcac28;" aria-hidden="true"></span>
-						<span data-toggle="modal" data-target="#external">套件商品</span>
-					</span>
-					<span>
-						<span class="glyphicon glyphicon-list-alt" style="color: #fcac28;" aria-hidden="true"></span>
-						<span data-toggle="modal" data-target="#set">分类设置</span>						
-					</span>
-					<span>
-						<span class="glyphicon glyphicon-certificate" style="color: #fcac28;" aria-hidden="true"></span>
-						<span data-toggle="modal" data-target="#field">字段设置</span>					
-					</span>
-					<span>
-						<input type="text" style="width: 30px; height: 35px; background: #f7f7f7; color: #f7f7f7; border: none;" class="zhi"/>
-					</span>
-				
+					<span><input type="text" style="width: 30px; height: 35px; background: #f7f7f7; color: #f7f7f7; border: none;" class="zhi"/></span>
 				</div>
 				<div>
 					<div  class="col-sm-3 col-lg-3 col-md-3">
-						<div>
-							<input type="text" placeholder="匹配 编码/名称" style="height: 35px; "/>
-							<button type="button" class="btn btn-warning">搜索</button>
-						</div>
 						<div  style="background: white; height: 500px;">
-							<ul id="treeDemo" class="ztree"></ul>
+							<ul style="margin-left: 15px;">
+								<li v-for="item in shuzhi">
+									<span class="glyphicon glyphicon-cloud-upload" style="font-size: 12px; color: #fcac28;" ></span>
+									<span class="abq" panduan="true" onclick="xsyc(this)" v-on:click="supse(item.typename)">{{item.typename}}</span>
+									<ul style="display:none;margin:0 25px;">
+										<li v-for="item2 in item.goodstypes">
+											<span  v-on:click="supse(item2.typename)">{{item2.typename}}</span>
+										</li>
+									</ul>
+								</li>
+							</ul>
 						</div>
 					</div>
 					<div class="bq col-lg-9 col-md-9 col-sm-9">
@@ -132,7 +114,7 @@
 										<td><input type="text" v-model="i.brandname" style="border: none; text-align: center; width: 100px;" v-on:click="zhi(i.gid)"/></td>
 										<td><input type="text" v-model="i.applycar" style="border: none; text-align: center; width: 100px;" v-on:click="zhi(i.gid)"/></td>
 										<td><input type="text" v-model="i.numbename" style="border: none; text-align: center; width: 100px;" v-on:click="zhi(i.gid)"/></td>
-										<td><input type="text" v-model="i.bigclassify" style="border: none; text-align: center; width: 100px;" v-on:click="zhi(i.gid)"/></td>
+										<td><input type="text" v-model="i.typename" style="border: none; text-align: center; width: 100px;" v-on:click="zhi(i.gid)"/></td>
 										<td><input type="text" v-model="i.centreclassify" style="border: none; text-align: center; width: 100px;" v-on:click="zhi(i.gid)"/></td>
 										<td><input type="text" v-model="i.smallclassify" style="border: none; text-align: center; width: 100px;" v-on:click="zhi(i.gid)"/></td>
 										<td><input type="text" v-model="i.incomename" style="border: none; text-align: center; width: 100px;"/></td>
@@ -593,7 +575,7 @@
 		</div>
 	</div>
 </div>
-<!---->
+<!--商品多查询-->
 <div class="modal fade" id="selects" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	<div class="modal-dialog" role="document" style="width: 820px;">
 		<div class="modal-content">
@@ -602,8 +584,8 @@
 				<h4 class="modal-title" id="myModalLabel">
 					<span class="col-sm-4 col-lg-4 col-md-4" style="font-size:30px;">商品查询</span>
 					<span  class="col-sm-5 col-lg-5 col-md-5" style="text-align: right;"><input type="checkbox"/>停用</span>
-					<span style="text-align: right;" class="col-sm-2 col-lg-2 col-md-2">
-						<button type="button" class="btn btn-success" style="float: right; width: 90px;">确定</button>
+					<span style="text-align: right;" class="col-sm-2 col-lg-2 col-md-2"   v-on:click="supse()">
+						<button type="button" class="btn btn-success" data-dismiss="modal" aria-label="Close" style="float: right; width: 90px;">确定</button>
 					</span>
 				</h4>
 			</div>
@@ -611,21 +593,21 @@
 							<table class="jji">
 								<tr>
 									<td>商品编码</td>
-									<td><input type="text"/></td>
+									<td><input type="text" class="fcdm"/></td>
 									<td>商品名称</td>
-									<td><input type="text"/></td>
+									<td><input type="text" class="fcmc"/></td>
 									<td>
 										商品品牌
 									</td>
 									<td>
-										<select  style="width: 180px; height: 25px;">
-											<option>1</option>
+										<select  style="width: 180px; height: 25px;" class="fcpp">
+											<option v-for="i in sp">{{i.brandname}}</option>
 										</select>
 									</td>
 								</tr>
 								<tr>
 									<td>适用车型</td>
-									<td><input type="text"/></td>
+									<td><input type="text" class="fccx"/></td>
 									<td>商品大类</td>
 									<td>
 										<form class="form-inline">
@@ -648,13 +630,13 @@
 									<td>收入分类</td>
 									<td>
 										<select  style="width: 180px; height: 25px;">
-											<option>1</option>
+											<option v-for="i in lb">{{i.incomename}}</option>
 										</select>
 									</td>
 									<td>原厂副厂</td>
 									<td>
 										<select  style="width: 180px; height: 25px;">
-											<option>1</option>
+											<option v-for="i in fc">{{i.originalname}}</option>
 										</select>
 									</td>
 								</tr>
@@ -662,13 +644,13 @@
 									<td>商品等级</td>
 									<td>
 										<select  style="width: 180px; height: 25px;">
-											<option>1</option>
+											<option v-for="i in dj">{{i.placename}}</option>
 										</select>
 									</td>
 									<td>商品产地</td>
 									<td>
 										<select  style="width: 180px; height: 25px;">
-											<option>1</option>
+											<option v-for="i in cd">{{i.sitename}}</option>
 										</select>
 									</td>
 									<td>厂商名称</td>
@@ -705,161 +687,24 @@
 									<td>零部件</td>
 									<td>
 										<select  style="width: 180px; height: 20px;">
-											<option>1</option>
+											<option></option>
 										</select>
 									</td>
 									<td>品牌车型</td>
 									<td colspan="3">
-										<form class="form-inline">
+										<!--<form class="form-inline">
 										  <div class="form-group">
-										    <div class="input-group">
-										      <input type="text" style="width: 140px; height: 30px;">
-										      <div class="input-group-addon"  style="background: white; margin-bottom: 20px;" >
+										    <div class="input-group">-->
+										      <input type="text">
+										      <!--<div class="input-group-addon"  style="background: white; margin-bottom: 20px;" >
 										      	<span class="glyphicon glyphicon-triangle-bottom"   data-toggle="modal" data-target="#motorcycle"></span>
 										      </div>
 										    </div>
 										  </div>
-										</form>
+										</form>-->
 									</td>
 								</tr>
 							</table>					
-					</div>
-		</div>
-	</div>
-</div>
-<!---->
-<div class="modal fade" id="code" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-	<div class="modal-dialog" role="document" style="width: 600px;">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="myModalLabel">条码打印</h4>
-			</div>
-					<div class="modal-body">
-							<div class="col-sm-12 col-lg-12 col-md-12 " style="text-align: left; background:#F7F7F7 ; ">
-								<span style="padding-right: 10px;"><span class="glyphicon glyphicon-floppy-saved" style="color: #fcac28;" aria-hidden="true"></span>全部选择</span>
-								<span style="padding-right: 10px;"><span class="glyphicon glyphicon-floppy-remove" style="color: #fcac28;" aria-hidden="true"></span>全部取消</span>
-								<span><span class="glyphicon glyphicon-print" style="color: #fcac28;" aria-hidden="true"></span>条码打印</span>
-							</div>
-							<table class="table">  
-								<tr> 
-									<td> 
-										<iframe width="100%" height="150px" src="unitsel.html" class="t-iframe" scrolling="no" security="restricted" sandbox="" frameborder="no" border="0" marginwidth="0" marginheight="0" ></iframe> 
-									</td> 
-								</tr> 
-							</table>
-					</div>
-		</div>
-	</div>
-</div>
-<!---->
-<div class="modal fade" id="external" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-	<div class="modal-dialog" role="document" style="width:800px;">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="myModalLabel">
-					<span class="col-sm-5 col-lg-5 col-md-5">套件商品关系图</span>
-					<span class="col-sm-6 col-lg-6 col-md-6" style=" text-align: right;">
-					<button type="button" class="btn btn-default"  class="col-sm-3 col-lg-3 col-md-3" style="width: 70px; ">取消</button>
-					</span>
-				</h4>
-			</div>
-					<div class="modal-body"style=" background:#F7F7F7 ;" >
-						<div>
-							<div class="col-sm-5 col-lg-5 col-md-5 " style="text-align: right;">父编码:0280130039</div>
-							<div class="col-sm-7 col-lg-7 col-md-7 " style="text-align: right;">
-								<span style="padding-right: 10px;"><span class="glyphicon glyphicon-floppy-disk" style="color: #fcac28;" aria-hidden="true"></span>保存</span>
-								<span><span class="glyphicon glyphicon-remove-circle" style="color: #fcac28;" aria-hidden="true"></span>删除</span>
-							</div>
-						</div>
-						<table class="table">  
-								<tr> 
-									<td> 
-										<iframe width="100%" height="150px" src="dataexternal.html" class="t-iframe" scrolling="no" security="restricted" sandbox="" frameborder="no" border="0" marginwidth="0" marginheight="0" ></iframe> 
-									</td> 
-								</tr> 
-							</table>
-					</div>	
-					
-		</div>
-	</div>
-</div>
-<!---->
-<div class="modal fade" id="set" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-	<div class="modal-dialog" role="document" style="width: 900px;">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="myModalLabel">
-					<span class="col-sm-5 col-lg-5 col-md-5">商品标准分类</span>
-					<span class="col-sm-6 col-lg-6 col-md-6" style=" text-align: right;">
-					<button type="button" class="btn btn-default"  class="col-sm-3 col-lg-3 col-md-3" style="width: 70px; ">取消</button>
-					</span>
-				</h4>
-			</div>
-					<div class="modal-body">
-							<div>
-								<span class="col-lg-4 col-md-4 col-sm-4" style="text-align: right;">商品分类<input type="text" style="height: 30px;"/></span>
-								<span class="col-lg-8 col-md-8 col-sm-8" style="text-align: left;">
-									<form class="form-inline">
-									  <div class="form-group">
-									    <div class="input-group">									    
-									    <input type="text" style="width: 400px;" class="form-control" id="exampleInputAmount" placeholder="Amount">
-									     	<div class="input-group-addon"  style="background: white; margin-bottom: 20px;" >
-										      	<span class="glyphicon glyphicon-triangle-bottom"   data-toggle="modal" data-target="#heading"></span>
-										    </div>
-									    </div>
-									  </div>
-									</form>
-								</span>
-							</div>
-							<div>
-								<iframe width="100%" height="150px" src="datastandard.html" class="t-iframe" scrolling="no" security="restricted" sandbox="" frameborder="no" border="0" marginwidth="0" marginheight="0" ></iframe> 
-							</div>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-success">选择</button>
-					</div>
-		</div>
-	</div>
-</div>
-<!---->
-<div class="modal fade" id="field" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-	<div class="modal-dialog" role="document" style="width: 500px;">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="myModalLabel">字段设置</h4>
-			</div>
-					<div class="modal-body">
-							<div class="col-sm-7 col-lg-7 col-md-7 " style="text-align: left;">
-								<button type="button" class="btn btn-success" style="width: 80px; height: 30px;">确定</button>
-							</div>
-							<div class="col-sm-5 col-lg-5 col-md-5 " style="text-align: right; line-height: 30px;">
-								<span style="padding-right: 10px;"><span class="glyphicon glyphicon-floppy-saved" style="height: 60px; color: #fcac28;" aria-hidden="true"></span>全部选择</span>
-								<span><span class="glyphicon glyphicon-floppy-remove" style="color: #fcac28;" aria-hidden="true"></span>全部取消</span>
-							</div>
-						
-						<table class="table">
-							<tr  style="background: #39cede;color: white;">
-								<th>显示</th>
-								<th>字段</th>
-								<th>字段名称</th>
-								<th>序号</th>
-								<th>显示宽度</th>
-							</tr>
-							<tr  style="background: white;">
-								<td><input type="checkbox"/></td>
-								<td>1</td>
-								<td>1</td>
-								<td>1</td>
-								<td>1</td>
-							</tr>
-						</table>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-success">选择</button>
 					</div>
 		</div>
 	</div>
@@ -1080,7 +925,7 @@
 	</div>
 </div>	
 <!---->
-<div class="modal fade" id="motorcycle" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<!--<div class="modal fade" id="motorcycle" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	<div class="modal-dialog" role="document" style="width: 470px;">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -1113,7 +958,7 @@
 					</div>
 		</div>
 	</div>
-</div>	
+</div>	-->
 </div>
 
 		<script type="text/javascript" src="js/jquery-1.12.4.js" ></script>
@@ -1123,32 +968,22 @@
 		<script type="text/javascript" src="js/jquery.min.js" ></script>
 		<script type="text/javascript" src="js/jquery.ztree.core.js" ></script>
 		<script>
-			var setting = {
-				check: {
-					
-					enable: true
-				},
-				data: {
-					simpleData: {
-						enable: true
-					}
-				},
-				edit: {
-					enable: true
+			var xsyc=function(kj){ 
+				var pd=$(kj).attr("panduan");
+				if(pd=="true"){
+					$(kj).attr("panduan",false);
+					$(kj).siblings("span[class='glyphicon glyphicon-cloud-upload']").attr("class","glyphicon glyphicon-cloud-download");
+					$(kj).siblings("ul").show();
+				}else{
+					$(kj).attr("panduan",true);
+					$(kj).siblings("span[class='glyphicon glyphicon-cloud-download']").attr("class","glyphicon glyphicon-cloud-upload");
+					$(kj).siblings("ul").hide();
 				}
-			};
-			//数据结构，从后台查询数据进行赋值就可使用
-			var zNodes =[
-			{id:1, pId:0, name:"发动机", open:true},
-			{id:101, pId:1, name:"1001-发动机总成"},
+			}
 			
-			{id:2, pId:0, name:"传统系统", open:false},
-			{id:201, pId:2, name:"2001-离合器"}
-			];
-		
-			$(document).ready(function(){
-				$.fn.zTree.init($("#treeDemo"), setting, zNodes);
-			});
+			$(function(){
+				$("ul li span").siblings("ul").css("display","none");
+			})
 			
 			
 			var vm=new Vue({
@@ -1163,7 +998,8 @@
 						dj:{},
 						cd:{},
 						sj:{},
-						goupse:{}
+						goupse:{},
+						shuzhi:[]
 					};
 				},
 				methods: {
@@ -1361,9 +1197,6 @@
 						});
 				    	
 				    },gai:function(){
-				    	var that=this;
-				    	that.zen()			    	
-				    },gai:function(){
 				    	var that=this
 				    	that.zen();
 				    	var gid=$(".zhi").val()
@@ -1487,18 +1320,41 @@
 							}
 						});
 				    	
-				    }
-				    
-				},created:function(){
-						var that = this;
-						$.ajax({
+				    },shuxin:function(){
+				    	var that = this;
+				    	$.ajax({
+							url: data.ip + "selectgoodstypeMapperwangmali",	
+							type: "post",
+							dataType: "json",
+							success: function(res) {
+								console.log(res);
+								that.shuzhi=res;
+							}
+						});
+				   },supse:function(typenames){
+				   	var that = this;
+				   	var mcs=$(".mcs").val();
+				   	var fccx=$(".fccx").val();
+				   	var fcdm=$(".fcdm").val();
+				   	var fcmc=$(".fcmc").val();
+				   	var fcpp=$(".fcpp").val();
+				   		$.ajax({
 							url: data.ip + "goodsel",	
+							data:{
+								"typenames":typenames,"mcs":mcs,"fccx":fccx,"fcdm":fcdm,"fcmc":fcmc,"fcpp":fcpp		
+							},
 							type: "post",
 							dataType: "json",
 							success: function(res) {
 								that.go=res;
 							}
 						});
+				   }
+				    
+				},created:function(){
+						var that = this;
+						that.supse("");
+						that.shuxin();
 				}
 	  })
 		</script>

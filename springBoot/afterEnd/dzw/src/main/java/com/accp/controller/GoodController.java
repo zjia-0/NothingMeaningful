@@ -16,8 +16,8 @@ public class GoodController {
 	GoodService goodService;
 	
 	@PostMapping("/goodsel")
-	public List<goodsdata> goodsel(){
-		return goodService.goodsel();
+	public List<goodsdata> goodsel(String typenames,String mcs,String fccx,String fcdm,String fcmc,String fcpp){
+		return goodService.goodsel(typenames, mcs, fccx, fcdm, fcmc, fcpp);
 	}
 	
 	@PostMapping("/gooddel")

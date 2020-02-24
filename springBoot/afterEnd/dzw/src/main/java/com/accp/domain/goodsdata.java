@@ -8,7 +8,7 @@ public class goodsdata {
 	private String brandname; 
 	private String applycar; 
 	private String numbename; 
-	private String bigclassify; 
+	private String typename; 
 	private String centreclassify; 
 	private String smallclassify; 
 	private String incomename; 
@@ -25,40 +25,9 @@ public class goodsdata {
 	private String exchange; 
 	private String pricename; 
 	private String yieldiy;
-	public goodsdata(String storename, String remark1, String gid, String gname, String brandname, String applycar,
-			String numbename, String bigclassify, String centreclassify, String smallclassify, String incomename,
-			String originalname, String placename, String sitename, String coding, String barcodes, String specs,
-			String volume, String netweight, String suttle, String hike, String exchange, String pricename,
-			String yieldiy) {
-		super();
-		this.storename = storename;
-		this.remark1 = remark1;
-		this.gid = gid;
-		this.gname = gname;
-		this.brandname = brandname;
-		this.applycar = applycar;
-		this.numbename = numbename;
-		this.bigclassify = bigclassify;
-		this.centreclassify = centreclassify;
-		this.smallclassify = smallclassify;
-		this.incomename = incomename;
-		Originalname = originalname;
-		this.placename = placename;
-		this.sitename = sitename;
-		this.coding = coding;
-		this.barcodes = barcodes;
-		this.specs = specs;
-		this.volume = volume;
-		this.netweight = netweight;
-		this.suttle = suttle;
-		this.hike = hike;
-		this.exchange = exchange;
-		this.pricename = pricename;
-		this.yieldiy = yieldiy;
-	}
-	public goodsdata() {
-		super();
-	}
+	
+	
+	
 	public String getStorename() {
 		return storename;
 	}
@@ -101,11 +70,11 @@ public class goodsdata {
 	public void setNumbename(String numbename) {
 		this.numbename = numbename;
 	}
-	public String getBigclassify() {
-		return bigclassify;
+	public String getTypename() {
+		return typename;
 	}
-	public void setBigclassify(String bigclassify) {
-		this.bigclassify = bigclassify;
+	public void setTypename(String typename) {
+		this.typename = typename;
 	}
 	public String getCentreclassify() {
 		return centreclassify;
@@ -204,6 +173,5 @@ public class goodsdata {
 		this.yieldiy = yieldiy;
 	}
 	
-	
-	
 }
+	

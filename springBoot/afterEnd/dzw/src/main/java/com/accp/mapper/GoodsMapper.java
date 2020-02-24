@@ -21,6 +21,12 @@ public interface GoodsMapper {
     List<Goods> selectByExample(GoodsExample example);
     
     List<goodsdata> goodsel();
+    
+    List<goodsdata> goodselmc(String typename);
+    
+    List<goodsdata> goodselwb(String gid ,String gname,String brandname,String typename);
+    
+    List<goodsdata> goodseltc(String gid,String gname,String brandname,String applycar);
 
     Goods selectByPrimaryKey(Integer gid);
 

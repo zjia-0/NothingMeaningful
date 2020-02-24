@@ -82,10 +82,20 @@
     claimprice, insuranceprice, remark1, remark2, remark3, remark4, remark5
   </sql>
   
-  <select id="prosel" resultMap="BaseResultMap" parameterType="com.accp.domain.ProjectExample" >
-  	SELECT * FROM `project` WHERE `pname`= #{pname}
+   <select id="proselsel" resultType="com.accp.domain.projectwang">
+  	SELECT p.id,typename,pnum,pname,incomename,standardprice,memberprice,vipprice,dealprice,claimprice,insuranceprice
+	FROM project AS p,`incometype` AS i,`maintaintype` AS m WHERE p.maintainid=m.maintainid AND p.incomeid=i.incomeid 
   </select>
   
+  <select id="prosel" resultType="com.accp.domain.projectwang">
+  	SELECT p.id,typename,pnum,pname,incomename,standardprice,memberprice,vipprice,dealprice,claimprice,insuranceprice
+	FROM project AS p,`incometype` AS i,`maintaintype` AS m WHERE p.maintainid=m.maintainid AND p.incomeid=i.incomeid AND `pname`= #{pname}
+  </select>
+  
+  <select id="proselname" resultType="com.accp.domain.projectwang">
+  	SELECT p.id,typename,pnum,pname,incomename,standardprice,memberprice,vipprice,dealprice,claimprice,insuranceprice
+	FROM project AS p,`incometype` AS i,`maintaintype` AS m WHERE p.maintainid=m.maintainid AND p.incomeid=i.incomeid AND `typename`=#{typename}  	 	
+  </select>
   
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.accp.domain.ProjectExample" >
     select

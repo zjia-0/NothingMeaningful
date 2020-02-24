@@ -13,6 +13,8 @@ public interface GoodstypeMapper {
     int deleteByPrimaryKey(Integer typeid);
 
     int insert(Goodstype record);
+    
+    List<Goodstype> select(Integer parentid);
 
     int insertSelective(Goodstype record);
 

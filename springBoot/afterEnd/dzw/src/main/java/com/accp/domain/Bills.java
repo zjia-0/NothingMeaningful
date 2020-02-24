@@ -17,10 +17,11 @@ public class Bills {
 	private int astate;
 	private String bid;
 	private String aname;
+	private String cdframe;
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date atime;
- 
+
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date starttime;
@@ -87,7 +88,14 @@ public class Bills {
 
 	private String remark5;
 
-	
+	public String getCdframe() {
+		return cdframe;
+	}
+
+	public void setCdframe(String cdframe) {
+		this.cdframe = cdframe;
+	}
+
 	public Date getAtime() {
 		return atime;
 	}
