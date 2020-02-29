@@ -43,6 +43,8 @@ public class BalanceService {
 	AccountMapper aMapper;
 	@Autowired
 	VipMapper vipMapper;
+	@Autowired
+	InvoiceMapper inMapper;
 
 	public List<Customer> queryAllcust() {
 		return custMapper.selectByExample(null);
@@ -59,21 +61,37 @@ public class BalanceService {
 	public List<Bills> queryAllBills() {
 		return billMapper.findAllBills();
 	}
-	public List<Bills> findbytj(Bills bill){
+
+	public List<Bills> findbytj(Bills bill) {
 		return billMapper.findbytj(bill);
 	}
-	public List<InvoiceType> findAllInvoice(){
+
+	public List<InvoiceType> findAllInvoice() {
 		return itMapper.selectByExample(null);
 	}
-	public List<Account> findByBid(String bid){
-		AccountExample example=new AccountExample();
+
+	public List<Account> findByBid(String bid) {
+		AccountExample example = new AccountExample();
 		example.createCriteria().andBidEqualTo(bid);
 		return aMapper.selectByExample(example);
 	}
-	public List<Vip> findByCno(String cno){
-		VipExample example=new VipExample();
+
+	public List<Vip> findByCno(String cno) {
+		VipExample example = new VipExample();
 		example.createCriteria().andCnoEqualTo(cno);
 		return vipMapper.selectByExample(example);
 	}
- 
+
+	public int updateAccount(Account account) {
+		return aMapper.updateAccount(account);
+	}
+
+	public int addInvoice(Invoice invoice) {
+		return inMapper.addInvoice(invoice);
+	}
+
+	public int updateVip(Vip vip) {
+		return vipMapper.updateVip(vip);
+	}
+
 }

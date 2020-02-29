@@ -32,6 +32,15 @@
     <result column="remark4" property="remark4" jdbcType="VARCHAR" />
     <result column="remark5" property="remark5" jdbcType="VARCHAR" />
   </resultMap>
+  <update id="updateAccount" parameterType="map">
+  	UPDATE `account` SET `astate`=2,
+  	`cash`=#{cash},`bank`=#{bank},atime=#{atime},
+  	`buying`=#{buying},`at_card`=#{atCard},
+  	`at_deposit`=#{atDeposit},`invid`=#{invid},
+  	`itid`=#{itid},aname=#{aname}
+  	 WHERE `bid`=#{bid}
+  </update>
+  	
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >

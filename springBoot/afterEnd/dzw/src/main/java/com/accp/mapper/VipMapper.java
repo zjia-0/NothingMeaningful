@@ -6,6 +6,8 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface VipMapper {
+	int updateVip(Vip vip);
+
 	List<Vip> findVipsisok(String cno);
 
 	int upMoney(Vip vip);

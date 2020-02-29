@@ -16,6 +16,9 @@
     <result column="remark5" property="remark5" jdbcType="VARCHAR" />
     <result column="money" property="money" jdbcType="DOUBLE" />
   </resultMap>
+  <update id="updateVip" parameterType="map">
+  	UPDATE `vip` SET `summoney`=`summoney` +#{summoney},`money`=#{money} ,`currentjifen`=#{currentjifen} WHERE `vno`=#{vno}
+  </update>
   <update id="upMoney" parameterType="map">
   	UPDATE `vip` SET currentjifen=currentjifen+#{currentjifen},money=money+#{money} WHERE vno=#{vno}
   </update>

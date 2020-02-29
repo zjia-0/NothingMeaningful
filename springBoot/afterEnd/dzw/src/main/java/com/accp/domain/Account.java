@@ -44,7 +44,7 @@ public class Account {
     private Float internal;
 
     private Float pointsDeduction;
-
+    
     private Float profitLoss;
 
     private Integer itid;

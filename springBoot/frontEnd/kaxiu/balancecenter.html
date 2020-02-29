@@ -126,7 +126,7 @@
 							<tr>
 								<form class="form">
 									<div class="form-group">
-										<td>&nbsp;客总费&nbsp;</td><td><input type="text" v-model="account.total" readonly="readonly" v-model="shouyin.total" class="form-control"/></td>
+										<td>&nbsp;客总费&nbsp;</td><td><input type="text" v-model="shouyin.total" readonly="readonly" v-model="shouyin.total" class="form-control"/></td>
 										<td>&nbsp;加税金&nbsp;</td><td><input v-model="account.collectTaxes" type="text" value="0" class="form-control"/ ></td>
 										<td>&nbsp;抹尾数&nbsp;</td><td><input v-model="account.wipeMantissa" type="text" class="form-control"/></td>
 										<td>&nbsp;积分抵扣(元)&nbsp;</td><td><input type="text" v-model="account.pointsDeduction" class="form-control"/></td>
@@ -151,46 +151,46 @@
 								<p>积分最大抵用金额：{{vipinfo.currentjifen*0.1}}.00</p>
 								<p>储值卡余额：{{vipinfo.money}}.00</p>
 								<p>挂账金额：{{shouyin.buying}}.00</p>
-								<p><input id="isvipjs" @click="" type="checkbox" />会员卡结算</p>
+								<p><input id="isvipjs" v-model="isvipjs"  type="checkbox" />会员卡结算</p>
 							</div>
 						</div>
 						<div class="row" style="margin-top: 10px;">
 							<table class="table-responsive">
 								<tr style="line-height: 50px;">
-				        			<td>现金 &nbsp;</td>
-				        			<td><input type="text" v-model="account.cash" class="form-control" /></td>
+				        			<td><input type="checkbox" @click="xianjins" v-model="xianjin"/> 现金 &nbsp;</td>
+				        			<td><input type="text" @change="zhaoling($event)" id="xianjin1" disabled="disabled" v-model="account.cash" class="form-control" /></td>
 				        			<td> &nbsp;银联手续费  &nbsp;</td>
-				        			<td><input  type="text" class="form-control" /></td>
+				        			<td><input  type="text" disabled="disabled"  id="sxf" class="form-control" /></td>
 				        			<td></td>
 				        		</tr>
 				        		<tr style="line-height: 50px;">
-				        			<td>银行卡 &nbsp;</td>
-				        			<td><input type="text" v-model="account.bank" class="form-control"  /></td>
+				        			<td><input type="checkbox" @click="yinhangka" v-model="yhk"/>银行卡 &nbsp;</td>
+				        			<td><input type="text" @change="zhaoling($event)" id="yhks" disabled="disabled" v-model="account.bank" class="form-control"  /></td>
 				        			<td> </td>
 				        			<td><input type="checkbox" @click="isinvoice" v-model="isval"/>&nbsp;开发票</td>
 				        			<td></td>
 				        		</tr>
 				        		<tr style="line-height: 50px;">
-				        			<td>冲储值 &nbsp;</td>
-				        			<td><input type="text" v-model="account.at_card" class="form-control" /></td>
+				        			<td><input type="checkbox" @click="chongchuzhi" v-model="ccz"/>冲储值 &nbsp;</td>
+				        			<td><input type="text" @change="zhaoling($event)" id="cczs" disabled="disabled" v-model="account.atCard" class="form-control" /></td>
 				        			<td></td>
 				        			<td>发票种类</td>
 				        			<td>&nbsp;&nbsp;发票号</td>
 				        		</tr>
 				        		<tr style="line-height: 50px;">
-				        			<td>冲订金 &nbsp;</td>
-				        			<td><input type="text" v-model="account.atDeposit" class="form-control"/></td>
+				        			<td><input type="checkbox" @click="chongdingjin" v-model="cdj"/>冲订金 &nbsp;</td>
+				        			<td><input type="text" @change="zhaoling($event)" id="cdjs" disabled="disabled" v-model="account.atDeposit" class="form-control"/></td>
 				        			<td></td>
 				        			<td>
-				        				<select class="form-control" id="invoicetype" disabled="disabled">
+				        				<select class="form-control" id="invoicetype" disabled="disabled" v-model="account.itid">
 					        				<option :value="item.itid" v-for="item in invocetypes">{{item.itname}}</option>
 					        			</select>
 				        			</td>
-				        			<td><input style="margin-left: 30px;" id="invoicenum" disabled="disabled" type="text" class="form-control"/></td>
+				        			<td><input style="margin-left: 30px;" v-model="account.invid" id="invoicenum" disabled="disabled" type="text" class="form-control"/></td>
 				        		</tr>
 				        		<tr style="line-height: 50px;">
-				        			<td>挂账 &nbsp;</td>
-				        			<td><input type="text" class="form-control"/></td>
+				        			<td><input type="checkbox" @click="guazhang" v-model="gz"/>挂账 &nbsp;</td>
+				        			<td><input type="text" @change="zhaoling($event)" id="gzs" disabled="disabled" v-model="account.buying" class="form-control"/></td>
 				        			<td></td>
 				        			<td>
 				        				发票金额
@@ -200,13 +200,13 @@
 				        		<tr style="line-height: 50px;">
 				        			<td></td>
 				        			<td>
-				        				<span>找零 &nbsp;0.00</span></td>
+				        				<span>找零 &nbsp;<span id="zhaoling">0</span>.00</span></td>
 				        			<td></td>
 				        			<td>
-				        				<input type="text" id="invoiceprice" disabled="disabled" class="form-control" />
+				        				<input type="text" id="invoiceprice" v-model="invoice.invmoney" disabled="disabled" class="form-control" />
 				        			</td>
 				        			<td>
-				        				<input style="margin-left: 30px;" type="date" disabled="disabled"  id="itdate" class="form-control" />
+				        				<input style="margin-left: 30px;" type="date" v-model="invoice.invdate" disabled="disabled"  id="itdate" class="form-control" />
 				        			</td>
 				        		</tr>
 							</table>
@@ -214,7 +214,7 @@
 			        </div>
 			      </div>
 			      <div class="modal-footer">
-			        <button type="button" class="btn btn-default">确定</button>
+			        <button type="button" @click="jiesuan" class="btn btn-default">确定</button>
 			      </div>
 			    </div>
 			  </div>
@@ -294,10 +294,8 @@
 			        			<td>结算方式</td>
 			        			<td><input type="text" class="form-control">
 			        			</td>
-			        			<td>赔款公司</td>
-			        			<td><select>
-			        					
-			        				</select>
+			        			<td></td>
+			        			<td>
 			        			</td>
 			        		</tr>
 			        		<tr>
@@ -319,8 +317,6 @@
 			        	<ul class="nav nav-tabs" >
 							<li role="presentation" class="active"><a href="#wxls" data-toggle="tab">维修项目</a></li>
 							<li role="presentation"><a href="#llqk" data-toggle="tab">领料情况</a></li>
-							<li role="presentation"><a href="#fjxm" data-toggle="tab">附加项目</a></li>
-							<li role="presentation"><a href="#lshf" data-toggle="tab">历史回访</a></li>
 						</ul>
 						<div class="tab-content" style="padding: 5px;;">
 							<div id="wxls" style="overflow: auto;" class="active tab-pane bg-warning">
@@ -370,8 +366,206 @@
 									</tr>
 								</table>
 							</div>
-							<div id="fjxm" style="overflow: auto;" class="tab-pane bg-warning">
+						</div>
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+			      	<button type="button" class="btn btn-default">保存</button>
+			      </div>
+			    </div><!-- /.modal-content -->
+			  </div><!-- /.modal-dialog -->
+			</div><!-- /.modal -->
+			
+	<!--
+    	作者：1795022470@qq.com
+    	时间：2020-02-29
+    	描述：救援单
+    -->			
+			<div id="openRmodal" class="modal fade" tabindex="-1" role="dialog">
+			  <div class="modal-dialog" role="document">
+			    <div class="modal-content" style="width: 1000px;position: relative;left: -200px;">
+			      <div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			        <h4 class="modal-title">救援单</h4>
+				        <span>单号:{{bills.bid}}</span>
+			        <div class="form-inline" style="float: right;">
+				        <button class="btn btn-success" v-if="bills.bstate==0">接车</button>
+				        <button class="btn btn-danger"  v-else>竣工检验</button>
+			        </div>
+			      </div>
+			      <div class="modal-body">
+			        	<table class="table">
+			        		<tr>
+			        			<td>单号</td>
+			        			<td><input type="text" v-model="bills.bid" readonly="readonly"/></td>
+			        			<td>车型</td>
+			        			<td><input type="text" readonly="readonly" /></td>
+			        			<td>车品牌</td>
+			        			<td><input type="text" readonly="readonly"/></td>
+			        		</tr>
+			        		<tr>
+			        			<td>车主</td>
+			        			<td><input type="text" readonly="readonly"/></td>
+			        			<td>驾驶员</td>
+			        			<td><input type="text" /></td>
+			        			<td>手机</td>
+			        			<td><input type="text" /></td>
+			        		</tr>
+			        		<tr>
+			        			<td>服务顾问</td>
+			        			<td><input type="text" /><button class="btn btn-success">选择</button></td>
+			        			<td>业务类别</td>
+			        			<td><select></select></td>
+			        			<td>施工班次</td>
+			        			<td><select></select></td>
+			        		</tr>
+			        		<tr>
+			        			<td>当前里程</td>
+			        			<td><input type="text" /></td>
+			        			<td>派工时间</td>
+			        			<td><input type="text" readonly=""/></td>
+			        			<td>结算方式</td>
+			        			<td><select></select></td>
+			        		</tr>
+			        		<tr>
+			        			
+			        			<td>赔款公司</td>
+			        			<td><select></select></td>
+			        			<td>派工班组</td>
+			        			<td><input type="text" /><button class="btn btn-success">选择</button></td>
+			        			<td>出发时间</td>
+			        			<td><input type="text" readonly="readonly"/></td>
+			        		</tr>
+			        		
+			        		<tr>
+			        			<td>出发地址</td>
+			        			<td><input type="text" /></td>
+			        			<td>驾驶车辆</td>
+			        			<td><input type="text" /></td>
+			        			<td>行驶里程</td>
+			        			<td><input type="text" /></td>
+			        		</tr>
+			        		<tr>
+			        			<td>施工时间</td>
+			        			<td><input type="text" /></td>
+			        			<td>施工地址</td>
+			        			<td><input type="text" readonly="readonly"/></td>
+			        			<td>完工时间</td>
+			        			<td><input type="text" readonly="readonly"/></td>
+			        		</tr>
+			        		<tr>
+			        			<td>预估金额</td>
+			        			<td><input type="text" readonly="readonly"/></td>
+			        			<td>维修备注</td>
+			        			<td><input type="text" /></td>
+			        			<td>救援陈述</td>
+			        			<td><input type="text" /></td>
+			        		</tr>
+			        	</table>
+			        	<ul class="nav nav-tabs" >
+							<li role="presentation" class="active"><a href="#wxls2" data-toggle="tab">维修项目</a></li>
+							<li role="presentation"><a href="#llqk2" data-toggle="tab">领料情况</a></li>
+							<li role="presentation"><a href="#fjxm2" data-toggle="tab">附加项目</a></li>
+							<li role="presentation"><a href="#lshf2" data-toggle="tab">历史回访</a></li>
+						</ul>
+						<div class="tab-content" style="padding: 5px;;">
+							<div id="wxls2" class="active tab-pane bg-warning">
+								<nav class="navbar navbar-default">
+								  <div class="container-fluid">
+								    <div class="navbar-header">
+								      <a class="navbar-brand" href="#">
+									         维修项目
+								      </a>
+									</div>
+									    <ul class="nav navbar-nav">
+									       	<li><a href="#">单项项目</a></li>
+									       	<li><a href="#">多项添加</a></li>
+									        <li><a href="#">修改项目</a></li>
+									        <li><a href="#">删除项目</a></li>
+									        <li><a href="#">修改班组</a></li>
+									        <li><a href="#">重置价格</a></li>
+								        </ul>
+								  </div>
+								</nav>
 								<table class="table">
+									<tr>
+										<td>选择</td>
+										<td>项目编码</td>
+										<td>项目名称</td>
+										<td>数量</td>
+										<td>价类</td>
+										<td>优惠前单价</td>
+										<td>优惠后单价</td>
+										<td>优惠后金额</td>
+										<td>故障描述</td>
+										<td>故障原因</td>
+										<td>维修班组</td>
+										<td>作业人员</td>
+										<td>服务顾问</td>
+										<td>免单原因</td>
+									</tr>
+									<tr>
+										<td>选择</td>
+										<td>项目编码</td>
+										<td>项目名称</td>
+										<td>数量</td>
+										<td>价类</td>
+										<td>优惠前单价</td>
+										<td>优惠后单价</td>
+										<td>优惠后金额</td>
+										<td>故障描述</td>
+										<td>故障原因</td>
+										<td>维修班组</td>
+										<td>作业人员</td>
+										<td>服务顾问</td>
+										<td>免单原因</td>
+									</tr>
+								</table>
+							</div>
+							<div id="llqk2" class="tab-pane bg-warning">
+								<nav class="navbar navbar-default">
+								  <div class="container-fluid">
+								    <div class="navbar-header">
+								      <a class="navbar-brand" href="#">
+									         领料情况
+								      </a>
+								    </div>
+								  </div>
+								</nav>
+								<table class="table">
+									<tr>
+										<td>类别</td>
+										<td>领料日期</td>
+										<td>领料人</td>
+										<td>物料编码</td>
+										<td>物料名称</td>
+										<td>单位</td>
+										<td>价类</td>
+										<td>数量</td>
+										<td>优惠前单价</td>
+										<td>优惠后单价</td>
+										<td>优惠后金额</td>
+										<td>服务顾问</td>
+										<td>免单原因</td>
+									</tr>
+								</table>
+							</div>
+							<div id="fjxm2" class="tab-pane bg-warning">
+								<nav class="navbar navbar-default">
+								  <div class="container-fluid">
+								    <div class="navbar-header">
+								      <a class="navbar-brand" href="#">
+									           附加项目
+								      </a>
+								    </div>
+								    <ul class="nav navbar-nav">
+									       	<li><a href="#">添加项目</a></li>
+									        <li><a href="#">修改项目</a></li>
+									        <li><a href="#">删除项目</a></li>
+								        </ul>
+								  </div>
+								</nav>
+								<table>
 									<tr>
 										<td>附加项目</td>
 										<td>价类</td>
@@ -380,8 +574,17 @@
 									</tr>
 								</table>
 							</div>
-							<div id="lshf" style="overflow: auto;" class="tab-pane bg-warning">
-								<table class="table">
+							<div id="lshf2" class="tab-pane bg-warning">
+								<nav class="navbar navbar-default">
+								  <div class="container-fluid">
+								    <div class="navbar-header">
+								      <a class="navbar-brand" href="#">
+									         结算信息
+								      </a>
+								    </div>
+								  </div>
+								</nav>
+								<table>
 									<tr>
 										<td>结算状态</td>
 										<td>优惠前金额</td>
@@ -407,20 +610,18 @@
 										<td>发票号</td>
 										<td>发票金额</td>
 									</tr>
-									<tr>
-										
-									</tr>
 								</table>
 							</div>
 						</div>
 			      </div>
 			      <div class="modal-footer">
 			        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-			      	<button type="button" class="btn btn-default">保存</button>
+			      	<button type="button" class="btn btn-default" >保存</button>
 			      </div>
 			    </div><!-- /.modal-content -->
 			  </div><!-- /.modal-dialog -->
-			</div><!-- /.modal -->
+			</div><!-- /.modal -->			
+			
 		</div>
 		<script src="js/jquery-1.12.4.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
@@ -451,7 +652,14 @@
 						shouyin:{},
 						isval:false,
 						vipinfo:{},
-						account:{}
+						account:{atime:""},
+						isvipjs:false,
+						invoice:{invid:""},
+						xianjin:false,
+						yhk:false,
+						ccz:false,
+						cdj:false,
+						gz:false
 					}
 				},created:function(){
 					var that=this;
@@ -541,6 +749,7 @@
 						})
 					},openshouyin(){
 						var that=this;
+						
 						console.log(that.settlement)
 						if(JSON.stringify(that.settlement)=='{}'){
 							alert("请选择订单!")
@@ -570,8 +779,14 @@
 								},
 								success:function(result){
 									that.shouyin=result;
+									that.account=result;
+									that.account.cash=0;
+									that.account.bank=0;
+									that.account.atCard=0;
+									that.account.atDeposit=0;
 								}
 							})
+							
 							$('#myModal').modal("show");
 						}
 					},fuzhisettlement(item){
@@ -592,6 +807,178 @@
 							$("#invoiceprice").prop("disabled","disabled");
 							$("#invoicenum").prop("disabled","disabled");
 							$("#invoicetype").prop("disabled","disabled");
+						}
+					},isvip(){
+					},jiesuan(){
+						var that=this;
+						
+						that.invoice.invid=that.account.invid;
+						if(that.isvipjs==true){
+							if(that.shouyin.total<=that.vipinfo.money){
+								if(that.account.pointsDeduction!=undefined){
+									if(that.vipinfo.currentjifen*0.1>=that.account.pointsDeduction){
+										
+										that.vipinfo.money=that.vipinfo.money-(that.shouyin.total-that.account.pointsDeduction);
+										that.vipinfo.currentjifen=that.vipinfo.currentjifen-that.account.pointsDeduction*10;
+										console.log(that.vipinfo)
+										console.log(that.account)
+										
+										$.ajax({
+											url:data.ip+"balance/updateVips",
+											type:"put",
+											data:JSON.stringify(that.vipinfo),
+											dataType:"json",
+											contentType:"application/json;",
+											xhrFields: {
+												withCredentials: true
+											},
+											success:function(result){
+												
+											}
+										})
+										var now = new Date();
+									    //格式化日，如果小于9，前面补0
+									    var day = ("0" + now.getDate()).slice(-2);
+									    //格式化月，如果小于9，前面补0
+									    var month = ("0" + (now.getMonth() + 1)).slice(-2);
+									    //拼装完整日期格式
+									    var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
+									    that.account.atime=today;
+										$.ajax({
+											url:data.ip+"balance/updateAcc",
+											type:"put",
+											data:JSON.stringify(that.account),
+											dataType:"json",
+											contentType:"application/json;",
+											xhrFields: {
+												withCredentials: true
+											},
+											success:function(result){
+												if(result>0){
+													alert("结算成功！")
+													location.reload();
+												}
+											}
+										})
+										
+									}else{
+										alert("积分抵扣金额不足！")
+										return false;
+									}
+								}else{
+									that.vipinfo.money=that.vipinfo.money-that.shouyin.total;
+								}
+								
+							}else{
+								alert("会员卡金额不足！")
+								return false;
+							}
+						}else{
+							if(that.account.cash!=0
+								||that.account.bank!=0
+								||that.account.atCard!=0
+								||that.account.atDeposit!=0
+								||that.account.buying!=0){
+									if(parseInt($("#zhaoling").text())<0){
+										alert("需支付的金额不足")
+									}
+									//ajax请求后台结算
+									console.log(JSON.stringify(that.account))
+									console.log(JSON.stringify(that.vipinfo))
+									console.log(JSON.stringify(that.invoice))
+									var now = new Date();
+								    //格式化日，如果小于9，前面补0
+								    var day = ("0" + now.getDate()).slice(-2);
+								    //格式化月，如果小于9，前面补0
+								    var month = ("0" + (now.getMonth() + 1)).slice(-2);
+								    //拼装完整日期格式
+								    var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
+								    that.account.atime=today;
+									$.ajax({
+										url:data.ip+"balance/updateAcc",
+										type:"put",
+										data:JSON.stringify(that.account),
+										dataType:"json",
+										contentType:"application/json;",
+										xhrFields: {
+											withCredentials: true
+										},
+										success:function(result){
+											if(result>0){
+												alert("结算成功！")
+												location.reload();
+											}
+										}
+									})
+							}else{
+								alert("请选择结算方式！")
+								return false;
+							}
+						}
+						if(that.isval==true){
+							//如果选中开发票才进行发票提交
+							
+						}
+						if(that.isvipjs==true){
+							//如果选择会员提交才进行会员修改
+							
+						}
+					},zhaoling(e){
+						var that=this;
+						console.log(e.target.value)
+						$("#zhaoling").text(e.target.value-that.account.total);
+						if(parseInt($("#zhaoling").text())<0){
+							alert("需支付的金额不足")
+						}
+						
+					},xianjins(){
+						var that=this;
+						if(that.xianjin==false){
+							$("#xianjin1").prop("disabled","");
+							that.account.cash=that.account.total;
+						}else{
+							$("#xianjin1").prop("disabled","disabled");
+							that.account.cash=0;
+						}
+					},yinhangka(){
+						var that=this;
+						if(that.yhk==false){
+							$("#yhks").prop("disabled","");
+							$("#sxf").prop("disabled","");
+							that.account.bank=that.account.total;
+							$("#sxf").val(parseInt(that.account.total*0.001));
+						}else{
+							$("#yhks").prop("disabled","disabled");
+							$("#sxf").prop("disabled","disabled");
+							that.account.bank=0;
+							$("#sxf").val("");
+						}
+					},chongchuzhi(){
+						var that=this;
+						if(that.ccz==false){
+							$("#cczs").prop("disabled","");
+							that.account.atCard=that.account.total;
+						}else{
+							$("#cczs").prop("disabled","disabled");
+							that.account.atCard=0;
+						}
+					},chongdingjin(){
+						var that=this;
+						if(that.cdj==false){
+							$("#cdjs").prop("disabled","");
+							that.account.atDeposit=that.account.total;
+						}else{
+							$("#cdjs").prop("disabled","disabled");
+							that.account.atDeposit=0;
+						}
+					},guazhang(){
+						var that=this;
+						if(that.gz==false){
+							$("#gzs").prop("disabled","");
+							that.account.buying=that.account.total;
+						}else{
+							$("#gzs").prop("disabled","disabled");
+							that.account.buying=0;
 						}
 					}
 					

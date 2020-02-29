@@ -13,18 +13,18 @@
 	</head>
 	<body>
 		<div class="container-fluid" id="ctx">
-			<div class="row" style="background-color: #DFF0D8;">
+			<div class="row" style="background-color: #f7ffff;">
 				<div class="col-xs-4">
 					<h2>角色权限控制</h2>
 				</div>
 				<div class="col-xs-4 col-xs-offset-4">
 					<div style="float: right;margin-top: 20px;">
-						<button class="btn btn-success" onclick="onCheck()"><span class="glyphicon glyphicon-ok"></span>&nbsp;&nbsp;保存</button>
+						<button class="btn btn-success" onclick="onCheck()"><span class="glyphicon glyphicon-ok" ></span>&nbsp;&nbsp;保存</button>
 						<button class="btn btn-default">关闭</button>
 					</div>
 				</div>
 			</div>
-			<div class="row" style="background-color: #F5F5F5;">
+			<div class="row" style="background-color: #f7ffff;">
 				<div class="col-xs-6">
 					
 					<div class="btn-group" role="group" aria-label="..."style="height: 50px;margin-top: 20px;">
@@ -43,9 +43,9 @@
 				</div>
 				<div class="col-xs-6">
 					<div style="margin-top: 20px;float: right;">
-						<button class="btn btn-success" @click="checkAll"><span class="glyphicon glyphicon-book"></span>&nbsp;全部选择</button>
-						<button class="btn btn-success" @click="chengdel"><span class="glyphicon glyphicon-check"></span>&nbsp;全部取消</button>
-						<button class="btn btn-success" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;角色定义</button>
+						<button class="btn btn-default" @click="checkAll"><span class="glyphicon glyphicon-book" style="color:#fcac28;"></span>&nbsp;全部选择</button>
+						<button class="btn btn-default" @click="chengdel"><span class="glyphicon glyphicon-check" style="color:#fcac28;"></span>&nbsp;全部取消</button>
+						<button class="btn btn-default" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-list-alt" style="color:#fcac28;"></span>&nbsp;角色定义</button>
 					</div>
 				</div>
 			</div>
@@ -65,15 +65,15 @@
 			<div class="modal fade" data-backdrop="static" data-keyboard="false"  id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 			  <div class="modal-dialog" role="document"> 
 			    <div class="modal-content">
-			      <div class="modal-header" style="background-color: #DFF0D8;">
+			      <div class="modal-header" style="background-color: #f7ffff;">
 			        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" class="btn btn-default">关闭</span></button>
 			        <h3 class="modal-title" id="myModalLabel">角色定义</h3>
 			      </div>
 			      <div class="modal-body">
 			        <div class="row text-right" style="margin-bottom: 10px;">
-			        	<button class="btn btn-success" @click="open"><span class="glyphicon glyphicon-book"></span>&nbsp;增加</button>
+			        	<button class="btn btn-default" @click="open"><span class="glyphicon glyphicon-book" style="color:#fcac28;"></span>&nbsp;增加</button>
 						
-						<button class="btn btn-success" style="margin-right: 15px;" @click="addRole"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;保存</button>
+						<button class="btn btn-default" style="margin-right: 15px;" @click="addRole"><span class="glyphicon glyphicon-list-alt" style="color:#fcac28;"></span>&nbsp;保存</button>
 			        </div>
 			        <div class="row" style="padding-bottom: 10px;">
 			        	<!--
@@ -104,8 +104,8 @@
 					        		<td>{{item.id}}</td>
 					        		<td>{{item.name}}</td>
 					        		<td>
-					        			<button class="btn btn-success" @click="toup(item)" data-toggle="modal" data-target="#upRoles" >修改</button>
-					        			<button class="btn btn-success" @click="delRole(item)">删除</button>
+					        			<button class="btn btn-default" @click="toup(item)" data-toggle="modal" data-target="#upRoles" >修改</button>
+					        			<button class="btn btn-default" @click="delRole(item)">删除</button>
 					        		</td>
 					        	</tr>
 					        </table>
@@ -129,7 +129,7 @@
 			<div class="modal fade" data-backdrop="static" id="upRoles" data-keyboard="false" tabindex="-1" role="dialog">
 			  <div class="modal-dialog" role="document">
 			    <div class="modal-content" style="margin-top: 95px;">
-			      <div class="modal-header" style="background-color: #DFF0D8;">
+			      <div class="modal-header" style="background-color: #f7ffff;">
 			        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" class="btn btn-default">关闭</span></button>
 			        <h4 class="modal-title">修改角色信息</h4>
 			      </div>
@@ -140,15 +140,14 @@
 						</div>
 			      </div>
 			      <div class="modal-footer">
-			      	 <button type="button" @click="clear" class="btn btn-success" >清空</button>
-			        <button type="button" @click="update" class="btn btn-success" data-dismiss="modal">确定</button>
+			      	 <button type="button" @click="clear" class="btn btn-default" >清空</button>
+			        <button type="button" @click="update" class="btn btn-default" data-dismiss="modal">确定</button>
 			      </div>
 			    </div><!-- /.modal-content -->
 			  </div><!-- /.modal-dialog -->
 			</div><!-- /.modal -->
 			
 		</div>
-		<script src="js/canvas-nest.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/jquery-1.12.4.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
@@ -226,6 +225,7 @@
 					},clear(){
 						$("#upRoleName").val("");
 					},addRole(){
+						alert($("#upRoleName").val(""))
 						$.ajax({
 							type:"post",
 							url:data.ip+"per/addRole",

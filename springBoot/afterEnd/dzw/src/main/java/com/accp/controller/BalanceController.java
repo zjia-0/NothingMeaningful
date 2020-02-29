@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,6 +14,7 @@ import com.accp.domain.Account;
 import com.accp.domain.Bills;
 import com.accp.domain.Billstype;
 import com.accp.domain.Customer;
+import com.accp.domain.Invoice;
 import com.accp.domain.InvoiceType;
 import com.accp.domain.Personnel;
 import com.accp.domain.Vip;
@@ -45,27 +48,45 @@ public class BalanceController {
 	}
 
 	@GetMapping("/findbytj")
-	public List<Bills> findbytj( Bills bill){
+	public List<Bills> findbytj(Bills bill) {
 		return bservice.findbytj(bill);
 	}
+
 	@GetMapping("/findAllInvocetype")
-	public List<InvoiceType> findAllInvoice(){
+	public List<InvoiceType> findAllInvoice() {
 		return bservice.findAllInvoice();
 	}
+
 	@GetMapping("/findByBid")
-	public Account findByBid(String bid){
-		List<Account> list=bservice.findByBid(bid);
-		if(list.size()>0) {
+	public Account findByBid(String bid) {
+		List<Account> list = bservice.findByBid(bid);
+		if (list.size() > 0) {
 			return list.get(0);
-		}  
+		}
 		return null;
 	}
+
 	@GetMapping("/findByCno")
 	public Vip findByCno(String cno) {
-		List<Vip> list=bservice.findByCno(cno);
-		if(list.size()>0) {
+		List<Vip> list = bservice.findByCno(cno);
+		if (list.size() > 0) {
 			return list.get(0);
-		}  
+		}
 		return null;
+	}
+
+	@PutMapping("/updateAcc")
+	public int updateAccount(@RequestBody Account account) {
+		return bservice.updateAccount(account);
+	}
+
+	@PostMapping("/addInvoice")
+	public int addInvoice(@RequestBody Invoice invoice) {
+		return bservice.addInvoice(invoice);
+	}
+	
+	@PutMapping("/updateVips")
+	public int updateVip(@RequestBody Vip vip) {
+		return bservice.updateVip(vip);
 	}
 }

@@ -6,25 +6,27 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface InvoiceMapper {
-    int countByExample(InvoiceExample example);
+	int addInvoice(Invoice invoice);
 
-    int deleteByExample(InvoiceExample example);
+	int countByExample(InvoiceExample example);
 
-    int deleteByPrimaryKey(String invid);
+	int deleteByExample(InvoiceExample example);
 
-    int insert(Invoice record);
+	int deleteByPrimaryKey(String invid);
 
-    int insertSelective(Invoice record);
+	int insert(Invoice record);
 
-    List<Invoice> selectByExample(InvoiceExample example);
+	int insertSelective(Invoice record);
 
-    Invoice selectByPrimaryKey(String invid);
+	List<Invoice> selectByExample(InvoiceExample example);
 
-    int updateByExampleSelective(@Param("record") Invoice record, @Param("example") InvoiceExample example);
+	Invoice selectByPrimaryKey(String invid);
 
-    int updateByExample(@Param("record") Invoice record, @Param("example") InvoiceExample example);
+	int updateByExampleSelective(@Param("record") Invoice record, @Param("example") InvoiceExample example);
 
-    int updateByPrimaryKeySelective(Invoice record);
+	int updateByExample(@Param("record") Invoice record, @Param("example") InvoiceExample example);
 
-    int updateByPrimaryKey(Invoice record);
+	int updateByPrimaryKeySelective(Invoice record);
+
+	int updateByPrimaryKey(Invoice record);
 }
