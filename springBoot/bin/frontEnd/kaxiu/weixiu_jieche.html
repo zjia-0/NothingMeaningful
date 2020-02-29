@@ -1,132 +1,343 @@
 <!DOCTYPE html>
 <html>
+
 	<head>
 		<meta charset="UTF-8">
 		<title>维修接车</title>
 		<link rel="stylesheet" href="css/bootstrap.min.css" />
 		<style>
-			#top1{ background-color: rgb(249,249,249);}
-			#top1 h3{display: inline-block;margin: 10px 1000px 10px 30px; vertical-align: middle;}
-			#top1 input{display: inline-block;width: 230px; }
-			#search{width: 70px;color: white;background-color: orange;margin-right: 10px;}
-			#close{color: white;background-color: #999999;}
-			#btns a{ text-decoration: none; color: black; font-size: 16px;}
-			#btns span{color: orange;  margin-top: 25px; margin-left: 10px;}
-			#info hr{height: 2px;width: 98%;}
-			#info table{ margin-left: 30px;}
-			#info table tr:nth-child(1){color: #31B0D5;font-size: 17px; font-weight: 600;}
-			#info table tr:nth-child(2) input{ width: 300px; font-size: 17px; outline: none; border: none; border-bottom: #9D9D9D 1.5px solid; margin-right: 35px;}
-			#info table tr:nth-child(3){color: #31B0D5;font-size: 14px; font-weight: 600;}
-			#info table tr:nth-child(4),tr:nth-child(5),tr:nth-child(6){line-height: 30px; color: rgb(110,110,110);}
-			#menu{ width: 98%; margin: auto; color: #999999; background-color: rgb(249,249,249);  margin-top: 10px;}
+			#top1 {
+				background-color: rgb(249, 249, 249);
+			}
+			
+			#top1 h3 {
+				display: inline-block;
+				margin: 10px 1000px 10px 30px;
+				vertical-align: middle;
+			}
+			
+			#top1 input {
+				display: inline-block;
+				width: 230px;
+			}
+			
+			#search {
+				width: 70px;
+				color: white;
+				background-color: orange;
+				margin-right: 10px;
+			}
+			
+			#close {
+				color: white;
+				background-color: #999999;
+			}
+			
+			#btns a {
+				text-decoration: none;
+				color: black;
+				font-size: 16px;
+			}
+			
+			#btns span {
+				color: orange;
+				margin-top: 25px;
+				margin-left: 10px;
+			}
+			
+			#info hr {
+				height: 2px;
+				width: 98%;
+			}
+			
+			#info table {
+				margin-left: 30px;
+			}
+			
+			#info table tr:nth-child(1) {
+				color: #31B0D5;
+				font-size: 17px;
+				font-weight: 600;
+			}
+			
+			#info table tr:nth-child(2) input {
+				width: 300px;
+				font-size: 17px;
+				outline: none;
+				border: none;
+				border-bottom: #9D9D9D 1.5px solid;
+				margin-right: 35px;
+			}
+			
+			#info table tr:nth-child(3) {
+				color: #31B0D5;
+				font-size: 14px;
+				font-weight: 600;
+			}
+			
+			#info table tr:nth-child(4),
+			tr:nth-child(5),
+			tr:nth-child(6) {
+				line-height: 30px;
+				color: rgb(110, 110, 110);
+			}
+			
+			#menu {
+				width: 98%;
+				margin: auto;
+				color: #999999;
+				background-color: rgb(249, 249, 249);
+				margin-top: 10px;
+			}
 			/*覆盖bootstrap原页签效果*/
-			.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {color: #31B0D5;cursor: default;background-color: rgba(0,0,0,0); border:none; border-top: solid 3px #31B0D5;} 
-			.nav-tabs>li>a {margin-right: 2px;line-height: 1.42857143;border: 1px solid transparent;border-radius: 0;}
+			
+			.nav-tabs>li.active>a,
+			.nav-tabs>li.active>a:focus,
+			.nav-tabs>li.active>a:hover {
+				color: #31B0D5;
+				cursor: default;
+				background-color: rgba(0, 0, 0, 0);
+				border: none;
+				border-top: solid 3px #31B0D5;
+			}
+			
+			.nav-tabs>li>a {
+				margin-right: 2px;
+				line-height: 1.42857143;
+				border: 1px solid transparent;
+				border-radius: 0;
+			}
 			/*覆盖完毕*/
-			#tabs{width: 98%; margin: auto;}
-			#tabs thead td{color: white; background-color: #31B0D5;}
+			
+			.tabs {
+				width: 98%;
+				margin: auto;
+			}
+			
+			.tabs thead td {
+				color: white;
+				background-color: #31B0D5;
+			}
 		</style>
 	</head>
+
 	<body>
 		<div class="container-fluid">
-			<div id="top1" class="row">
-				<h3>接车登记</h3>
-				<input type="text"  placeholder="匹配车牌号/车架号/手机/客户" class="form-control" /> 
-				<button id="search" class="btn btn-default">搜索</button><button id="close" class="btn btn-default">关闭</button>
-			</div>
-			<div id="btns" class="row">
-				<div class="col-md-3 col-md-push-9">
-					<span class="glyphicon glyphicon-certificate"></span><a href="javascript:void(0)">维修接车</a>
-					<span class="glyphicon glyphicon-plus"></span><a href="javascript:void(0)">救援开单</a>
-					<span class="glyphicon glyphicon-plus-sign"></span><a href="javascript:void(0)">关注公众号</a>
-				</div>				
-			</div>
-			<div id="info" class="row">
-				<hr color="#31B0D5"/>
-				<table>
-					<tr>
-						<td>公众号会员码</td>
-						<td>车牌号&nbsp;<span class="glyphicon glyphicon-triangle-bottom"></span></td>					
-					</tr>
-					<tr>
-						<td><input type="text"/></td>
-						<td><input type="text"/></td>					
-					</tr>
-					<tr>
-						<td>车主信息</td>
-						<td>车辆信息</td>					
-					</tr>
-					<tr>
-						<td>车主：--</td>
-						<td>品牌：--</td>					
-					</tr>
-					<tr>
-						<td>地址：--</td>
-						<td>发动机品牌：--</td>					
-					</tr>
-					<tr>
-						<td>驾驶员：--</td>
-						<td>保养日期：--</td>					
-					</tr>
-				</table>
-			</div>
-			<div class="row">
-				<ul class="nav nav-tabs" id="menu">
-					<li class="active"><a href="#index" data-toggle="tab">作业中车辆</a></li>
-					<li class=""><a href="#" data-toggle="tab">维修历史</a></li>
-					<li class=""><a href="#" data-toggle="tab">维修项目</a></li>
-					<li class=""><a href="#" data-toggle="tab">领料情况</a></li>
-					<li class=""><a href="#" data-toggle="tab">历史回访</a></li>
-				</ul>
-			</div>
-			<div id="tabs" class="row">
-				<table border="1px" class="table">
-					<thead>
+			<div id="ctx">
+				<div id="top1" class="row">
+					<h3>接车登记</h3>
+					<input type="text" placeholder="匹配车牌号/车架号/手机/客户" class="form-control" />
+					<button id="search" class="btn btn-default">搜索</button><button id="close" class="btn btn-default">关闭</button>
+				</div>
+				<div id="btns" class="row">
+					<div class="col-md-3 col-md-push-9">
+						<span class="glyphicon glyphicon-certificate"></span>
+						<a href="javascript:void(0)">维修接车</a>
+						<span class="glyphicon glyphicon-plus"></span>
+						<a href="javascript:void(0)">救援开单</a>
+						<span class="glyphicon glyphicon-plus-sign"></span>
+						<a href="javascript:void(0)">关注公众号</a>
+					</div>
+				</div>
+				<div id="info" class="row">
+					<hr color="#31B0D5" />
+					<table>
 						<tr>
-							<td>单据状态</td>
-							<td>业务类型</td>
-							<td>客户名称</td>
-							<td>车牌号</td>
-							<td>手机</td>
-							<td>会员卡</td>
-							<td>维修单</td>
-							<td>单据类型</td>
-							<td>开单时间</td>
-							<td>预计完工</td>
-							<td>完工时间</td>
-							<td>结算时间</td>
-							<td>预估金额</td>
-							<td>服务顾问</td>
-							<td>接车人</td>
+							<td>公众号会员码</td>
+							<td>车牌号&nbsp;<span class="glyphicon glyphicon-triangle-bottom"></span></td>
 						</tr>
-					</thead>
-					<tbody>
 						<tr>
-							<td>123</td>
-							<td>123</td>
-							<td>123</td>
-							<td>123</td>
-							<td>123</td>
-							<td>123</td>
-							<td>123</td>
-							<td>123</td>
-							<td>123</td>
-							<td>123</td>
-							<td>123</td>
-							<td>123</td>
-							<td>123</td>
-							<td>123</td>
-							<td>123</td>
+							<td><input type="text" /></td>
+							<td><input type="text" /></td>
 						</tr>
-					</tbody>
-				</table>
+						<tr>
+							<td>车主信息</td>
+							<td>车辆信息</td>
+						</tr>
+						<tr>
+							<td>车主：--</td>
+							<td>品牌：--</td>
+						</tr>
+						<tr>
+							<td>地址：--</td>
+							<td>发动机品牌：--</td>
+						</tr>
+						<tr>
+							<td>驾驶员：--</td>
+							<td>保养日期：--</td>
+						</tr>
+					</table>
+				</div>
+				<div class="row">
+					<ul class="nav nav-tabs" id="menu">
+						<li class="active">
+							<a href="#index" data-toggle="tab">作业中车辆</a>
+						</li>
+						<li class="">
+							<a href="#lishi" data-toggle="tab">维修历史</a>
+						</li>
+						<li class="">
+							<a href="#object" data-toggle="tab">维修项目</a>
+						</li>
+						<li class="">
+							<a href="#linliao" data-toggle="tab">领料情况</a>
+						</li>
+					</ul>
+				</div>
+				<div class="tab-content">
+					<div role="tabpanel" class="tab-pane active" id="index">
+						<div class="row tabs">
+							<table border="1px" class="table table-hover">
+								<thead>
+									<tr class="text-center">
+										<td>单据状态</td>
+										<td>业务类型</td>
+										<td>客户名称</td>
+										<td>车牌号</td>
+										<td>手机</td>
+										<td>会员卡</td>
+										<td>维修单</td>
+										<td>单据类型</td>
+										<td>开单时间</td>
+										<td>预计完工</td>
+										<td>完工时间</td>
+										<td>结算时间</td>
+										<td>预估金额</td>
+										<td>服务顾问</td>
+										<td>接车人</td>
+									</tr>
+								</thead>
+								<tbody>
+									<tr v-for="item,index in billss">
+										<td v-if="item.bstate=0">接车</td>
+										<td v-if="item.bstate=1">作业中</td>
+										<td v-if="item.bstate=0">完工</td>
+										<td>{{item.billname}}</td>
+										<td>{{item.cname}}</td>
+										<td>{{item.cdlicense}}</td>
+										<td>{{item.cphone}}</td>
+										<td>{{item.vno}}</td>
+										<td>{{item.bid}}</td>
+										<td>{{item.bname}}</td>
+										<td>{{item.ordertime}}</td>
+										<td>{{item.expectedtime}}</td>
+										<td>{{item.completiontime}}</td>
+										<td>{{item.clearingtime}}</td>
+										<td>{{item.forecastmoney}}</td>
+										<td>{{item.personnelname}}</td>
+										<td>{{item.jcr}}</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<div role="tabpanel" class="tab-pane" id="lishi">
+						<div class="row tabs">
+							<table border="1px" class="table table-hover">
+								<thead>
+									<tr class="text-center">
+										<td>维修单号</td>
+										<td>接车时间</td>
+										<td>业务类型</td>
+										<td>完工时间</td>
+										<td>客户名称</td>
+										<td>车牌号</td>
+										<td>手机</td>
+										<td>会员卡号</td>
+										<td>结算时间</td>
+										<td>消费金额</td>
+									</tr>
+								</thead>
+								<tbody>
+									<tr class="text-center">
+										<td>维修单号</td>
+										<td>接车时间</td>
+										<td>业务类型</td>
+										<td>完工时间</td>
+										<td>客户名称</td>
+										<td>车牌号</td>
+										<td>手机</td>
+										<td>会员卡号</td>
+										<td>结算时间</td>
+										<td>消费金额</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<div role="tabpanel" class="tab-pane" id="object">
+						<div class="row tabs">
+							<table border="1px" class="table table-hover">
+								<thead>
+									<tr class="text-center">
+										<td>维修单号</td>
+										<td>接车时间</td>
+										<td>业务类型</td>
+										<td>完工时间</td>
+										<td>结算时间</td>
+										<td>项目编码</td>
+										<td>项目名称</td>
+										<td>价类</td>
+										<td>工时金额</td>
+										<td>故障描述</td>
+										<td>描述确认</td>
+									</tr>
+								</thead>
+								<tbody>
+									<tr class="text-center">
+										<td>维修单号</td>
+										<td>接车时间</td>
+										<td>业务类型</td>
+										<td>完工时间</td>
+										<td>结算时间</td>
+										<td>项目编码</td>
+										<td>项目名称</td>
+										<td>价类</td>
+										<td>工时金额</td>
+										<td>故障描述</td>
+										<td>描述确认</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				    <div role="tabpanel" class="tab-pane" id="linliao">领料情况</div>
+				</div>
+
 			</div>
 		</div>
-		<script type="text/javascript" src="js/jquery-1.12.4.js"></script>
-		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+
+		<script src="js/jquery-1.12.4.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/jquery.ztree.core.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" src="js/my.js"></script>
 		<script>
-			
+			var vm = new Vue({
+				el: "#ctx",
+				data() {
+					return {
+						billss: []
+					}
+				},
+				methods: {
+					queryCars: function() {
+						$.ajax({
+							type: "get",
+							url: data.ip + "/weixiu/queryCars",
+							xhrFields: {
+								withCredentials: true
+							},
+							success: function(result) {
+								vm.billss = result;
+							}
+						});
+					}
+				}
+			});
+			vm.queryCars();
 		</script>
 	</body>
+
 </html>

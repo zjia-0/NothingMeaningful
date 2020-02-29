@@ -87,7 +87,177 @@ public class Bills {
 	private String remark4;
 
 	private String remark5;
+	
+	//查询作业中车辆需要添加的属性
+	private String vno;
+	private String bname;
+	private String jcr;
 
+	//查询维修历史需要添加属性'total'
+	private float total;
+	
+	//查询维修项目需要添加的属性
+	private String pnum;
+	private String pname;
+	private String ptname;
+	private float bpreferentialM;
+	private String faultdescription;
+	private String problem;
+	
+	//查询领料情况
+	private Integer type;
+	private Integer gid;
+	private String gname;
+	private String unit;
+	private Integer number;
+	private float frontPrice;
+	private float laterPrice;
+	private float price;
+	
+	public Integer getType() {
+		return type;
+	}
+
+	public void setType(Integer type) {
+		this.type = type;
+	}
+
+	public Integer getGid() {
+		return gid;
+	}
+
+	public void setGid(Integer gid) {
+		this.gid = gid;
+	}
+
+	public String getGname() {
+		return gname;
+	}
+
+	public void setGname(String gname) {
+		this.gname = gname;
+	}
+
+	public String getUnit() {
+		return unit;
+	}
+
+	public void setUnit(String unit) {
+		this.unit = unit;
+	}
+
+	public Integer getNumber() {
+		return number;
+	}
+
+	public void setNumber(Integer number) {
+		this.number = number;
+	}
+
+	public float getFrontPrice() {
+		return frontPrice;
+	}
+
+	public void setFrontPrice(float frontPrice) {
+		this.frontPrice = frontPrice;
+	}
+
+	public float getLaterPrice() {
+		return laterPrice;
+	}
+
+	public void setLaterPrice(float laterPrice) {
+		this.laterPrice = laterPrice;
+	}
+
+	public float getPrice() {
+		return price;
+	}
+
+	public void setPrice(float price) {
+		this.price = price;
+	}
+	
+	public String getPnum() {
+		return pnum;
+	}
+
+	public void setPnum(String pnum) {
+		this.pnum = pnum;
+	}
+
+	public String getPname() {
+		return pname;
+	}
+
+	public void setPname(String pname) {
+		this.pname = pname;
+	}
+
+	public String getPtname() {
+		return ptname;
+	}
+
+	public void setPtname(String ptname) {
+		this.ptname = ptname;
+	}
+
+	public float getBpreferentialM() {
+		return bpreferentialM;
+	}
+
+	public void setBpreferentialM(float bpreferentialM) {
+		this.bpreferentialM = bpreferentialM;
+	}
+
+	public String getFaultdescription() {
+		return faultdescription;
+	}
+
+	public void setFaultdescription(String faultdescription) {
+		this.faultdescription = faultdescription;
+	}
+
+	public String getProblem() {
+		return problem;
+	}
+
+	public void setProblem(String problem) {
+		this.problem = problem;
+	}
+	
+	public float getTotal() {
+		return total;
+	}
+
+	public void setTotal(float total) {
+		this.total = total;
+	}
+
+	public String getVno() {
+		return vno;
+	}
+
+	public void setVno(String vno) {
+		this.vno = vno;
+	}
+
+	public String getBname() {
+		return bname;
+	}
+
+	public void setBname(String bname) {
+		this.bname = bname;
+	}
+
+	public String getJcr() {
+		return jcr;
+	}
+
+	public void setJcr(String jcr) {
+		this.jcr = jcr;
+	}
+	
 	public String getCdframe() {
 		return cdframe;
 	}

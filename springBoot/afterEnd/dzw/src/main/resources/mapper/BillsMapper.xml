@@ -41,6 +41,133 @@
 		<result column="remark4" property="remark4" jdbcType="VARCHAR" />
 		<result column="remark5" property="remark5" jdbcType="VARCHAR" />
 	</resultMap>
+	
+	<resultMap id="BaseResultMapTwo" type="com.accp.domain.Bills">
+		<id column="bid" property="bid" jdbcType="VARCHAR" />
+		<result column="bstate" property="bstate" jdbcType="INTEGER" />
+		<result column="cdlicense" property="cdlicense"
+			jdbcType="VARCHAR" />
+		<result column="pno" property="pno" jdbcType="VARCHAR" />
+		<result column="btid" property="btid" jdbcType="INTEGER" />
+		<result column="id" property="id" jdbcType="INTEGER" />
+		<result column="pmid" property="pmid" jdbcType="INTEGER" />
+		<result column="inid" property="inid" jdbcType="INTEGER" />
+		<result column="qualified" property="qualified"
+			jdbcType="INTEGER" />
+		<result column="reworknum" property="reworknum"
+			jdbcType="INTEGER" />
+		<result column="respeople" property="respeople"
+			jdbcType="VARCHAR" />
+		<result column="Delaysreason" property="delaysreason"
+			jdbcType="VARCHAR" />
+		<result column="Reworkreason" property="reworkreason"
+			jdbcType="VARCHAR" />
+		<result column="Expectedtime" property="expectedtime"
+			jdbcType="TIMESTAMP" />
+		<result column="Completiontime" property="completiontime"
+			jdbcType="TIMESTAMP" />
+		<result column="Penaltyamount" property="penaltyamount"
+			jdbcType="REAL" />
+		<result column="qmember" property="qmember" jdbcType="VARCHAR" />
+		<result column="Pickcar" property="pickcar" jdbcType="VARCHAR" />
+		<result column="Ordertime" property="ordertime"
+			jdbcType="TIMESTAMP" />
+		<result column="Clearingtime" property="clearingtime"
+			jdbcType="TIMESTAMP" />
+		<result column="forecastmoney" property="forecastmoney"
+			jdbcType="REAL" />
+		<result column="remark1" property="remark1" jdbcType="VARCHAR" />
+		<result column="remark2" property="remark2" jdbcType="VARCHAR" />
+		<result column="remark3" property="remark3" jdbcType="VARCHAR" />
+		<result column="remark4" property="remark4" jdbcType="VARCHAR" />
+		<result column="remark5" property="remark5" jdbcType="VARCHAR" />
+<!-- 		作业中车辆 -->
+		<result column="vno" property="vno" jdbcType="VARCHAR" />
+		<result column="bname" property="bname" jdbcType="VARCHAR" />
+		<result column="jcr" property="jcr" jdbcType="VARCHAR" />
+<!-- 		维修历史 -->
+		<result column="total" property="total" jdbcType="FLOAT" />
+<!-- 		维修项目 -->
+		<result column="pnum" property="pnum" jdbcType="VARCHAR" />
+		<result column="pname" property="pname" jdbcType="VARCHAR" />
+		<result column="ptname" property="ptname" jdbcType="VARCHAR" />
+		<result column="bpreferentialM" property="bpreferentialM" jdbcType="FLOAT" />
+		<result column="Faultdescription" property="faultdescription" jdbcType="VARCHAR" />
+		<result column="problem" property="problem" jdbcType="VARCHAR" />
+		
+<!-- 		领料情况 -->
+		<result column="type" property="type" jdbcType="INTEGER" />
+		<result column="gid" property="gid" jdbcType="INTEGER" />
+		<result column="gname" property="gname" jdbcType="VARCHAR" />
+		<result column="unit" property="unit" jdbcType="VARCHAR" />
+		<result column="number" property="number" jdbcType="INTEGER" />
+		<result column="frontPrice" property="frontPrice" jdbcType="FLOAT" />
+		<result column="laterPrice" property="laterPrice" jdbcType="FLOAT" />
+		<result column="price" property="price" jdbcType="FLOAT" />
+	</resultMap>
+	
+	<!-- 作业中车辆 -->
+	<!-- 单据状态，业务类型，客户名称(cus)，车牌号，手机(cus)，会员卡号(vip)，维修单号，单据类型，开单时间，预计完工，完工时间，结算时间，预估金额，服务顾问，接车人 -->
+	<select id="queryWeiXiu" resultMap="BaseResultMapTwo">
+		SELECT bs.`bstate`,bstp.`billname`,cus.`cname`,cinfo.`cdlicense`,cus.`cphone`,vip.`vno`,bs.`bid`,mb.`mbname` AS bname,bs.`Ordertime`,bs.`Expectedtime`,bs.`Completiontime`
+		,bs.`Clearingtime`,bs.`forecastmoney`,per.`personnelname`,(SELECT personnel.`personnelname` FROM personnel WHERE personnel.`personnelid`=bs.`Pickcar` ) AS jcr 
+		FROM maintain_bill mb 
+		LEFT JOIN bills bs ON mb.`bid`=bs.`bid`
+		LEFT JOIN billstype bstp ON bstp.`id`=bs.`btid`
+		LEFT JOIN carinfo cinfo ON cinfo.`cdlicense`=bs.`cdlicense`
+		LEFT JOIN personnel per ON per.`personnelid`=bs.`pno`
+		LEFT JOIN customer cus ON cus.`cno`=cinfo.`cno`
+		LEFT JOIN vip ON vip.`cno`=cus.`cno`
+		UNION ALL
+		SELECT bs.`bstate`,bstp.`billname`,cus.`cname`,cinfo.`cdlicense`,cus.`cphone`,vip.`vno`,bs.`bid`,mb.`rbname` AS bname,bs.`Ordertime`,bs.`Expectedtime`,bs.`Completiontime`
+		,bs.`Clearingtime`,bs.`forecastmoney`,per.`personnelname`,(SELECT personnel.`personnelname` FROM personnel WHERE personnel.`personnelid`=bs.`Pickcar` ) AS jcr 
+		FROM rescue_bill mb 
+		LEFT JOIN bills bs ON mb.`bid`=bs.`bid`
+		LEFT JOIN billstype bstp ON bstp.`id`=bs.`btid`
+		LEFT JOIN carinfo cinfo ON cinfo.`cdlicense`=bs.`cdlicense`
+		LEFT JOIN personnel per ON per.`personnelid`=bs.`pno`
+		LEFT JOIN customer cus ON cus.`cno`=cinfo.`cno`
+		LEFT JOIN vip ON vip.`cno`=cus.`cno`;
+	</select>
+	
+	<!-- 查询维修历史 -->
+	<select id="weixiuHistory" resultMap="BaseResultMapTwo">
+		SELECT bs.`bid`,bs.`Ordertime`,bstp.`billname` ,bs.`Completiontime`,cus.`cname`,bs.`cdlicense`,cus.`cphone`,vip.`vno`,bs.`Clearingtime`,ac.`total`
+		FROM bills bs
+		INNER JOIN carinfo cinfo ON cinfo.`cdlicense`=bs.`cdlicense`
+		LEFT JOIN customer cus ON cus.`cno`=cinfo.`cno`
+		INNER JOIN billstype bstp ON bstp.`id`=bs.`btid`
+		INNER JOIN account ac ON ac.`bid`=bs.`bid`
+		LEFT JOIN vip ON vip.`cno`=cus.`cno`
+		WHERE bs.`cdlicense`=#{cdlicense};
+	</select>
+	
+	<!-- 查询维修项目 -->
+	<select id="queryProject"  resultMap="BaseResultMapTwo">
+		SELECT bs.`bid`,bs.`Ordertime`,bstp.`billname` ,bs.`Completiontime`,bs.`Clearingtime`
+		,pj.`pnum`,pj.`pname`,ptype.`ptname` ,dm.`bpreferentialM`,dm.`Faultdescription`,dm.`problem`      
+		FROM project pj 
+		LEFT JOIN d_maintenance dm ON dm.`cno`=pj.`id`
+		LEFT JOIN bills bs ON bs.`bid`=dm.`bid`
+		LEFT JOIN carinfo cinfo ON cinfo.`cdlicense`=bs.`cdlicense`
+		LEFT JOIN customer cus ON cus.`cno`=cinfo.`cno`
+		LEFT JOIN billstype bstp ON bstp.`id`=bs.`btid`
+		INNER JOIN account ac ON ac.`bid`=bs.`bid`
+		LEFT JOIN pricetype ptype ON ptype.`ptid`=dm.`pcid`
+		WHERE bs.`cdlicense`=#{cdlicense};
+	</select>
+	
+	<select id="queryLinliao" resultMap="BaseResultMapTwo">
+		SELECT bs.`bid`,bs.`Ordertime`,bstp.`billname` ,bs.`Completiontime`,bs.`Clearingtime`,li.`type`,gs.`gid`,gs.`gname`,gs.`unit`,bstp.`billname`,li.`number`,li.`frontPrice`,li.`laterPrice`,li.`price`
+		FROM bills bs
+		INNER JOIN billstype bstp ON bstp.`id`=bs.`btid`
+		INNER JOIN linliao li ON li.`bid`=bs.`bid`
+		LEFT JOIN pricetype pt ON li.`ptid`=pt.`ptid`
+		LEFT JOIN goods gs ON gs.`gid`=li.`gid`
+		INNER JOIN account ac ON ac.`bid`=bs.`bid`
+		WHERE bs.`cdlicense`=#{cdlicense};
+	</select>
+		
 	<!-- 不带条件查询所有 -->
 	<select id="findAllBills" resultMap="BaseResultMap">
 		SELECT c.`cno`,a.buying,

@@ -28,8 +28,9 @@
     <result column="cdnextmileage" property="cdnextmileage" jdbcType="REAL" />
     <result column="cdnextkeep" property="cdnextkeep" jdbcType="TIMESTAMP" />
     <result column="cno" property="cno" jdbcType="VARCHAR" />
-    <result column="remark1" property="remark1" jdbcType="VARCHAR" />
-    <result column="remark2" property="remark2" jdbcType="VARCHAR" />
+    <result column="cdcompulsoryinsurancename" property="cdcompulsoryinsurancename" jdbcType="VARCHAR" />
+    <result column="cdcommerceinsurancename" property="cdcommerceinsurancename" jdbcType="VARCHAR" />   
+    <result column="cdenginebrandid" property="cdenginebrandid" jdbcType="INTEGER" />
     <result column="remark3" property="remark3" jdbcType="VARCHAR" />
     <result column="remark4" property="remark4" jdbcType="VARCHAR" />
     <result column="remark5" property="remark5" jdbcType="VARCHAR" />
@@ -61,8 +62,9 @@
     <result column="cdnextmileage" property="cdnextmileage" jdbcType="REAL" />
     <result column="cdnextkeep" property="cdnextkeep" jdbcType="TIMESTAMP" />
     <result column="cno" property="cno" jdbcType="VARCHAR" />
-    <result column="remark1" property="remark1" jdbcType="VARCHAR" />
-    <result column="remark2" property="remark2" jdbcType="VARCHAR" />
+    <result column="cdcompulsoryinsurancename" property="cdcompulsoryinsurancename" jdbcType="VARCHAR" />
+    <result column="cdcommerceinsurancename" property="cdcommerceinsurancename" jdbcType="VARCHAR" />
+    <result column="cdenginebrandid" property="cdenginebrandid" jdbcType="INTEGER" />
     <result column="remark3" property="remark3" jdbcType="VARCHAR" />
     <result column="remark4" property="remark4" jdbcType="VARCHAR" />
     <result column="remark5" property="remark5" jdbcType="VARCHAR" />
@@ -74,6 +76,8 @@
   </resultMap>
   <select id="queryCarinfoKey" resultMap="BaseResultMapTwo">
   		SELECT cinfo.*,cbrand.`brandname`,cbrandinfo.`cname`,cbl.`carname`,en.`motorname`,fu.`fuelname`
+  		,(SELECT ins.insurancename FROM insurance ins WHERE ins.insuranceid=cinfo.`cdcompulsoryinsuranceid` ) AS cdcompulsoryinsurancename
+		,(SELECT ins.insurancename FROM insurance ins WHERE ins.insuranceid=cinfo.`cdcommerceinsuranceid` ) AS cdcommerceinsurancename
 		FROM carinfo cinfo
 		LEFT JOIN carbrand cbrand ON cbrand.`brandid`=cinfo.`cdno`
 		LEFT JOIN carbrandinfo cbrandinfo ON cbrand.`brandid`=cbrandinfo.`cno`
@@ -84,6 +88,8 @@
   </select>
   <select id="queryCarinfo" resultMap="BaseResultMapTwo">
   		SELECT cinfo.*,cbrand.`brandname`,cbrandinfo.`cname`,cbl.`carname`,en.`motorname`,fu.`fuelname`
+		,(SELECT ins.insurancename FROM insurance ins WHERE ins.insuranceid=cinfo.`cdcompulsoryinsuranceid` ) AS cdcompulsoryinsurancename
+		,(SELECT ins.insurancename FROM insurance ins WHERE ins.insuranceid=cinfo.`cdcommerceinsuranceid` ) AS cdcommerceinsurancename
 		FROM carinfo cinfo
 		LEFT JOIN carbrand cbrand ON cbrand.`brandid`=cinfo.`cdno`
 		LEFT JOIN carbrandinfo cbrandinfo ON cbrand.`brandid`=cbrandinfo.`cno`
@@ -93,6 +99,8 @@
   </select>
   <select id="queryCarinfoLike" resultMap="BaseResultMapTwo">
   	SELECT cinfo.*,cbrand.`brandname`,cbrandinfo.`cname`,cbl.`carname`,en.`motorname`,fu.`fuelname`
+  		,(SELECT ins.insurancename FROM insurance ins WHERE ins.insuranceid=cinfo.`cdcompulsoryinsuranceid` ) AS cdcompulsoryinsurancename
+		,(SELECT ins.insurancename FROM insurance ins WHERE ins.insuranceid=cinfo.`cdcommerceinsuranceid` ) AS cdcommerceinsurancename
 		FROM carinfo cinfo
 		LEFT JOIN carbrand cbrand ON cbrand.`brandid`=cinfo.`cdno`
 		LEFT JOIN carbrandinfo cbrandinfo ON cbrand.`brandid`=cbrandinfo.`cno`
@@ -174,7 +182,7 @@
     cdlicense, cdno, cbiid, cddricer, cddriverphone, cddriverbirth, clid, cdlicenseend, 
     cdframe, cdengine, cdyearprice, cdmileage, cdload, cdbuydate, cdgolicense, cdcarcheckdate, 
     fuelid, cdsystem, cdcompulsoryinsuranceid, cdcompulsoryinsurancedate, cdcommerceinsuranceid, 
-    cdcommerceinsurancedate, cdisinsure, cdnextmileage, cdnextkeep, cno, remark1, remark2, 
+    cdcommerceinsurancedate, cdisinsure, cdnextmileage, cdnextkeep, cno, cdenginebrandid,
     remark3, remark4, remark5
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.accp.domain.CarinfoExample" >
@@ -217,7 +225,7 @@
       cdcompulsoryinsuranceid, cdcompulsoryinsurancedate, 
       cdcommerceinsuranceid, cdcommerceinsurancedate, 
       cdisinsure, cdnextmileage, cdnextkeep, 
-      cno, remark1, remark2, 
+      cno, cdenginebrandid
       remark3, remark4, remark5
       )
     values (#{cdlicense,jdbcType=VARCHAR}, #{cdno,jdbcType=VARCHAR}, #{cbiid,jdbcType=VARCHAR}, 
@@ -229,7 +237,7 @@
       #{cdcompulsoryinsuranceid,jdbcType=INTEGER}, #{cdcompulsoryinsurancedate,jdbcType=TIMESTAMP}, 
       #{cdcommerceinsuranceid,jdbcType=INTEGER}, #{cdcommerceinsurancedate,jdbcType=TIMESTAMP}, 
       #{cdisinsure,jdbcType=INTEGER}, #{cdnextmileage,jdbcType=REAL}, #{cdnextkeep,jdbcType=TIMESTAMP}, 
-      #{cno,jdbcType=VARCHAR}, #{remark1,jdbcType=VARCHAR}, #{remark2,jdbcType=VARCHAR}, 
+      #{cno,jdbcType=VARCHAR}, #{cdenginebrandid,jdbcType=INTEGER}
       #{remark3,jdbcType=VARCHAR}, #{remark4,jdbcType=VARCHAR}, #{remark5,jdbcType=VARCHAR}
       )
   </insert>
@@ -314,11 +322,8 @@
       <if test="cno != null" >
         cno,
       </if>
-      <if test="remark1 != null" >
-        remark1,
-      </if>
-      <if test="remark2 != null" >
-        remark2,
+      <if test="cdenginebrandid != null">
+      cdenginebrandid,
       </if>
       <if test="remark3 != null" >
         remark3,
@@ -409,11 +414,8 @@
       <if test="cno != null" >
         #{cno,jdbcType=VARCHAR},
       </if>
-      <if test="remark1 != null" >
-        #{remark1,jdbcType=VARCHAR},
-      </if>
-      <if test="remark2 != null" >
-        #{remark2,jdbcType=VARCHAR},
+      <if test="cdenginebrandid != null">
+      	#{cdenginebrandid,jdbcType=INTEGER},
       </if>
       <if test="remark3 != null" >
         #{remark3,jdbcType=VARCHAR},
@@ -513,12 +515,9 @@
       <if test="record.cno != null" >
         cno = #{record.cno,jdbcType=VARCHAR},
       </if>
-      <if test="record.remark1 != null" >
-        remark1 = #{record.remark1,jdbcType=VARCHAR},
-      </if>
-      <if test="record.remark2 != null" >
-        remark2 = #{record.remark2,jdbcType=VARCHAR},
-      </if>
+     <if test="record.cdenginebrandid !=null">
+     	cdenginebrandid = #{record.cdenginebrandid,jdbcType=INTEGER},
+     </if>
       <if test="record.remark3 != null" >
         remark3 = #{record.remark3,jdbcType=VARCHAR},
       </if>
@@ -561,8 +560,7 @@
       cdnextmileage = #{record.cdnextmileage,jdbcType=REAL},
       cdnextkeep = #{record.cdnextkeep,jdbcType=TIMESTAMP},
       cno = #{record.cno,jdbcType=VARCHAR},
-      remark1 = #{record.remark1,jdbcType=VARCHAR},
-      remark2 = #{record.remark2,jdbcType=VARCHAR},
+      cdenginebrandid= #{record.cdenginebrandid,jdbcType=INTEGER},
       remark3 = #{record.remark3,jdbcType=VARCHAR},
       remark4 = #{record.remark4,jdbcType=VARCHAR},
       remark5 = #{record.remark5,jdbcType=VARCHAR}
@@ -648,11 +646,8 @@
       <if test="cno != null" >
         cno = #{cno,jdbcType=VARCHAR},
       </if>
-      <if test="remark1 != null" >
-        remark1 = #{remark1,jdbcType=VARCHAR},
-      </if>
-      <if test="remark2 != null" >
-        remark2 = #{remark2,jdbcType=VARCHAR},
+      <if test="cdenginebrandid != null">
+      	cdenginebrandid = #{cdenginebrandid,jdbcType=INTEGER},
       </if>
       <if test="remark3 != null" >
         remark3 = #{remark3,jdbcType=VARCHAR},
@@ -693,8 +688,7 @@
       cdnextmileage = #{cdnextmileage,jdbcType=REAL},
       cdnextkeep = #{cdnextkeep,jdbcType=TIMESTAMP},
       cno = #{cno,jdbcType=VARCHAR},
-      remark1 = #{remark1,jdbcType=VARCHAR},
-      remark2 = #{remark2,jdbcType=VARCHAR},
+      cdenginebrandid = #{cdenginebrandid,jdbcType=INTEGER},
       remark3 = #{remark3,jdbcType=VARCHAR},
       remark4 = #{remark4,jdbcType=VARCHAR},
       remark5 = #{remark5,jdbcType=VARCHAR}

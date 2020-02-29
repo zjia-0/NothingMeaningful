@@ -35,21 +35,21 @@
 							<li>车架号：<input name="chejia" type="text" /></li>
 						</ul>
 						<ul class="menue" style="padding: 0px;margin: 0px;float: right;">
-							<li @click="addBind" class="insert"><span class="glyphicon glyphicon-plus-sign"></span>增加</li>
-							<li class="update" data-toggle="modal" data-target="#myModal" ><span class="glyphicon glyphicon-leaf"></span>修改</li>
-							<li @click="del"><span class="glyphicon glyphicon-remove-sign"></span>删除</li>
-							<li @click="checkstaff"><span class="glyphicon glyphicon-sunglasses"></span>查询</li>
-							<li><span class="glyphicon glyphicon-lock"></span>保养</li>
+							<li @click="addBind" class="insert"><span style="color: #fcac28;" class="glyphicon glyphicon-plus-sign"></span>增加</li>
+							<li class="update" data-toggle="modal" data-target="#myModal" ><span style="color: #fcac28;" class="glyphicon glyphicon-leaf"></span>修改</li>
+							<li @click="del"><span style="color: #fcac28;" class="glyphicon glyphicon-remove-sign"></span>删除</li>
+							<li @click="checkstaff"><span style="color: #fcac28;" class="glyphicon glyphicon-sunglasses"></span>查询</li>
+							<li><span style="color: #fcac28;" class="glyphicon glyphicon-lock"></span>保养</li>
 
-							<li><span class="glyphicon glyphicon-export"></span>导出</li>
-							<li @click="setting"><span class="glyphicon glyphicon-cog"></span>字段设置</li>
+							<li><span style="color: #fcac28;" class="glyphicon glyphicon-export"></span>导出</li>
+							<li @click="setting"><span style="color: #fcac28;" class="glyphicon glyphicon-cog"></span>字段设置</li>
 						</ul>
 					</div>
 					<!--车辆信息-->
 					<div class="col-md-12 col-xs-12" style="overflow: auto;height: 400px;">
 						<table class="table table-hover" style="width: 3000px;">
 							<thead>
-								<tr>
+								<tr style="background-color: #39ecde; color: white;">
 									<td></td>
 									<td>车牌号码</td>
 									<td>车辆品牌</td>
@@ -122,7 +122,7 @@
 					<div class="col-md-12 col-xs-12" style="overflow: auto;height: 190px;">
 						<table class="table table-bordered" style="width: 3000px;">
 							<thead>
-								<tr style="background-color: deepskyblue;">
+								<tr style="background-color: #39ecde; color: white;">
 									<td></td>
 									<td v-for="item in carinfo">{{item}}</td>
 								</tr>
@@ -356,7 +356,7 @@
 									<p style="padding-top: 15px;">
 										<label>车牌号码：</label>
 										<input v-model="vehicle.cdlicense" name="cdlicense"type="text" ></input>
-										<span  data-toggle="modal" data-target="#myChePaiHao" style="margin: 0px 10px 0px -25px;" class="glyphicon glyphicon-th"></span>
+										<span data-toggle="modal" data-target="#myChePaiHao" style=" margin-left: -25px; margin-right: 20px; position: relative; top: 2px;" class="glyphicon glyphicon-th"></span>
 										<label>车辆品牌：</label>
 										<input type="text" v-model="vehicle.cdno"  name="carBrand">
 										</input>
@@ -372,6 +372,7 @@
 										<select id="guishu" v-model="vehicle.clid" style="width: 100px;">
 											<option selected="selected" >请选择</option>
 											<option :value="item.carid" v-for="item in carbelong">{{item.carname}}</option>
+											<option>2</option>
 										</select>
 										<label>驾证到期：</label><input v-model="vehicle.cdlicenseend" type="date" style="width: 140px;">
 									</p>
@@ -423,8 +424,10 @@
 										<label>下次保养里程：</label>
 										<input v-model="vehicle.cdnextmileage" type="text">
 										<label>下次保养日期：</label><input v-model="vehicle.cdnextkeep" type="date" style="width: 140px;">
-										<label>客户名称：</label>
-										<input v-model="vehicle.cno" style="width: 255px;" type="text">
+										<label>客户名称：</label>										
+										<input disabled="disabled" v-model="vehicle.cno" style="width: 100px;" type="text">
+										<input disabled="disabled" name="cname" />
+										<span @click="customers" style="font-size: 16px; margin-left: -27px; position: relative; top: 2px; " class="glyphicon glyphicon-align-justify"></span>
 									</p>
 								</div>
 							</div>
@@ -479,7 +482,7 @@
 		<script src="js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript" src="js/my.js"></script>
-		<script type="text/javascript">
+		<script type="text/javascript">		
 			//定义新增修改的路径
 			var updateUrl="";
 			
@@ -528,7 +531,9 @@
 							success: function(result) {
 								vm.vehicles = result
 								console.log(result)
-								vm.queryCustomer(vm.vehicles[0].cno);
+								if(result!=null && result!=""){
+										vm.queryCustomer(vm.vehicles[0].cno);
+								}							
 							}
 						})
 					},
@@ -570,7 +575,9 @@
 							success: function(result) {
 								vm.vehicles = result
 								console.log(result)
-								vm.queryCustomer(vm.vehicles[0].cno);
+								if(result!=null && result!=""){
+										vm.queryCustomer(vm.vehicles[0].cno);
+								}
 							}
 						})
 					},
@@ -636,7 +643,7 @@
 							},
 							contentType:"application/json;charset=utf-8",
 							success: function(result) {
-								window.location.reload()
+								vm.queryCarinfo()
 							},
 							error:function(error){
 								console.log(error)
@@ -645,7 +652,6 @@
 					},
 					//删除车资料
 					del: function() {	
-						alert(vm.vehicle.cdlicense)
 						$.ajax({
 							url: data.ip + "/vehicle/delCarinfo",
 							type: "get",
@@ -660,6 +666,13 @@
 								console.log(error)
 							}
 						})
+					},
+					//选择用户
+					customers: function(){
+						localStorage.setItem("cardate","selectcustomer");
+						localStorage.setItem("url",updateUrl);
+						localStorage.setItem("carinfo",JSON.stringify(vm.vehicle));
+						window.location.href="customer_information.html";
 					}
 				}
 			});
@@ -676,19 +689,46 @@
 				}
 			}
 			$(".insert").click(function(){
-				updateUrl="addCarinfo"
-				vm.vehicle="";
+				$("[name=cdlicense]").attr("disabled",false)
+				$("[name=cdlicense]").next().attr("data-toggle","modal")
+				updateUrl="addCarinfo";
+				vm.vehicle={};
+				vm.vehicle.clid="请选择";
+				vm.vehicle.cdenginebrandid="请选择";
+				vm.vehicle.cdcommerceinsuranceid="请选择";
+				vm.vehicle.cdcompulsoryinsuranceid="请选择";
+				vm.vehicle.fuelid="请选择";
+				$("[name=cname]").val("")
             	$("#myModal").modal("show");
 			})
 			$(".update").click(function(){
-				updateUrl="updCarinfo"
+				$("[name=cdlicense]").attr("disabled","disabled")
+				$("[name=cdlicense]").next().attr("data-toggle","")
+				updateUrl="updCarinfo";
 			})
-			//新增功能模态框下拉框默认选中第一项
-			vm.vehicle.clid="请选择";
-			vm.vehicle.cdenginebrandid="请选择";
-			vm.vehicle.cdcommerceinsuranceid="请选择";
-			vm.vehicle.cdcompulsoryinsuranceid="请选择";
-			vm.vehicle.fuelid="请选择";
+
+			$(function(){
+				var flight=localStorage.getItem("carinfo");
+				var flight2=localStorage.getItem("customer");
+				updateUrl=localStorage.getItem("url");
+				if(flight != null){
+					vm.addBind();
+					var cinfo=JSON.parse(flight);	
+					var cus=JSON.parse(flight2)
+					vm.vehicle={};
+					vm.vehicle=cinfo;	
+					vm.vehicle.cno=cus.cno;
+					if(vm.vehicle.cdisinsure==1){
+						$("[name=tbc]").attr("checked",true);
+					}else{
+						$("[name=tbc]").attr("checked",false);
+					}
+					$("[name=cname]").val(cus.cname)
+					$("#myModal").modal("show");
+					//删除单个数据：localStorage.removeItem(key);
+					localStorage.clear();
+				}
+			})
 			
 		</script>
 	</body>

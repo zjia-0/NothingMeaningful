@@ -6,6 +6,12 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface BillsMapper {
+
+	List<Bills> queryWeiXiu();//查询维修模块作业中车辆
+	List<Bills> weixiuHistory(String cdlicense);//查询维修历史
+	List<Bills> queryProject(String cdlicense);//查询维修项目
+	List<Bills> queryLinliao(String cdlicense);//查询领料情况
+	
 	List<Bills> findbytj(Bills bill);
 	List<Bills> findAllBills();
 

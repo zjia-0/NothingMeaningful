@@ -9,76 +9,95 @@
 		<link rel="stylesheet" type="text/css" href="fonts/mdi/css/materialdesignicons.css" />
 		<link rel="stylesheet" type="text/css" href="fonts/mdi/css/materialdesignicons.min.css" />
 		<link rel="stylesheet" type="text/css" href="css/customer_information.css" />
-		<link rel="stylesheet" type="text/css" href="css/bootstrapStyle/bootstrapStyle.css"/>
+		<link rel="stylesheet" type="text/css" href="css/bootstrapStyle/bootstrapStyle.css" />
 		<style>
-			
+
 		</style>
 	</head>
 
-	<body>
+	<body onload="setup();">
 
 		<div id="ctx">
 			<div class="container-fluid">
 				<div class="row">
 					<div>
-						<span>客户档案</span>
+						<span>客户档案</span>						
 					</div>
 					<div>
+						<button @click="selectCustomer" name="qd" style="margin-left:400px; margin-top: 18px; width: 100px; height: 30px; color: white; background-color: #5CB85C;"  class="btn btn-default hidden">选择</button>
+					</div>
+					
+					<div>
 						<div style="float: right;box-sizing: border-box;padding-right: 100px;padding-top: 13px;">
-							<input type="text" style="height: 35px;margin-right: 10px;width: 300px;outline:none;" />
-							<button class="btn btn-success" style="width: 100px;margin-right: 10px;">搜索</button>
+							<input name="mohu" type="text" placeholder=" 名称/手机/会员卡号/车牌号" style="height: 35px;margin-right: 10px;width: 300px;outline:none;" />
+							<button @click="likeQuery" name="xz" class="btn btn-success" style="width: 100px;margin-right: 10px;">搜索</button>
 							<button class="btn btn-default" style="width: 70px;">关闭</button>
 						</div>
 					</div>
 				</div>
 				<div class="row">
-					<div class="row col-md-12 col-xs-12" style="box-sizing: border-box;background-color: #F7F7F7;border: 1px solid #E9E9E9;">
+					<div class="row col-md-12 col-lg-12 col-xs-12" style="box-sizing: border-box;background-color: #F7F7F7;border: 1px solid #E9E9E9;">
 						<ul class="menue" style="padding: 0px;margin: 0px;">
 							<li class="btn-group" style="margin-left: 100px;">
-								<button href=".hide-btn-customer" data-toggle="collapse" type="button" style="background-color: #A6E1EC;" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								<button href=".hide-btn-customer" data-toggle="collapse" type="button" style="background-color: deepskyblue; color: white;" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								    客户编辑 <span class="caret"></span>
-								</button>								
+								</button>
 							</li>
 							<li class="btn-group">
-								<button href=".hide-btn-carinfo" data-toggle="collapse" type="button" style="background-color: #EEA236;" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								<button href=".hide-btn-carinfo" data-toggle="collapse" type="button" style="background-color: rgb(252,172,20); color: white;" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								    车资料 <span class="caret"></span>
-								</button>								
+								</button>
 							</li>
 							<li class="btn-group">
-								<button  type="button" class="btn btn-default">
+								<button type="button" class="btn btn-default">
 								    客户分类 <span class="caret"></span>
 								</button>
 							</li>
 							<li @click="checkstaff" class="btn-group">
-								<button  type="button" class="btn btn-default">
+								<button type="button" class="btn btn-default">
 								    查询 <span class="caret"></span>
 								</button>
 							</li>
-							<li><span class="glyphicon glyphicon-export"></span>导出</li>
-							<li @click="setting"><span class="glyphicon glyphicon-cog"></span>字段设置</li>
+							<li><span style="color: #fcac28;" class="glyphicon glyphicon-export"></span>导出</li>
+							<li @click="setting"><span style="color: #fcac28;" class="glyphicon glyphicon-cog"></span>字段设置</li>
 						</ul>
-						
+
 					</div>
-						<div class="nav nav-list collapse menu-second hide-btn-customer col-md-12 " style="height: 30px; background-color: #A6E1EC;">
-							<ul id="customer">
-								<li><a href="javascript:void(0)">增加客户和车</a></li>
-								<li><a href="javascript:void(0)">增加客户</a></li>
-								<li><a href="javascript:void(0)">修改客户</a></li>
-								<li><a href="javascript:void(0)">删除客户</a></li>
-							</ul>							
-						</div>
-						<div class="nav nav-list collapse menu-second hide-btn-carinfo col-md-12 " style="height: 30px; background-color: #EEA236;">
-							<ul id="carinfo">
-								<li><a href="javascript:void(0)">增加车资料</a></li>
-								<li><a href="javascript:void(0)">修改车资料</a></li>
-								<li><a href="javascript:void(0)">删除车资料</a></li>
-							</ul>							
-						</div>
-					<div class="col-md-12 col-xs-12" style="overflow: auto;height: 400px;">
-						
+					<div class="nav nav-list collapse menu-second hide-btn-customer col-md-12 " style="height: 30px; background-color: deepskyblue;">
+						<ul id="customer">
+							<li>
+								<a href="javascript:void(0)">增加客户和车</a>
+							</li>
+							<li>
+								<a class="toAddCus" href="javascript:void(0)">增加客户</a>
+							</li>
+							<li>
+								<a class="toUpdCus" href="javascript:void(0)">修改客户</a>
+							</li>
+							<li>
+								<a @click="del" href="javascript:void(0)">删除客户</a>
+							</li>
+						</ul>
+					</div>
+					<div class="nav nav-list collapse menu-second hide-btn-carinfo col-md-12 " style="height: 30px; background-color: rgb(252,172,20)">
+						<ul id="carinfo">
+							<li>
+								<a class="insertCar" @click="addBind" href="javascript:void(0)">增加车资料</a>
+							</li>
+							<li>
+								<a class="updCar" @click="addBind" href="javascript:void(0)">修改车资料</a>
+							</li>
+							<li>
+								<a @click="delCar" href="javascript:void(0)">删除车资料</a>
+							</li>
+						</ul>
+					</div>
+					<!--客户信息-->
+					<div class="col-md-12 col-xs-12" style="overflow: auto;height: 350px;">
+
 						<table class="table table-hover" style="width: 3000px;">
 							<thead>
-								<tr>
+								<tr style="background-color: #39ecde; color: white;">
 									<td> </td>
 									<td>客户编码</td>
 									<td>客户名称</td>
@@ -105,11 +124,6 @@
 									<td>注册电话</td>
 									<td>开户银行</td>
 									<td>银行账号</td>
-									<td>注册地址</td>
-									<td>其他一</td>
-									<td>其他二</td>
-									<td>其他三</td>
-									<td>其他四</td>
 								</tr>
 							</thead>
 							<tbody class="cinfo">
@@ -140,21 +154,22 @@
 									<td @click="clickCustomer(item,index)">{{item.cregistphone}}</td>
 									<td @click="clickCustomer(item,index)">{{item.cbank}}</td>
 									<td @click="clickCustomer(item,index)">{{item.cbanknumber}}</td>
-								</tr>   
+								</tr>
 							</tbody>
 						</table>
 					</div>
-					<div class="col-md-12 col-xs-12" >
+					<div class="col-md-12 col-xs-12">
 						<ul id="lists" style="padding: 0px;margin: 0px;">
 							<li>车辆信息</li>
 							<li>历史消费</li>
 							<li>历史回访</li>
 						</ul>
 					</div>
+					<!--车辆信息-->
 					<div class="col-md-12 col-xs-12" style="overflow: auto;height: 190px;">
-						<table class="table table-bordered" style="width: 3000px;">
+						<table class="table table-hover" style="width: 3000px;">
 							<thead>
-								<tr>
+								<tr style="background-color: #39ecde; color: white;">
 									<td> </td>
 									<td>车牌号码</td>
 									<td>车辆品牌</td>
@@ -183,35 +198,35 @@
 									<td>下次保养日期</td>
 								</tr>
 							</thead>
-							<tbody class="cinfo">
+							<tbody class="carinfo">
 								<tr v-for="item,index in vehicles">
 									<td> </td>
-									<td>{{item.cdlicense}}</td>
-									<td>{{item.brandname}}</td>
-									<td>{{item.cname}}</td>
-									<td>{{item.cddricer}}</td>
-									<td>{{item.cddriverphone}}</td>
-									<td>{{item.cddriverbirth}}</td>
-									<td>{{item.carname}}</td>
-									<td>{{item.cdlicenseend}}</td>
-									<td>{{item.cdframe}}</td>
-									<td>{{item.cdengine}}</td>
-									<td>{{item.motorname}}</td>
-									<td>{{item.cdyearprice}}</td>
-									<td>{{item.cdmileage}}</td>
-									<td>{{item.cdload}}</td>
-									<td>{{item.cdbuydate}}</td>
-									<td>{{item.cdgolicense}}</td>
-									<td>{{item.cdcarcheckdate}}</td>
-									<td>{{item.cdcompulsoryinsurancename}}</td>
-									<td>{{item.cdcompulsoryinsurancedate}}</td>
-									<td>{{item.cdcommerceinsurancename}}</td>
-									<td>{{item.cdcommerceinsurancedate}}</td>
-									<td v-if="item.cdisinsure == 1">是</td>
-									<td v-else>否</td>
-									<td>{{item.fuelname}}</td>
-									<td>{{item.cdnextmileage}}</td>
-									<td>{{item.cdnextkeep}}</td>
+									<td @click="clickVehicle(item,index)">{{item.cdlicense}}</td>
+									<td @click="clickVehicle(item,index)">{{item.brandname}}</td>
+									<td @click="clickVehicle(item,index)">{{item.cname}}</td>
+									<td @click="clickVehicle(item,index)">{{item.cddricer}}</td>
+									<td @click="clickVehicle(item,index)">{{item.cddriverphone}}</td>
+									<td @click="clickVehicle(item,index)">{{item.cddriverbirth}}</td>
+									<td @click="clickVehicle(item,index)">{{item.carname}}</td>
+									<td @click="clickVehicle(item,index)">{{item.cdlicenseend}}</td>
+									<td @click="clickVehicle(item,index)">{{item.cdframe}}</td>
+									<td @click="clickVehicle(item,index)">{{item.cdengine}}</td>
+									<td @click="clickVehicle(item,index)">{{item.motorname}}</td>
+									<td @click="clickVehicle(item,index)">{{item.cdyearprice}}</td>
+									<td @click="clickVehicle(item,index)">{{item.cdmileage}}</td>
+									<td @click="clickVehicle(item,index)">{{item.cdload}}</td>
+									<td @click="clickVehicle(item,index)">{{item.cdbuydate}}</td>
+									<td @click="clickVehicle(item,index)">{{item.cdgolicense}}</td>
+									<td @click="clickVehicle(item,index)">{{item.cdcarcheckdate}}</td>
+									<td @click="clickVehicle(item,index)">{{item.cdcompulsoryinsurancename}}</td>
+									<td @click="clickVehicle(item,index)">{{item.cdcompulsoryinsurancedate}}</td>
+									<td @click="clickVehicle(item,index)">{{item.cdcommerceinsurancename}}</td>
+									<td @click="clickVehicle(item,index)">{{item.cdcommerceinsurancedate}}</td>
+									<td @click="clickVehicle(item,index)" v-if="item.cdisinsure == 1">是</td>
+									<td @click="clickVehicle(item,index)" v-else>否</td>
+									<td @click="clickVehicle(item,index)">{{item.fuelname}}</td>
+									<td @click="clickVehicle(item,index)">{{item.cdnextmileage}}</td>
+									<td @click="clickVehicle(item,index)">{{item.cdnextkeep}}</td>
 								</tr>
 							</tbody>
 						</table>
@@ -221,6 +236,7 @@
 					合计：<span>2</span>条记录
 				</div>
 			</div>
+			<!--增加客户和车资料-->
 			<div id="addcusandcar">
 				<p style="padding: 2px;background-color: #858585;font-weight: bold;color: #D6D6CE;">增加客户和车资料</p>
 				<div style="width: 980px;height: 600px;border:1px solid white;margin-left: 10px;background-color: white;">
@@ -299,57 +315,215 @@
 					</div>
 				</div>
 			</div>
-			<div id="addcus">
-				<p style="padding: 2px;background-color: #858585;font-weight: bold;color: #D6D6CE;">增加客户</p>
-				<div style="width: 980px;height: 450px;border:1px solid white;margin-left: 10px;background-color: white;">
-					<div style="width: 960px;height: 50px;margin-left: 10px;">
-						<div style="display: inline-block;width: 200px;height: 40px;font-size: 24px;box-sizing: border-box;padding-top: 5px;border-left: 4px solid orange;">增加客户</div>
-						<div @click="closeadd" class="clo" style="display: inline-block;width: 100px;height: 40px;box-sizing: border-box;float:right;font-size: 50px;text-align: right;padding: 0px;">X</div>
-						<button class="btn-success" style="float: right;width: 100px;height: 40px;margin-top: 5px;">确定</button>
-					</div>
-					<div style="width: 960px;height: 390px;margin-left: 10px;background-color: #D6D6CE;color:#44BDCA;box-sizing: border-box;padding-left: 20px;">
-						<p style="padding-top: 10px;">
-							<label><span style="color: red;">*</span>客户编码</label><input />
-							<label><span style="color: red;">*</span>客户名称</label><input />
-							<label><span style="color: red;">*</span>联系人</label><input />
-							<label><span style="color: red;">*</span>手机号码</label><input />
-						</p>
-						<p>
-							<label>客户地址</label><input style="width: 300px;" />
-							<label>客户生日</label><input />
-						</p>
-						<p>
-							<label>账期(天)</label><input />
-							<label>挂账额度</label><input />
-							<label>专属顾问</label><input />
-							<label>顾问电话</label><input />
-						</p>
-						<p>
-							<label>省</label><input />
-							<label>市</label><input />
-							<label>区</label><input />
-						</p>
-						<p>
-							<label>备注</label><input style="width: 500px;" />
-						</p>
-						<p>
-							<label>纳税人识别号</label><input />
-							<label>注册电话</label><input />
-							<label>开户银行</label><input />
-						</p>
-						<p>
-							<label>银行账号</label><input />
-							<label>注册地址</label><input style="width: 300px;" />
-						</p>
-						<p>
-							<label>其他一</label><input />
-							<label>其他二</label><input />
-							<label>其他三</label><input />
-							<label>其他四</label><input />
-						</p>
+			<!--客户资料编辑-->
+			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							<h4 class="modal-title" id="myModalLabel">客户资料编辑</h4>
+						</div>
+						<div class="modal-body">
+							<div class="addUser" style="width: 940px;height: 310px;margin-left: 10px;background-color: #D6D6CE;color:#44BDCA;box-sizing: border-box;padding-left: 20px;">
+								<p style="padding-top: 10px;">
+									<label><span style="color: red;">*</span>客户编码</label><input name="cusID" v-model="customer.cno" />
+									<label><span style="color: red;">*</span>客户名称</label><input v-model="customer.cname" />
+									<label><span style="color: red;">*</span>联系人</label><input v-model="customer.cpeople" />
+
+								</p>
+								<p>
+									<label><span style="color: red;">*</span>手机号码</label><input v-model="customer.cphone" />
+									<label>客户地址</label><input style="width: 300px;" v-model="customer.caddress" />
+									<label>客户生日</label><input type="date" v-model="customer.cbirthday" />
+								</p>
+								<p>
+									<label>账期(天)</label><input type="number" v-model="customer.cperiod" />
+									<label>挂账额度</label><input v-model="customer.climit" />
+									<label>专属顾问</label>
+									<select v-model="customer.personnelid">
+										<option selected="selected">请选择</option>
+										<option :value="item.personnelid" v-for="item in perss">{{item.personnelname}}</option>
+									</select>
+								</p>
+								<p>
+									<label>顾问电话</label><input v-model="customer.cadviserphone" />
+									<label>省</label>
+									<select class="select" v-model="customer.province" name="province" id="s1">
+										<option></option>
+									</select>
+									<label>市</label>
+									<select class="select" v-model="customer.city" name="city" id="s2">
+										<option></option>
+									</select>
+									<label>区</label>
+									<select class="select" v-model="customer.district" name="town" id="s3">
+										<option></option>
+									</select>
+								</p>
+								<p>
+									<label>备注</label><input style="width: 500px;" v-model="customer.cremark" />
+								</p>
+								<p>
+									<label>纳税人识别号</label><input v-model="customer.ctaxes" />
+									<label>注册电话</label><input v-model="customer.cregistphone" />
+									<label>开户银行</label><input v-model="customer.cbank" />
+								</p>
+								<p>
+									<label>银行账号</label><input v-model="customer.cbanknumber" />
+									<label>注册地址</label><input style="width: 300px;" v-model="customer.cregistaddress" />
+								</p>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default col-md-1 col-lg-push-10" data-dismiss="modal">取消</button>
+							<button type="button" data-dismiss="modal" @click="updateCus" class="btn btn-primary col-md-1 col-lg-push-10">确认</button>
+						</div>
 					</div>
 				</div>
 			</div>
+			<!--车资料新增修改模态框-->
+			<div class="modal fade" id="myModalCar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							<h4 class="modal-title" id="myModalLabel">车辆资料编辑</h4>
+						</div>
+						<div class="modal-body">
+							<div style="width: 1000px;height: 400px;border:1px solid white;background-color: white;">
+								<div style="width: 1000px;height: 400px;background-color: rgb(236, 236, 235);color:#44BDCA;box-sizing: border-box;padding-left: 20px;">
+									<p style="padding-top: 15px;">
+										<label>车牌号码：</label>
+										<input v-model="vehicle.cdlicense" name="cdlicense" type="text"></input>
+										<span data-toggle="modal" data-target="#myChePaiHao" style="margin: 0px 10px 0px -25px;" class="glyphicon glyphicon-th"></span>
+										<label>车辆品牌：</label>
+										<input type="text" v-model="vehicle.cdno" name="carBrand">
+										</input>
+										<label>车辆型号：</label>
+										<input v-model="vehicle.cbiid" type="text">
+										<label>驾驶员：</label>
+										<input v-model="vehicle.cddricer" style="width: 100px" type="text">
+									</p>
+									<p style="padding-top: 10px;">
+										<label>驾驶员电话：</label><input v-model="vehicle.cddriverphone" type="text">
+										<label>出生日期：</label><input v-model="vehicle.cddriverbirth" type="date" style="width: 140px;">
+										<label>车辆归属：</label>
+										<select id="guishu" v-model="vehicle.clid" style="width: 100px;">
+											<option selected="selected">请选择</option>
+											<option :value="item.carid" v-for="item in carbelong">{{item.carname}}</option>
+											<option>2</option>
+										</select>
+										<label>驾证到期：</label><input v-model="vehicle.cdlicenseend" type="date" style="width: 140px;">
+									</p>
+									<p style="padding-top: 10px;">
+										<label>车架号：</label><input v-model="vehicle.cdframe" type="text">
+										<label>发动机号：</label><input v-model="vehicle.cdengine" type="text">
+										<label>车辆年款：</label><input v-model="vehicle.cdyearprice" type="text">
+										<label>里程：</label><input v-model="vehicle.cdmileage" type="text">
+									</p>
+									<p style="padding-top: 10px;">
+										<label>发动机品牌：</label>
+										<select id="fadongji" v-model="vehicle.cdenginebrandid" style="width: 100px;">
+											<option selected="selected">请选择</option>
+											<option :value="item.motorid" v-for="item in engine">{{item.motorname}}</option>
+										</select>
+										<label>载重：</label><input v-model="vehicle.cdload" type="text">
+										<label>购买日期：</label><input v-model="vehicle.cdbuydate" type="date" style="width: 140px;">
+									</p>
+									<p style="padding-top: 10px;">
+										<label>上牌日期：</label><input v-model="vehicle.cdgolicense" type="date" style="width: 140px;">
+										<label>车检日期：</label><input v-model="vehicle.cdcarcheckdate" type="date" style="width: 140px;">
+										<label>燃油类别：</label>
+										<select v-model="vehicle.fuelid" style="width: 100px;">
+											<option selected="selected">请选择</option>
+											<option :value="item.fuelid" v-for="item in fuel">{{item.fuelname}}</option>
+										</select>
+										<label>车系：</label>
+										<input v-model="vehicle.cdsystem" type="text">
+									</p>
+									<p style="padding-top: 10px;">
+										<label>保险：交强险保险公司：</label>
+										<select v-model="vehicle.cdcompulsoryinsuranceid" style="width: 100px;">
+											<option selected="selected">请选择</option>
+											<option :value="item.insuranceid" v-for="item in insurance">{{item.insurancename}}</option>
+										</select>
+										<label>交强险到期：</label><input v-model="vehicle.cdcompulsoryinsurancedate" type="date" style="width: 140px;">
+										<label>在我投保车：</label>
+										<input name="tbc" type="checkbox" onchange="tbc(this)">
+									</p>
+									<p style="padding-top: 10px;">
+										<label>商业险保险公司：</label>
+										<select v-model="vehicle.cdcommerceinsuranceid" style="width: 100px;">
+											<option selected="selected">请选择</option>
+											<option :value="item.insuranceid" v-for="item in insurance">{{item.insurancename}}</option>
+										</select>
+										<label>商业险到期：</label><input v-model="vehicle.cdcommerceinsurancedate" type="date" style="width: 140px;">
+									</p>
+									<p style="padding-top: 10px;">
+										<label>下次保养里程：</label>
+										<input v-model="vehicle.cdnextmileage" type="text">
+										<label>下次保养日期：</label><input v-model="vehicle.cdnextkeep" type="date" style="width: 140px;">
+										<label>客户名称：</label>
+										<input disabled="disabled" v-model="vehicle.cno" style="width: 100px;" type="text">
+										<input disabled="disabled" name="cname" />
+									</p>
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default col-md-1 col-lg-push-10" data-dismiss="modal">取消</button>
+							<button type="button" data-dismiss="modal" @click="updateCar" class="btn btn-primary col-md-1 col-lg-push-10">确认</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--车牌号-->
+			<div style="z-index: 1999;" class="modal fade" id="myChePaiHao" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+				<div class="modal-dialog" role="document">
+					<div style="width: 450px; margin:150px auto;" class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							<h4 class="modal-title" id="myModalLabel">车牌字</h4>
+						</div>
+						<div class="modal-body chepai">
+							<button data-dismiss="modal" class="btn btn-default btn-lg " type="button">京</button>
+							<button data-dismiss="modal" class="btn btn-default btn-lg" type="button">沪</button>
+							<button data-dismiss="modal" class="btn btn-default btn-lg" type="button">津</button>
+							<button data-dismiss="modal" class="btn btn-default btn-lg" type="button">冀</button>
+							<button data-dismiss="modal" class="btn btn-default btn-lg" type="button">晋</button>
+							<button data-dismiss="modal" class="btn btn-default btn-lg" type="button">蒙</button>
+							<button data-dismiss="modal" class="btn btn-default btn-lg" type="button">辽</button>
+							<button data-dismiss="modal" class="btn btn-default btn-lg" type="button">吉</button>
+							<button data-dismiss="modal" class="btn btn-default btn-lg" type="button">黑</button>
+							<button data-dismiss="modal" class="btn btn-default btn-lg" type="button">苏</button>
+							<button data-dismiss="modal" class="btn btn-default btn-lg" type="button">浙</button>
+							<button data-dismiss="modal" class="btn btn-default btn-lg" type="button">皖</button>
+							<button data-dismiss="modal" class="btn btn-default btn-lg" type="button">闽</button>
+							<button data-dismiss="modal" class="btn btn-default btn-lg" type="button">赣</button>
+							<button data-dismiss="modal" class="btn btn-default btn-lg" type="button">鲁</button>
+							<button data-dismiss="modal" class="btn btn-default btn-lg" type="button">豫</button>
+							<button data-dismiss="modal" class="btn btn-default btn-lg" type="button">鄂</button>
+							<button data-dismiss="modal" class="btn btn-default btn-lg" type="button">湘</button>
+							<button data-dismiss="modal" class="btn btn-default btn-lg" type="button">粤</button>
+							<button data-dismiss="modal" class="btn btn-default btn-lg" type="button">桂</button>
+							<button data-dismiss="modal" class="btn btn-default btn-lg" type="button">琼</button>
+							<button data-dismiss="modal" class="btn btn-default btn-lg" type="button">渝</button>
+							<button data-dismiss="modal" class="btn btn-default btn-lg" type="button">川</button>
+							<button data-dismiss="modal" class="btn btn-default btn-lg" type="button">贵</button>
+							<button data-dismiss="modal" class="btn btn-default btn-lg" type="button">云</button>
+							<button data-dismiss="modal" class="btn btn-default btn-lg" type="button">藏</button>
+							<button data-dismiss="modal" class="btn btn-default btn-lg" type="button">陕</button>
+							<button data-dismiss="modal" class="btn btn-default btn-lg" type="button">甘</button>
+							<button data-dismiss="modal" class="btn btn-default btn-lg" type="button">青</button>
+							<button data-dismiss="modal" class="btn btn-default btn-lg" type="button">宁</button>
+							<button data-dismiss="modal" class="btn btn-default btn-lg" type="button">新</button>
+							<!--京、津、冀、晋、蒙、辽、吉、黑、沪、苏、浙、皖、闽、赣、鲁、豫、鄂、湘、粤、桂、琼、渝、川、贵、云、藏、陕、甘、青、宁、新-->
+						</div>
+
+					</div>
+				</div>
+			</div>
+			<!--员工查询-->
 			<div id="checkstaff">
 				<p style="padding: 2px;background-color: #858585;font-weight: bold;color: #D6D6CE;">员工查询</p>
 				<div style="width: 880px;height: 450px;border:1px solid white;margin-left: 10px;background-color: white;">
@@ -405,66 +579,7 @@
 					</div>
 				</div>
 			</div>
-			<div id="addcar">
-				<p style="padding: 2px;background-color: #858585;font-weight: bold;color: #D6D6CE;">增加车资料</p>
-				<div style="width: 980px;height: 450px;border:1px solid white;margin-left: 10px;background-color: white;">
-					<div style="width: 960px;height: 50px;margin-left: 10px;">
-						<div style="display: inline-block;width: 200px;height: 40px;font-size: 24px;box-sizing: border-box;padding-top: 5px;border-left: 4px solid orange;">增加车资料</div>
-						<div @click="closeadd" class="clo" style="display: inline-block;width: 100px;height: 40px;box-sizing: border-box;float:right;font-size: 50px;text-align: right;padding: 0px;">X</div>
-						<button class="btn-success" style="float: right;width: 100px;height: 40px;margin-top: 5px;">确定</button>
-					</div>
-					<div style="width: 960px;height: 390px;margin-left: 10px;background-color: #D6D6CE;color:#44BDCA;box-sizing: border-box;padding-left: 20px;">
-						<p  style="padding-top: 10px;">
-							<label><span style="color: red;">*</span>车牌号码</label><input />
-							<label><span style="color: red;">*</span>车辆品牌</label><input />
-							<label><span style="color: red;">*</span>车辆型号</label><input />
-							<label><span style="color: red;">*</span>驾驶员</label><input />
-						</p>
-						<p>
-							<label><span style="color: red;">*</span>驾驶员电话</label><input />
-							<label>出生日期</label><input />
-							<label><span style="color: red;">*</span>车辆归属</label><input />
-							<label>驾照到期</label><input />
-						</p>
-						<p>
-							<label>车架号</label><input />
-							<label>发动机号</label><input />
-							<label>车辆年款</label><input />
-							<label>里程</label><input />
-						</p>
-						<p>
-							<label><span style="color: red;">*</span>发动机品牌</label><input />
-							<label>载重</label><input />
-							<label>购买日期</label><input />
-						</p>
-						<p>
-							<label><span style="color: red;">*</span>发动机品牌</label><input />
-							<label>载重</label><input />
-							<label>购买日期</label><input />
-						</p>
-						<p>
-							<label>上牌日期</label><input />
-							<label>车险到期</label><input />
-							<label>燃油类别</label><input />
-							<label>车系</label><input />
-						</p>
-						<p>
-							<label><span style="color: red;">保险：</span>交强保险公司</label><input />
-							<label>交强险到期</label><input />
-							<input type="checkbox" />在我投保车
-						</p>
-						<p>
-							<label><span style="color: red;">保险：</span>商业险保险公司</label><input />
-							<label>商业险到期</label><input />
-						</p>
-						<p>
-							<label>下次保养里程</label><input />
-							<label>下次保养日期</label><input />
-							<label>客户名称</label><input />
-						</p>
-					</div>
-				</div>
-			</div>
+			<!--字段设置-->
 			<div id="setting">
 				<p style="padding: 2px;background-color: #858585;font-weight: bold;color: #D6D6CE;">字段设置</p>
 				<div style="width: 580px;height: 550px;border:1px solid white;margin-left: 10px;background-color: white;">
@@ -489,7 +604,7 @@
 							</thead>
 							<tbody>
 								<tr>
-									<td>   </td>
+									<td> </td>
 									<td>id</td>
 									<td>编号</td>
 									<td><input type="checkbox" /></td>
@@ -500,90 +615,365 @@
 				</div>
 			</div>
 		</div>
-
-			<script src="js/jquery-1.12.4.js" type="text/javascript" charset="utf-8"></script>
-			<script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
-			<script src="js/jquery.ztree.core.js" type="text/javascript" charset="utf-8"></script>
-			<script src="js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
-			<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
-			<script type="text/javascript" src="js/my.js"></script>
-			<script type="text/javascript">
-				var vm = new Vue({
-					el:"#ctx",
-					data(){
-						return {
-							vehicles: [],
-							vehicle: {},
-							customers: [],
-							customer:{},
-							carbelong: [],
-							engine: [],
-							fuel: [],
-							insurance: []
-						}
+		
+		<script src="js/jquery-1.12.4.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/jquery.ztree.core.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" src="js/my.js"></script>
+		<script src="js/S3.js"></script>
+		<script type="text/javascript">
+			//定义新增修改的路径
+			var updateUrl = "";
+			var carupdateUrl = ""; 
+			var vm = new Vue({
+				el: "#ctx",
+				data() {
+					return {
+						vehicles: [],
+						vehicle: {},
+						customers: [],
+						customer: {},
+						perss: [],
+						carbelong: [],
+						engine: [],
+						fuel: [],
+						insurance: []
+					}
+				},
+				methods: {
+					addcusandcar: function() {
+						$("#addcusandcar").show();
 					},
-					methods:{
-						addcusandcar:function(){
-							$("#addcusandcar").show();
-						},
-						closeadd:function(){
-							$("#addcusandcar").hide();
-							$("#checkstaff").hide();
-							$("#addcus").hide();
-							$("#addcar").hide();
-							$("#setting").hide();
-						},
-						checkstaff:function(){
-							$("#checkstaff").show();
-						},
-						addcus:function(){
-							$("#addcus").show();
-						},
-						addcar:function(){
-							$("#addcar").show();
-						},
-						setting:function(){
-							$("#setting").show();
-						},
-						//单击客户项查询车辆信息
-						clickCustomer: function(item,index) {
-							vm.customer=item;
-							$(".cinfo tr").removeClass("active");
-							$(".cinfo tr:eq("+index+")").addClass("active");
-							vm.queryCarinfo(item.cno);
-						},
-						queryCustomer: function() {
-							$.ajax({
-								url: data.ip + "customer/queryCustomer",
-								type: "get",
-								xhrFields: {
-									withCredentials: true
-								},
-								dataType: "json",
-								success: function(result) {
-									vm.customers = result
+					closeadd: function() {
+						$("#addcusandcar").hide();
+						$("#checkstaff").hide();
+						$("#addcus").hide();
+						$("#addcar").hide();
+						$("#setting").hide();
+					},
+					checkstaff: function() {
+						$("#checkstaff").show();
+					},
+					addcus: function() {
+						$("#addcus").show();
+					},
+					addcar: function() {
+						$("#addcar").show();
+					},
+					setting: function() {
+						$("#setting").show();
+					},
+					/**
+					 * 单击客户项查询车辆信息
+					 */
+					clickCustomer: function(item, index) {
+						vm.customer = item;						
+						$(".cinfo tr").removeClass("active");
+						$(".cinfo tr:eq(" + index + ")").addClass("active");
+						vm.queryCarinfo(item.cno);
+					},
+					/**
+					 * 单击车辆信息
+					 */
+					clickVehicle: function(item, index) {
+						vm.vehicle = item;						
+						$(".carinfo tr").removeClass("active");
+						$(".carinfo tr:eq(" + index + ")").addClass("active");
+					},
+					/**
+					 * 查询客户信息
+					 */
+					queryCustomer: function() {
+						$.ajax({
+							url: data.ip + "customer/queryCustomer",
+							type: "get",
+							xhrFields: {
+								withCredentials: true
+							},
+							dataType: "json",
+							success: function(result) {
+								vm.customers = result
+								if(result != null && result != "") {
+									if(JSON.stringify(vm.customer)=="{}"){
+										vm.queryCarinfo(vm.customers[0].cno)
+									}else{
+										vm.queryCarinfo(vm.customer.cno)
+									}
+									
+								}
+								//vm.customer.cno=vm.customers[0].cno;//默认选中第一个客户
+							}
+						})
+					},
+					/**
+					 * 根据客户ID查询车辆信息
+					 */
+					queryCarinfo: function(cno) {
+						$.ajax({
+							url: data.ip + "customer/queryCarinfo",
+							type: "get",
+							data: { "cno": cno },
+							xhrFields: {
+								withCredentials: true
+							},
+							dataType: "json",
+							success: function(result) {
+								vm.vehicles = result
+							}
+						})
+					},
+					/**
+					 * 模糊查询
+					 */
+					likeQuery: function() {
+						var mohu = $("[name=mohu]").val();
+						$.ajax({
+							url: data.ip + "customer/queryLike",
+							type: "post",
+							data: { "mohu": mohu },
+							xhrFields: {
+								withCredentials: true
+							},
+							dataType: "json",
+							success: function(result) {
+								console.log(result)
+								vm.customers = result
+								if(result != null && result != "") {
 									vm.queryCarinfo(vm.customers[0].cno)
 								}
-							})
-						},
-						queryCarinfo: function(cno) {
-							$.ajax({
-								url: data.ip + "customer/queryCarinfo",
-								type: "get",
-								data:{"cno":cno},
-								xhrFields: {
-									withCredentials: true
-								},
-								dataType: "json",
-								success: function(result) {
-									vm.vehicles = result
-								}
-							})
+
+							}
+						})
+					},
+					/**
+					 * 绑定专属顾问下拉框
+					 */
+					bindPers: function() {
+						$.ajax({
+							url: data.ip + "customer/bindpers",
+							type: "get",
+							xhrFields: {
+								withCredentials: true
+							},
+							dataType: "json",
+							success: function(result) {
+								console.log(result)
+								vm.perss = result
+							}
+						})
+					},
+					/**
+					 * 新增and修改客户
+					 */
+					updateCus: function() {
+						let customer = JSON.stringify(vm.customer)
+						console.log(customer)
+						$.ajax({
+							url: data.ip + "customer/" + updateUrl,
+							type: "post",
+							data: customer,
+							xhrFields: {
+								withCredentials: true
+							},
+							dataType: "json",
+							contentType: "application/json;charset=utf-8",
+							success: function(result) {
+								vm.queryCustomer();
+							},
+							error: function(err) {
+								alert("报错")
+							}
+						})
+					},
+					//删除客户信息
+					del: function() {
+						$.ajax({
+							url: data.ip + "customer/delCus",
+							type: "get",
+							data: { "cno": vm.customer.cno },
+							xhrFields: {
+								withCredentials: true
+							},
+							success: function(result) {
+								vm.queryCustomer();
+							},
+							error: function(error) {
+								console.log(error)
+							}
+						})
+					},
+					//绑定新增功能模态框里的下拉框
+					addBind: function() {
+						$.ajax({
+							url: data.ip + "/vehicle/bindCarbelong",
+							type: "get",
+							xhrFields: {
+								withCredentials: true
+							},
+							dataType: "json",
+							success: function(result) {
+								vm.carbelong = result
+							}
+						});
+						$.ajax({
+							url: data.ip + "/vehicle/bindEngine",
+							type: "get",
+							xhrFields: {
+								withCredentials: true
+							},
+							dataType: "json",
+							success: function(result) {
+								vm.engine = result
+							}
+						});
+						$.ajax({
+							url: data.ip + "/vehicle/bindFuel",
+							type: "get",
+							xhrFields: {
+								withCredentials: true
+							},
+							dataType: "json",
+							success: function(result) {
+								vm.fuel = result
+							}
+						});
+						$.ajax({
+							url: data.ip + "/vehicle/bindInsurance",
+							type: "get",
+							xhrFields: {
+								withCredentials: true
+							},
+							dataType: "json",
+							success: function(result) {
+								vm.insurance = result
+							}
+						})
+
+					},
+					//新增and修改车资料
+					updateCar: function() {
+						console.log(vm.vehicle)
+						let vehicle = JSON.stringify(vm.vehicle)
+						console.log(vehicle)
+						$.ajax({
+							url: data.ip + "/vehicle/" + carupdateUrl,
+							type: "post",
+							data: vehicle,
+							xhrFields: {
+								withCredentials: true
+							},
+							contentType: "application/json;charset=utf-8",
+							success: function(result) {
+								vm.queryCarinfo(vm.customer.cno);
+							},
+							error: function(error) {
+								console.log(error)
+							}
+						})
+					},
+					//删除车资料
+					delCar: function() {
+						if(JSON.stringify(vm.vehicle) == "{}" || vm.vehicle.cdlicense== null){
+							alert("请选择车辆");
+							return;
 						}
+						$.ajax({
+							url: data.ip + "/vehicle/delCarinfo",
+							type: "get",
+							data: { "cdlicense": vm.vehicle.cdlicense },
+							xhrFields: {
+								withCredentials: true
+							},
+							success: function(result) {
+								vm.queryCarinfo(vm.customer.cno);
+							},
+							error: function(error) {
+								console.log(error)
+							}
+						})
+					},
+					//返回数据回车资料页面
+					selectCustomer: function(){
+						localStorage.setItem("customer",JSON.stringify(vm.customer));
+						window.history.go(-1);
 					}
-				});
-				vm.queryCustomer();
-		
+				}
+			});
+			/**
+			 * 打开新增模态框
+			 */
+			$(".toAddCus").click(function() {
+				updateUrl = "addCus";
+				vm.customer = {}
+				vm.customer.personnelid = "请选择";
+				vm.customer.province = "省份";
+				vm.customer.city = "地级市";
+				vm.customer.district = "市、县级市、县";
+				$("#myModal").modal("show");
+			})
+			/**
+			 * 打开修改模态框
+			 */
+			$(".toUpdCus").click(function() {
+				if(JSON.stringify(vm.customer) == "{}") {
+					alert("请选择客户");
+					return;
+				}
+				$("[name=cusID]").attr("disabled", "disabled")
+				updateUrl = "updCus";
+				opt0 = [ vm.customer.province, vm.customer.city, vm.customer.district ];
+				setup();
+				$("#myModal").modal("show");
+			});
+			$(".chepai button").click(function() {
+				$("input[name=cdlicense]").val($(this).text());
+			})
+			function tbc(obj){
+				if(obj.checked){
+					vm.vehicle.cdisinsure=1;
+				}else{
+					vm.vehicle.cdisinsure=0;
+				}
+			}
+			
+			//打开新增车资料模态框			
+			$(".insertCar").click(function(){
+				if(JSON.stringify(vm.customer) == "{}") {
+					alert("请选择客户");
+					return;
+				}
+				$("[name=cdlicense]").attr("disabled",false)
+				carupdateUrl="addCarinfo";
+				vm.vehicle={};
+				vm.vehicle.clid="请选择";
+				vm.vehicle.cdenginebrandid="请选择";
+				vm.vehicle.cdcommerceinsuranceid="请选择";
+				vm.vehicle.cdcompulsoryinsuranceid="请选择";
+				vm.vehicle.fuelid="请选择";						
+				vm.vehicle.cno=vm.customer.cno;
+				$("[name=cname]").val(vm.customer.cname)
+            	$("#myModalCar").modal("show");
+			})
+			//打开修改车资料模态框
+			$(".updCar").click(function(){
+				if(JSON.stringify(vm.vehicle) == "{}" || vm.vehicle.cdlicense== null){
+					alert("请选择车辆");
+					return;
+				}
+				$("[name=cdlicense]").attr("disabled","disabled")
+				carupdateUrl="updCarinfo";
+				$("#myModalCar").modal("show");
+			})
+			vm.bindPers();
+			vm.queryCustomer();
+			
+			
+			var flight=localStorage.getItem("cardate");//读取session中的数据
+			if(flight == "selectcustomer"){
+				$("[name=qd]").removeClass("hidden");
+			}
 		</script>
 	</body>
 
