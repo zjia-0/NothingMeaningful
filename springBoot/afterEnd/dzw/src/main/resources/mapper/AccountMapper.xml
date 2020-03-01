@@ -32,6 +32,9 @@
     <result column="remark4" property="remark4" jdbcType="VARCHAR" />
     <result column="remark5" property="remark5" jdbcType="VARCHAR" />
   </resultMap>
+  <update id="rolleBack" parameterType="java.lang.String">
+  	UPDATE  `account` SET  atime=NULL,`aname`='',`astate`=1,`cash`=0,`bank`=0,`buying`=0,`at_card`=0,`at_deposit`=0 WHERE `bid`=#{bid}
+  </update>
   <update id="updateAccount" parameterType="map">
   	UPDATE `account` SET `astate`=2,
   	`cash`=#{cash},`bank`=#{bank},atime=#{atime},

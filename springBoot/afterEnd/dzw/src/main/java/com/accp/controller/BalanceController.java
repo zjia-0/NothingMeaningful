@@ -89,4 +89,9 @@ public class BalanceController {
 	public int updateVip(@RequestBody Vip vip) {
 		return bservice.updateVip(vip);
 	}
+	
+	@PutMapping("/rolleback")
+	public int rolleBack(String bid) {
+		return bservice.rolleBack(bid);
+	}
 }

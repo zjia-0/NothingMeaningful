@@ -93,5 +93,8 @@ public class BalanceService {
 	public int updateVip(Vip vip) {
 		return vipMapper.updateVip(vip);
 	}
+	public int rolleBack(String bid) {
+		return aMapper.rolleBack(bid);
+	}
 
 }

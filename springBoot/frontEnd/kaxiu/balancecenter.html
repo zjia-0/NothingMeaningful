@@ -68,7 +68,7 @@
 			<div class="row">
 				<div style="float: right;margin-right: 20px;margin-bottom: 10px;">
 					<button id="shouyin"  class="btn btn-default" @click="openshouyin"><span class="glyphicon glyphicon-calendar" style="color: #fcac28;"></span>&nbsp;收银</button>
-					<button id="huigun" style="display: none;" class="btn btn-default" ><span class="glyphicon glyphicon-calendar" style="color: #fcac28;"></span>&nbsp;回滚</button>
+					<button id="huigun" style="display: none;" 	@click="huigun" class="btn btn-default" ><span class="glyphicon glyphicon-calendar" style="color: #fcac28;"></span>&nbsp;回滚</button>
 					<button   class="btn btn-default" data-toggle="modal" data-target="#openMmodal"><span class="glyphicon glyphicon-folder-open" style="color:#fcac28;"></span>&nbsp;打开单据</button>
 				</div>
 			</div>
@@ -104,7 +104,7 @@
 						<td>{{item.billname}}</td>
 						<td>{{item.cname}}</td>
 						<td>{{item.cdlicense}}</td>
-						<td>{{item.cartype}}</td>
+						<td>{{item.cartype}}</td> 
 						<td>{{item.cdframe}}</td>
 						<td>{{item.ordertime}}</td>
 						<td>{{item.cphone}}</td>
@@ -792,7 +792,36 @@
 					},fuzhisettlement(item){
 						var that=this;
 						that.settlement=item;
-					},clearshouyin(){
+						if(item.astate==1){
+							$("#huigun").hide();
+							$("#shouyin").show();
+						}else{
+							$("#huigun").show();
+							$("#shouyin").hide();
+						}
+						
+					},huigun(){
+						var that=this;
+						console.log(that.settlement)
+						var isok=confirm("确定回滚此订单到未结算吗？");
+						if(isok){
+							$.ajax({
+								url:data.ip+"balance/rolleback?bid="+that.settlement.bid,
+								type:"put",
+								dataType:"json",
+								xhrFields: {
+									withCredentials: true
+								},
+								success:function(result){
+									if(result>0){
+											alert("回滚成功！")
+									}
+									location.reload();
+								}
+							})
+						}
+					}
+					,clearshouyin(){
 						var that=this;
 						that.settlement={};
 					},isinvoice(){
