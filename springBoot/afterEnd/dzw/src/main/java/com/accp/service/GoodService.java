@@ -34,6 +34,10 @@ public class GoodService {
 		return goodsMapper.goodsel();
 	}
 	
+	public List<goodsdata> find(){
+		return goodsMapper.goodsel();
+	}
+	
 	public int goodsins(Goods goods) {
 		return goodsMapper.insert(goods);
 	}

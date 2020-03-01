@@ -54,4 +54,8 @@ public class CarbrandService {
 			return carbrandMapper.select(zhi,zhi,zhi);
 	}
 	
+	public List<Carbrand> find(){
+		return carbrandMapper.selectByExample(null);
+	}
+	
 }

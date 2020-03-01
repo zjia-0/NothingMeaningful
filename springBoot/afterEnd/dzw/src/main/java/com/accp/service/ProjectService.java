@@ -29,6 +29,10 @@ public class ProjectService {
 		return ProjectMapper.proselsel();
 	}
 	
+	public List<projectwang> find(){
+		return ProjectMapper.proselsel();
+	}
+	
 	public int  projectdelete(int id) {
 		return ProjectMapper.deleteByPrimaryKey(id);
 	}

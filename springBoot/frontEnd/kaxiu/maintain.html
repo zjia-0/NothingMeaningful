@@ -44,7 +44,7 @@
 						<span data-toggle="modal" data-target="#myModals" v-on:click="xg()">修改</span>			
 					</span>
 					<span v-on:click="shan()"><span class="glyphicon glyphicon-remove-sign" style="color: #fcac28;" aria-hidden="true"></span>删除</span>
-					<span><span class="glyphicon glyphicon-floppy-disk" style="color: #fcac28;" aria-hidden="true"></span>导出</span>
+					<span v-on:click="exportExcel()"><span class="glyphicon glyphicon-floppy-disk" style="color: #fcac28;" aria-hidden="true"></span>导出</span>
 				</div>
 				
 				<div>
@@ -101,7 +101,7 @@
 				<h4 class="modal-title" id="myModalLabel">
 					<span class="col-sm-4 col-lg-4 col-md-4">服务项目定义</span>
 					<span style="text-align: right;" class="col-sm-7 col-lg-7 col-md-7">
-						<button type="button" class="btn btn-success" style="width: 90px;"  v-on:click="bc()">保存</button>
+						<button type="button" class="btn btn-success" style="width: 90px;"   v-on:click="bc()">保存</button>
 					</span>
 				</h4>
 			</div>
@@ -180,7 +180,6 @@
 							<div class="col-sm-6 col-lg-6 col-md-6 " style="height:30px;">&nbsp;</div>
 							<div class="col-sm-6 col-lg-6 col-md-6 " style="height:40px; line-height: 40px;">
 								<span><input type="text" class="zhis" style="width: 30px; height: 35px; background: white; color: white; border: none;"/></span>
-								<span style="padding-right: 10px;"><span class="glyphicon glyphicon-edit" style="color: #fcac28;" aria-hidden="true"></span>修改</span>
 								<span><span class="glyphicon glyphicon-floppy-disk" style="color: #fcac28;" aria-hidden="true"></span>保存</span>
 							</div>
 						
@@ -585,7 +584,10 @@
 				    },zholeis:function(){
 				    	var zhis=$(".zhis").val()
 				    	$(".xmzls").val(zhis)
-				    }
+				    },exportExcel:function(){
+				    	var that=this
+						window.location.href=data.ip + "daochuproject"
+					}
 				},created:function(){
 						var that = this;
 						that.bhao();

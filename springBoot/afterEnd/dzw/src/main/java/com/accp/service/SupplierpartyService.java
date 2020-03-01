@@ -35,6 +35,10 @@ public class SupplierpartyService {
 		return supplierpartyMapper.venselbiao(supcode, supname, address, way, grade, brand, unitsname, contacts, phone, mobile, scase, remark);
 	}
 	
+	public List<Vendor> find(){
+		return supplierpartyMapper.vensel();
+	}
+	
 	public int supplierpartyinsert(Supplierparty supplierparty) {
 		return supplierpartyMapper.insert(supplierparty);
 	}
